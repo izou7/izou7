@@ -1,0 +1,2 @@
+[2014-09-03 22:55:29,538] WARN  (DispatcherServlet.java:1118) - No mapping found for HTTP request with URI [/mms/test/list] in DispatcherServlet with name 'spring-mvc'
+[2014-09-03 22:55:57,938] WARN  (DispatcherServlet.java:1118) - No mapping found for HTTP request with URI [/favicon.ico] in DispatcherServlet with name 'spring-mvc'

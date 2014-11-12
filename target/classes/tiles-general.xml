@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+<tiles-definitions>
+	<definition name="site.*.*" template="/freemarker/frame/site.ftl">
+		<put-attribute name="header" value="/freemarker/include/header.ftl"/>
+		<put-attribute name="navigator" value="/freemarker/include/navigator.ftl"/>
+		<put-attribute name="footer" value="/freemarker/include/footer.ftl"/>
+		<put-attribute name="body" value="/freemarker/{1}/{2}.ftl"/>
+	</definition>
+	<definition name="raw.*.*" template="/freemarker/frame/raw.ftl">
+		<put-attribute name="body" value="/freemarker/{1}/{2}.ftl"/>
+	</definition>
+</tiles-definitions>

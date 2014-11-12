@@ -1,0 +1,8 @@
+[2014-11-11 22:57:20,315] WARN  (DispatcherServlet.java:1118) - No mapping found for HTTP request with URI [/izou7] in DispatcherServlet with name 'spring-mvc'
+[2014-11-11 22:57:23,242] WARN  (DispatcherServlet.java:1118) - No mapping found for HTTP request with URI [/izou7] in DispatcherServlet with name 'spring-mvc'
+[2014-11-11 22:57:23,773] WARN  (DispatcherServlet.java:1118) - No mapping found for HTTP request with URI [/izou7] in DispatcherServlet with name 'spring-mvc'
+[2014-11-11 22:57:23,965] WARN  (DispatcherServlet.java:1118) - No mapping found for HTTP request with URI [/izou7] in DispatcherServlet with name 'spring-mvc'
+[2014-11-11 22:57:24,127] WARN  (DispatcherServlet.java:1118) - No mapping found for HTTP request with URI [/izou7] in DispatcherServlet with name 'spring-mvc'
+[2014-11-11 22:57:27,980] WARN  (DispatcherServlet.java:1118) - No mapping found for HTTP request with URI [/] in DispatcherServlet with name 'spring-mvc'
+[2014-11-11 22:58:03,216] WARN  (DispatcherServlet.java:1118) - No mapping found for HTTP request with URI [/user/signin.css] in DispatcherServlet with name 'spring-mvc'
+[2014-11-11 22:58:03,224] WARN  (DispatcherServlet.java:1118) - No mapping found for HTTP request with URI [/user/static/libs/bootstrap/css/bootstrap.min.css] in DispatcherServlet with name 'spring-mvc'
