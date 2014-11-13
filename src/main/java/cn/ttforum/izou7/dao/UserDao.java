@@ -17,7 +17,7 @@ public class UserDao  extends AdvancedHibernateDao<User>{
     public User findByUsername(String username) {
     	Criteria criteria = this.getCurrentSession().createCriteria(
 				User.class);
-    	criteria.add(Restrictions.eq("name", username));
+    	criteria.add(Restrictions.eq("username", username));
 		criteria.add(Restrictions.eq("locked", false));
 		return criteria.uniqueResult()==null?null:(User)criteria.uniqueResult();
     }

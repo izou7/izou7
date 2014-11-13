@@ -45,48 +45,48 @@ public class UserController {
 	 * 登录页
 	 * @return
 	 */
-	@RequestMapping(value="login", method = RequestMethod.GET)
-	public String loginPage() {
-		return "raw.login.login";
-	}
+//	@RequestMapping(value="login", method = RequestMethod.GET)
+//	public String loginPage() {
+//		return "raw.login.login";
+//	}
 	
 	/**
 	 * 登录
 	 * @param user
 	 * @return
 	 */
-	@RequestMapping(value="login", method = RequestMethod.POST)
-	@ResponseBody
-	public RestResponse login(User user) {
-		RestResponse response = new RestResponse();
-		int statusCode = ResponseStatusCode.OK;
-		String msg = "登录成功！";
-		Subject currentUser = SecurityUtils.getSubject();
-		UsernamePasswordToken token = new UsernamePasswordToken(
-				user.getUsername(), user.getPassword());
-		try {
-			currentUser.login(token);
-		} catch (UnknownAccountException uae) {
-			msg = "用户名不存在系统！";
-			statusCode = ResponseStatusCode.UNAUTHORIZED;
-		} catch (IncorrectCredentialsException ice) {
-			msg = "密码错误！";
-			statusCode = ResponseStatusCode.UNAUTHORIZED;
-		} catch (LockedAccountException lae) {
-			msg = "用户已经被锁定不能登录，请与管理员联系！";
-			statusCode = ResponseStatusCode.UNAUTHORIZED;
-		} catch (ExcessiveAttemptsException eae) {
-			msg = "错误次数过多！";
-			statusCode = ResponseStatusCode.UNAUTHORIZED;
-		} catch (AuthenticationException ae) {
-			msg = "其他的登录错误！";
-			statusCode = ResponseStatusCode.UNAUTHORIZED;
-		}
-		response.setMessage(msg);
-		response.setStatusCode(statusCode);
-		response.getBody().put("key", userServiceImpl.findByUsername(user.getUsername()).getKey());
-		return response;
-
-	}
+//	@RequestMapping(value="login", method = RequestMethod.POST)
+//	@ResponseBody
+//	public RestResponse login(User user) {
+//		RestResponse response = new RestResponse();
+//		int statusCode = ResponseStatusCode.OK;
+//		String msg = "登录成功！";
+//		Subject currentUser = SecurityUtils.getSubject();
+//		UsernamePasswordToken token = new UsernamePasswordToken(
+//				user.getUsername(), user.getPassword());
+//		try {
+//			currentUser.login(token);
+//		} catch (UnknownAccountException uae) {
+//			msg = "用户名不存在系统！";
+//			statusCode = ResponseStatusCode.UNAUTHORIZED;
+//		} catch (IncorrectCredentialsException ice) {
+//			msg = "密码错误！";
+//			statusCode = ResponseStatusCode.UNAUTHORIZED;
+//		} catch (LockedAccountException lae) {
+//			msg = "用户已经被锁定不能登录，请与管理员联系！";
+//			statusCode = ResponseStatusCode.UNAUTHORIZED;
+//		} catch (ExcessiveAttemptsException eae) {
+//			msg = "错误次数过多！";
+//			statusCode = ResponseStatusCode.UNAUTHORIZED;
+//		} catch (AuthenticationException ae) {
+//			msg = "其他的登录错误！";
+//			statusCode = ResponseStatusCode.UNAUTHORIZED;
+//		}
+//		response.setMessage(msg);
+//		response.setStatusCode(statusCode);
+//		response.getBody().put("key", userServiceImpl.findByUsername(user.getUsername()).getKey());
+//		return response;
+//
+//	}
 
 }

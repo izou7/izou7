@@ -51,7 +51,7 @@ public class ShiroTest {
     protected User u4;
     
     public void setUp() {
-        //4、新增用户
+//        //4、新增用户
 //        u1 = new User("zhang", password);
 //        u2 = new User("li", password);
 //        u3 = new User("wu", password);
@@ -66,13 +66,17 @@ public class ShiroTest {
 
     @Test
     public void test() {
-        Subject subject = SecurityUtils.getSubject();
-        UsernamePasswordToken token = new UsernamePasswordToken("wu", password);
-        subject.login(token);
-
-        Assert.assertTrue(subject.isAuthenticated());
+//        Subject subject = SecurityUtils.getSubject();
+//        UsernamePasswordToken token = new UsernamePasswordToken("wu", password);
+//        subject.login(token);
+//
+//        Assert.assertTrue(subject.isAuthenticated());
 //        subject.checkRole("admin");
 //        subject.checkPermission("user:create");
+    	User u = new User();
+    	u.setUsername("zy");
+    	u.setPassword("123456");
+    	userService.createUser(u);
 
 
 

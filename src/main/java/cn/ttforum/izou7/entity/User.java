@@ -1,11 +1,10 @@
 package cn.ttforum.izou7.entity;
 
-import java.io.Serializable;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 /**
  * 用户实体类
@@ -13,7 +12,7 @@ import javax.persistence.Table;
  *
  */
 @Entity
-@Table(name = "user")
+@Table(name = "sys_users")
 public class User {
 	@Id
 	@GeneratedValue
@@ -33,6 +32,7 @@ public class User {
     /**
      * 秘钥
      */
+    @Transient
     private String key;
 	/**
 	 * 是否上锁
