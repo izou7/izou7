@@ -11,4 +11,5 @@
 <title>${ (project.title)! }</title>
 <link rel="stylesheet" href="${ (project.staticDomain)! }/css/scaffold/sticky-footer.css">
 <link rel="stylesheet" href="${ (project.staticDomain)! }/libs/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="${ (project.staticDomain)! }/css/common.css">
 <script data-main="${ (project.staticDomain)! }/js/config.js" src="${ (project.staticDomain)! }/libs/requirejs/require-2.1.9.min.js" type="text/javascript"></script>

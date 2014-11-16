@@ -1,0 +1,23 @@
+body {
+	padding-top: 50px;
+}
+
+.carousel {
+	height: 400px;
+	background-color: #000;
+}
+
+.carousel .item {
+	height: 400px;
+	background-color: #000;
+}
+
+.carousel img {
+	width: 100%;
+}
+
+.btn-outline {
+	border-color: #563d7c;
+	background-color: transparent;
+	color: #563d7c;
+}

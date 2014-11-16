@@ -12,7 +12,7 @@
     </bean>
 
     <!-- 凭证匹配器 -->
-    <bean id="credentialsMatcher" class="cn.ttforum.izou7.credentials.RetryLimitHashedCredentialsMatcher">
+    <bean id="credentialsMatcher" class="cn.chinattclub.izou7.credentials.RetryLimitHashedCredentialsMatcher">
         <constructor-arg ref="cacheManager"/>
         <property name="hashAlgorithmName" value="md5"/>
         <property name="hashIterations" value="2"/>
@@ -20,7 +20,7 @@
     </bean>
 
     <!-- Realm实现 -->
-    <bean id="userRealm" class="cn.ttforum.izou7.realm.UserRealm">
+    <bean id="userRealm" class="cn.chinattclub.izou7.realm.UserRealm">
         <property name="userService" ref="userService"/>
         <property name="credentialsMatcher" ref="credentialsMatcher"/>
         <property name="cachingEnabled" value="true"/>
@@ -97,6 +97,7 @@
             <value>
                 /index.jsp = anon
                 /unauthorized.jsp = anon
+                /static/** = anon
                 /login.jsp = authc
                 /logout = logout
                 /** = user

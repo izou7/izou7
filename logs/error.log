@@ -863,3 +863,5 @@ Caused by: org.springframework.beans.factory.NoSuchBeanDefinitionException: No q
 	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:87)
 	at org.springframework.context.annotation.CommonAnnotationBeanPostProcessor.postProcessPropertyValues(CommonAnnotationBeanPostProcessor.java:304)
 	... 53 more
+[2014-11-15 11:44:14,934] ERROR (SqlExceptionHelper.java:147) - Table 'test.sys_users' doesn't exist
+[2014-11-15 11:47:24,434] ERROR (SqlExceptionHelper.java:147) - Unknown column 'secret_key' in 'field list'

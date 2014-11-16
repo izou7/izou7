@@ -5,15 +5,15 @@
   				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
   					<span class="sr-only">Toggle navigation</span>
   				</button> 
-  				<a class="navbar-brand" href="#">izou7</a></div>
+  				<a class="navbar-brand" href="/index">izou7</a></div>
   				<!-- Collect the nav links, forms, and other content for toggling -->
   				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
   					<ul class="nav navbar-nav">
   						<li class="active">
-  							<a href="sponsor.html">主办方</a>
+  							<a href="/activity/index">主办方</a>
   						</li>
   						<li>
-  							<a class="deployment" href="index.html">参会者</a>
+  							<a class="deployment" href="#">参会者</a>
   						</li>         
   						<li>
   							<a class="deployment" href="#">公众号录入</a>

@@ -1,30 +1,4 @@
-      <style>
-      	body{
-      		padding-top:50px;
-      	}
-      	.carousel{
-      		height:400px;
-      		background-color:#000;
-      	}
-      	.carousel .item{
-      		height:400px;
-      		background-color:#000;
-      	}
-      	.carousel img{
-      		width:100%;
-      	}
-      	.btn-outline{
-      		border-color:#563d7c;
-      		background-color:transparent;
-      		color:#563d7c;
-      	}
-      	.summary {
-      		padding:15px 15px 15px 15px;
-
-      	}
-
-      </style>
-<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+  		<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
   			<!-- Indicators -->
   			<ol class="carousel-indicators">
   				<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
@@ -37,7 +11,7 @@
   				<div class="item active">
   					<img src="${ (project.staticDomain)! }/images/shop.jpg" alt="" />
   					<div class="carousel-caption">
-  						<button type="button" class="btn btn-default btn-lg btn-outline" >点我下载</button>
+  						<button type="button" class="btn btn-default btn-lg btn-outline" onclick="javascript:location.href='/activity/activity?step=FIRST'">发布活动</button>
   					</div>
   				</div>
   				<div class="item">
@@ -60,9 +34,31 @@
   			<a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
   				<span class="glyphicon glyphicon-chevron-right"></span>
   			</a>
-
+  			
+  			
   		</div>
+  		<!--编辑器-->
   		
+  		<!-- 主要内容 -->
+  		<div class="container summary">
+  			<div class="col-sm-12 text-center" >
+  				<h3 style="font-size: 22px;color:#4B535D;margin-bottom:30px;">JOIN OVER <strong>10,000+</strong> COMPANIES AND FREELANCERS</h3>
+  			</div>
+  			<div class="row">
+  				<div class="col-sm-4 text-center" >
+  					<p class="lead">Thank you for breaking the mold on time tracking. I’m really impressed. First app I’ve really loved in awhile.</p>
+  					<h6>Matt Everson, Astuteo</h6>
+  				</div>
+  				<div class="col-sm-4 text-center" >
+  					<p class="lead">I just started using your application and I just had to write to tell you how great I think it is. Perfect simple interface, easy to navigate, intuitive and reliable.</p>
+  					<h6>Matt Everson, Astuteo</h6>
+  				</div>
+  				<div class="col-sm-4 text-center" >
+  					<p class="lead">I’m impressed. You’ve really cracked the code for how a time tracking app should be designed.</p>
+  					<h6>Matt Everson, Astuteo</h6>
+  				</div>
+  			</div>
+  		</div>
   		<script type="text/javascript">
-			requirejs( ["${ (project.staticDomain)! }/js/login/login.js"] );
+			requirejs( ["${ (project.staticDomain)! }/js/activity/index.js"] );
 		</script>
