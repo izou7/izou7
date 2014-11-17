@@ -1,5 +1,9 @@
 package cn.chinattclub.izou7.dao;
 
+import java.util.List;
+
+import org.hibernate.Criteria;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import cn.chinattclub.izou7.entity.City;
@@ -11,4 +15,17 @@ import cn.zy.commons.dao.hibernate.AdvancedHibernateDao;
  */
 @Repository
 public class CityDao  extends AdvancedHibernateDao<City>{
+	/**
+	 * 
+	 * 通过省ID获取城市
+	 *
+	 * @param id
+	 * @return
+	 */
+	public List<City> findCityByProvince(int id){
+		Criteria criteria = this.getCurrentSession().createCriteria(
+				City.class);
+		criteria.add(Restrictions.eq("province.id", id));
+		return criteria.list();
+	}
 }
