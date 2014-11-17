@@ -37,7 +37,7 @@ public class PublicController {
 	public String listPublic(Model model ,User user) {
 		
 		List<Public> publicList = publicService.listPublic(user);
-		model.addAttribute(publicList);
+		model.addAttribute("publicList",publicList);
 		return "site.public.list";
 	}
 	
