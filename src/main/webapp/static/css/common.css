@@ -3,12 +3,12 @@ body {
 }
 
 .carousel {
-	height: 400px;
+	height: 366px;
 	background-color: #000;
 }
 
 .carousel .item {
-	height: 400px;
+	height: 366px;
 	background-color: #000;
 }
 
@@ -20,4 +20,8 @@ body {
 	border-color: #563d7c;
 	background-color: transparent;
 	color: #563d7c;
+}
+
+.summary {
+   padding:15px 15px 15px 15px;
 }

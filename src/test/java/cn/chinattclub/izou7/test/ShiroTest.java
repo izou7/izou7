@@ -1,5 +1,9 @@
 package cn.chinattclub.izou7.test;
 
+import java.util.List;
+
+import javax.annotation.Resource;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,9 +11,12 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 
+import cn.chinattclub.izou7.dao.CityDao;
+import cn.chinattclub.izou7.entity.City;
 import cn.chinattclub.izou7.entity.User;
 import cn.chinattclub.izou7.entity.User2;
 import cn.chinattclub.izou7.realm.UserRealm;
+import cn.chinattclub.izou7.service.CityService;
 import cn.chinattclub.izou7.service.UserService;
 
 /**
@@ -33,6 +40,9 @@ public class ShiroTest {
 
     @Autowired
     private UserRealm userRealm;
+    
+    @Resource
+    private CityService cityServiceImpl;
 
 
 
@@ -66,12 +76,15 @@ public class ShiroTest {
 //        Assert.assertTrue(subject.isAuthenticated());
 //        subject.checkRole("admin");
 //        subject.checkPermission("user:create");
-    	User u = new User();
-    	u.setUsername("zy");
-    	u.setPassword("123456");
-    	userService.createUser(u);
-
-
+//    	User u = new User();
+//    	u.setUsername("zy");
+//    	u.setPassword("123456");
+//    	userService.createUser(u);
+    	
+    	List<City> citys = cityServiceImpl.list();
+    	System.out.println(citys.size());
+    	List<City> city = cityServiceImpl.findCityIdByProvince(28);
+    	System.out.println(city.size());
 
 
 

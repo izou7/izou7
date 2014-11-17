@@ -34,30 +34,26 @@
 			  <div class="form-group">
 				<label class="col-sm-2 control-label" for="name">活动名称：</label>
 				<div class="col-sm-6">
-				  <input class="form-control" type="text" id="name" placeholder="活动名称">
+				  <input class="form-control" type="text" id="name" placeholder="活动名称" required>
 				</div>
 			  </div>
 			   <div class="form-group">
 				<label class="col-lg-2 control-label" for="site">活动地点：</label>
 				<div class="col-lg-2">
-				  <select id="site" class="form-control" >
-					<option>北京</option>
-					<option>上海</option>
-					<option>广州</option>
+				  <select id="province" name="province" class="form-control" >
+				  <option value="0">请选择</option>
+				  <#list provinces! as province>
+				  		<#if (activity.city.province.name)! == province.name >
+				  			<option value="${(province.id)!}" selected>${(province.name)!}</option>
+				  		<#else>
+				  			<option value="${(province.id)!}">${(province.name)!}</option>
+				  		</#if>
+				  </#list>
 				  </select>
 				</div>
 				<div class="col-lg-2">
-				  <select class="form-control" >
-					<option>北京</option>
-					<option>上海</option>
-					<option>广州</option>
-				  </select>
-				</div>
-				<div class="col-lg-2">
-				  <select class="form-control" >
-					<option>北京</option>
-					<option>上海</option>
-					<option>广州</option>
+				  <select id="city" name="city" class="form-control" >
+					<option>请选择</option>
 				  </select>
 				</div>
 			  </div>		
@@ -76,13 +72,15 @@
 				<div class="col-lg-6">
 				  <input class="form-control" type="text" id="num" placeholder="活动人数">
 				</div>
-			  </div>			  
+			  </div>
+			  <!--  			  
 			  <div class="form-group">
 				<label class="col-lg-2 control-label" for="tag">活动标签：</label>
 				<div class="col-lg-6">
 				  <input id="tags_1" id="tag" type="text" class="tags form-control" value="原装设计,微电影" />
 				</div>
 			  </div>
+			  -->
 			  <div class="form-group">
 				<label class="col-lg-2 control-label" for="introduction">活动介绍：</label>
 				<div class="col-lg-6">
