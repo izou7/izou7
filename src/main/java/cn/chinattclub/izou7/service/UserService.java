@@ -33,4 +33,6 @@ public interface UserService {
      * @return
      */
     public User findByUsername(String username);
+    
+    public boolean exists(User user);
 }
