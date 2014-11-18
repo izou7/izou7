@@ -46,7 +46,7 @@ public class CityController {
 		List<City> citys = cityServiceImpl.findCityIdByProvince(id);
 		response.setMessage(msg);
 		response.setStatusCode(statusCode);
-		response.getBody().put("city",citys);
+		response.getBody().put("citys",citys);
 		return response;
 
 	}

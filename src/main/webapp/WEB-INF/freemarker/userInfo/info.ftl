@@ -39,12 +39,37 @@
 				  <input class="form-control" type="text" id="qq" placeholder="qq号">
 				</div>
 			  </div>
+			  
+			  <div class="form-group">
+				<label class="col-lg-2 control-label" for="time">生日：</label>
+				<div class="col-lg-2" >
+				  <input class="form-control " type="text" id="birthday" style="width:220px;">
+				</div>
+			  </div>
+			  
+			  <div class="form-group">
+				<label class="col-lg-2 control-label" for="isPublic">性别：</label>
+				<div class="col-lg-10">
+					<div class="checkbox">
+						<label>
+						  <input type="radio" name="sex"> 男
+						</label>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<label>
+						  <input type="radio" name="sex"> 女
+						</label>
+					</div>
+				</div>
+			 </div>
+			  
 			  <div class="form-group">
 				<label class="col-lg-2 control-label" for="introduction">个人介绍：</label>
 				<div class="col-lg-6">
-				  <textarea class="form-control" rows="4" id="introduction" placeholder="活动介绍"></textarea>
+				  <textarea class="form-control" rows="4" id="introduction" placeholder="个人介绍"></textarea>
 				</div>
 			  </div>
+			  
+
 			  
 			  <div class="form-group">
 				<label class="col-sm-2 control-label" for="interestField">感兴趣的领域：</label>
@@ -231,5 +256,5 @@
 	</div>
   </div>
 <script type="text/javascript">
-	requirejs( ["${ (project.staticDomain)! }/js/activity/activity.js"] );
+	requirejs( ["${ (project.staticDomain)! }/js/userInfo/info.js"] );
 </script>

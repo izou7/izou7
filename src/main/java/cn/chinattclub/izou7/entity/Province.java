@@ -10,8 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
  * 
@@ -22,6 +21,7 @@ import org.hibernate.annotations.FetchMode;
  */
 @Entity
 @Table(name = "i_province")
+@JsonIgnoreProperties("citys")
 public class Province {
 	@Id
 	@GeneratedValue
@@ -31,9 +31,8 @@ public class Province {
 	private String name;
 	
 	
-//	@OneToMany(mappedBy = "province",fetch = FetchType.EAGER)
-//	@Fetch(FetchMode.SELECT)
-//	private List<City> citys;
+	@OneToMany(mappedBy = "province",fetch = FetchType.LAZY)
+	private List<City> citys;
 
 	/**
 	 * Returns the value of the field called 'id'.
@@ -65,6 +64,22 @@ public class Province {
 	 */
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	/**
+	 * Returns the value of the field called 'citys'.
+	 * @return Returns the citys.
+	 */
+	public List<City> getCitys() {
+		return this.citys;
+	}
+
+	/**
+	 * Sets the field called 'citys' to the given value.
+	 * @param citys The citys to set.
+	 */
+	public void setCitys(List<City> citys) {
+		this.citys = citys;
 	}
 
 	

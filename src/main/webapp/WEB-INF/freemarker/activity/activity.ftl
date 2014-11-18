@@ -56,6 +56,12 @@
 					<option>请选择</option>
 				  </select>
 				</div>
+			  </div>
+			  <div class="form-group">
+				<label class="col-sm-2 control-label" for="address"></label>
+				<div class="col-sm-6">
+				  <input class="form-control" type="text" id="address" placeholder="详细地址" required>
+				</div>
 			  </div>		
 			  <div class="form-group">
 				<label class="col-lg-2 control-label" for="time">活动时间：</label>
