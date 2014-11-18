@@ -3,6 +3,10 @@
   	  margin:5px;
   	}
   </style>
+  <!-- Generic page styles -->
+<link rel="stylesheet" href="${ (project.staticDomain)! }/libs/jqueryFileUpload/css/style.css">
+<!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
+<link rel="stylesheet" href="${ (project.staticDomain)! }/libs/jqueryFileUpload/css/jquery.fileupload.css">
   <!-- 主要内容 -->
   <div class="container content">
   <!--页头-->
@@ -94,6 +98,16 @@
 				</div>
 			  </div>
 			  <div class="form-group">
+				  <label class="col-lg-2 control-label" for="poster">上传海报：</label>
+				  <div class="col-lg-4">
+					  <span class="btn btn-success fileinput-button">
+					        <i class="glyphicon glyphicon-plus"></i>
+					        <span>上传海报...</span>
+					        <!-- The file input field used as target for the file upload widget -->
+					        <input id="fileupload" type="file" name="files[]" multiple="">
+					  </span>
+				  </div>
+			  <!-- 
 				<label class="col-lg-2 control-label" for="poster">上传海报：</label>
 				<div class="col-lg-1">
 				<button type="button" class="btn btn-info">上传海报</button>
@@ -103,13 +117,20 @@
 					<h6 class="help-block">支持jpg、jpeg、png、gif格式，大小不超过2M。建议尺寸：400 X 220px</h6>
 					
 				</div>
+				-->
+			 </div>
+			 <div class="form-group">
+				<label class="col-lg-2 control-label" for="attachment"></label>
+				<div class="col-lg-6">
+					<div id="progress" class="progress">
+        				<div class="progress-bar progress-bar-success"></div>
+   					</div>	
+				</div>
 			 </div>
 			 <div class="form-group">
 				<label class="col-lg-2 control-label" for="attachment"></label>
 				<div class="col-lg-10">
-				<!--
-					<img src="${ (project.staticDomain)! }/images/shop.jpg" class="img-responsive" height="140" width="200">
-					-->
+					<div id="files" class="files"></div>
 				</div>
 			 </div>
 			 <div class="form-group">
@@ -188,6 +209,28 @@
 		</div>
 	</div>
   </div>
-<script type="text/javascript">
-	requirejs( ["${ (project.staticDomain)! }/js/activity/activity.js"] );
-</script>
+<script src="${ (project.staticDomain)! }/libs/jquery/jquery-2.0.3.js"></script>
+<!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
+<script src="${ (project.staticDomain)! }/libs/jqueryFileUpload/js/vendor/jquery.ui.widget.js"></script>
+<!-- The Load Image plugin is included for the preview images and image resizing functionality -->
+<script src="${ (project.staticDomain)! }/libs/jqueryFileUpload/js/load-image.all.min.js"></script>
+<!-- The Canvas to Blob plugin is included for image resizing functionality -->
+<script src="${ (project.staticDomain)! }/libs/jqueryFileUpload/js/canvas-to-blob.min.js"></script>
+<!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
+<script src="${ (project.staticDomain)! }/libs/bootstrap/js/bootstrap.js"></script>
+<script src="${ (project.staticDomain)! }/libs/jqueryFileUpload/js/jquery.iframe-transport.js"></script>
+<!-- The basic File Upload plugin -->
+<script src="${ (project.staticDomain)! }/libs/jqueryFileUpload/js/jquery.fileupload.js"></script>
+<!-- The File Upload processing plugin -->
+<script src="${ (project.staticDomain)! }/libs/jqueryFileUpload/js/jquery.fileupload-process.js"></script>
+<!-- The File Upload image preview & resize plugin -->
+<script src="${ (project.staticDomain)! }/libs/jqueryFileUpload/js/jquery.fileupload-image.js"></script>
+<!-- The File Upload audio preview plugin -->
+<script src="${ (project.staticDomain)! }/libs/jqueryFileUpload/js/jquery.fileupload-audio.js"></script>
+<!-- The File Upload video preview plugin -->
+<script src="${ (project.staticDomain)! }/libs/jqueryFileUpload/js/jquery.fileupload-video.js"></script>
+<!-- The File Upload validation plugin -->
+<script src="${ (project.staticDomain)! }/libs/jqueryFileUpload/js/jquery.fileupload-validate.js"></script>
+<script src="${ (project.staticDomain)! }/js/common.js"></script>
+<script src="${ (project.staticDomain)! }/libs/My97DatePicker/WdatePicker.js"></script>
+<script src="${ (project.staticDomain)! }/js/activity/activity.js"></script>
