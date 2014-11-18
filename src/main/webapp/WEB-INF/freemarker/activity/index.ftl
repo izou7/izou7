@@ -59,5 +59,6 @@
   				</div>
   			</div>
   		</div>
-<script src="${ (project.staticDomain)! }/libs/jquery/jquery-2.0.3.js"></script>
-<script src="${ (project.staticDomain)! }/libs/bootstrap/js/bootstrap.js"></script>
+  		<script type="text/javascript">
+			requirejs( ["${ (project.staticDomain)! }/js/activity/index.js"] );
+		</script>

@@ -5,6 +5,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import cn.chinattclub.izou7.dao.UserDao;
 import cn.chinattclub.izou7.dao.UserInfoDao;
 import cn.chinattclub.izou7.entity.User;
 import cn.chinattclub.izou7.entity.UserInfo;
@@ -20,10 +21,6 @@ public class UserInfoServiceImpl implements UserInfoService {
 	@Resource
 	public UserInfoDao userInfoDao;
 	
-	@Override
-	public UserInfo getUserInfo(User user) {
-		return userInfoDao.get(user.getId());
-	}
 
 	@Override
 	public void addUserInfo(UserInfo userInfo) {

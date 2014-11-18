@@ -10,7 +10,6 @@ import cn.chinattclub.izou7.entity.UserInfo;
  */
 public interface UserInfoService {
 	
-	public UserInfo getUserInfo(User user);
 	
 	public void addUserInfo(UserInfo userInfo);
 	
