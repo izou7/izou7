@@ -23,12 +23,12 @@ import cn.zy.commons.webdev.http.RestResponse;
 public class PublicController {
 	
 	@Resource 
-	private PublicService publicService; 
+	private PublicService publicServiceImpl;
 	
 	@RequestMapping(value="/import", method = RequestMethod.GET)
 	public String importPublic(Model model ,PublicDto dto) {
 		
-		publicService.importPublic(dto);
+		publicServiceImpl.importPublic(dto);
 		
 		return "site.public.share";
 	}
@@ -36,7 +36,7 @@ public class PublicController {
 	@RequestMapping(value="/list", method = RequestMethod.GET)
 	public String listPublic(Model model ,User user) {
 		
-		List<Public> publicList = publicService.listPublic(user);
+		List<Public> publicList = publicServiceImpl.listPublic(user);
 		model.addAttribute("publicList",publicList);
 		return "site.public.list";
 	}
@@ -50,7 +50,7 @@ public class PublicController {
 		if(StringUtils.isNotBlank(id)){
 			try{
 				publicId = Integer.parseInt(id);
-				publicService.deletePublic(publicId);
+				publicServiceImpl.deletePublic(publicId);
 				response.setMessage("删除成功");
 				response.setStatusCode(200);
 			}catch(Exception e){
