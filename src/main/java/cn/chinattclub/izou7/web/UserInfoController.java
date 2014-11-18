@@ -1,5 +1,7 @@
 package cn.chinattclub.izou7.web;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.apache.commons.lang3.StringUtils;
@@ -11,9 +13,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import cn.chinattclub.izou7.entity.Province;
 import cn.chinattclub.izou7.entity.User;
 import cn.chinattclub.izou7.entity.UserInfo;
+import cn.chinattclub.izou7.service.ProvinceService;
 import cn.chinattclub.izou7.service.UserInfoService;
+import cn.chinattclub.izou7.service.UserService;
+import cn.chinattclub.izou7.util.CommonUtil;
 import cn.zy.commons.webdev.http.RestResponse;
 
 
@@ -21,14 +27,24 @@ import cn.zy.commons.webdev.http.RestResponse;
 @RequestMapping(value="/userInfo")
 public class UserInfoController {
 	@Resource 
-	private UserInfoService userInfoService;
+	private UserInfoService userInfoServiceImpl;
+	
+	@Resource
+	private UserService userServiceImpl;
+	
+	@Resource
+	private ProvinceService ProvinceServiceImpl;
 	
 	@RequestMapping(value="/get", method = RequestMethod.GET)
-	public String getUserInfo(Model model ,User user) {
+	public String getUserInfo(Model model) {
+		User user = CommonUtil.getCurrentUser();
 		
-		UserInfo userInfo = userInfoService.getUserInfo(user);
+		UserInfo userInfo = user.getUserInfo();
+		List<Province> provinces = ProvinceServiceImpl.findAll();
+		
 		model.addAttribute("userInfo", userInfo);
-		return "site.userInfo.get";
+		model.addAttribute("provinces", provinces);
+		return "site.userInfo.info";
 	}
 	
 	@RequestMapping(value="/add", method = RequestMethod.POST)
@@ -38,7 +54,7 @@ public class UserInfoController {
 		RestResponse response = new RestResponse();
 		
 		try{
-			userInfoService.addUserInfo(userInfo);
+			userInfoServiceImpl.addUserInfo(userInfo);
 			response.setMessage("添加信息成功");
 			response.setStatusCode(200);
 		}catch(Exception e){
@@ -55,7 +71,7 @@ public class UserInfoController {
 		RestResponse response = new RestResponse();
 		
 		try{
-			userInfoService.updateUserInfo(userInfo);
+			userInfoServiceImpl.updateUserInfo(userInfo);
 			response.setMessage("修改信息成功");
 			response.setStatusCode(200);
 		}catch(Exception e){
