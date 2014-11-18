@@ -24,7 +24,7 @@
   							<a href="#" class="dropdown-toggle" data-toggle="dropdown">张颖<span class="caret"></span></a>
   							<ul class="dropdown-menu" role="menu">
   								<li>
-  									<a href="#">个人资料</a>
+  									<a href="/userInfo/get">个人资料</a>
   								</li>
   								<li>
   									<a href="#">我发起的活动</a>

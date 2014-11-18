@@ -16,18 +16,18 @@ import cn.zy.commons.webdev.http.RestResponse;
 @RequestMapping(value="/regist")
 public class RegistController {
 	@Resource 
-	private UserService userService;
+	private UserService userServiceImpl;
 	
 	@RequestMapping(value="/regist", method = RequestMethod.POST)
 	@ResponseBody
 	public RestResponse regist(@RequestBody User user) {
 		RestResponse response = new RestResponse();
 		try{
-			if(userService.exists(user)){
+			if(userServiceImpl.exists(user)){
 				response.setMessage("该用户已经存在");
 				response.setStatusCode(508);
 			}else{
-				userService.createUser(user);
+				userServiceImpl.createUser(user);
 				response.setMessage("注册成功");
 				response.setStatusCode(200);
 			}
