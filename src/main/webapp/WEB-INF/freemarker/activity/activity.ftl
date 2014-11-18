@@ -233,4 +233,4 @@
 <script src="${ (project.staticDomain)! }/libs/jqueryFileUpload/js/jquery.fileupload-validate.js"></script>
 <script src="${ (project.staticDomain)! }/js/common.js"></script>
 <script src="${ (project.staticDomain)! }/libs/My97DatePicker/WdatePicker.js"></script>
-<script src="${ (project.staticDomain)! }/js/activity/activity.js"></script>
+<script src="${ (project.staticDomain)! }/js/activity/activity.js"></script> 
