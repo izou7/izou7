@@ -1,4 +1,4 @@
-define( [ "jquery", "bootstrap"], function () {
+define( [ "jquery", "bootstrap","WdatePicker","common"], function () {
 
 	(function ( $ ) {
 		
@@ -10,6 +10,8 @@ define( [ "jquery", "bootstrap"], function () {
 		/* Init components.
 		 ==========================================*/
 		function initComponents() {
+			initCalendar("#startTime");
+			initCalendar("#endTime");
 		}
 
 		/* Add  event listener.
@@ -21,7 +23,7 @@ define( [ "jquery", "bootstrap"], function () {
 
 		/*Functions of initComponents
 		 ============================================*/
-
+		
 		/*Functions of addEventListener
 		 ============================================*/
 		function tagsClicked(obj){
@@ -40,8 +42,15 @@ define( [ "jquery", "bootstrap"], function () {
 					url: url,
 					dataType : "json",
 					success: function(json) {
+						$("#city").empty();
+						$("#city").append('<option value="0">请选择</option>');
 						if (json.statusCode == 200) {
-							console.info(json);
+							var citys = json.data.citys;
+							if(citys){
+								for(var i=0;i<citys.length;i++){
+									$("#city").append('<option value="'+citys[i].id+'">'+citys[i].city+'</option>');
+								}
+							}
 						}else {
 							$.Zebra_Dialog('获取城市失败！', {
 								'type':     'information',
