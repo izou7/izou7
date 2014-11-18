@@ -14,7 +14,7 @@ import cn.zy.commons.webdev.http.RestResponse;
 
 @Controller
 @RequestMapping(value="/regist")
-public class RegistController {
+public class RegistController { 
 	@Resource 
 	private UserService userService;
 	

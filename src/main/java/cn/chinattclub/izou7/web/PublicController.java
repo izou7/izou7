@@ -23,7 +23,7 @@ import cn.zy.commons.webdev.http.RestResponse;
 public class PublicController {
 	
 	@Resource 
-	private PublicService publicService;
+	private PublicService publicService; 
 	
 	@RequestMapping(value="/import", method = RequestMethod.GET)
 	public String importPublic(Model model ,PublicDto dto) {
