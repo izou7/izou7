@@ -5,8 +5,11 @@
   </style>
   <!-- Generic page styles -->
 <link rel="stylesheet" href="${ (project.staticDomain)! }/libs/jqueryFileUpload/css/style.css">
-<!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
+<link rel="stylesheet" href="http://blueimp.github.io/Gallery/css/blueimp-gallery.min.css">
 <link rel="stylesheet" href="${ (project.staticDomain)! }/libs/jqueryFileUpload/css/jquery.fileupload.css">
+<link rel="stylesheet" href="${ (project.staticDomain)! }/libs/jqueryFileUpload/css/jquery.fileupload-ui.css">
+<noscript><link rel="stylesheet" href="${ (project.staticDomain)! }/libs/jqueryFileUpload/css/jquery.fileupload-noscript.css"></noscript>
+<noscript><link rel="stylesheet" href="${ (project.staticDomain)! }/libs/jqueryFileUpload/css/jquery.fileupload-ui-noscript.css"></noscript>
   <!-- 主要内容 -->
   <div class="container content">
   <!--页头-->
@@ -18,7 +21,8 @@
 		<h3 class="panel-title">基本信息</h3>
 		</div>
 		<div class="panel-body">
-			<form class="form-horizontal" role="form">
+			<form class="form-horizontal" role="form" id="fileupload" action="//jquery-file-upload.appspot.com/" method="POST" enctype="multipart/form-data">
+			<input type="hidden" id="activityId" name="activityId" value="">
 			  <div class="form-group">
 				<label class="col-sm-2 control-label" for="name">标签：</label>
 				<div id="tagsDiv" class="col-sm-6">
@@ -64,7 +68,7 @@
 			  <div class="form-group">
 				<label class="col-sm-2 control-label" for="address"></label>
 				<div class="col-sm-6">
-				  <input class="form-control" type="text" id="address" placeholder="详细地址" required>
+				  <input class="form-control" type="text" id="address" placeholder="详细地址">
 				</div>
 			  </div>		
 			  <div class="form-group">
@@ -97,35 +101,36 @@
 				  <textarea class="form-control" rows="4" id="introduction" placeholder="活动介绍"></textarea>
 				</div>
 			  </div>
-			  <div class="form-group">
-				  <label class="col-lg-2 control-label" for="poster">上传海报：</label>
-				  
-			  <!-- 
-				<label class="col-lg-2 control-label" for="poster">上传海报：</label>
-				<div class="col-lg-1">
-				<button type="button" class="btn btn-info">上传海报</button>
-				<input type="file" name="fileField" class="file" id="fileField" size="18" />
+			  		        <!-- Redirect browsers with JavaScript disabled to the origin page -->
+		        <noscript><input type="hidden" name="redirect" value="https://blueimp.github.io/jQuery-File-Upload/"></noscript>
+		        <div class="form-group">
+		        	<label class="col-lg-2 control-label" for="poster">上传海报：</label>
+			        <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
+			        <div class="row fileupload-buttonbar col-lg-6">
+			            <div class="col-lg-6">
+			                <!-- The fileinput-button span is used to style the file input field as button -->
+			                <span class="btn btn-success fileinput-button">
+			                    <i class="glyphicon glyphicon-plus"></i>
+			                    <span>上传海报</span>
+			                    <input type="file" name="files[]" multiple>
+			                </span>
+			            </div>
+			        </div>
+			</div>
+	        <div class="form-group">
+				<label class="col-lg-2 control-label" ></label>
+				<div class="col-lg-6">
+				  <!-- The table listing the files available for upload/download -->
+	        		<table role="presentation" class="table table-striped"><tbody class="files"></tbody></table>
 				</div>
-				<div class="col-lg-4">
-					<h6 class="help-block">支持jpg、jpeg、png、gif格式，大小不超过2M。建议尺寸：400 X 220px</h6>
-					
-				</div>
-				-->
-			 </div>
-			 
-			 <div class="form-group">
-				<label class="col-lg-2 control-label" for="attachment">上传附件：</label>
-				<div class="col-lg-10">
-					<input type="file" id="attachment" class="btn btn-primary" >
-					<h6 class="help-block">支持jpg、jpeg、png、gif格式，大小不超过2M。建议尺寸：400 X 220px</h6>
-				</div>
-			 </div>
+		  	</div>
+				  	
 			 <div class="form-group">
 				<label class="col-lg-2 control-label" for="isPublic">是否公开：</label>
 				<div class="col-lg-10">
 					<div class="checkbox">
 						<label>
-						  <input type="radio" name="isPublic"> 是
+						  <input type="radio" name="isPublic" checked> 是
 						</label>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<label>
@@ -146,54 +151,95 @@
 				 
 				</div>
 				<div class="col-lg-2">
-				  <button type="button" class="btn btn-info btn-block" onclick="javascript:location.href='deploy2.html'">下一步</button>
+				  <button type="button" id="nextBtn" class="btn btn-info btn-block" >下一步</button>
 				</div>
 			 </div>
-			<!--
-			 <div class="form-group">
-			 <label class="col-lg-2 control-label" for="inputFile">相关链接：</label>
-				<div class="col-lg-6">
-					 <div class="table-responsive">
-					  <table class="table table-bordered">
-						<thead>
-						  <tr>
-							<th>序号</th>
-							<th>链接</th>
-							
-						  </tr>
-						</thead>
-						<tbody>
-						  <tr>
-							<td>1</td>
-							<td>www.baidu.com</td>
-						  </tr>
-						  <tr>
-							<td>2</td>
-							<td>www.sogou.com</td>
-						  </tr>
-						  <tr>
-							<td>3</td>
-							<td>www.google.com</td>
-						  </tr>
-						</tbody>
-					  </table>
-					</div>
-				</div>
-				<div class="col-lg-4">
-					<button type="button" class="btn btn-info"><span class="glyphicon glyphicon-plus"></span></button>
-					<button type="button" class="btn btn-info"><span class="glyphicon glyphicon-minus"></span></button>
-				</div>
-			</div>
-			-->
 			</form>
+			
 		</div>
 	</div>
   </div>
+	
+<!-- The template to display files available for upload -->
+<script id="template-upload" type="text/x-tmpl">
+{% for (var i=0, file; file=o.files[i]; i++) { %}
+    <tr class="template-upload fade">
+        <td>
+            <span class="preview"></span>
+        </td>
+        <td>
+            <p class="name">{%=file.name%}</p>
+            <strong class="error text-danger"></strong>
+        </td>
+        <td>
+            <p class="size">Processing...</p>
+            <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="progress-bar progress-bar-success" style="width:0%;"></div></div>
+        </td>
+        <td>
+            {% if (!i && !o.options.autoUpload) { %}
+                <button class="btn btn-primary start" disabled>
+                    <i class="glyphicon glyphicon-upload"></i>
+                    <span>Start</span>
+                </button>
+            {% } %}
+            {% if (!i) { %}
+                <button class="btn btn-warning cancel">
+                    <i class="glyphicon glyphicon-ban-circle"></i>
+                    <span>Cancel</span>
+                </button>
+            {% } %}
+        </td>
+    </tr>
+{% } %}
+</script>
+<!-- The template to display files available for download -->
+<script id="template-download" type="text/x-tmpl">
+{% for (var i=0, file; file=o.files[i]; i++) { %}
+    <tr class="template-download fade">
+        <td>
+            <span class="preview">
+                {% if (file.thumbnailUrl) { %}
+                    <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" data-gallery><img src="{%=file.thumbnailUrl%}"></a>
+                {% } %}
+            </span>
+        </td>
+        <td>
+            <p class="name">
+                {% if (file.url) { %}
+                    <a href="{%=file.url%}" title="{%=file.name%}" name="posterUrl" download="{%=file.name%}" {%=file.thumbnailUrl?'data-gallery':''%}>{%=file.name%}</a>
+                {% } else { %}
+                    <span>{%=file.name%}</span>
+                {% } %}
+            </p>
+            {% if (file.error) { %}
+                <div><span class="label label-danger">Error</span> {%=file.error%}</div>
+            {% } %}
+        </td>
+        <td>
+            <span class="size">{%=o.formatFileSize(file.size)%}</span>
+        </td>
+        <td>
+            {% if (file.deleteUrl) { %}
+                <button class="btn btn-danger delete" data-type="{%=file.deleteType%}" data-url="{%=file.deleteUrl%}"{% if (file.deleteWithCredentials) { %} data-xhr-fields='{"withCredentials":true}'{% } %}>
+                    <i class="glyphicon glyphicon-trash"></i>
+                    <span>Delete</span>
+                </button>
+                <input type="checkbox" name="delete" value="1" class="toggle">
+            {% } else { %}
+                <button class="btn btn-warning cancel">
+                    <i class="glyphicon glyphicon-ban-circle"></i>
+                    <span>Cancel</span>
+                </button>
+            {% } %}
+        </td>
+    </tr>
+{% } %}
+</script> 
 <script src="${ (project.staticDomain)! }/libs/jquery/jquery-2.0.3.js"></script>
 <!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
 <script src="${ (project.staticDomain)! }/libs/jqueryFileUpload/js/vendor/jquery.ui.widget.js"></script>
 <!-- The Templates plugin is included to render the upload/download listings -->
-<script src="http://blueimp.github.io/JavaScript-Templates/js/tmpl.min.js"></script>
+<script src="${ (project.staticDomain)! }/libs/jqueryFileUpload/js/tmpl.min.js"></script>
 <!-- The Load Image plugin is included for the preview images and image resizing functionality -->
 <script src="${ (project.staticDomain)! }/libs/jqueryFileUpload/js/load-image.all.min.js"></script>
 <!-- The Canvas to Blob plugin is included for image resizing functionality -->
@@ -201,7 +247,7 @@
 <!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
 <script src="${ (project.staticDomain)! }/libs/bootstrap/js/bootstrap.js"></script>
 <!-- blueimp Gallery script -->
-<script src="http://blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
+<script src="${ (project.staticDomain)! }/libs/jqueryFileUpload/js/jquery.blueimp-gallery.min.js"></script>
 <script src="${ (project.staticDomain)! }/libs/jqueryFileUpload/js/jquery.iframe-transport.js"></script>
 <!-- The basic File Upload plugin -->
 <script src="${ (project.staticDomain)! }/libs/jqueryFileUpload/js/jquery.fileupload.js"></script>
