@@ -1,5 +1,6 @@
 package cn.chinattclub.izou7.service;
 
+import cn.chinattclub.izou7.dto.UserInfoDto;
 import cn.chinattclub.izou7.entity.User;
 import cn.chinattclub.izou7.entity.UserInfo;
 
@@ -11,8 +12,8 @@ import cn.chinattclub.izou7.entity.UserInfo;
 public interface UserInfoService {
 	
 	
-	public void addUserInfo(UserInfo userInfo);
+	public void addUserInfo(UserInfoDto userInfoDto);
 	
-	public void updateUserInfo(UserInfo userInfo);
+	public void updateUserInfo(UserInfoDto userInfoDto,int userInfoId);
 
 }

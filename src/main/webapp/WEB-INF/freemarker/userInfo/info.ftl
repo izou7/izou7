@@ -127,7 +127,7 @@
 			  <div class="form-group">
 				<label class="col-lg-2 control-label" for="introduction">个人介绍：</label>
 				<div class="col-lg-6">
-				  <textarea class="form-control" rows="4" id="introduction" placeholder="个人介绍"></textarea>
+				  <textarea class="form-control" rows="4" id="introduction" placeholder="个人介绍">${(userInfo.introduction)!}</textarea>
 				</div>
 			  </div>
 			  
@@ -139,12 +139,17 @@
 				  <button type="button" class="btn btn-info btn-block" id="save">保存</button>
 				</div>
 			 </div>
-			  
-			  
 			</form>
 		</div>
 	</div>
   </div>
 <script src="${ (project.staticDomain)! }/libs/jquery/jquery-2.0.3.js"></script>
 <script src="${ (project.staticDomain)! }/libs/bootstrap/js/bootstrap.js"></script> 
-<script src="${ (project.staticDomain)! }/js/activity/activity.js"></script> 
+<script src="${ (project.staticDomain)! }/libs/Zebra_Dialog/js/zebra_dialog.js"></script>
+<script src="${ (project.staticDomain)! }/libs/My97DatePicker/WdatePicker.js"></script> 
+<script src="${ (project.staticDomain)! }/js/common.js"></script>
+<script src="${ (project.staticDomain)! }/js/userInfo/info.js"></script> 
+<script type="text/javascript">
+	var userInfoId = "${(userInfo.id)!}";
+	console.info(userInfoId);
+</script>

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import cn.chinattclub.izou7.dto.UserInfoDto;
 import cn.chinattclub.izou7.entity.Province;
 import cn.chinattclub.izou7.entity.User;
 import cn.chinattclub.izou7.entity.UserInfo;
@@ -47,6 +48,7 @@ public class UserInfoController {
 		return "site.userInfo.info";
 	}
 	
+	/**
 	@RequestMapping(value="/add", method = RequestMethod.POST)
 	@ResponseBody
 	public RestResponse addUserInfo(@RequestBody UserInfo userInfo) {
@@ -63,19 +65,26 @@ public class UserInfoController {
 		}
 		return response;
 	}
+	**/
 	
 	@RequestMapping(value="/update", method = RequestMethod.POST)
 	@ResponseBody
-	public RestResponse updateUserInfo(@RequestBody UserInfo userInfo) {
-		
+	public RestResponse updateUserInfo(@RequestBody UserInfoDto userInfoDto) {
+
 		RestResponse response = new RestResponse();
 		
 		try{
-			userInfoServiceImpl.updateUserInfo(userInfo);
-			response.setMessage("修改信息成功");
-			response.setStatusCode(200);
+			if(userInfoDto.getId()==null){
+				userInfoServiceImpl.addUserInfo(userInfoDto);
+				response.setMessage("添加信息成功");
+				response.setStatusCode(200);
+			}else{
+				userInfoServiceImpl.updateUserInfo(userInfoDto,userInfoDto.getId());
+				response.setMessage("修改信息成功");
+				response.setStatusCode(200);
+			}
 		}catch(Exception e){
-			response.setMessage("修改信息失败，内部错误");
+			response.setMessage("失败，内部错误");
 			response.setStatusCode(500);
 		}
 		return response;
