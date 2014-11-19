@@ -21,10 +21,10 @@
 		<h3 class="panel-title">基本信息</h3>
 		</div>
 		<div class="panel-body">
-			<form class="form-horizontal" role="form" id="fileupload" action="//jquery-file-upload.appspot.com/" method="POST" enctype="multipart/form-data">
-			<input type="hidden" id="activityId" name="activityId" value="">
+			<form class="form-horizontal" role="form" id="fileupload" action="add" method="POST" enctype="multipart/form-data">
+			<input type="hidden" id="id" name="id" value="${ (activity.id)! }">
 			  <div class="form-group">
-				<label class="col-sm-2 control-label" for="name">标签：</label>
+				<label class="col-sm-2 control-label">标签：</label>
 				<div id="tagsDiv" class="col-sm-6">
 					<button type="button" class="btn btn-sm btn-info">原创设计</button>
 					<button type="button" class="btn btn-sm btn-info">演唱会</button>
@@ -38,18 +38,18 @@
 					<button type="button" class="btn btn-sm btn-info">首映</button>
 					<button type="button" class="btn btn-sm btn-info">其他</button>
 				</div>
+				<input type="hidden" id="tags" name="tags" value="123">
 			  </div>
 			  <div class="form-group">
 				<label class="col-sm-2 control-label" for="name">活动名称：</label>
 				<div class="col-sm-6">
-				  <input class="form-control" type="text" id="name" placeholder="活动名称" required>
+				  <input class="form-control" type="text" id="name" name="name" placeholder="活动名称" required>
 				</div>
 			  </div>
 			   <div class="form-group">
-				<label class="col-lg-2 control-label" for="site">活动地点：</label>
+				<label class="col-lg-2 control-label" for="place">活动地点：</label>
 				<div class="col-lg-2">
 				  <select id="province" name="province" class="form-control" >
-				  <option value="0">请选择</option>
 				  <#list provinces! as province>
 				  		<#if (activity.city.province.name)! == province.name >
 				  			<option value="${(province.id)!}" selected>${(province.name)!}</option>
@@ -61,44 +61,37 @@
 				</div>
 				<div class="col-lg-2">
 				  <select id="city" name="city" class="form-control" >
-					<option>请选择</option>
+					<option value="51">北京</option>
 				  </select>
 				</div>
 			  </div>
 			  <div class="form-group">
-				<label class="col-sm-2 control-label" for="address"></label>
+				<label class="col-sm-2 control-label" for="place"></label>
 				<div class="col-sm-6">
-				  <input class="form-control" type="text" id="address" placeholder="详细地址">
+				  <input class="form-control" type="text" name="place"  id="place" placeholder="详细地址" required>
 				</div>
 			  </div>		
 			  <div class="form-group">
 				<label class="col-lg-2 control-label" for="time">活动时间：</label>
 				<div class="col-lg-2" >
-				  <input class="form-control " type="text" id="startTime" style="width:220px;">
+				  <input class="form-control " type="text" name="startTime" id="startTime" style="width:220px;" required>
 				</div>
 				<span class="col-lg-2 text-center" >到</span>
 				<div class="col-lg-2">
-				  <input class="form-control" type="text" id="endTime" style="width:220px;margin-left:-63px;">
+				  <input class="form-control" type="text" id="endTime" name="endTime" style="width:220px;margin-left:-63px;" required>
 				</div>
 			  </div>
 			  <div class="form-group">
-				<label class="col-lg-2 control-label" for="num">活动人数：</label>
+				<label class="col-lg-2 control-label" for="headCount">活动人数：</label>
 				<div class="col-lg-6">
-				  <input class="form-control" type="text" id="num" placeholder="活动人数">
+				  <input class="form-control" type="text" name="headCount" id="headCount" placeholder="活动人数" required>
 				</div>
 			  </div>
-			  <!--  			  
-			  <div class="form-group">
-				<label class="col-lg-2 control-label" for="tag">活动标签：</label>
-				<div class="col-lg-6">
-				  <input id="tags_1" id="tag" type="text" class="tags form-control" value="原装设计,微电影" />
-				</div>
-			  </div>
-			  -->
+			  
 			  <div class="form-group">
 				<label class="col-lg-2 control-label" for="introduction">活动介绍：</label>
 				<div class="col-lg-6">
-				  <textarea class="form-control" rows="4" id="introduction" placeholder="活动介绍"></textarea>
+				  <textarea class="form-control" rows="4" id="introduction" name="introduction" placeholder="活动介绍"></textarea>
 				</div>
 			  </div>
 			  		        <!-- Redirect browsers with JavaScript disabled to the origin page -->
@@ -126,24 +119,24 @@
 		  	</div>
 				  	
 			 <div class="form-group">
-				<label class="col-lg-2 control-label" for="isPublic">是否公开：</label>
+				<label class="col-lg-2 control-label" for="opened">是否公开：</label>
 				<div class="col-lg-10">
 					<div class="checkbox">
 						<label>
-						  <input type="radio" name="isPublic" checked> 是
+						  <input type="radio" name="opened" value="true" checked> 是
 						</label>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<label>
-						  <input type="radio" name="isPublic"> 否
+						  <input type="radio" name="opened" value="false"> 否
 						</label>
 					</div>
 					
 				</div>
 			 </div>	
 			 <div class="form-group">
-				<label class="col-lg-2 control-label" for="homeUrl">活动主页地址：</label>
+				<label class="col-lg-2 control-label" for="homepage">活动主页地址：</label>
 				<div class="col-lg-6">
-				  <input class="form-control" type="text" id="homeUrl" placeholder="活动主页地址">
+				  <input class="form-control" type="text" id="homepage" name="homepage"  placeholder="活动主页地址" required>
 				</div>
 			 </div>	
 			 <div class="form-group">
@@ -151,7 +144,7 @@
 				 
 				</div>
 				<div class="col-lg-2">
-				  <button type="button" id="nextBtn" class="btn btn-info btn-block" >下一步</button>
+				  <button  id="nextBtn" type="submit" class="btn btn-info btn-block" >下一步</button>
 				</div>
 			 </div>
 			</form>
@@ -265,6 +258,7 @@
 <script src="${ (project.staticDomain)! }/libs/jqueryFileUpload/js/jquery.fileupload-ui.js"></script>
 <script src="${ (project.staticDomain)! }/libs/jqueryFileUpload/js/cors/jquery.xdr-transport.js"></script>
 
+<script src="${ (project.staticDomain)! }/libs/jquery-form/jquery.form.js"></script>
 <script src="${ (project.staticDomain)! }/js/common.js"></script>
 <script src="${ (project.staticDomain)! }/libs/My97DatePicker/WdatePicker.js"></script>
 <script src="${ (project.staticDomain)! }/js/activity/activity.js"></script> 

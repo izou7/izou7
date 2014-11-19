@@ -30,6 +30,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import cn.chinattclub.izou7.dto.ActivityDto;
+import cn.chinattclub.izou7.dto.ActivityFormDto;
 import cn.chinattclub.izou7.entity.Activity;
 import cn.chinattclub.izou7.entity.Image;
 import cn.chinattclub.izou7.entity.Province;
@@ -71,7 +72,7 @@ public class ActivityController {
 	
 	@RequestMapping(value="/add", method = RequestMethod.POST)
 	@ResponseBody
-	public RestResponse add(@RequestBody Activity activity) {
+	public RestResponse add(ActivityFormDto dto) {
 		RestResponse response = new RestResponse();
 		int statusCode = ResponseStatusCode.OK;
 		String msg = "操作成功！";
