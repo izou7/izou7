@@ -145,7 +145,6 @@
 		</div>
 	</div>
   </div>
-<script type="text/javascript">
-	requirejs( ["${ (project.staticDomain)! }/js/userInfo/info.js"] );
-	userInfo = "${userInfo}";
-</script>
+<script src="${ (project.staticDomain)! }/libs/jquery/jquery-2.0.3.js"></script>
+<script src="${ (project.staticDomain)! }/libs/bootstrap/js/bootstrap.js"></script> 
+<script src="${ (project.staticDomain)! }/js/activity/activity.js"></script> 

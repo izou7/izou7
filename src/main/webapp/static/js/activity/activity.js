@@ -25,11 +25,20 @@ $(function () {
                     $this.remove();
                 });
             });
+    var maxFileNumber = 1;
+    var currentFileNumber = 0;
+    var alertFlag = false;
+    $('#fileupload').click(function(){
+    	currentFileNumber=0;
+    	$("#files").empty();
+    	});
     $('#fileupload').fileupload({
-        url: url,
+        url: "upload",
         dataType: 'json',
+        limitConcurrentUploads: 1,
         autoUpload: false,
         acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i,
+        disableValidation : true,
         maxFileSize: 5000000, // 5 MB
         // Enable image resizing, except for Android and Opera,
         // which actually support image resizing, but fail to
@@ -40,6 +49,14 @@ $(function () {
         previewMaxHeight: 100,
         previewCrop: true
     }).on('fileuploadadd', function (e, data) {
+    	currentFileNumber++;
+    	if(currentFileNumber>1){
+    		if(!alertFlag){
+    			alert("上传文件数量超过限制！");
+    		}
+    		alertFlag = true;
+    		return;
+    	}
         data.context = $('<div/>').appendTo('#files');
         $.each(data.files, function (index, file) {
             var node = $('<p/>')
