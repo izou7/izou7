@@ -4,6 +4,9 @@ package cn.chinattclub.izou7.web;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -16,6 +19,7 @@ import javax.annotation.Resource;
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
@@ -31,11 +35,20 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import cn.chinattclub.izou7.dto.ActivityDto;
 import cn.chinattclub.izou7.dto.ActivityFormDto;
+import cn.chinattclub.izou7.dto.UserDto;
 import cn.chinattclub.izou7.entity.Activity;
+import cn.chinattclub.izou7.entity.ActivityArticle;
+import cn.chinattclub.izou7.entity.ActivityPoster;
+import cn.chinattclub.izou7.entity.Article;
+import cn.chinattclub.izou7.entity.City;
 import cn.chinattclub.izou7.entity.Image;
 import cn.chinattclub.izou7.entity.Province;
+import cn.chinattclub.izou7.entity.User;
+import cn.chinattclub.izou7.service.ActivityArticleService;
 import cn.chinattclub.izou7.service.ActivityService;
+import cn.chinattclub.izou7.service.CityService;
 import cn.chinattclub.izou7.service.ProvinceService;
+import cn.chinattclub.izou7.service.UserService;
 import cn.zy.commons.webdev.constant.ResponseStatusCode;
 import cn.zy.commons.webdev.http.RestResponse;
 
@@ -57,7 +70,18 @@ public class ActivityController {
 	private ActivityService activityServiceImpl;
 	
 	@Resource
+	private ActivityArticleService activityArticleServiceImpl;
+	
+	@Resource
 	private ProvinceService provinceServiceImpl; 
+	
+	@Resource
+	private CityService cityServiceImpl; 
+	
+	@Resource
+	private UserService userServiceImpl; 
+	
+	
 	
 	@Resource
 	private Properties appConfig;
@@ -70,9 +94,38 @@ public class ActivityController {
 		return "site.activity.index";
 	}
 	
-	@RequestMapping(value="/add", method = RequestMethod.POST)
+	@RequestMapping(value="/add", method = RequestMethod.GET)
 	@ResponseBody
-	public RestResponse add(ActivityFormDto dto) {
+	public RestResponse add(ActivityFormDto dto) throws ParseException {
+		RestResponse response = new RestResponse();
+		int statusCode = ResponseStatusCode.OK;
+		String msg = "操作成功！";
+		Subject currentUser = SecurityUtils.getSubject();
+		User user = userServiceImpl.findByUsername(currentUser.getPrincipal().toString());
+		City city = cityServiceImpl.getCity(dto.getCity());
+		Activity activity = dto.convert(null);
+		if(StringUtils.isNotBlank(dto.getPosterUrl())){
+			ActivityPoster poster = new ActivityPoster();
+			poster.setActivity(activity);
+			poster.setPoster(dto.getPosterUrl());
+			poster.setCreateTime(new Date());
+			List<ActivityPoster> posters = new ArrayList<>();
+			posters.add(poster);
+			activity.setActivityPosters(posters);
+		}
+		activity.setCity(city);
+		activity.setUser(user);
+		activity.setStatus(0);
+		activityServiceImpl.add(activity);
+		response.setMessage(msg);
+		response.setStatusCode(statusCode);
+		response.getBody().put("id",activity.getId());
+		return response;
+		
+	}
+	@RequestMapping(value="/addUser", method = RequestMethod.POST)
+	@ResponseBody
+	public RestResponse addUser(@RequestBody List<UserDto> dtos) {
 		RestResponse response = new RestResponse();
 		int statusCode = ResponseStatusCode.OK;
 		String msg = "操作成功！";
@@ -101,6 +154,7 @@ public class ActivityController {
 			view = activityPage(model,dto);
 			break;
 		case SECOND:
+			view = activityArticlesPage(model,dto);
 			break;
 		case THIRD:
 			break;
@@ -119,6 +173,19 @@ public class ActivityController {
 	}
 	
 	/**
+	 * 第二步
+	 * @param model
+	 * @param dto
+	 * @return
+	 */
+	public String activityArticlesPage(Model model ,ActivityDto dto){
+		if(dto.getActivityId()!=null){
+			List<ActivityArticle> articles = activityArticleServiceImpl.findArticlesById(dto.getActivityId());
+			model.addAttribute("articles", articles);
+		}
+		return "site.activity.articles";
+	}
+	/**
 	 * 第一步
 	 * @param model
 	 * @param dto
@@ -134,27 +201,56 @@ public class ActivityController {
 	
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
 	@ResponseBody
-    public  Map upload(MultipartHttpServletRequest request, HttpServletResponse response) {
+	public  Map upload(MultipartHttpServletRequest request, HttpServletResponse response) {
+		Iterator<String> itr = request.getFileNames();
+		MultipartFile mpf;
+		List<Image> list = new LinkedList<>();
+		while (itr.hasNext()) {
+			mpf = request.getFile(itr.next());
+			String newFilenameBase = UUID.randomUUID().toString();
+			String originalFileExtension = mpf.getOriginalFilename().substring(mpf.getOriginalFilename().lastIndexOf("."));
+			String newFilename = newFilenameBase + originalFileExtension;
+			String storageDirectory = appConfig.get("storageDirectory").toString().trim()+"images";
+			File newFile = new File(storageDirectory + "/" + newFilename);
+			Image image = new Image();
+			try {
+				mpf.transferTo(newFile);
+				image.setName(newFile.getName());
+				image.setUrl(appConfig.get("storageImageUrl").toString().trim() + "/" + newFilename);
+			} catch(IOException e) {
+				log.error("Could not upload file "+mpf.getOriginalFilename(), e);
+				image.setError("上传失败！");
+			}
+			list.add(image);
+		}
+		Map<String, Object> files = new HashMap<>();
+		files.put("files", list);
+		return files;
+	}
+	@RequestMapping(value = "/uploadArticles", method = RequestMethod.POST)
+	@ResponseBody
+    public  Map uploadArticles(MultipartHttpServletRequest request, HttpServletResponse response) {
         Iterator<String> itr = request.getFileNames();
         MultipartFile mpf;
-        List<Image> list = new LinkedList<>();
+        List<Article> list = new LinkedList<>();
+        String sbs = request.getParameter("sb");
         while (itr.hasNext()) {
             mpf = request.getFile(itr.next());
             String newFilenameBase = UUID.randomUUID().toString();
             String originalFileExtension = mpf.getOriginalFilename().substring(mpf.getOriginalFilename().lastIndexOf("."));
             String newFilename = newFilenameBase + originalFileExtension;
-            String storageDirectory = appConfig.get("storageDirectory").toString().trim()+"images";
+            String storageDirectory = appConfig.get("storageDirectory").toString().trim()+"articles";
             File newFile = new File(storageDirectory + "/" + newFilename);
-            Image image = new Image();
+            Article article = new Article();
             try {
                 mpf.transferTo(newFile);
-                image.setName(newFile.getName());
-                image.setUrl(appConfig.get("storageImageUrl").toString().trim() + "/" + newFilename);
+//                image.setName(newFile.getName());
+//                image.setUrl(appConfig.get("storageImageUrl").toString().trim() + "/" + newFilename);
             } catch(IOException e) {
                 log.error("Could not upload file "+mpf.getOriginalFilename(), e);
-                image.setError("上传失败！");
+                article.setError("上传失败！");
             }
-            list.add(image);
+            list.add(article);
         }
         Map<String, Object> files = new HashMap<>();
         files.put("files", list);

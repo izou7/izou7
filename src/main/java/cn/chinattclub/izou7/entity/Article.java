@@ -1,15 +1,10 @@
 package cn.chinattclub.izou7.entity;
 
-import java.util.List;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
 @Table(name = "i_article")
@@ -27,6 +22,9 @@ public class Article {
 	private String summary;
 	
 	private String url;
+	
+	@Transient
+	private String error;
 
 
 	public Integer getId() {
@@ -67,6 +65,22 @@ public class Article {
 
 	public void setUrl(String url) {
 		this.url = url;
+	}
+
+	/**
+	 * Returns the value of the field called 'error'.
+	 * @return Returns the error.
+	 */
+	public String getError() {
+		return this.error;
+	}
+
+	/**
+	 * Sets the field called 'error' to the given value.
+	 * @param error The error to set.
+	 */
+	public void setError(String error) {
+		this.error = error;
 	}
 
 	

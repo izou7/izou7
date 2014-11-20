@@ -30,4 +30,8 @@ public class ActivityServiceImpl implements ActivityService {
 		activityDao.update(activity);
 	}
 	
+	@Override
+	public void add(Activity activity){
+		activityDao.save(activity);
+	}
 }

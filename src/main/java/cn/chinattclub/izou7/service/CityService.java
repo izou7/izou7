@@ -29,4 +29,12 @@ public interface CityService {
 	 * @return
 	 */
 	public List<City> list();
+
+	/**
+	 * TODO Put here a description of what this method does.
+	 *
+	 * @param id
+	 * @return
+	 */
+	City getCity(int id);
 }

@@ -16,7 +16,7 @@
 		<tiles.version>2.2.2</tiles.version>
 		<cxf.version>2.7.5</cxf.version>
 		<util-commons.version>0.0.1-SNAPSHOT</util-commons.version>
-		<web-commons.version>0.0.1-SNAPSHOT</web-commons.version>
+		<web-commons.version>0.0.2-SNAPSHOT</web-commons.version>
 		<dao-commons.version>0.0.1-SNAPSHOT</dao-commons.version>
 	</properties>
 	<dependencies>

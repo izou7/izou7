@@ -22,4 +22,11 @@ public interface ActivityService {
 	 */
 	public void update(Activity activity);
 
+	/**
+	 * TODO Put here a description of what this method does.
+	 *
+	 * @param activity
+	 */
+	void add(Activity activity);
+
 }

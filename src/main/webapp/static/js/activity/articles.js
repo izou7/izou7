@@ -4,9 +4,9 @@ $(function () {
 	 'use strict';
 
 	    $('#fileupload').fileupload({
-	        url: 'upload',
-			maxFileSize: 5000000,
-			maxNumberOfFiles: 1
+	        url: 'uploadArticles',
+	        maxFileSize: 5000000,
+			maxNumberOfFiles: 2
 	    });
 
 	    $('#fileupload').fileupload(
@@ -18,12 +18,8 @@ $(function () {
 	        )
 	    );
 	
-    initCalendar("#startTime");
-	initCalendar("#endTime");
 	
 	$("#tagsDiv button").click(function(){tagsClicked(this)});
-	$("#province").change(function(){provinceChange(this)});
-	
 	$("#nextBtn").click(nextBtnClick);
 //	$("#fileupload").ajaxForm({
 //		dataType:  "json",
@@ -76,6 +72,8 @@ function nextBtnClick(){
 	
 }
 function createAndValidate(){
+	
+
 }
 function tagsClicked(obj){
 	if($(obj).attr("class").indexOf("btn-info")!=-1){
@@ -94,37 +92,3 @@ function tagsClicked(obj){
 	$("#tags").val(tags);
 }
 
-function provinceChange(obj){
-	if($(obj).val()!=0){
-		var url = "/city/"+$(obj).val();
-		$.ajax({
-			type: "GET",
-			url: url,
-			dataType : "json",
-			success: function(json) {
-				$("#city").empty();
-				if (json.statusCode == 200) {
-					var citys = json.data.citys;
-					if(citys){
-						for(var i=0;i<citys.length;i++){
-							$("#city").append('<option value="'+citys[i].id+'">'+citys[i].city+'</option>');
-						}
-					}
-				}else {
-					$.Zebra_Dialog('获取城市失败！', {
-						'type':     'information',
-						'title':    '提示',
-						'buttons':  ["确定"]
-					});
-				}
-			},
-			fail : function(json){
-				$.Zebra_Dialog('获取城市失败！', {
-					'type':     'information',
-					'title':    '提示',
-					'buttons':  ["确定"]
-				});
-			}
-		});
-	}
-}

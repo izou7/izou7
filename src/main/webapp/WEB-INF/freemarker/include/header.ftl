@@ -12,4 +12,5 @@
 <link rel="stylesheet" href="${ (project.staticDomain)! }/css/scaffold/sticky-footer.css">
 <link rel="stylesheet" href="${ (project.staticDomain)! }/libs/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="${ (project.staticDomain)! }/css/common.css">
+<link rel="stylesheet" href="${ (project.staticDomain)! }/css/base.css">
 <link rel="stylesheet" type="text/css" href="${ (project.staticDomain)! }/libs/Zebra_Dialog/css/flat/zebra_dialog.css"/>

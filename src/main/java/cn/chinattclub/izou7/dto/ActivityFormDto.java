@@ -1,6 +1,14 @@
 package cn.chinattclub.izou7.dto;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.validation.constraints.Size;
+
+
+import cn.chinattclub.izou7.entity.Activity;
 
 import com.sun.istack.NotNull;
 
@@ -13,6 +21,10 @@ import com.sun.istack.NotNull;
  * 
  */
 public class ActivityFormDto {
+	
+	private static final DateFormat df = new SimpleDateFormat(
+			"yyyy-MM-dd");
+
 
 	private Integer id;
 	
@@ -172,6 +184,23 @@ public class ActivityFormDto {
 
 	public void setPosterUrl(String posterUrl) {
 		this.posterUrl = posterUrl;
+	}
+	
+	public Activity convert(Activity activity) throws ParseException{
+		if(activity==null){
+			activity = new Activity();
+		}
+		activity.setCreateTime(new Date());
+		activity.setEndTime(df.parse(getEndTime()));
+		activity.setHeadCount(getHeadCount());
+		activity.setHomepage(getHomepage());
+		activity.setIntroduction(getIntroduction());
+		activity.setName(getName());
+		activity.setOpened(getOpened());
+		activity.setPlace(getPlace());
+		activity.setStartTime(df.parse(getStartTime()));
+		activity.setTags(getTags());
+		return activity;
 	}
 	
 }

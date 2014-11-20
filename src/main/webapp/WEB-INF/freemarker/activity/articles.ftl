@@ -18,130 +18,43 @@
 	</div>
 	<div class="panel panel-default">
 		<div class="panel-heading">
-		<h3 class="panel-title">基本信息</h3>
+		<h3 class="panel-title">上传文章</h3>
 		</div>
 		<div class="panel-body">
 			<form class="form-horizontal" role="form" id="fileupload" action="add" method="POST" enctype="multipart/form-data">
 			<input type="hidden" id="id" name="id" value="${ (activity.id)! }">
-			  <div class="form-group">
-				<label class="col-sm-2 control-label">标签：</label>
-				<div id="tagsDiv" class="col-sm-6">
-					<button type="button" class="btn btn-sm btn-info">原创设计</button>
-					<button type="button" class="btn btn-sm btn-info">演唱会</button>
-					<button type="button" class="btn btn-sm btn-info">红丝带</button>
-					<button type="button" class="btn btn-sm btn-info">扶贫</button>
-					<button type="button" class="btn btn-sm btn-info">助学</button>
-					<button type="button" class="btn btn-sm btn-info">微电影</button>
-					<button type="button" class="btn btn-sm btn-info">生活育儿</button>
-					<button type="button" class="btn btn-sm btn-info">论坛</button>
-					<button type="button" class="btn btn-sm btn-info">点映</button>
-					<button type="button" class="btn btn-sm btn-info">首映</button>
-					<button type="button" class="btn btn-sm btn-info">其他</button>
-				</div>
-				<input type="hidden" id="tags" name="tags" >
-			  </div>
-			  <div class="form-group">
-				<label class="col-sm-2 control-label" for="name">活动名称：</label>
-				<div class="col-sm-6">
-				  <input class="form-control" type="text" id="name" name="name" placeholder="活动名称" required>
-				</div>
-			  </div>
-			   <div class="form-group">
-				<label class="col-lg-2 control-label" for="place">活动地点：</label>
-				<div class="col-lg-2">
-				  <select id="province" name="province" class="form-control" >
-				  <#list provinces! as province>
-				  		<#if (activity.city.province.name)! == province.name >
-				  			<option value="${(province.id)!}" selected>${(province.name)!}</option>
-				  		<#else>
-				  			<option value="${(province.id)!}">${(province.name)!}</option>
-				  		</#if>
-				  </#list>
-				  </select>
-				</div>
-				<div class="col-lg-2">
-				  <select id="city" name="city" class="form-control" >
-					<option value="51">北京</option>
-				  </select>
-				</div>
-			  </div>
-			  <div class="form-group">
-				<label class="col-sm-2 control-label" for="place"></label>
-				<div class="col-sm-6">
-				  <input class="form-control" type="text" name="place"  id="place" placeholder="详细地址" required>
-				</div>
-			  </div>		
-			  <div class="form-group">
-				<label class="col-lg-2 control-label" for="time">活动时间：</label>
-				<div class="col-lg-2" >
-				  <input class="form-control " type="text" name="startTime" id="startTime" style="width:220px;" required>
-				</div>
-				<span class="col-lg-2 text-center" >到</span>
-				<div class="col-lg-2">
-				  <input class="form-control" type="text" id="endTime" name="endTime" style="width:220px;margin-left:-63px;" required>
-				</div>
-			  </div>
-			  <div class="form-group">
-				<label class="col-lg-2 control-label" for="headCount">活动人数：</label>
-				<div class="col-lg-6">
-				  <input class="form-control" type="text" name="headCount" id="headCount" placeholder="活动人数" >
-				</div>
-			  </div>
-			  
-			  <div class="form-group">
-				<label class="col-lg-2 control-label" for="introduction">活动介绍：</label>
-				<div class="col-lg-6">
-				  <textarea class="form-control" rows="4" id="introduction" name="introduction" placeholder="活动介绍"></textarea>
-				</div>
-			  </div>
-			  		        <!-- Redirect browsers with JavaScript disabled to the origin page -->
+			    <!-- Redirect browsers with JavaScript disabled to the origin page -->
+			   
 		        <noscript><input type="hidden" name="redirect" value="https://blueimp.github.io/jQuery-File-Upload/"></noscript>
 		        <div class="form-group">
-		        	<label class="col-lg-2 control-label" for="poster">上传海报：</label>
+		        	<label class="col-lg-2 control-label" for="poster">上传文章：</label>
 			        <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
-			        <div class="row fileupload-buttonbar col-lg-6">
+			        <div class="row fileupload-buttonbar col-lg-10">
 			            <div class="col-lg-6">
 			                <!-- The fileinput-button span is used to style the file input field as button -->
 			                <span class="btn btn-success fileinput-button">
 			                    <i class="glyphicon glyphicon-plus"></i>
-			                    <span>上传海报</span>
+			                    <span>上传文章</span>
 			                    <input type="file" name="files[]" multiple>
 			                </span>
+			                <button type="submit" class="btn btn-primary start">
+			                    <i class="glyphicon glyphicon-upload"></i>
+			                    <span>Start upload</span>
+			                </button>
 			            </div>
 			        </div>
 			        <input type="hidden" id="posterUrl" name="posterUrl" value="">
 			</div>
 	        <div class="form-group">
 				<label class="col-lg-2 control-label" ></label>
-				<div class="col-lg-6">
+				<div class="col-lg-10">
 				  <!-- The table listing the files available for upload/download -->
 	        		<table role="presentation" class="table table-striped"><tbody class="files"></tbody></table>
 				</div>
 		  	</div>
 				  	
 			 <div class="form-group">
-				<label class="col-lg-2 control-label" for="opened">是否公开：</label>
 				<div class="col-lg-10">
-					<div class="checkbox">
-						<label>
-						  <input type="radio" name="opened" value="true" checked> 是
-						</label>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<label>
-						  <input type="radio" name="opened" value="false"> 否
-						</label>
-					</div>
-					
-				</div>
-			 </div>	
-			 <div class="form-group">
-				<label class="col-lg-2 control-label" for="homepage">活动主页地址：</label>
-				<div class="col-lg-6">
-				  <input class="form-control" type="text" id="homepage" name="homepage"  placeholder="活动主页地址">
-				</div>
-			 </div>	
-			 <div class="form-group">
-				<div class="col-lg-6">
 				 
 				</div>
 				<div class="col-lg-2">
@@ -199,7 +112,7 @@
         </td>
         <td>
             <p class="name">
-                {% if (file.url) { $("#posterUrl").val(file.url);%}
+                {% if (file.url) { %}
                     <a href="{%=file.url%}" title="{%=file.name%}" download="{%=file.name%}" {%=file.thumbnailUrl?'data-gallery':''%}>{%=file.name%}</a>
                 {% } else { %}
                     <span>{%=file.name%}</span>
@@ -228,7 +141,7 @@
         </td>
     </tr>
 {% } %}
-</script> 
+</script>
 <script src="${ (project.staticDomain)! }/libs/jquery/jquery-2.0.3.js"></script>
 <script src="${ (project.staticDomain)! }/libs/jquery/jquery-migrate-1.2.1.min.js"></script>
 <!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
@@ -262,6 +175,4 @@
 
 <script src="${ (project.staticDomain)! }/libs/jquery-form/jquery-form-20131225.min.js"></script>
 <script src="${ (project.staticDomain)! }/libs/Zebra_Dialog/js/zebra_dialog.js"></script>
-<script src="${ (project.staticDomain)! }/js/common.js"></script>
-<script src="${ (project.staticDomain)! }/libs/My97DatePicker/WdatePicker.js"></script>
-<script src="${ (project.staticDomain)! }/js/activity/activity.js"></script> 
+<script src="${ (project.staticDomain)! }/js/activity/articles.js"></script> 
