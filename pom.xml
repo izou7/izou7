@@ -16,7 +16,7 @@
 		<tiles.version>2.2.2</tiles.version>
 		<cxf.version>2.7.5</cxf.version>
 		<util-commons.version>0.0.1-SNAPSHOT</util-commons.version>
-		<web-commons.version>0.0.2-SNAPSHOT</web-commons.version>
+		<web-commons.version>0.0.1-SNAPSHOT</web-commons.version>
 		<dao-commons.version>0.0.1-SNAPSHOT</dao-commons.version>
 	</properties>
 	<dependencies>
@@ -218,6 +218,43 @@
 			<artifactId>cxf-rt-transports-http</artifactId>
 			<version>${cxf.version}</version>
 		</dependency>
+
+		<!-- Apache POI -->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>3.10.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+			<version>3.10.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml-schemas</artifactId>
+			<version>3.10.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-scratchpad</artifactId>
+			<version>3.10.1</version>
+		</dependency>
+		
+		<!-- Apache pdfbox -->
+		<dependency>
+		  <groupId>org.apache.pdfbox</groupId>
+		  <artifactId>pdfbox</artifactId>
+		  <version>1.8.7</version>
+		</dependency>
+
+		<!-- java mail -->
+	    <dependency>
+	        <groupId>javax.mail</groupId>
+	        <artifactId>mail</artifactId>
+	        <version>1.4.1</version>
+	    </dependency>  
+
 
 		<!-- Jackson 2 for Spring 3.2.x above. -->
 		<dependency>
