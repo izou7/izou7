@@ -21,7 +21,7 @@ public class PublicDao  extends AdvancedHibernateDao<Public>{
 	@SuppressWarnings("unchecked")
 	public List<Public> listByUser(User user){
 		Criteria criteria = this.getCurrentSession().createCriteria(Public.class);
-		criteria.add(Restrictions.eq("user", user.getId()));
+		criteria.add(Restrictions.eq("user", user));
 		criteria.addOrder(Order.desc("createTime"));
 		return criteria.list();
 	}

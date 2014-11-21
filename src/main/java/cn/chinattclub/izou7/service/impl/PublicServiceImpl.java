@@ -69,6 +69,9 @@ public class PublicServiceImpl implements PublicService {
 		publicDao.delete(id);
 	}
 
-	
+	@Override
+	public Public getPublicById(int publicId) {
+		return publicDao.get(publicId);
+	}
 	
 }

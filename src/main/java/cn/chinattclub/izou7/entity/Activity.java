@@ -1,17 +1,12 @@
 package cn.chinattclub.izou7.entity;
 
 import java.util.Date;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.NotFound;
@@ -35,7 +30,6 @@ public class Activity {
 	 * 用户名
 	 */
 	@ManyToOne
-	@JoinColumn(name="user")
 	@NotFound(action = NotFoundAction.IGNORE)
 	private User user;
 	
@@ -48,7 +42,6 @@ public class Activity {
 	 * 活动举办城市
 	 */
 	@ManyToOne
-	@JoinColumn(name="city")
 	private City city;
 	
 	/**
@@ -107,9 +100,6 @@ public class Activity {
 	 * 活动状态
 	 */
 	private Integer status;
-	
-	@OneToMany(mappedBy="activity",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
-	private List<ActivityPoster> activityPosters;
 	
 	/** 
 	 *  创建时间
@@ -394,22 +384,6 @@ public class Activity {
 	 */
 	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
-	}
-
-	/**
-	 * Returns the value of the field called 'activityPosters'.
-	 * @return Returns the activityPosters.
-	 */
-	public List<ActivityPoster> getActivityPosters() {
-		return this.activityPosters;
-	}
-
-	/**
-	 * Sets the field called 'activityPosters' to the given value.
-	 * @param activityPosters The activityPosters to set.
-	 */
-	public void setActivityPosters(List<ActivityPoster> activityPosters) {
-		this.activityPosters = activityPosters;
 	}
 	
 	

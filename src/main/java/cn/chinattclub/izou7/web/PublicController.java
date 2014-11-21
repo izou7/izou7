@@ -16,6 +16,7 @@ import cn.chinattclub.izou7.dto.PublicDto;
 import cn.chinattclub.izou7.entity.Public;
 import cn.chinattclub.izou7.entity.User;
 import cn.chinattclub.izou7.service.PublicService;
+import cn.chinattclub.izou7.util.CommonUtil;
 import cn.zy.commons.webdev.http.RestResponse;
 
 @Controller
@@ -34,8 +35,8 @@ public class PublicController {
 	}
 	
 	@RequestMapping(value="/list", method = RequestMethod.GET)
-	public String listPublic(Model model ,User user) {
-		
+	public String listPublic(Model model) {
+		User user = CommonUtil.getCurrentUser();
 		List<Public> publicList = publicServiceImpl.listPublic(user);
 		model.addAttribute("publicList",publicList);
 		return "site.public.list";
@@ -63,5 +64,12 @@ public class PublicController {
 			response.setStatusCode(500);
 		}
 		return response;
+	}
+	
+	@RequestMapping(value="/show", method = RequestMethod.GET)
+	public String showPublic(Model model, int publicId) {
+		Public pub = publicServiceImpl.getPublicById(publicId);
+		model.addAttribute("public",pub);
+		return "site.public.info";
 	}
 }

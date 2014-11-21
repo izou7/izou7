@@ -1,10 +1,14 @@
 package cn.chinattclub.izou7.entity;
 
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
+
 
 @Entity
 @Table(name = "i_article")
@@ -14,6 +18,9 @@ public class Article {
 	@GeneratedValue
 	private Integer id;
 
+	@ManyToOne
+	@JoinColumn(name="source")
+	private Public pub;
 	
 	private String title;
 	
@@ -22,10 +29,12 @@ public class Article {
 	private String summary;
 	
 	private String url;
-	
-	@Transient
-	private String error;
 
+	@Column(name="praise_number")
+	private int praiseNumber;
+	
+	@Column(name="bad_number")
+	private int badNumber;
 
 	public Integer getId() {
 		return id;
@@ -33,6 +42,14 @@ public class Article {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public Public getPub() {
+		return pub;
+	}
+
+	public void setPub(Public pub) {
+		this.pub = pub;
 	}
 
 	public String getTitle() {
@@ -67,20 +84,20 @@ public class Article {
 		this.url = url;
 	}
 
-	/**
-	 * Returns the value of the field called 'error'.
-	 * @return Returns the error.
-	 */
-	public String getError() {
-		return this.error;
+	public int getPraiseNumber() {
+		return praiseNumber;
 	}
 
-	/**
-	 * Sets the field called 'error' to the given value.
-	 * @param error The error to set.
-	 */
-	public void setError(String error) {
-		this.error = error;
+	public void setPraiseNumber(int praiseNumber) {
+		this.praiseNumber = praiseNumber;
+	}
+
+	public int getBadNumber() {
+		return badNumber;
+	}
+
+	public void setBadNumber(int badNumber) {
+		this.badNumber = badNumber;
 	}
 
 	

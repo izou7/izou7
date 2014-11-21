@@ -22,14 +22,10 @@ public class CityServiceImpl implements CityService {
 	@Override
 	public List<City> findCityIdByProvince(int id) {
 		// TODO Auto-generated method stub.
+//		return dao.findByHQL("from City as city where city.province.id=?",0,1000,id);
 		return dao.findByHQL("SELECT pro.citys from Province as pro where pro.id=?",0,1000,id);
+//		return dao.findCityByProvince(id);
 	}
-	
-	@Override
-	public City getCity(int id){
-		return dao.get(id);
-	}
-	
 	@Override
 	public List<City> list() {
 		// TODO Auto-generated method stub.

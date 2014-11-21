@@ -9,6 +9,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -40,9 +42,21 @@ public class Public {
 	@Column(name="update_time")
 	private Date updateTime;
 	
-	@OneToMany(cascade=CascadeType.ALL)
+	@OneToMany(mappedBy="pub", cascade=CascadeType.ALL)
 	private List<Article> article;
 	
+	@ManyToOne
+	@JoinColumn(name="user")
+	private User user;
+	
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 	public Integer getId() {
 		return id;
 	}

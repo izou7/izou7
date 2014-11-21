@@ -11,11 +11,13 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
+
 
 /**
  * 用户实体类
@@ -68,6 +70,17 @@ public class User {
 	@OneToOne
 	@JoinColumn(name = "user_info_id")
 	private UserInfo userInfo;
+	
+	@OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+	private List<Public> pub;
+
+	public List<Public> getPub() {
+		return pub;
+	}
+
+	public void setPub(List<Public> pub) {
+		this.pub = pub;
+	}
 
 	public Integer getId() {
 		return id;
