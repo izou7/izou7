@@ -4,6 +4,7 @@
   	}
   </style>
   <!-- Generic page styles -->
+<link rel="stylesheet" href="${ (project.staticDomain)! }/libs/bootstrap-multiselect/bootstrap-multiselect.css">
 <link rel="stylesheet" href="${ (project.staticDomain)! }/libs/jqueryFileUpload/css/style.css">
 <link rel="stylesheet" href="http://blueimp.github.io/Gallery/css/blueimp-gallery.min.css">
 <link rel="stylesheet" href="${ (project.staticDomain)! }/libs/jqueryFileUpload/css/jquery.fileupload.css">
@@ -37,10 +38,6 @@
 			                    <span>上传文章</span>
 			                    <input type="file" name="files[]" multiple>
 			                </span>
-			                <button type="submit" class="btn btn-primary start">
-			                    <i class="glyphicon glyphicon-upload"></i>
-			                    <span>Start upload</span>
-			                </button>
 			            </div>
 			        </div>
 			        <input type="hidden" id="posterUrl" name="posterUrl" value="">
@@ -49,7 +46,7 @@
 				<label class="col-lg-2 control-label" ></label>
 				<div class="col-lg-10">
 				  <!-- The table listing the files available for upload/download -->
-	        		<table role="presentation" class="table table-striped"><tbody class="files"></tbody></table>
+	        		<table id="filesTable" role="presentation" class="table table-striped"><tbody class="files"></tbody></table>
 				</div>
 		  	</div>
 				  	
@@ -65,8 +62,18 @@
 			
 		</div>
 	</div>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+		<h3 class="panel-title">文章列表</h3>
+		</div>
+		<div class="panel-body">
+			
+			
+		</div>
+	</div>
   </div>
-	
+
+			
 <!-- The template to display files available for upload -->
 <script id="template-upload" type="text/x-tmpl">
 {% for (var i=0, file; file=o.files[i]; i++) { %}
@@ -78,6 +85,25 @@
             <p class="name">{%=file.name%}</p>
             <strong class="error text-danger"></strong>
         </td>
+		<td>
+			<div class="input-group width150">
+  				<span class="input-group-addon">标题</span>
+  				<input  name="{%="title"+file.name.substring(0,file.name.indexOf("."))%}" type="text" class="form-control" placeholder="标题">
+			</div>
+		</td>
+<td>
+	<div class="input-group btn-group width150">
+	<span class="input-group-addon">标签</span>
+	<select id="{%="multiple"+file.name.substring(0,file.name.indexOf("."))%}" name="{%="multiple"+file.name.substring(0,file.name.indexOf("."))%}" class="multiselect" multiple="multiple">
+	  <option value="原创设计">原创设计</option>
+	  <option value="演唱会">演唱会</option>
+	  <option value="红丝带">红丝带</option>
+	  <option value="扶贫">扶贫</option>
+	  <option value="助学">助学</option>
+	  <option value="论坛">论坛</option>
+	</select>
+    </div>
+</td>
         <td>
             <p class="size">Processing...</p>
             <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="progress-bar progress-bar-success" style="width:0%;"></div></div>
@@ -90,7 +116,7 @@
                 </button>
             {% } %}
             {% if (!i) { %}
-                <button class="btn btn-warning cancel">
+                <button name="cancelBtn" class="btn btn-warning cancel">
                     <i class="glyphicon glyphicon-ban-circle"></i>
                     <span>Cancel</span>
                 </button>
@@ -123,6 +149,10 @@
             {% } %}
         </td>
         <td>
+        </td>
+        <td>
+        </td>
+        <td>
             <span class="size">{%=o.formatFileSize(file.size)%}</span>
         </td>
         <td>
@@ -133,7 +163,7 @@
                 </button>
                 <input type="checkbox" name="delete" value="1" class="toggle">
             {% } else { %}
-                <button class="btn btn-warning cancel">
+                <button name="cancelBtn" class="btn btn-warning cancel">
                     <i class="glyphicon glyphicon-ban-circle"></i>
                     <span>Cancel</span>
                 </button>
@@ -144,6 +174,7 @@
 </script>
 <script src="${ (project.staticDomain)! }/libs/jquery/jquery-2.0.3.js"></script>
 <script src="${ (project.staticDomain)! }/libs/jquery/jquery-migrate-1.2.1.min.js"></script>
+<script src="${ (project.staticDomain)! }/libs/bootstrap-multiselect/bootstrap-multiselect.js"></script>
 <!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
 <script src="${ (project.staticDomain)! }/libs/jqueryFileUpload/js/vendor/jquery.ui.widget.js"></script>
 <!-- The Templates plugin is included to render the upload/download listings -->

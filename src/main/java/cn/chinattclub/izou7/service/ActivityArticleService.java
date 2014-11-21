@@ -16,4 +16,11 @@ import cn.chinattclub.izou7.entity.ActivityArticle;
 public interface ActivityArticleService {
 
 	public List<ActivityArticle> findArticlesById(int id);
+
+	/**
+	 * TODO Put here a description of what this method does.
+	 *
+	 * @param article
+	 */
+	public void add(ActivityArticle article);
 }

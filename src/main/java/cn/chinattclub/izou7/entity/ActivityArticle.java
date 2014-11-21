@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 
 /**
@@ -17,7 +18,7 @@ import javax.persistence.Table;
  * 
  */
 @Entity
-@Table(name = "_activity_article")
+@Table(name = "i_activity_article")
 public class ActivityArticle {
 
 	@Id
@@ -48,7 +49,13 @@ public class ActivityArticle {
 	/**
 	 * 文章地址
 	 */
-	private String article;
+	private String url;
+	
+	@Transient
+	private String error;
+	
+	@Transient
+	private String name;
 	
 	/** 
 	 *  创建时间
@@ -142,20 +149,21 @@ public class ActivityArticle {
 		this.summary = summary;
 	}
 
+
 	/**
-	 * Returns the value of the field called 'article'.
-	 * @return Returns the article.
+	 * Returns the value of the field called 'url'.
+	 * @return Returns the url.
 	 */
-	public String getArticle() {
-		return this.article;
+	public String getUrl() {
+		return this.url;
 	}
 
 	/**
-	 * Sets the field called 'article' to the given value.
-	 * @param article The article to set.
+	 * Sets the field called 'url' to the given value.
+	 * @param url The url to set.
 	 */
-	public void setArticle(String article) {
-		this.article = article;
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 	/**
@@ -188,6 +196,38 @@ public class ActivityArticle {
 	 */
 	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
+	}
+
+	/**
+	 * Returns the value of the field called 'error'.
+	 * @return Returns the error.
+	 */
+	public String getError() {
+		return this.error;
+	}
+
+	/**
+	 * Sets the field called 'error' to the given value.
+	 * @param error The error to set.
+	 */
+	public void setError(String error) {
+		this.error = error;
+	}
+
+	/**
+	 * Returns the value of the field called 'name'.
+	 * @return Returns the name.
+	 */
+	public String getName() {
+		return this.name;
+	}
+
+	/**
+	 * Sets the field called 'name' to the given value.
+	 * @param name The name to set.
+	 */
+	public void setName(String name) {
+		this.name = name;
 	}
 
 }

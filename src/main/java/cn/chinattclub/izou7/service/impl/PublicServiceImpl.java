@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import cn.chinattclub.izou7.dao.PublicDao;
 import cn.chinattclub.izou7.dto.PublicDto;
-import cn.chinattclub.izou7.entity.Article;
+import cn.chinattclub.izou7.entity.ActivityArticle;
 import cn.chinattclub.izou7.entity.Public;
 import cn.chinattclub.izou7.entity.User;
 import cn.chinattclub.izou7.service.PublicService;
@@ -25,8 +25,8 @@ public class PublicServiceImpl implements PublicService {
 	@Resource
 	public PublicDao publicDao;
 
-	List<Article> getArticlesFromPublic(PublicDto dto){
-		List<Article> articles = new ArrayList<Article>();
+	List<ActivityArticle> getArticlesFromPublic(PublicDto dto){
+		List<ActivityArticle> articles = new ArrayList<ActivityArticle>();
 		//////////todo////////////
 		return articles;
 	}
@@ -42,7 +42,7 @@ public class PublicServiceImpl implements PublicService {
 		pub.setCreateTime(new Date());
 		pub.setUpdateTime(new Date());
 		
-		List<Article> article = getArticlesFromPublic(dto);
+		List<ActivityArticle> article = getArticlesFromPublic(dto);
 		pub.setArticle(article);
 		
 		return pub;

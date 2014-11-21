@@ -41,7 +41,7 @@ public class Public {
 	private Date updateTime;
 	
 	@OneToMany(cascade=CascadeType.ALL)
-	private List<Article> article;
+	private List<ActivityArticle> article;
 	
 	public Integer getId() {
 		return id;
@@ -109,11 +109,11 @@ public class Public {
 		this.updateTime = updateTime;
 	}
 
-	public List<Article> getArticle() {
+	public List<ActivityArticle> getArticle() {
 		return article;
 	}
 
-	public void setArticle(List<Article> article) {
+	public void setArticle(List<ActivityArticle> article) {
 		this.article = article;
 	}
 

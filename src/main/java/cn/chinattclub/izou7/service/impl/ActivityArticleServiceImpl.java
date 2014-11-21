@@ -25,5 +25,11 @@ public class ActivityArticleServiceImpl implements ActivityArticleService {
 		// TODO Auto-generated method stub.
 		return dao.findByHQL("from ActivityArticle as art where art.activity.id=?",0,1000,id);
 	}
+
+	@Override
+	public void add(ActivityArticle article) {
+		// TODO Auto-generated method stub.
+		dao.save(article);
+	}
 	
 }

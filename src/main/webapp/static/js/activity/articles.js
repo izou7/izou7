@@ -1,12 +1,45 @@
 /*jslint unparam: true, regexp: true */
 /*global window, $ */
+var files = [];
+var initFlag = false;
 $(function () {
 	 'use strict';
-
 	    $('#fileupload').fileupload({
 	        url: 'uploadArticles',
-	        maxFileSize: 5000000,
-			maxNumberOfFiles: 2
+	        maxFileSize: 10000000,
+			maxNumberOfFiles: 3,
+			multipart:true,
+			singleFileUploads:true,
+			acceptFileTypes:/(\.|\/)(doc|docx|txt|pdf|wps)$/i
+	    }).bind('fileuploadadd', function (e, data) {
+	    	var fileName = data.files[0].name;
+	    	for(var i=0;i<files.length;i++){
+	    		if(fileName==files[i]){
+	    			$.Zebra_Dialog("上传文章名有重复！", {
+	    				'type':     'information',
+	    				'title':    '提示',
+	    				'buttons':  ["确定"]
+	    			});
+	    			return false;
+	    		}
+	    	}
+	    	files.push(fileName);
+	    }).bind('fileuploaddone', function (e, data) {
+	    	var fileName = data.files[0].name;
+	    	files.remove(fileName);
+	    }).bind('fileuploadsend', function (e, data) {
+	    	var title = $(e.target).parent().children().find("input[name^='title']").val();
+	    	var tags = $(e.target).parent().children().find("select[name^='multiple']").val();
+	    	if(title&&tags){
+	    		return true;
+	    	}else{
+	    		$.Zebra_Dialog("标题和标签不能为空！", {
+    				'type':     'information',
+    				'title':    '提示',
+    				'buttons':  ["确定"]
+    			});
+	    		return false;
+	    	}
 	    });
 
 	    $('#fileupload').fileupload(
@@ -17,9 +50,16 @@ $(function () {
 	            '/cors/result.html?%s'
 	        )
 	    );
+	$(".files").bind("DOMNodeInserted",function(e){
+		if($(e.target).is("tr")){
+			var id = $(e.target).children().find("select[id^=multiple]").attr("id");
+			$("#"+id).multiselect({numberDisplayed: 0});
+		}
+	});
 	
 	
 	$("#tagsDiv button").click(function(){tagsClicked(this)});
+	$("#filesTable").click(function(e){filesTableClik(this,e)});
 	$("#nextBtn").click(nextBtnClick);
 //	$("#fileupload").ajaxForm({
 //		dataType:  "json",
@@ -30,6 +70,31 @@ $(function () {
 //		}
 //	});
 });
+Array.prototype.indexOf = function(val) {            
+	for (var i = 0; i < this.length; i++) {
+		if (this[i] == val) return i;
+	}
+	return -1;
+};
+Array.prototype.remove = function(val) {
+	var index = this.indexOf(val);
+	if (index > -1) {
+		this.splice(index, 1);
+	}
+};
+
+function filesTableClik(obj,e){
+	if($(e.target).is("button[name='cancelBtn']")||$(e.target).parent().is("button[name='cancelBtn']")){
+		var taget;
+		if($(e.target).is("button[name='cancelBtn']")){
+			target = $(e.target);
+		}else{
+			target = $(e.target).parent();
+		}
+		var fileName = target.parent().parent().children().find(".name").text();
+		files.remove($.trim(fileName));
+	}
+}
 function beforeRequest(){
 	var tags = $("#tags").val();
 	if(!tags){

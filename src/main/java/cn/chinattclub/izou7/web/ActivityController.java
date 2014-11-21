@@ -4,6 +4,7 @@ package cn.chinattclub.izou7.web;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -39,7 +40,7 @@ import cn.chinattclub.izou7.dto.UserDto;
 import cn.chinattclub.izou7.entity.Activity;
 import cn.chinattclub.izou7.entity.ActivityArticle;
 import cn.chinattclub.izou7.entity.ActivityPoster;
-import cn.chinattclub.izou7.entity.Article;
+import cn.chinattclub.izou7.entity.ActivityArticle;
 import cn.chinattclub.izou7.entity.City;
 import cn.chinattclub.izou7.entity.Image;
 import cn.chinattclub.izou7.entity.Province;
@@ -80,6 +81,7 @@ public class ActivityController {
 	
 	@Resource
 	private UserService userServiceImpl; 
+	
 	
 	
 	
@@ -199,6 +201,14 @@ public class ActivityController {
 		return "site.activity.activity";
 	}
 	
+	/**
+	 * 
+	 * 图片上传
+	 *
+	 * @param request
+	 * @param response
+	 * @return
+	 */
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
 	@ResponseBody
 	public  Map upload(MultipartHttpServletRequest request, HttpServletResponse response) {
@@ -216,7 +226,7 @@ public class ActivityController {
 			try {
 				mpf.transferTo(newFile);
 				image.setName(newFile.getName());
-				image.setUrl(appConfig.get("storageImageUrl").toString().trim() + "/" + newFilename);
+				image.setUrl(appConfig.get("storageDirectory").toString().substring(appConfig.get("storageDirectory").toString().indexOf("static")) + "images/" + newFilename);
 			} catch(IOException e) {
 				log.error("Could not upload file "+mpf.getOriginalFilename(), e);
 				image.setError("上传失败！");
@@ -227,25 +237,42 @@ public class ActivityController {
 		files.put("files", list);
 		return files;
 	}
+	/**
+	 * 
+	 * 文章上传
+	 *
+	 * @param request
+	 * @param response
+	 * @return
+	 * @throws UnsupportedEncodingException
+	 */
 	@RequestMapping(value = "/uploadArticles", method = RequestMethod.POST)
 	@ResponseBody
-    public  Map uploadArticles(MultipartHttpServletRequest request, HttpServletResponse response) {
+    public  Map uploadArticles(MultipartHttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
         Iterator<String> itr = request.getFileNames();
         MultipartFile mpf;
-        List<Article> list = new LinkedList<>();
-        String sbs = request.getParameter("sb");
+        List<ActivityArticle> list = new LinkedList<>();
         while (itr.hasNext()) {
             mpf = request.getFile(itr.next());
             String newFilenameBase = UUID.randomUUID().toString();
             String originalFileExtension = mpf.getOriginalFilename().substring(mpf.getOriginalFilename().lastIndexOf("."));
-            String newFilename = newFilenameBase + originalFileExtension;
-            String storageDirectory = appConfig.get("storageDirectory").toString().trim()+"articles";
-            File newFile = new File(storageDirectory + "/" + newFilename);
-            Article article = new Article();
+            String originalFileName = mpf.getOriginalFilename().substring(0,mpf.getOriginalFilename().lastIndexOf("."));
+            ActivityArticle article = new ActivityArticle();
             try {
-                mpf.transferTo(newFile);
-//                image.setName(newFile.getName());
-//                image.setUrl(appConfig.get("storageImageUrl").toString().trim() + "/" + newFilename);
+            	 String title = new String(request.getParameter("title"+originalFileName).getBytes("ISO8859-1"),"UTF-8"); 
+                 String[] tags = request.getParameterValues("multiple"+originalFileName);
+                 for (int i=0;i<tags.length;i++) {
+                 	tags[i] = new String(tags[i].getBytes("ISO8859-1"),"UTF-8");
+     			}
+                 String newFilename = newFilenameBase + originalFileExtension;
+                 String storageDirectory = appConfig.get("storageDirectory").toString().trim()+"articles";
+                 File newFile = new File(storageDirectory + "/" + newFilename);
+                 article.setTags(tags.toString());
+                 article.setTitle(title);
+                 article.setUrl(appConfig.get("storageDirectory").toString().substring(appConfig.get("storageDirectory").toString().indexOf("static")) + "articles/" + newFilename);
+                 article.setName(newFile.getName());
+                 mpf.transferTo(newFile);
+                 activityArticleServiceImpl.add(article);
             } catch(IOException e) {
                 log.error("Could not upload file "+mpf.getOriginalFilename(), e);
                 article.setError("上传失败！");

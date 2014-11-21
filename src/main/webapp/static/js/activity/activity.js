@@ -5,8 +5,9 @@ $(function () {
 
 	    $('#fileupload').fileupload({
 	        url: 'upload',
-			maxFileSize: 5000000,
-			maxNumberOfFiles: 1
+			maxFileSize: 2000000,
+			maxNumberOfFiles: 1,
+			acceptFileTypes:/(\.|\/)(gif|jpe?g|png)$/i
 	    });
 
 	    $('#fileupload').fileupload(
