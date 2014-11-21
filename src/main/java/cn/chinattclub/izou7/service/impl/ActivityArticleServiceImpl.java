@@ -23,7 +23,7 @@ public class ActivityArticleServiceImpl implements ActivityArticleService {
 	@Override
 	public List<ActivityArticle> findArticlesById(int id) {
 		// TODO Auto-generated method stub.
-		return dao.findByHQL("from ActivityArticle as art where art.activity.id=?",0,1000,id);
+		return dao.findByHQL("from ActivityArticle as art where art.activity=?",0,1000,id);
 	}
 
 	@Override

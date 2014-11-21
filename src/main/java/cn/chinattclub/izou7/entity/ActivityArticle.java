@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -28,8 +29,7 @@ public class ActivityArticle {
 	/**
 	 * 活动
 	 */
-	@ManyToOne
-	private Activity activity;
+	private int activity;
 	
 	/**
 	 * 标题
@@ -85,19 +85,11 @@ public class ActivityArticle {
 		this.id = id;
 	}
 
-	/**
-	 * Returns the value of the field called 'activity'.
-	 * @return Returns the activity.
-	 */
-	public Activity getActivity() {
-		return this.activity;
+	public int getActivity() {
+		return activity;
 	}
 
-	/**
-	 * Sets the field called 'activity' to the given value.
-	 * @param activity The activity to set.
-	 */
-	public void setActivity(Activity activity) {
+	public void setActivity(int activity) {
 		this.activity = activity;
 	}
 

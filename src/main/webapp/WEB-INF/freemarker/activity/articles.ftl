@@ -23,7 +23,7 @@
 		</div>
 		<div class="panel-body">
 			<form class="form-horizontal" role="form" id="fileupload" action="add" method="POST" enctype="multipart/form-data">
-			<input type="hidden" id="id" name="id" value="${ (activity.id)! }">
+			<input type="hidden" id="id" name="id" value="${id!}">
 			    <!-- Redirect browsers with JavaScript disabled to the origin page -->
 			   
 		        <noscript><input type="hidden" name="redirect" value="https://blueimp.github.io/jQuery-File-Upload/"></noscript>
@@ -50,14 +50,6 @@
 				</div>
 		  	</div>
 				  	
-			 <div class="form-group">
-				<div class="col-lg-10">
-				 
-				</div>
-				<div class="col-lg-2">
-				  <button  id="nextBtn" type="button" class="btn btn-info btn-block" >下一步</button>
-				</div>
-			 </div>
 			</form>
 			
 		</div>
@@ -67,8 +59,44 @@
 		<h3 class="panel-title">文章列表</h3>
 		</div>
 		<div class="panel-body">
-			
-			
+			 <div class="form-group">
+				<div class="col-lg-12">
+					 <div class="table-responsive">
+					  <table class="table table-bordered">
+						<thead>
+						  <tr>
+							<th>标题</th>
+							<th>标签</th>
+							<th>摘要</th>
+							<th>地址</th>
+							<th>操作</th>
+						  </tr>
+						</thead>
+						<tbody>
+							<#list articles! as article>
+							<tr>
+								<td>${(article.title)!}</td>
+								<td>${(article.tags)!}</td>
+								<td>${(article.summary)!}</td>
+								<td>${(article.url)!}</td>
+								<td><button type="button" class="btn btn-info" data_id="${(article.id)}">删除</button></td>
+							</tr>
+							</#list>
+						  <tr>
+						  </tr>
+						</tbody>
+					  </table>
+					</div>
+				</div>
+			</div>
+			 <div class="form-group">
+				<div class="col-lg-10">
+				 
+				</div>
+				<div class="col-lg-2">
+				  <button  id="nextBtn" type="button" class="btn btn-info btn-block" >下一步</button>
+				</div>
+			 </div>
 		</div>
 	</div>
   </div>

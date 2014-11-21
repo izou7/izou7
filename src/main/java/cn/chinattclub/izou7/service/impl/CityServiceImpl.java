@@ -34,6 +34,10 @@ public class CityServiceImpl implements CityService {
 	@Override
 	public City getCity(Integer city) {
 		// TODO Auto-generated method stub.
-		return dao.findByHQL("from City as city where city.id=?",0,1000,city).get(0);
+		List<City> citys = dao.findByHQL("from City as city where city.id=?",0,1000,city);
+		if(citys!=null&&citys.size()>0){
+			return citys.get(0);
+		}
+		return null;
 	}
 }

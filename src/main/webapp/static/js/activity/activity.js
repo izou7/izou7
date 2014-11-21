@@ -57,7 +57,7 @@ function nextBtnClick(){
 		contentType:'application/json;charset=UTF-8', 
 		success: function(json) {
 			if (json.statusCode == 200) {
-				location.href="activity?step=SECOND&id="+json.body.id;
+				location.href="activity?step=SECOND&activityId="+json.body.id;
 			}else {
 				$.Zebra_Dialog(json.message, {
 					'type':     'information',

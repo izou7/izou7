@@ -184,6 +184,7 @@ public class ActivityController {
 		if(dto.getActivityId()!=null){
 			List<ActivityArticle> articles = activityArticleServiceImpl.findArticlesById(dto.getActivityId());
 			model.addAttribute("articles", articles);
+			model.addAttribute("id", dto.getActivityId());
 		}
 		return "site.activity.articles";
 	}
@@ -259,19 +260,23 @@ public class ActivityController {
             String originalFileName = mpf.getOriginalFilename().substring(0,mpf.getOriginalFilename().lastIndexOf("."));
             ActivityArticle article = new ActivityArticle();
             try {
+            	 int id = Integer.parseInt(request.getParameter("id").toString());
             	 String title = new String(request.getParameter("title"+originalFileName).getBytes("ISO8859-1"),"UTF-8"); 
                  String[] tags = request.getParameterValues("multiple"+originalFileName);
+                 
                  for (int i=0;i<tags.length;i++) {
                  	tags[i] = new String(tags[i].getBytes("ISO8859-1"),"UTF-8");
      			}
                  String newFilename = newFilenameBase + originalFileExtension;
                  String storageDirectory = appConfig.get("storageDirectory").toString().trim()+"articles";
                  File newFile = new File(storageDirectory + "/" + newFilename);
-                 article.setTags(tags.toString());
+                 mpf.transferTo(newFile);
+                 article.setTags(convertTags(tags));
                  article.setTitle(title);
                  article.setUrl(appConfig.get("storageDirectory").toString().substring(appConfig.get("storageDirectory").toString().indexOf("static")) + "articles/" + newFilename);
                  article.setName(newFile.getName());
-                 mpf.transferTo(newFile);
+                 article.setActivity(id);
+                 article.setCreateTime(new Date());
                  activityArticleServiceImpl.add(article);
             } catch(IOException e) {
                 log.error("Could not upload file "+mpf.getOriginalFilename(), e);
@@ -282,6 +287,22 @@ public class ActivityController {
         Map<String, Object> files = new HashMap<>();
         files.put("files", list);
         return files;
+	}
+	/**
+	 * 转换tags数组
+	 * @param tags
+	 * @return
+	 */
+	private String convertTags(String[] tags){
+		StringBuilder tagsStr = new StringBuilder();
+		for (int i=0;i<tags.length;i++) {
+			if(i==tags.length-1){
+				tagsStr.append(tags[i]);
+			}else{
+				tagsStr.append(tags[i]).append(",");
+			}
+		}
+		return tagsStr.toString();
 	}
 
 }
