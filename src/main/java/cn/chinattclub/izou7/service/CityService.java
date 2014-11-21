@@ -33,8 +33,8 @@ public interface CityService {
 	/**
 	 * TODO Put here a description of what this method does.
 	 *
-	 * @param id
+	 * @param city
 	 * @return
 	 */
-	City getCity(int id);
+	public City getCity(Integer city);
 }

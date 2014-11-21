@@ -19,5 +19,7 @@ public interface PublicService {
 	List<Public> listPublic(User user);
 	
 	void deletePublic(int id);
+	
+	Public getPublicById(int publicId);
 
 }

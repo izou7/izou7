@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import cn.chinattclub.izou7.dao.PublicDao;
 import cn.chinattclub.izou7.dto.PublicDto;
 import cn.chinattclub.izou7.entity.ActivityArticle;
+import cn.chinattclub.izou7.entity.Article;
 import cn.chinattclub.izou7.entity.Public;
 import cn.chinattclub.izou7.entity.User;
 import cn.chinattclub.izou7.service.PublicService;
@@ -25,8 +26,8 @@ public class PublicServiceImpl implements PublicService {
 	@Resource
 	public PublicDao publicDao;
 
-	List<ActivityArticle> getArticlesFromPublic(PublicDto dto){
-		List<ActivityArticle> articles = new ArrayList<ActivityArticle>();
+	List<Article> getArticlesFromPublic(PublicDto dto){
+		List<Article> articles = new ArrayList<Article>();
 		//////////todo////////////
 		return articles;
 	}
@@ -42,7 +43,7 @@ public class PublicServiceImpl implements PublicService {
 		pub.setCreateTime(new Date());
 		pub.setUpdateTime(new Date());
 		
-		List<ActivityArticle> article = getArticlesFromPublic(dto);
+		List<Article> article = getArticlesFromPublic(dto);
 		pub.setArticle(article);
 		
 		return pub;
@@ -69,6 +70,9 @@ public class PublicServiceImpl implements PublicService {
 		publicDao.delete(id);
 	}
 
-	
+	@Override
+	public Public getPublicById(int publicId) {
+		return publicDao.get(publicId);
+	}
 	
 }

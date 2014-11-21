@@ -30,7 +30,7 @@
   									<a href="#">我发起的活动</a>
   								</li>
   								<li>
-  									<a href="#">我录入的公众号</a>
+  									<a href="/public/list">我录入的公众号</a>
   								</li>
   								<li>
   									<a href="#">登出</a>

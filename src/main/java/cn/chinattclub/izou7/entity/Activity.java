@@ -108,7 +108,7 @@ public class Activity {
 	 */
 	private Integer status;
 	
-	@OneToMany(mappedBy="activity",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+	@OneToMany(mappedBy="",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	private List<ActivityPoster> activityPosters;
 	
 	/** 
