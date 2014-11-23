@@ -25,6 +25,7 @@ $(function () {
 	    	}
 	    	files.push(fileName);
 	    }).bind('fileuploaddone', function (e, data) {
+	    	loadFilesTable();
 	    	var fileName = data.files[0].name;
 	    	files.remove(fileName);
 	    }).bind('fileuploadsend', function (e, data) {
@@ -60,15 +61,15 @@ $(function () {
 	
 	$("#tagsDiv button").click(function(){tagsClicked(this)});
 	$("#filesTable").click(function(e){filesTableClik(this,e)});
-	$("#nextBtn").click(nextBtnClick);
-//	$("#fileupload").ajaxForm({
-//		dataType:  "json",
-//		success:    function( response ) {
-//			if ( response.statusCode === 200 ) {
-//				alert( response.message );
-//			}
-//		}
+//	待研究。。。
+//	$('button.cancel').click(function (e) {
+//	    jqXHR.abort();
 //	});
+	$("#nextBtn").click(nextBtnClick);
+	$("#tbodyId").delegate("button[name='delBtn']","click",function(){
+		delArticle($(this).attr("data_id"));
+		loadFilesTable();
+	});
 });
 Array.prototype.indexOf = function(val) {            
 	for (var i = 0; i < this.length; i++) {
@@ -82,7 +83,68 @@ Array.prototype.remove = function(val) {
 		this.splice(index, 1);
 	}
 };
-
+function delArticle(id){
+	$.ajax({
+		type: "DELETE",
+		url: "article/"+id,
+		dataType : "json",
+		contentType:'application/json;charset=UTF-8', 
+		success: function(json) {
+			if (json.statusCode == 200) {
+				$.Zebra_Dialog('删除文章成功', {
+					'type':     'information',
+					'title':    '提示',
+					'buttons':  ["确定"]
+				});
+			}else {
+				$.Zebra_Dialog('删除文章失败', {
+					'type':     'information',
+					'title':    '提示',
+					'buttons':  ["确定"]
+				});
+			}
+		},
+		fail : function(json){
+			$.Zebra_Dialog('删除文章异常', {
+				'type':     'information',
+				'title':    '提示',
+				'buttons':  ["确定"]
+			});
+		}
+	}); 
+}
+function loadFilesTable(){
+	var arcitityId = $("#id").val();
+	$.ajax({
+		type: "GET",
+		url: "articles",
+		dataType : "json",
+		data : "arcitityId="+arcitityId,
+		contentType:'application/json;charset=UTF-8', 
+		success: function(json) {
+			if (json.statusCode == 200) {
+				$("#tbodyId").empty();
+				for(var i=0;i<json.body.articles.length;i++){
+					var article = json.body.articles[i];
+					$("#tbodyId").append('<tr><td>'+article.title+'</td><td>'+article.tags+'</td><td>'+(article.summary==null?"":article.summary)+'</td><td>'+article.url+'</td><td><button type="button" class="btn btn-info" name="delBtn" data_id="'+article.id+'">删除</button></td></tr>');
+				}
+			}else {
+				$.Zebra_Dialog('获取文章列表失败', {
+					'type':     'information',
+					'title':    '提示',
+					'buttons':  ["确定"]
+				});
+			}
+		},
+		fail : function(json){
+			$.Zebra_Dialog('获取文章列表异常', {
+				'type':     'information',
+				'title':    '提示',
+				'buttons':  ["确定"]
+			});
+		}
+	}); 
+}
 function filesTableClik(obj,e){
 	if($(e.target).is("button[name='cancelBtn']")||$(e.target).parent().is("button[name='cancelBtn']")){
 		var taget;
@@ -108,52 +170,8 @@ function beforeRequest(){
 	return true;
 }
 function nextBtnClick(){
-	var inputJson = $("#fileupload").serialize();
-	$.ajax({
-		type: "GET",
-		url: "add",
-		dataType : "json",
-		data : inputJson,
-		contentType:'application/json;charset=UTF-8', 
-		success: function(json) {
-			if (json.statusCode == 200) {
-				location.href="activity?step=SECOND&id="+json.body.id;
-			}else {
-				$.Zebra_Dialog(json.message, {
-					'type':     'information',
-					'title':    '提示',
-					'buttons':  ["确定"]
-				});
-			}
-		},
-		fail : function(json){
-			$.Zebra_Dialog('操作异常', {
-				'type':     'information',
-				'title':    '提示',
-				'buttons':  ["确定"]
-			});
-		}
-	}); 
+	var arcitityId = $("#id").val();
+	location.href="activity?step=THIRD&activityId="+arcitityId;
 	
-}
-function createAndValidate(){
-	
-
-}
-function tagsClicked(obj){
-	if($(obj).attr("class").indexOf("btn-info")!=-1){
-		$(obj).attr("class",$(obj).attr("class").replace("btn-info","btn-danger"));
-	}else{
-		$(obj).attr("class",$(obj).attr("class").replace("btn-danger","btn-info"));
-	}
-	var tags = "";
-	$("#tagsDiv button[class='btn btn-sm btn-danger']").each(function(index){
-		if(index==0){
-			tags+=$(this).text();
-		}else{
-			tags+="|"+$(this).text();
-		}
-	});
-	$("#tags").val(tags);
 }
 

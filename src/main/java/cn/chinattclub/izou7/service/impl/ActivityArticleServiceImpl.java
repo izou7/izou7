@@ -31,5 +31,11 @@ public class ActivityArticleServiceImpl implements ActivityArticleService {
 		// TODO Auto-generated method stub.
 		dao.save(article);
 	}
+
+	@Override
+	public void delete(int articleId) {
+		// TODO Auto-generated method stub
+		dao.delete(articleId);
+	}
 	
 }

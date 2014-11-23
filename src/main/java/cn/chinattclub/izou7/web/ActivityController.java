@@ -5,7 +5,9 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -27,6 +29,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -36,16 +39,19 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import cn.chinattclub.izou7.dto.ActivityDto;
 import cn.chinattclub.izou7.dto.ActivityFormDto;
+import cn.chinattclub.izou7.dto.CalendarDto;
 import cn.chinattclub.izou7.dto.UserDto;
 import cn.chinattclub.izou7.entity.Activity;
 import cn.chinattclub.izou7.entity.ActivityArticle;
 import cn.chinattclub.izou7.entity.ActivityPoster;
 import cn.chinattclub.izou7.entity.ActivityArticle;
+import cn.chinattclub.izou7.entity.ActivitySchedule;
 import cn.chinattclub.izou7.entity.City;
 import cn.chinattclub.izou7.entity.Image;
 import cn.chinattclub.izou7.entity.Province;
 import cn.chinattclub.izou7.entity.User;
 import cn.chinattclub.izou7.service.ActivityArticleService;
+import cn.chinattclub.izou7.service.ActivityScheduleService;
 import cn.chinattclub.izou7.service.ActivityService;
 import cn.chinattclub.izou7.service.CityService;
 import cn.chinattclub.izou7.service.ProvinceService;
@@ -67,6 +73,8 @@ public class ActivityController {
 	
 	private static final Logger log = LoggerFactory.getLogger(ActivityController.class);
 	
+	private static final DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	
 	@Resource
 	private ActivityService activityServiceImpl;
 	
@@ -81,6 +89,9 @@ public class ActivityController {
 	
 	@Resource
 	private UserService userServiceImpl; 
+	
+	@Resource
+	private ActivityScheduleService activityScheduleServiceImpl; 
 	
 	
 	
@@ -159,6 +170,7 @@ public class ActivityController {
 			view = activityArticlesPage(model,dto);
 			break;
 		case THIRD:
+			view = activityCalendarPage(model,dto);
 			break;
 		case FOURTH:
 			break;
@@ -173,9 +185,20 @@ public class ActivityController {
 		}
 		return view;
 	}
-	
 	/**
-	 * 第二步
+	 * 第三步 日程
+	 * @param model
+	 * @param dto
+	 * @return
+	 */
+	private String activityCalendarPage(Model model, ActivityDto dto) {
+		// TODO Auto-generated method stub
+		model.addAttribute("id",dto.getActivityId());
+		return "site.activity.calendar";
+	}
+
+	/**
+	 * 第二步 上传文章
 	 * @param model
 	 * @param dto
 	 * @return
@@ -189,7 +212,7 @@ public class ActivityController {
 		return "site.activity.articles";
 	}
 	/**
-	 * 第一步
+	 * 第一步 基本信息
 	 * @param model
 	 * @param dto
 	 * @return
@@ -287,6 +310,108 @@ public class ActivityController {
         Map<String, Object> files = new HashMap<>();
         files.put("files", list);
         return files;
+	}
+	/**
+	 * 获取文章列表
+	 * @param arcitityId
+	 * @return
+	 */
+	@RequestMapping(value = "/articles", method = RequestMethod.GET)
+	@ResponseBody
+	public RestResponse findArticles(int arcitityId){
+		RestResponse response = new RestResponse();
+		List<ActivityArticle> articles = activityArticleServiceImpl.findArticlesById(arcitityId);
+		response.setMessage("获取文章成功!");
+		response.setStatusCode(ResponseStatusCode.OK);
+		response.getBody().put("articles", articles);
+		return response;
+	}
+	/**
+	 * 删除文章
+	 * @param articleId
+	 * @return
+	 */
+	@RequestMapping(value = "/article/{articleId}", method = RequestMethod.DELETE)
+	@ResponseBody
+	public RestResponse deleteArticle(@PathVariable int articleId){
+		RestResponse response = new RestResponse();
+		activityArticleServiceImpl.delete(articleId);
+		log.info("删除文章【"+articleId+"】成功!");
+		response.setMessage("删除文章成功!");
+		response.setStatusCode(ResponseStatusCode.OK);
+		return response;
+	}
+	
+	/**
+	 * 获取活动的日程
+	 * @param activityId
+	 * @param start
+	 * @param end
+	 * @return
+	 * @throws ParseException
+	 */
+	@RequestMapping(value = "{activityId}/calendars", method = RequestMethod.GET)
+	@ResponseBody
+	public List<ActivitySchedule> findCalendars(@PathVariable int activityId,Long start,Long end) throws ParseException{
+		List<CalendarDto> cals = new ArrayList<>();
+		List<ActivitySchedule> ass = activityScheduleServiceImpl.find(activityId, new Date(start), new Date(end));
+		return ass;
+	}
+	/**
+	 * 新增日程
+	 * @param activityId
+	 * @param calendar
+	 * @return
+	 * @throws ParseException
+	 */
+	@RequestMapping(value = "{activityId}/calendar", method = RequestMethod.POST)
+	@ResponseBody
+	public RestResponse addCalendar(@PathVariable int activityId,CalendarDto calendar) throws ParseException{
+		RestResponse response = new RestResponse();
+		ActivitySchedule as = new ActivitySchedule();
+		as.setActivity(activityId);
+		as.setContent(calendar.getTitle());
+		as.setStartTime(df.parse(calendar.getStart()));
+		as.setEndTime(df.parse(calendar.getEnd()));
+		as.setCreateTime(new Date());
+		activityScheduleServiceImpl.add(as);
+		response.setMessage("新增日程成功!");
+		response.setStatusCode(ResponseStatusCode.OK);
+		return response;
+	}
+	/**
+	 * 更新日程
+	 * @param calendarId
+	 * @param dto
+	 * @return
+	 * @throws ParseException
+	 */
+	@RequestMapping(value = "calendar/{calendarId}", method = RequestMethod.PUT)
+	@ResponseBody
+	public RestResponse updateCalendar(@PathVariable int calendarId,@RequestBody CalendarDto dto) throws ParseException{
+		RestResponse response = new RestResponse();
+		ActivitySchedule as = activityScheduleServiceImpl.get(calendarId);
+		as.setContent(dto.getTitle());
+		as.setStartTime(df.parse(dto.getStart()));
+		as.setEndTime(df.parse(dto.getEnd()));
+		activityScheduleServiceImpl.update(as);
+		response.setMessage("更新日程成功!");
+		response.setStatusCode(ResponseStatusCode.OK);
+		return response;
+	}
+	/**
+	 * 删除日程
+	 * @param calendarId
+	 * @return
+	 */
+	@RequestMapping(value = "calendar/{calendarId}", method = RequestMethod.DELETE)
+	@ResponseBody
+	public RestResponse deleteCalendar(@PathVariable int calendarId) {
+		RestResponse response = new RestResponse();
+		activityScheduleServiceImpl.delete(calendarId);
+		response.setMessage("删除日程成功!");
+		response.setStatusCode(ResponseStatusCode.OK);
+		return response;
 	}
 	/**
 	 * 转换tags数组

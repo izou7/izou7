@@ -1,6 +1,5 @@
 package cn.chinattclub.izou7.service;
 
-
 import java.util.List;
 
 import cn.chinattclub.izou7.entity.ActivityArticle;
@@ -19,8 +18,15 @@ public interface ActivityArticleService {
 
 	/**
 	 * TODO Put here a description of what this method does.
-	 *
+	 * 
 	 * @param article
 	 */
 	public void add(ActivityArticle article);
+
+	/**
+	 * 删除文章
+	 * 
+	 * @param articleId
+	 */
+	public void delete(int articleId);
 }

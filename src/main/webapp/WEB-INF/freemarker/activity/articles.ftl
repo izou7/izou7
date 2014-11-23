@@ -72,14 +72,14 @@
 							<th>操作</th>
 						  </tr>
 						</thead>
-						<tbody>
+						<tbody id="tbodyId">
 							<#list articles! as article>
 							<tr>
 								<td>${(article.title)!}</td>
 								<td>${(article.tags)!}</td>
 								<td>${(article.summary)!}</td>
 								<td>${(article.url)!}</td>
-								<td><button type="button" class="btn btn-info" data_id="${(article.id)}">删除</button></td>
+								<td><button type="button" name="delBtn" class="btn btn-info" data_id="${(article.id)}">删除</button></td>
 							</tr>
 							</#list>
 						  <tr>
