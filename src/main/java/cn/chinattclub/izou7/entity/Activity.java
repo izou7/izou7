@@ -111,6 +111,14 @@ public class Activity {
 	@OneToMany(mappedBy="",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	private List<ActivityPoster> activityPosters;
 	
+	/**
+	 * 报名模板
+	 */
+	@ManyToOne
+	@JoinColumn(name="apply_template_id")
+	@NotFound(action = NotFoundAction.IGNORE)
+	private ApplyTemplate template;
+	
 	/** 
 	 *  创建时间
 	 */
@@ -410,6 +418,14 @@ public class Activity {
 	 */
 	public void setActivityPosters(List<ActivityPoster> activityPosters) {
 		this.activityPosters = activityPosters;
+	}
+
+	public ApplyTemplate getTemplate() {
+		return template;
+	}
+
+	public void setTemplate(ApplyTemplate template) {
+		this.template = template;
 	}
 	
 	

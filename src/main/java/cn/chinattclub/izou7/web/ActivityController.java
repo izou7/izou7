@@ -53,6 +53,7 @@ import cn.chinattclub.izou7.entity.User;
 import cn.chinattclub.izou7.service.ActivityArticleService;
 import cn.chinattclub.izou7.service.ActivityScheduleService;
 import cn.chinattclub.izou7.service.ActivityService;
+import cn.chinattclub.izou7.service.ApplyTemplateService;
 import cn.chinattclub.izou7.service.CityService;
 import cn.chinattclub.izou7.service.ProvinceService;
 import cn.chinattclub.izou7.service.UserService;
@@ -92,6 +93,9 @@ public class ActivityController {
 	
 	@Resource
 	private ActivityScheduleService activityScheduleServiceImpl; 
+	
+	@Resource
+	private ApplyTemplateService applyTemplateServiceImpl; 
 	
 	
 	
@@ -173,6 +177,7 @@ public class ActivityController {
 			view = activityCalendarPage(model,dto);
 			break;
 		case FOURTH:
+			view = activityApplyTemplatePage(model,dto);
 			break;
 		case FIFTH:
 			break;
@@ -185,6 +190,19 @@ public class ActivityController {
 		}
 		return view;
 	}
+	/**
+	 * 第四步 报名模板
+	 * @param model
+	 * @param dto
+	 * @return
+	 */
+	private String activityApplyTemplatePage(Model model, ActivityDto dto) {
+		// TODO Auto-generated method stub
+		model.addAttribute("id",dto.getActivityId());
+		model.addAttribute("templates",applyTemplateServiceImpl.list());
+		return "site.activity.template";
+	}
+
 	/**
 	 * 第三步 日程
 	 * @param model

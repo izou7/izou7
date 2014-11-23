@@ -27,10 +27,10 @@
 				 
 				</div>
 				<div class="col-lg-2">
-				  <button type="button" class="btn btn-info btn-block" onclick="javascript:location.href='deploy1.html'">上一步</button>
+				  <button type="button" class="btn btn-info btn-block" onclick="javascript:location.href='activity?step=SECOND&activityId=${id!}';">上一步</button>
 				</div>
 				<div class="col-lg-2">
-				  <button type="button" class="btn btn-info btn-block" onclick="javascript:location.href='deploy3.html'">下一步</button>
+				  <button type="button" class="btn btn-info btn-block" onclick="javascript:location.href='activity?step=FOURTH&activityId=${id!}';">下一步</button>
 				</div>
 			 </div>
 		</div>			

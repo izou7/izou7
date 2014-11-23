@@ -260,6 +260,6 @@ function refreshView(activityId){
 }
 function nextBtnClick(){
 	var arcitityId = $("#id").val();
-	location.href="activity?step=THIRD&activityId="+arcitityId;
+	location.href="activity?step=FOURTH&activityId="+arcitityId;
 }
 
