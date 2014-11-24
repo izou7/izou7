@@ -119,6 +119,14 @@ public class Activity {
 	@NotFound(action = NotFoundAction.IGNORE)
 	private ApplyTemplate template;
 	
+	/**
+	 * 票务信息
+	 */
+	@OneToMany
+	@JoinColumn(name="activity")
+	@NotFound(action = NotFoundAction.IGNORE)
+	private List<ActivityTicket> tickets;
+	
 	/** 
 	 *  创建时间
 	 */
@@ -426,6 +434,14 @@ public class Activity {
 
 	public void setTemplate(ApplyTemplate template) {
 		this.template = template;
+	}
+
+	public List<ActivityTicket> getTickets() {
+		return tickets;
+	}
+
+	public void setTickets(List<ActivityTicket> tickets) {
+		this.tickets = tickets;
 	}
 	
 	

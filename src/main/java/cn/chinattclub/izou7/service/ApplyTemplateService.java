@@ -13,4 +13,11 @@ public interface ApplyTemplateService {
 	
 	public List<ApplyTemplate> list();
 
+	/**
+	 * 获取报名模板
+	 * @param id
+	 * @return
+	 */
+	public ApplyTemplate get(int id);
+
 }

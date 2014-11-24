@@ -25,6 +25,12 @@ public class ApplyTemplateServiceImpl implements ApplyTemplateService {
 		// TODO Auto-generated method stub
 		return dao.list();
 	}
+
+	@Override
+	public ApplyTemplate get(int id) {
+		// TODO Auto-generated method stub
+		return dao.get(id);
+	}
 	
 	
 }

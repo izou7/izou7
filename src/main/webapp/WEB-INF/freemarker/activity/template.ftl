@@ -18,22 +18,39 @@
 		<div class="panel-body">
 			  <div class="form-group form-group-lg">
 				<div class="row">
-				<#list templates as template>
-					 <#if template_index==0>
-						 <div class="col-xs-6 col-md-3">
-						    <a href="#" name="template" class="thumbnail selectedTemplate" data_id="${(template.id)!}">
-						      <img src="${(template.url)!}" data-src="holder.js/100%x180" alt="${(template.name)!}">
-						    </a>
-					     </div>
-					 <#else>
-					 	<div class="col-xs-6 col-md-3">
-						    <a href="#" name="template" class="thumbnail" data_id="${(template.id)!}">
-						      <img src="${(template.url)!}" data-src="holder.js/100%x180"  alt="${(template.name)!}">
-						    </a>
-					     </div>
-					 </#if>
-					 
-				</#list>
+				<#if (tmp.name)??>
+					<#list templates as template>
+						 <#if template.name==(tmp.name)!>
+							 <div class="col-xs-6 col-md-3">
+							    <a href="#" name="template" class="thumbnail selectedTemplate" data_id="${(template.id)!}">
+							      <img src="${(template.url)!}" data-src="holder.js/100%x180" alt="${(template.name)!}">
+							    </a>
+						     </div>
+						 <#else>
+						 	<div class="col-xs-6 col-md-3">
+							    <a href="#" name="template" class="thumbnail" data_id="${(template.id)!}">
+							      <img src="${(template.url)!}" data-src="holder.js/100%x180"  alt="${(template.name)!}">
+							    </a>
+						     </div>
+						 </#if>
+					 </#list>
+				<#else>
+					<#list templates as template>
+						<#if template_index==0>
+							 <div class="col-xs-6 col-md-3">
+							    <a href="#" name="template" class="thumbnail selectedTemplate" data_id="${(template.id)!}">
+							      <img src="${(template.url)!}" data-src="holder.js/100%x180" alt="${(template.name)!}">
+							    </a>
+						     </div>
+						 <#else>
+						 	<div class="col-xs-6 col-md-3">
+							    <a href="#" name="template" class="thumbnail" data_id="${(template.id)!}">
+							      <img src="${(template.url)!}" data-src="holder.js/100%x180"  alt="${(template.name)!}">
+							    </a>
+						     </div>
+						 </#if>
+					 </#list>
+				</#if>	 
 				</div>
 			  </div>
 			  <div class="form-group form-group-lg">

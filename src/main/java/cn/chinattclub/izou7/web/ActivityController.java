@@ -45,6 +45,7 @@ import cn.chinattclub.izou7.entity.ActivityArticle;
 import cn.chinattclub.izou7.entity.ActivityPoster;
 import cn.chinattclub.izou7.entity.ActivityArticle;
 import cn.chinattclub.izou7.entity.ActivitySchedule;
+import cn.chinattclub.izou7.entity.ActivityTicket;
 import cn.chinattclub.izou7.entity.ApplyTemplate;
 import cn.chinattclub.izou7.entity.City;
 import cn.chinattclub.izou7.entity.Image;
@@ -53,6 +54,7 @@ import cn.chinattclub.izou7.entity.User;
 import cn.chinattclub.izou7.service.ActivityArticleService;
 import cn.chinattclub.izou7.service.ActivityScheduleService;
 import cn.chinattclub.izou7.service.ActivityService;
+import cn.chinattclub.izou7.service.ActivityTicketService;
 import cn.chinattclub.izou7.service.ApplyTemplateService;
 import cn.chinattclub.izou7.service.CityService;
 import cn.chinattclub.izou7.service.ProvinceService;
@@ -96,6 +98,9 @@ public class ActivityController {
 	
 	@Resource
 	private ApplyTemplateService applyTemplateServiceImpl; 
+	
+	@Resource
+	private ActivityTicketService activityTicketServiceImpl; 
 	
 	
 	
@@ -180,6 +185,7 @@ public class ActivityController {
 			view = activityApplyTemplatePage(model,dto);
 			break;
 		case FIFTH:
+			view = activityTickedPage(model,dto);
 			break;
 		case SIXTH:
 			break;
@@ -190,6 +196,21 @@ public class ActivityController {
 		}
 		return view;
 	}
+	/**
+	 * 第五步 票务信息
+	 * @param model
+	 * @param dto
+	 * @return
+	 */
+	private String activityTickedPage(Model model, ActivityDto dto) {
+		// TODO Auto-generated method stub
+		Activity activity = activityServiceImpl.findById(dto.getActivityId());
+		List<ActivityTicket> tickets = activity.getTickets();
+		model.addAttribute("id",dto.getActivityId());
+		model.addAttribute("ticket",(tickets!=null&&tickets.size()>0)?tickets.get(0):null);
+		return "site.activity.ticket";
+	}
+
 	/**
 	 * 第四步 报名模板
 	 * @param model
@@ -431,6 +452,27 @@ public class ActivityController {
 		RestResponse response = new RestResponse();
 		activityScheduleServiceImpl.delete(calendarId);
 		response.setMessage("删除日程成功!");
+		response.setStatusCode(ResponseStatusCode.OK);
+		return response;
+	}
+	/**
+	 * 更新活动报名模板
+	 * @param activityId
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value = "{activityId}/template/{id}", method = RequestMethod.PUT)
+	@ResponseBody
+	public RestResponse updateActivityTemplate(@PathVariable int activityId,@PathVariable int id) {
+		RestResponse response = new RestResponse();
+		String message ;
+		Activity activity = activityServiceImpl.findById(activityId);
+		ApplyTemplate template = applyTemplateServiceImpl.get(id);
+		activity.setTemplate(template);
+		activityServiceImpl.update(activity);
+		message = "更新活动【"+activityId+"】报名模板【"+id+"】成功!";
+		log.info(message);
+		response.setMessage("更新活动报名模板成功!");
 		response.setStatusCode(ResponseStatusCode.OK);
 		return response;
 	}

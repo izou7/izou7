@@ -7,7 +7,7 @@ function nextBtnClick(){
     var activityId = $("#id").val();
 	$.ajax({
 		type: "PUT",
-		url: "activity/"+activityId+"/template/"+id,
+		url: activityId+"/template/"+id,
 		dataType : "json",
 		contentType:'application/json;charset=UTF-8', 
 		success: function(json) {
