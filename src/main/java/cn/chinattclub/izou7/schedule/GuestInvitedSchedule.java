@@ -3,6 +3,19 @@ package cn.chinattclub.izou7.schedule;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import cn.chinattclub.izou7.dao.ActivityDao;
+import cn.chinattclub.izou7.dao.ActivityGuestsDao;
+import cn.chinattclub.izou7.dao.ActivityGuestsSettingDao;
+import cn.chinattclub.izou7.entity.ActivityGuests;
+import cn.chinattclub.izou7.entity.ActivityGuestsSetting;
+import cn.chinattclub.izou7.enumeration.GuestRegistrationStatus;
+import cn.chinattclub.izou7.util.CommonUtil;
+
 @Component
 public class GuestInvitedSchedule {
 	
@@ -12,9 +25,10 @@ public class GuestInvitedSchedule {
 	//@Resource
 	//private ActivityGuestsDao activityGuestsDao;
 	
-	@Scheduled(fixedDelay = 5000, initialDelay = 1000)
-	public void execInviteGuest(){
-		System.out.println("---------------------");
+	//@Scheduled(initialDelay = 20000,fixedRate = 5000)
+	@Scheduled(cron = "0/5 * * * * ?")
+	void inviteGuest(){
+		System.out.println("1");
 //		List<ActivityGuestsSetting> activityGuestsSettings = activityGuestsSettingDao.getUnfixedActivity();
 //		
 //		for(ActivityGuestsSetting activityGuestsSetting:activityGuestsSettings){

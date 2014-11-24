@@ -1,8 +1,0 @@
-[2014-11-03 22:32:35,721] WARN  (DispatcherServlet.java:1118) - No mapping found for HTTP request with URI [/izou7/login] in DispatcherServlet with name 'spring-mvc'
-[2014-11-03 22:33:08,865] WARN  (DispatcherServlet.java:1118) - No mapping found for HTTP request with URI [/izou7/mms/test/list] in DispatcherServlet with name 'spring-mvc'
-[2014-11-03 22:34:01,211] WARN  (DispatcherServlet.java:1118) - No mapping found for HTTP request with URI [/izou7/mms/test/test] in DispatcherServlet with name 'spring-mvc'
-[2014-11-03 22:34:05,458] WARN  (DefaultHandlerExceptionResolver.java:198) - Request method 'GET' not supported
-[2014-11-03 22:35:08,744] WARN  (DispatcherServlet.java:1118) - No mapping found for HTTP request with URI [/favicon.ico] in DispatcherServlet with name 'spring-mvc'
-[2014-11-03 22:52:34,536] WARN  (DispatcherServlet.java:1118) - No mapping found for HTTP request with URI [/login] in DispatcherServlet with name 'spring-mvc'
-[2014-11-03 22:52:40,094] WARN  (DispatcherServlet.java:1118) - No mapping found for HTTP request with URI [/login] in DispatcherServlet with name 'spring-mvc'
-[2014-11-03 22:54:59,721] WARN  (DispatcherServlet.java:1118) - No mapping found for HTTP request with URI [/login] in DispatcherServlet with name 'spring-mvc'
