@@ -16,7 +16,7 @@ import cn.chinattclub.izou7.service.ActivityArticleService;
  */
 @Service
 public class ActivityArticleServiceImpl implements ActivityArticleService {
-
+	
 	@Resource
 	private ActivityArticleDao dao;
 	

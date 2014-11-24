@@ -22,6 +22,7 @@
 			classpath:applicationContext-common.xml,
 			classpath:spring-mvc-common.xml,
 			classpath:spring-shiro-web.xml,
+			classpath:applicationContext-izou7.xml
 			classpath:*/applicationContext-*.xml
 		</param-value>
 	</context-param>

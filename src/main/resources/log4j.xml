@@ -47,7 +47,7 @@
 
 	<!-- Root Logger -->
 	<root>
-		<priority value="WARN"/>
+		<priority value="INFO"/>
 		<appender-ref ref="consoleAppender"/>
 		<appender-ref ref="debugFileAppender"/>
 		<appender-ref ref="infoFileAppender"/>
