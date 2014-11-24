@@ -1,4 +1,4 @@
-package cn.chinattclub.izou7.scheduled;
+package cn.chinattclub.izou7.schedule;
 
 import java.util.Date;
 import java.util.List;
@@ -25,7 +25,8 @@ public class GuestInvitedSchedule {
 	//@Resource
 	//private ActivityGuestsDao activityGuestsDao;
 	
-	@Scheduled(initialDelay = 30000,fixedRate = 5000)
+	//@Scheduled(initialDelay = 20000,fixedRate = 5000)
+	@Scheduled(cron = "0/5 * * * * ?")
 	void inviteGuest(){
 		System.out.println("1");
 //		List<ActivityGuestsSetting> activityGuestsSettings = activityGuestsSettingDao.getUnfixedActivity();
