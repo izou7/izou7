@@ -1,4 +1,3 @@
-
 package cn.chinattclub.izou7.web;
 
 import java.awt.image.BufferedImage;
@@ -46,6 +45,7 @@ import cn.chinattclub.izou7.entity.ActivityArticle;
 import cn.chinattclub.izou7.entity.ActivityPoster;
 import cn.chinattclub.izou7.entity.ActivityArticle;
 import cn.chinattclub.izou7.entity.ActivitySchedule;
+import cn.chinattclub.izou7.entity.ApplyTemplate;
 import cn.chinattclub.izou7.entity.City;
 import cn.chinattclub.izou7.entity.Image;
 import cn.chinattclub.izou7.entity.Province;
@@ -200,6 +200,9 @@ public class ActivityController {
 		// TODO Auto-generated method stub
 		model.addAttribute("id",dto.getActivityId());
 		model.addAttribute("templates",applyTemplateServiceImpl.list());
+		Activity activity = activityServiceImpl.findById(dto.getActivityId());
+		ApplyTemplate template = activity.getTemplate()==null?null:activity.getTemplate();
+		model.addAttribute("tmp",template);
 		return "site.activity.template";
 	}
 
