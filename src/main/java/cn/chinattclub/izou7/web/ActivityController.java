@@ -477,6 +477,27 @@ public class ActivityController {
 		return response;
 	}
 	/**
+	 * 更新活动增加票务信息
+	 * @param activityId
+	 * @param ActivityTicket
+	 * @return
+	 */
+	@RequestMapping(value = "{activityId}/ticket", method = RequestMethod.POST)
+	@ResponseBody
+	public RestResponse addActivityTicket(@PathVariable int activityId,@RequestBody ActivityTicket ticket) {
+		RestResponse response = new RestResponse();
+		String message ;
+		Activity activity = activityServiceImpl.findById(activityId);
+		List<ActivityTicket> tickets = new ArrayList<ActivityTicket>();
+		tickets.add(ticket);
+		activityServiceImpl.update(activity);
+		message = "更新活动【"+activityId+"】增加票务信息成功!";
+		log.info(message);
+		response.setMessage("更新活动增加票务信息成功!");
+		response.setStatusCode(ResponseStatusCode.OK);
+		return response;
+	}
+	/**
 	 * 转换tags数组
 	 * @param tags
 	 * @return
