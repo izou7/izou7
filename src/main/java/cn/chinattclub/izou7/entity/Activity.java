@@ -127,6 +127,19 @@ public class Activity {
 	@NotFound(action = NotFoundAction.IGNORE)
 	private List<ActivityTicket> tickets;
 	
+	/**
+	 * 嘉宾
+	 */
+	@OneToMany
+	@JoinColumn(name="activity")
+	@NotFound(action = NotFoundAction.IGNORE)
+	private List<ActivityGuests> guests;
+	
+	@OneToMany
+	@JoinColumn(name="activity")
+	@NotFound(action = NotFoundAction.IGNORE)
+	private List<ActivityGuestsSetting> settings;
+	
 	/** 
 	 *  创建时间
 	 */
@@ -443,6 +456,23 @@ public class Activity {
 	public void setTickets(List<ActivityTicket> tickets) {
 		this.tickets = tickets;
 	}
+
+	public List<ActivityGuests> getGuests() {
+		return guests;
+	}
+
+	public void setGuests(List<ActivityGuests> guests) {
+		this.guests = guests;
+	}
+
+	public List<ActivityGuestsSetting> getSettings() {
+		return settings;
+	}
+
+	public void setSettings(List<ActivityGuestsSetting> settings) {
+		this.settings = settings;
+	}
+
 	
 	
 }

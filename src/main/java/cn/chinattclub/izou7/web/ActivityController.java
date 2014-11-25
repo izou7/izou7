@@ -53,7 +53,10 @@ import cn.chinattclub.izou7.entity.City;
 import cn.chinattclub.izou7.entity.Image;
 import cn.chinattclub.izou7.entity.Province;
 import cn.chinattclub.izou7.entity.User;
+import cn.chinattclub.izou7.enumeration.GuestRegistrationStatus;
 import cn.chinattclub.izou7.service.ActivityArticleService;
+import cn.chinattclub.izou7.service.ActivityGuestsService;
+import cn.chinattclub.izou7.service.ActivityGuestsSettingService;
 import cn.chinattclub.izou7.service.ActivityScheduleService;
 import cn.chinattclub.izou7.service.ActivityService;
 import cn.chinattclub.izou7.service.ActivityTicketService;
@@ -103,6 +106,12 @@ public class ActivityController {
 	
 	@Resource
 	private ActivityTicketService activityTicketServiceImpl; 
+	
+	@Resource
+	private ActivityGuestsService activityGuestsServiceImpl; 
+	
+	@Resource
+	private ActivityGuestsSettingService activityGuestsSettingServiceImpl; 
 	
 	
 	
@@ -207,6 +216,10 @@ public class ActivityController {
 	 */
 	private String activityGuestPage(Model model, ActivityDto dto) {
 		// TODO Auto-generated method stub
+		Activity activity = activityServiceImpl.findById(dto.getActivityId());
+		model.addAttribute("id",dto.getActivityId());
+		model.addAttribute("guests",activity.getGuests());
+		model.addAttribute("setting",activity.getSettings());
 		return "site.activity.guest";
 	}
 

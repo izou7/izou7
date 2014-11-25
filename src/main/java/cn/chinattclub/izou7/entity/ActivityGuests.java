@@ -38,8 +38,7 @@ public class ActivityGuests {
 	/**
 	 * 活动
 	 */
-	@Column(name="activity_setting")
-	private int activitySetting;
+	private int activity;
 	
 	/**
 	 * 发邀请排名
@@ -165,13 +164,12 @@ public class ActivityGuests {
 	}
 
 
-
-	public int getActivitySetting() {
-		return activitySetting;
+	public int getActivity() {
+		return activity;
 	}
 
-	public void setActivitySetting(int activitySetting) {
-		this.activitySetting = activitySetting;
+	public void setActivity(int activity) {
+		this.activity = activity;
 	}
 
 	public Date getNotifyTime() {
