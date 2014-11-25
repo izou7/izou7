@@ -20,6 +20,7 @@ import java.util.UUID;
 import javax.annotation.Resource;
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
@@ -38,6 +39,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import cn.chinattclub.izou7.dto.ActivityDto;
 import cn.chinattclub.izou7.dto.ActivityFormDto;
+import cn.chinattclub.izou7.dto.ActivityTicketDto;
 import cn.chinattclub.izou7.dto.CalendarDto;
 import cn.chinattclub.izou7.dto.UserDto;
 import cn.chinattclub.izou7.entity.Activity;
@@ -188,6 +190,7 @@ public class ActivityController {
 			view = activityTickedPage(model,dto);
 			break;
 		case SIXTH:
+			view = activityGuestPage(model,dto);
 			break;
 		case SEVENTH:
 			break;
@@ -196,6 +199,17 @@ public class ActivityController {
 		}
 		return view;
 	}
+	/**
+	 * 第六步 邀请嘉宾
+	 * @param model
+	 * @param dto
+	 * @return
+	 */
+	private String activityGuestPage(Model model, ActivityDto dto) {
+		// TODO Auto-generated method stub
+		return "site.activity.guest";
+	}
+
 	/**
 	 * 第五步 票务信息
 	 * @param model
@@ -481,16 +495,19 @@ public class ActivityController {
 	 * @param activityId
 	 * @param ActivityTicket
 	 * @return
+	 * @throws ParseException 
 	 */
 	@RequestMapping(value = "{activityId}/ticket", method = RequestMethod.POST)
 	@ResponseBody
-	public RestResponse addActivityTicket(@PathVariable int activityId,@RequestBody ActivityTicket ticket) {
+	public RestResponse addActivityTicket(@PathVariable int activityId,ActivityTicketDto ticket) throws ParseException {
 		RestResponse response = new RestResponse();
 		String message ;
-		Activity activity = activityServiceImpl.findById(activityId);
-		List<ActivityTicket> tickets = new ArrayList<ActivityTicket>();
-		tickets.add(ticket);
-		activityServiceImpl.update(activity);
+		ActivityTicket activityTicket = ticket.convert();
+		if(ticket.getId()!=null){
+			activityTicketServiceImpl.update(activityTicket);
+		}else{
+			activityTicketServiceImpl.add(activityTicket);
+		}
 		message = "更新活动【"+activityId+"】增加票务信息成功!";
 		log.info(message);
 		response.setMessage("更新活动增加票务信息成功!");

@@ -43,6 +43,7 @@ public class ActivityTicket {
 	/**
 	 * 限额
 	 */
+	@Column(name = "limit_num")
 	private Integer limit;
 	
 	/** 
@@ -260,6 +261,14 @@ public class ActivityTicket {
 	 */
 	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
+	}
+
+	public int getActivity() {
+		return activity;
+	}
+
+	public void setActivity(int activity) {
+		this.activity = activity;
 	}
 
 }

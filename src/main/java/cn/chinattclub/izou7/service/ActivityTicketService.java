@@ -8,10 +8,9 @@ import cn.chinattclub.izou7.entity.ActivityTicket;
  */
 public interface ActivityTicketService {
 
-	/**
-	 * 
-	 * @param activityId
-	 * @return
-	 */
 	public ActivityTicket findByActivityId(int activityId);
+	
+	public void update(ActivityTicket activityTicket);
+
+	public void add(ActivityTicket activityTicket);
 }
