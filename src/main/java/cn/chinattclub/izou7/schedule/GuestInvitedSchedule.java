@@ -17,7 +17,7 @@ import cn.chinattclub.izou7.service.ActivityGuestsSettingService;
 import cn.chinattclub.izou7.service.ActivityService;
 import cn.chinattclub.izou7.util.CommonUtil;
 
-@Component
+//@Component
 public class GuestInvitedSchedule {
 	
 	@Resource

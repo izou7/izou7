@@ -83,7 +83,7 @@
 			  <div class="form-group">
 				<label class="col-sm-2 control-label" for="introduction">票种说明：</label>
 				<div class="col-sm-6">
-				  <textarea class="form-control" rows="4" name="introduction" placeholder="票种说明" value="${(ticket.introduction)!}"></textarea>
+				  <textarea class="form-control" rows="4" name="introduction" placeholder="票种说明" >${(ticket.introduction)!}</textarea>
 				</div>
 			  </div>
 			 <div class="form-group">

@@ -44,6 +44,7 @@ import cn.chinattclub.izou7.dto.CalendarDto;
 import cn.chinattclub.izou7.dto.UserDto;
 import cn.chinattclub.izou7.entity.Activity;
 import cn.chinattclub.izou7.entity.ActivityArticle;
+import cn.chinattclub.izou7.entity.ActivityGuestsSetting;
 import cn.chinattclub.izou7.entity.ActivityPoster;
 import cn.chinattclub.izou7.entity.ActivityArticle;
 import cn.chinattclub.izou7.entity.ActivitySchedule;
@@ -217,10 +218,11 @@ public class ActivityController {
 	private String activityGuestPage(Model model, ActivityDto dto) {
 		// TODO Auto-generated method stub
 		Activity activity = activityServiceImpl.findById(dto.getActivityId());
+		List<ActivityGuestsSetting> settings = activity.getSettings();
 		model.addAttribute("id",dto.getActivityId());
 		model.addAttribute("guests",activity.getGuests());
-		model.addAttribute("setting",activity.getSettings());
-		return "site.activity.guest";
+		model.addAttribute("setting",(settings!=null&&settings.size()>0)?settings.get(0):null);
+		return "site.activity.guests";
 	}
 
 	/**
