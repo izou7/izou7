@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.NotFound;
@@ -135,7 +136,7 @@ public class Activity {
 	@NotFound(action = NotFoundAction.IGNORE)
 	private List<ActivityGuests> guests;
 	
-	@OneToMany
+	@OneToMany(fetch = FetchType.EAGER)
 	@JoinColumn(name="activity")
 	@NotFound(action = NotFoundAction.IGNORE)
 	private List<ActivityGuestsSetting> settings;
@@ -473,6 +474,6 @@ public class Activity {
 		this.settings = settings;
 	}
 
-	
-	
+
+
 }

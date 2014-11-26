@@ -1,5 +1,7 @@
 package cn.chinattclub.izou7.service;
 
+import java.util.List;
+
 import cn.chinattclub.izou7.entity.Activity;
 
 /**
@@ -28,5 +30,7 @@ public interface ActivityService {
 	 * @param activity
 	 */
 	void add(Activity activity);
+
+	public List<Activity> getUnfixedActivity();
 
 }

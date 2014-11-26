@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import cn.chinattclub.izou7.dao.ActivityGuestsDao;
 import cn.chinattclub.izou7.dao.ActivityGuestsSettingDao;
+import cn.chinattclub.izou7.entity.Activity;
 import cn.chinattclub.izou7.entity.ActivityGuests;
 import cn.chinattclub.izou7.entity.ActivityGuestsSetting;
 import cn.chinattclub.izou7.service.ActivityGuestsService;
@@ -24,19 +25,18 @@ public class ActivityGuestsServiceImpl implements ActivityGuestsService {
     private ActivityGuestsDao activityGuestsDao;
 
 	@Override
-	public List<ActivityGuests> getFixedGuests(ActivityGuestsSetting activityGuestsSetting) {
-		return activityGuestsDao.getFixedGuests(activityGuestsSetting);
+	public List<ActivityGuests> getFixedGuests(Activity activity) {
+		return activityGuestsDao.getFixedGuests(activity);
 	}
 	
 	@Override
-	public List<ActivityGuests> getSendingGuests(ActivityGuestsSetting activityGuestsSetting) {
-		return activityGuestsDao.getSendingGuests(activityGuestsSetting);
+	public List<ActivityGuests> getSendingGuests(Activity activity) {
+		return activityGuestsDao.getSendingGuests(activity);
 	}
 
 	@Override
-	public List<ActivityGuests> getWaitingGuests(
-			ActivityGuestsSetting activityGuestsSetting) {
-		return activityGuestsDao.getWaitingGuests(activityGuestsSetting);
+	public List<ActivityGuests> getWaitingGuests(Activity activity) {
+		return activityGuestsDao.getWaitingGuests(activity);
 	}
 
 	@Override

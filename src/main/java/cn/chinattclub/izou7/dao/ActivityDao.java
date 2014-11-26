@@ -1,8 +1,14 @@
 package cn.chinattclub.izou7.dao;
 
+import java.util.Date;
+import java.util.List;
+
+import org.hibernate.Criteria;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import cn.chinattclub.izou7.entity.Activity;
+import cn.chinattclub.izou7.entity.ActivityGuestsSetting;
 import cn.zy.commons.dao.hibernate.AdvancedHibernateDao;
 /**
  * 活动基本信息DAO
@@ -11,4 +17,11 @@ import cn.zy.commons.dao.hibernate.AdvancedHibernateDao;
  */
 @Repository
 public class ActivityDao  extends AdvancedHibernateDao<Activity>{
+
+	public List<Activity> getUnfixedActivity() {
+		Criteria criteria = this.getCurrentSession().createCriteria(Activity.class);
+		criteria.createAlias("settings", "s").add(Restrictions.eq("s.over", false));
+		criteria.add(Restrictions.le("startTime", new Date()));
+		return criteria.list();
+	}
 }

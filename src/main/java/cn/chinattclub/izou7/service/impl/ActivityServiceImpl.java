@@ -1,5 +1,7 @@
 package cn.chinattclub.izou7.service.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -32,5 +34,11 @@ public class ActivityServiceImpl implements ActivityService {
 	
 	public void add(Activity activity){
 		activityDao.save(activity);
+	}
+
+	@Override
+	public List<Activity> getUnfixedActivity() {
+		// TODO Auto-generated method stub
+		return activityDao.getUnfixedActivity();
 	}
 }
