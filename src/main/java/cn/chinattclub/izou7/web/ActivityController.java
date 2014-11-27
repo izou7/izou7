@@ -513,5 +513,12 @@ public class ActivityController {
 		}
 		return tagsStr.toString();
 	}
-
+	
+	@RequestMapping(value = "test", method = RequestMethod.GET)
+	@ResponseBody
+	public RestResponse test(){
+		RestResponse re = new RestResponse();
+		System.out.println("----------------------");
+		return re;
+	}
 }
