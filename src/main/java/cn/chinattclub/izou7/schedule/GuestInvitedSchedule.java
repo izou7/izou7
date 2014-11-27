@@ -9,7 +9,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import cn.chinattclub.izou7.entity.Activity;
-import cn.chinattclub.izou7.entity.ActivityGuests;
+import cn.chinattclub.izou7.entity.ActivityGuest;
 import cn.chinattclub.izou7.entity.ActivityGuestsSetting;
 import cn.chinattclub.izou7.enumeration.GuestRegistrationStatus;
 import cn.chinattclub.izou7.service.ActivityGuestsService;
@@ -36,7 +36,7 @@ public class GuestInvitedSchedule {
 		//List<ActivityGuestsSetting> activityGuestsSettings = activityGuestsSettingServiceImpl.getUnfixedActivity();
 		
 		for(Activity activity:activities){
-			List<ActivityGuests> fixedGuests = activityGuestsServiceImpl.getFixedGuests(activity);
+			List<ActivityGuest> fixedGuests = activityGuestsServiceImpl.getFixedGuests(activity);
 			ActivityGuestsSetting activityGuestsSetting = activity.getSettings().get(0);
 			if (fixedGuests.size()>=activityGuestsSetting.getGuestNumber()){
 				activityGuestsSetting.setOver(true);
@@ -44,8 +44,8 @@ public class GuestInvitedSchedule {
 				continue;
 			}
 			int toSendNumber = activityGuestsSetting.getGuestNumber() - fixedGuests.size();
-			List<ActivityGuests> sendingGuests = activityGuestsServiceImpl.getSendingGuests(activity);
-			for (ActivityGuests sendingGuest:sendingGuests){
+			List<ActivityGuest> sendingGuests = activityGuestsServiceImpl.getSendingGuests(activity);
+			for (ActivityGuest sendingGuest:sendingGuests){
 				if (new Date().getTime() - sendingGuest.getNotifyTime().getTime()>24*3600*1000*activityGuestsSetting.getGuestRegistrationDeadline()){
 					sendingGuest.setStatus(GuestRegistrationStatus.REFUSED);
 					activityGuestsServiceImpl.update(sendingGuest);
@@ -53,8 +53,8 @@ public class GuestInvitedSchedule {
 					toSendNumber--;
 				}
 			}
-			List<ActivityGuests> waitingGuests = activityGuestsServiceImpl.getWaitingGuests(activity);
-			for (ActivityGuests waitingGuest:waitingGuests){
+			List<ActivityGuest> waitingGuests = activityGuestsServiceImpl.getWaitingGuests(activity);
+			for (ActivityGuest waitingGuest:waitingGuests){
 				if(toSendNumber<=0){
 					break;
 				}

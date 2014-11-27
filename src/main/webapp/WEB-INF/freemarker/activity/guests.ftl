@@ -96,6 +96,58 @@
 			</form>
 		</div>
 	</div>
+	<div class="panel panel-default">
+	  <div class="panel-heading" name="title" style="cursor: pointer">
+	  	<h3 class="panel-title">系统推荐</h3>
+	  </div>
+	  <div class="panel-body" >
+		<div class="form-group">
+						<div class="col-lg-6">
+							 <div class="table-responsive">
+							  <table class="table table-bordered">
+								<thead>
+								  <tr>
+									<th>姓名</th>
+									<th>职业</th>
+									<th>公司</th>
+									<th>方向</th>
+									<th>联系方式</th>
+									<th>操作</th>
+								  </tr>
+								</thead>
+								<tbody>
+								  <tr>
+									<td>张三</td>
+									<td>IT研发</td>
+									<td>百度</td>
+									<td>大数据</td>
+									<td>zhangsan@baidu.com</td>
+									<td><button type="button" class="btn btn-info" >添加</button></td>
+								  </tr>
+		     					   <tr>
+									<td>张三</td>
+									<td>IT研发</td>
+									<td>百度</td>
+									<td>大数据</td>
+									<td>zhangsan@baidu.com</td>
+									<td><button type="button" class="btn btn-info" >添加</button></td>
+								  </tr>
+								</tbody>
+							  </table>
+							</div>
+						</div>
+					</div>
+	  </div>
+	</div>
+
+	<div class="panel panel-default">
+	  <div class="panel-heading" name="title"  style="cursor: pointer">
+	    <h3 class="panel-title">手动添加</h3>
+	  </div>
+	  <div class="panel-body">
+	    Panel content
+	  </div>
+	</div>
   </div>
 
 <script src="${ (project.staticDomain)! }/libs/jquery/jquery-2.0.3.js"></script>

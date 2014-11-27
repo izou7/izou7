@@ -134,7 +134,7 @@ public class Activity {
 	@OneToMany
 	@JoinColumn(name="activity")
 	@NotFound(action = NotFoundAction.IGNORE)
-	private List<ActivityGuests> guests;
+	private List<ActivityGuest> guests;
 	
 	@OneToMany(fetch = FetchType.EAGER)
 	@JoinColumn(name="activity")
@@ -458,11 +458,11 @@ public class Activity {
 		this.tickets = tickets;
 	}
 
-	public List<ActivityGuests> getGuests() {
+	public List<ActivityGuest> getGuests() {
 		return guests;
 	}
 
-	public void setGuests(List<ActivityGuests> guests) {
+	public void setGuests(List<ActivityGuest> guests) {
 		this.guests = guests;
 	}
 
