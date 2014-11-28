@@ -95,6 +95,7 @@
         </property>
         <property name="filterChainDefinitions">
             <value>
+            	/activity/test = anon
                 /index.jsp = anon
                 /unauthorized.jsp = anon
                 /static/** = anon

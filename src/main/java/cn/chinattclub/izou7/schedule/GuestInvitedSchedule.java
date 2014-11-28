@@ -16,7 +16,7 @@ import cn.chinattclub.izou7.entity.ActivityGuestsSetting;
 import cn.chinattclub.izou7.enumeration.GuestRegistrationStatus;
 import cn.chinattclub.izou7.util.CommonUtil;
 
-@Component
+//@Component
 public class GuestInvitedSchedule {
 	
 	//@Resource
