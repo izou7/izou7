@@ -31,6 +31,18 @@ public class ActivityTicketServiceImpl implements ActivityTicketService {
 			return null;
 		}
 	}
+
+	@Override
+	public void update(ActivityTicket activityTicket) {
+		// TODO Auto-generated method stub
+		dao.update(activityTicket);
+	}
+
+	@Override
+	public void add(ActivityTicket activityTicket) {
+		// TODO Auto-generated method stub
+		dao.save(activityTicket);
+	}
 	
 	
 }

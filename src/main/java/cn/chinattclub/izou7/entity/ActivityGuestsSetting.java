@@ -42,7 +42,11 @@ public class ActivityGuestsSetting {
 	@Column(name="guest_registration_deadline")
 	private Integer guestRegistrationDeadline;
 	
-	private boolean over;
+	/**
+	 * 邀请嘉宾是否完成
+	 * 0是未完成，1是已完成
+	 */
+	private Boolean over = false;
 	
 	/** 
 	 *  创建时间
@@ -82,11 +86,11 @@ public class ActivityGuestsSetting {
 		this.activity = activity;
 	}
 
-	public boolean isOver() {
+	public Boolean getOver() {
 		return over;
 	}
 
-	public void setOver(boolean over) {
+	public void setOver(Boolean over) {
 		this.over = over;
 	}
 

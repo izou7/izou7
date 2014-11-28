@@ -28,7 +28,7 @@ import cn.chinattclub.izou7.enumeration.GuestRegistrationStatus;
  */
 @Entity
 @Table(name = "i_activity_guests")
-public class ActivityGuests {
+public class ActivityGuest {
 
 
 	@Id
@@ -38,8 +38,7 @@ public class ActivityGuests {
 	/**
 	 * 活动
 	 */
-	@Column(name="activity_setting")
-	private int activitySetting;
+	private int activity;
 	
 	/**
 	 * 发邀请排名
@@ -165,13 +164,12 @@ public class ActivityGuests {
 	}
 
 
-
-	public int getActivitySetting() {
-		return activitySetting;
+	public int getActivity() {
+		return activity;
 	}
 
-	public void setActivitySetting(int activitySetting) {
-		this.activitySetting = activitySetting;
+	public void setActivity(int activity) {
+		this.activity = activity;
 	}
 
 	public Date getNotifyTime() {
@@ -182,9 +180,6 @@ public class ActivityGuests {
 		this.notifyTime = notifyTime;
 	}
 
-	public void setRank(int rank) {
-		this.rank = rank;
-	}
 
 	/**
 	 * Returns the value of the field called 'name'.
@@ -458,19 +453,13 @@ public class ActivityGuests {
 		this.type = type;
 	}
 
-	/**
-	 * Returns the value of the field called 'rank'.
-	 * @return Returns the rank.
-	 */
-	public Integer getRank() {
-		return this.rank;
+	public int getRank() {
+		return rank;
 	}
 
-	/**
-	 * Sets the field called 'rank' to the given value.
-	 * @param rank The rank to set.
-	 */
-	public void setRank(Integer rank) {
+	public void setRank(int rank) {
 		this.rank = rank;
 	}
+	
+	
 }

@@ -17,6 +17,7 @@
 		<div class="panel-body">
 			<form class="form-horizontal" role="form" id="ticketForm" action="${id!}/ticket"  method="POST">
 			<input class="form-control" type="hidden" id="id" name="activity" value="${id!}" >
+			<input class="form-control" type="hidden" id="ticketId" name="id" value="${(ticket.id)!}" >
 			  <div class="form-group">
 				<label class="col-sm-2 control-label" for="type">类型：</label>
 				<div class="col-sm-6">
@@ -82,7 +83,7 @@
 			  <div class="form-group">
 				<label class="col-sm-2 control-label" for="introduction">票种说明：</label>
 				<div class="col-sm-6">
-				  <textarea class="form-control" rows="4" name="introduction" placeholder="票种说明" value="${(ticket.introduction)!}"></textarea>
+				  <textarea class="form-control" rows="4" name="introduction" placeholder="票种说明" >${(ticket.introduction)!}</textarea>
 				</div>
 			  </div>
 			 <div class="form-group">
@@ -93,11 +94,12 @@
 				  <button type="button" class="btn btn-info btn-block" onclick="javascript:location.href='activity?step=FOURTH&activityId=${id!}'">上一步</button>
 				</div>
 				<div class="col-sm-2">
-				  <button type="button" id="saveBtn" class="btn btn-info btn-block" >保存</button>
+				  <button type="submit" id="saveBtn"  class="btn btn-info btn-block" >保存</button>
 				</div>
 				<div class="col-sm-2">
-				  <button type="button" id="nextBtn" class="btn btn-info btn-block" >下一步</button>
+				  <button type="submit" id="nextBtn"  class="btn btn-info btn-block" >下一步</button>
 				</div>
+				<input class="form-control" type="hidden" id="submitType"  value="" >
 			 </div>
 			</form>
 		</div>

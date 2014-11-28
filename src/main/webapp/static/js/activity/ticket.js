@@ -3,8 +3,44 @@ $(function () {
 	initCalendar("#ticketSaleEndTime");
 	initCalendar("#ticketValidStartTime");
 	initCalendar("#ticketValidEndTime");
-	$("#nextBtn").click(nextBtnClick);
+	var options = {
+			dataType:"json",
+			error:errorHandler,
+			success:successHandler,
+			target:"button[name='save']",
+			type:"POST"
+	}
+	$('#ticketForm').ajaxForm(options);
+	$("#saveBtn").click(function (){$("#submitType").val("save");});
+	$("#nextBtn").click(function (){$("#submitType").val("next");});
+	$("input[name='free']").click(function freeHander(){freeChecked(this);});
 });
+function freeChecked(obj){
+	var free = $(obj).val();
+	if(free=="true"){
+		$("input[type!='hidden'][name!='free']").val("");
+		$("textarea").val("");
+	}
+}
+function errorHandler(){
+	$.Zebra_Dialog("操作异常", {
+		'type':     'information',
+		'title':    '提示',
+		'buttons':  ["确定"]
+	});
+}
+function successHandler(responseText,statusText,xhr,$form){
+	var submitType = $("#submitType").val();
+	if(submitType=="save"){
+		$.Zebra_Dialog("操作成功", {
+			'type':     'information',
+			'title':    '提示',
+			'buttons':  ["确定"]
+		});
+	}else{
+		location.href='activity?step=SIXTH&activityId='+$("#id").val();
+	}
+}
 function nextBtnClick(){
 	   
 	var ticket = JSON.stringify($("#ticketForm").serializeObject());

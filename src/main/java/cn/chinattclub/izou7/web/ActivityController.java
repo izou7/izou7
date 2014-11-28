@@ -20,6 +20,7 @@ import java.util.UUID;
 import javax.annotation.Resource;
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
@@ -38,10 +39,14 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import cn.chinattclub.izou7.dto.ActivityDto;
 import cn.chinattclub.izou7.dto.ActivityFormDto;
+import cn.chinattclub.izou7.dto.ActivityTicketDto;
 import cn.chinattclub.izou7.dto.CalendarDto;
+import cn.chinattclub.izou7.dto.GuestDto;
 import cn.chinattclub.izou7.dto.UserDto;
 import cn.chinattclub.izou7.entity.Activity;
 import cn.chinattclub.izou7.entity.ActivityArticle;
+import cn.chinattclub.izou7.entity.ActivityGuest;
+import cn.chinattclub.izou7.entity.ActivityGuestsSetting;
 import cn.chinattclub.izou7.entity.ActivityPoster;
 import cn.chinattclub.izou7.entity.ActivityArticle;
 import cn.chinattclub.izou7.entity.ActivitySchedule;
@@ -51,13 +56,17 @@ import cn.chinattclub.izou7.entity.City;
 import cn.chinattclub.izou7.entity.Image;
 import cn.chinattclub.izou7.entity.Province;
 import cn.chinattclub.izou7.entity.User;
+import cn.chinattclub.izou7.enumeration.GuestRegistrationStatus;
 import cn.chinattclub.izou7.service.ActivityArticleService;
+import cn.chinattclub.izou7.service.ActivityGuestsService;
+import cn.chinattclub.izou7.service.ActivityGuestsSettingService;
 import cn.chinattclub.izou7.service.ActivityScheduleService;
 import cn.chinattclub.izou7.service.ActivityService;
 import cn.chinattclub.izou7.service.ActivityTicketService;
 import cn.chinattclub.izou7.service.ApplyTemplateService;
 import cn.chinattclub.izou7.service.CityService;
 import cn.chinattclub.izou7.service.ProvinceService;
+import cn.chinattclub.izou7.service.UserInfoService;
 import cn.chinattclub.izou7.service.UserService;
 import cn.zy.commons.webdev.constant.ResponseStatusCode;
 import cn.zy.commons.webdev.http.RestResponse;
@@ -101,6 +110,15 @@ public class ActivityController {
 	
 	@Resource
 	private ActivityTicketService activityTicketServiceImpl; 
+	
+	@Resource
+	private ActivityGuestsService activityGuestsServiceImpl; 
+	
+	@Resource
+	private ActivityGuestsSettingService activityGuestsSettingServiceImpl; 
+	
+	@Resource
+	private UserInfoService userInfoServiceImpl; 
 	
 	
 	
@@ -188,6 +206,7 @@ public class ActivityController {
 			view = activityTickedPage(model,dto);
 			break;
 		case SIXTH:
+			view = activityGuestPage(model,dto);
 			break;
 		case SEVENTH:
 			break;
@@ -196,6 +215,23 @@ public class ActivityController {
 		}
 		return view;
 	}
+	/**
+	 * 第六步 邀请嘉宾
+	 * @param model
+	 * @param dto
+	 * @return
+	 */
+	private String activityGuestPage(Model model, ActivityDto dto) {
+		// TODO Auto-generated method stub
+		Activity activity = activityServiceImpl.findById(dto.getActivityId());
+		List<ActivityGuestsSetting> settings = activity.getSettings();
+		model.addAttribute("id",dto.getActivityId());
+		/**系统推荐*/
+		model.addAttribute("rcds",userInfoServiceImpl.recommend());
+		model.addAttribute("setting",(settings!=null&&settings.size()>0)?settings.get(0):null);
+		return "site.activity.guests";
+	}
+
 	/**
 	 * 第五步 票务信息
 	 * @param model
@@ -481,22 +517,71 @@ public class ActivityController {
 	 * @param activityId
 	 * @param ActivityTicket
 	 * @return
+	 * @throws ParseException 
 	 */
 	@RequestMapping(value = "{activityId}/ticket", method = RequestMethod.POST)
 	@ResponseBody
-	public RestResponse addActivityTicket(@PathVariable int activityId,@RequestBody ActivityTicket ticket) {
+	public RestResponse addActivityTicket(@PathVariable int activityId,ActivityTicketDto ticket) throws ParseException {
 		RestResponse response = new RestResponse();
 		String message ;
-		Activity activity = activityServiceImpl.findById(activityId);
-		List<ActivityTicket> tickets = new ArrayList<ActivityTicket>();
-		tickets.add(ticket);
-		activityServiceImpl.update(activity);
+		ActivityTicket activityTicket = ticket.convert();
+		if(ticket.getId()!=null){
+			activityTicketServiceImpl.update(activityTicket);
+		}else{
+			activityTicketServiceImpl.add(activityTicket);
+		}
 		message = "更新活动【"+activityId+"】增加票务信息成功!";
 		log.info(message);
 		response.setMessage("更新活动增加票务信息成功!");
 		response.setStatusCode(ResponseStatusCode.OK);
 		return response;
 	}
+	
+	/**
+	 * 获取活动嘉宾
+	 * @param activityId
+	 * @return
+	 */
+	@RequestMapping(value = "{activityId}/guests", method = RequestMethod.GET)
+	@ResponseBody
+	public RestResponse addActivityTicket(@PathVariable int activityId)  {
+		RestResponse response = new RestResponse();
+		Activity activity = activityServiceImpl.findById(activityId);
+		response.getBody().put("guests", activity.getGuests());
+		response.setMessage("获取活动嘉宾信息成功!");
+		response.setStatusCode(ResponseStatusCode.OK);
+		return response;
+	}
+	
+	/**
+	 * 嘉宾顺序调整
+	 * @param activityId
+	 * @param guestId
+	 * @param up
+	 * @return
+	 */
+	@RequestMapping(value = "{activityId}/guest/{guestId}", method = RequestMethod.PUT)
+	@ResponseBody
+	public RestResponse addActivityTicket(@PathVariable int activityId,@PathVariable int guestId,boolean up)  {
+		RestResponse response = new RestResponse();
+		activityGuestsServiceImpl.execSequence(activityId,guestId,up);
+		response.setStatusCode(ResponseStatusCode.OK);
+		return response;
+	}
+	@RequestMapping(value = "{activityId}/guest", method = RequestMethod.POST)
+	@ResponseBody
+	public RestResponse addActivityTicket(@PathVariable int activityId,@RequestBody GuestDto guest)  {
+		RestResponse response = new RestResponse();
+		ActivityGuest aGuest = guest.convert();
+		aGuest.setActivity(activityId);
+		int maxRank = activityGuestsServiceImpl.getMaxRank(activityId);
+		aGuest.setRank(maxRank);
+		activityGuestsServiceImpl.add(aGuest);
+		response.setStatusCode(ResponseStatusCode.OK);
+		return response;
+	}
+	
+	
 	/**
 	 * 转换tags数组
 	 * @param tags

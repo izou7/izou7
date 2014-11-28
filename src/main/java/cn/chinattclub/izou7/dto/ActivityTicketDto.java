@@ -1,6 +1,13 @@
 package cn.chinattclub.izou7.dto;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.validation.constraints.NotNull;
+
+import cn.chinattclub.izou7.entity.ActivityTicket;
 
 
 /**
@@ -9,14 +16,16 @@ import javax.validation.constraints.NotNull;
  *
  */
 public class ActivityTicketDto {
+	private static final DateFormat df = new SimpleDateFormat(
+			"yyyy-MM-dd");
 
 	/**
 	 * 活动ID
 	 */
-	@NotNull
+	private Integer id;
+	
 	private Integer activity;
 	
-	@NotNull
 	private Boolean free;
 	
 	private Integer price;
@@ -177,6 +186,36 @@ public class ActivityTicketDto {
 		this.introduction = introduction;
 	}
 	
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	/**
+	 * @return
+	 * @throws ParseException
+	 */
+	public ActivityTicket convert() throws ParseException{
+		ActivityTicket ticket = new ActivityTicket();
+		ticket.setCreateTime(new Date());
+		ticket.setFree(free);
+		ticket.setId(id);
+		ticket.setActivity(activity);
+		if(free){
+			return ticket;
+		}
+		ticket.setIntroduction(introduction);
+		ticket.setLimit(limit);
+		ticket.setPrice(price);
+		ticket.setTicketSaleEndTime(df.parse(ticketSaleEndTime));
+		ticket.setTicketSaleStartTime(df.parse(ticketSaleStartTime));
+		ticket.setTicketValidEndTime(df.parse(ticketValidEndTime));
+		ticket.setTicketValidStartTime(df.parse(ticketValidStartTime));
+		return ticket;
+	}
 	
 	
 }

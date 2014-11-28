@@ -12,10 +12,15 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 
 import cn.chinattclub.izou7.dao.CityDao;
+import cn.chinattclub.izou7.entity.Activity;
+import cn.chinattclub.izou7.entity.ActivityGuests;
+import cn.chinattclub.izou7.entity.ActivityGuestsSetting;
 import cn.chinattclub.izou7.entity.City;
 import cn.chinattclub.izou7.entity.User;
 import cn.chinattclub.izou7.entity.User2;
 import cn.chinattclub.izou7.realm.UserRealm;
+import cn.chinattclub.izou7.service.ActivityGuestsService;
+import cn.chinattclub.izou7.service.ActivityService;
 import cn.chinattclub.izou7.service.CityService;
 import cn.chinattclub.izou7.service.UserService;
 
@@ -43,6 +48,12 @@ public class ShiroTest {
     
     @Resource
     private CityService cityServiceImpl;
+    
+    @Resource
+    private ActivityService activityServiceImpl;
+    
+    @Resource
+    private ActivityGuestsService activityGuestsServiceImpl;
 
 
 
@@ -81,13 +92,16 @@ public class ShiroTest {
 //    	u.setPassword("123456");
 //    	userService.createUser(u);
     	
-    	List<City> citys = cityServiceImpl.list();
-    	System.out.println(citys.size());
-    	List<City> city = cityServiceImpl.findCityIdByProvince(28);
-    	System.out.println(city.size());
-
-
-
+//    	List<City> citys = cityServiceImpl.list();
+//    	System.out.println(citys.size());
+//    	List<City> city = cityServiceImpl.findCityIdByProvince(28);
+//    	System.out.println(city.size());
+//    	ActivityGuestsSetting activityGuestsSetting = new ActivityGuestsSetting();
+//    	activityGuestsSetting.setId(1);
+//    	List<ActivityGuests> tt = activityGuestsServiceImpl.getWaitingGuests(activityGuestsSetting);
+//    	System.out.println(tt.size());
+    	
     }
 
 }
+

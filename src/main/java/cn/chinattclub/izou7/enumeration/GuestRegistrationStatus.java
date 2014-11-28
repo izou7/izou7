@@ -8,7 +8,6 @@ package cn.chinattclub.izou7.enumeration;
  */
 public enum GuestRegistrationStatus {
 
-	SELF(-1,"自荐"),
 	/**
 	 * 已发申请
 	 */

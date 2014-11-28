@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.NotFound;
@@ -126,6 +127,19 @@ public class Activity {
 	@JoinColumn(name="activity")
 	@NotFound(action = NotFoundAction.IGNORE)
 	private List<ActivityTicket> tickets;
+	
+	/**
+	 * 嘉宾
+	 */
+	@OneToMany
+	@JoinColumn(name="activity")
+	@NotFound(action = NotFoundAction.IGNORE)
+	private List<ActivityGuest> guests;
+	
+	@OneToMany(fetch = FetchType.EAGER)
+	@JoinColumn(name="activity")
+	@NotFound(action = NotFoundAction.IGNORE)
+	private List<ActivityGuestsSetting> settings;
 	
 	/** 
 	 *  创建时间
@@ -443,6 +457,23 @@ public class Activity {
 	public void setTickets(List<ActivityTicket> tickets) {
 		this.tickets = tickets;
 	}
-	
-	
+
+	public List<ActivityGuest> getGuests() {
+		return guests;
+	}
+
+	public void setGuests(List<ActivityGuest> guests) {
+		this.guests = guests;
+	}
+
+	public List<ActivityGuestsSetting> getSettings() {
+		return settings;
+	}
+
+	public void setSettings(List<ActivityGuestsSetting> settings) {
+		this.settings = settings;
+	}
+
+
+
 }

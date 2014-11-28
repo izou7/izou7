@@ -1,7 +1,9 @@
 package cn.chinattclub.izou7.service.impl;
 
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import cn.chinattclub.izou7.dao.UserDao;
 import cn.chinattclub.izou7.dao.UserInfoDao;
+import cn.chinattclub.izou7.dto.GuestDto;
 import cn.chinattclub.izou7.dto.UserInfoDto;
 import cn.chinattclub.izou7.entity.User;
 import cn.chinattclub.izou7.entity.UserInfo;
@@ -69,6 +72,24 @@ public class UserInfoServiceImpl implements UserInfoService {
 		UserInfo userInfo = userInfoDao.get(userInfoId);
 		userInfo = userInfoDto.toUserInfo(userInfo);
 		userInfoDao.update(userInfo);
+	}
+
+	@Override
+	public List<GuestDto> recommend() {
+		// TODO Auto-generated method stub
+		List<UserInfo> list = userInfoDao.list();
+		List<GuestDto> guestList = new ArrayList<>();
+		for (UserInfo info : list) {
+			GuestDto guest = new GuestDto();
+			guest.setCompany("无");
+			guest.setIntroduction(info.getIntroduction());
+			guest.setName(info.getRealName());
+			guest.setPhone(info.getPhone());
+			guest.setPosition("无");
+			guest.setResearchArea(info.getHeadPictureUrl());
+			guestList.add(guest);
+		}
+		return guestList;
 	}
 
 }
