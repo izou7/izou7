@@ -1,6 +1,6 @@
   <style>
-  	.selectedTemplate{
-  	border:5px solid #428bca;
+  	.glyphicon{
+  		cursor: pointer
   	}
   </style>
   <!-- Generic page styles -->
@@ -16,7 +16,7 @@
 		</div>
 		<div class="panel-body">
 			<form class="form-horizontal" role="form">
-							
+			<input type="hidden" id="id" name="id" value="${id!}">
 		   <div class="form-group">
 			<label class="col-sm-2 control-label" for="guestNumber">需求嘉宾人数：</label>
 			<div class="col-sm-2">
@@ -37,12 +37,6 @@
 		   </div>
 		   </form>
 		   <form class="form-horizontal" role="form">
-			<div class="form-group">
-				<div class="col-sm-4">
-				  <button type="button" class="btn btn-info" data-toggle="modal" data-target="#manual">手动添加</button>
-				  <button type="button" class="btn btn-info"  data-toggle="modal" data-target="#sys">系统推荐</button>
-				</div>
-			 </div>
 			  <div class="form-group">
 				<div class="col-lg-6">
 					 <div class="table-responsive">
@@ -54,29 +48,27 @@
 							<th>公司</th>
 							<th>方向</th>
 							<th>联系方式</th>
+							<th>顺序</th>
 							<th>调整顺序</th>
 							<th>操作</th>
 						  </tr>
 						</thead>
-						<tbody>
-						  <tr>
-							<td>张三</td>
-							<td>IT研发</td>
-							<td>百度</td>
-							<td>大数据</td>
-							<td>zhangsan@baidu.com</td>
-							<td>1</td>
-							<td><button type="button" class="btn btn-info" >删除</button></td>
-						  </tr>
-     					   <tr>
-							<td>张三</td>
-							<td>IT研发</td>
-							<td>百度</td>
-							<td>大数据</td>
-							<td>zhangsan@baidu.com</td>
-							<td>1</td>
-							<td><button type="button" class="btn btn-info" >删除</button></td>
-						  </tr>
+						<tbody id="guestTBody">
+						<#list guests as guest>
+							<tr>
+								<td>${(guest.name)!}</td>
+								<td>${(guest.position)!}</td>
+								<td>${(guest.company)!}</td>
+								<td>${(guest.researchArea)!}</td>
+								<td>${(guest.phone)!}</td>
+								<td>${(guest.rank)!}</td>
+								<td>
+									<span name="upSpan" data_up="true" class="glyphicon glyphicon-arrow-up " data_id="${(guest.id)!}"></span>
+									<span name="upSpan"  data_up="false" class="glyphicon glyphicon-arrow-down paddingleft20" data_id="${(guest.id)!}"></span>
+								</td>
+								<td><span id="delSpan" class="glyphicon glyphicon-remove"  data_id="${(guest.id)!}"></span></td>
+							  </tr>
+						</#list>
 						</tbody>
 					  </table>
 					</div>
@@ -116,22 +108,16 @@
 								  </tr>
 								</thead>
 								<tbody>
+								<#list rcds as rcd>
 								  <tr>
-									<td>张三</td>
-									<td>IT研发</td>
-									<td>百度</td>
-									<td>大数据</td>
-									<td>zhangsan@baidu.com</td>
+									<td>${(rcd.name)!}</td>
+									<td>${(rcd.position)!}</td>
+									<td>${(rcd.company)!}</td>
+									<td>${(rcd.researchArea)!}</td>
+									<td>${(rcd.phone)!}</td>
 									<td><button type="button" class="btn btn-info" >添加</button></td>
-								  </tr>
-		     					   <tr>
-									<td>张三</td>
-									<td>IT研发</td>
-									<td>百度</td>
-									<td>大数据</td>
-									<td>zhangsan@baidu.com</td>
-									<td><button type="button" class="btn btn-info" >添加</button></td>
-								  </tr>
+								  </tr>								
+								</#list>
 								</tbody>
 							  </table>
 							</div>

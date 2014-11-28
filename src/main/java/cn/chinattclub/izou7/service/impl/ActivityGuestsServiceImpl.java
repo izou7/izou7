@@ -90,5 +90,16 @@ public class ActivityGuestsServiceImpl implements ActivityGuestsService {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	@Override
+	public Object getGuestsByActivityId(int activityId) {
+		return dao.getGuestsByActivityId(activityId);
+	}
+
+	@Override
+	public void delete(int guestId) {
+		// TODO Auto-generated method stub.
+		dao.delete(guestId);
+	}
 	
 }

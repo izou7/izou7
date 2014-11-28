@@ -44,4 +44,19 @@ public interface ActivityGuestsService {
 	 */
 	public int getMaxRank(int activityId);
 
+	/**
+	 * TODO Put here a description of what this method does.
+	 *
+	 * @return
+	 */
+	public Object getGuestsByActivityId(int activityId);
+
+	/**
+	 * TODO Put here a description of what this method does.
+	 *
+	 * @param activityId
+	 * @param guestId
+	 */
+	public void delete(int guestId);
+
 }

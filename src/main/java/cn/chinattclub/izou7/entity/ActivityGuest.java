@@ -48,13 +48,13 @@ public class ActivityGuest {
 	/**
 	 * 用户
 	 */
-	@ManyToMany
-	@JoinTable(
-	   name="i_activity_guests_vote",
-	   joinColumns=@JoinColumn(name="activity_guests"),
-	   inverseJoinColumns=@JoinColumn(name="user")
-	   )
-	private List<User> users;
+//	@ManyToMany
+//	@JoinTable(
+//	   name="i_activity_guests_vote",
+//	   joinColumns=@JoinColumn(name="activity_guests"),
+//	   inverseJoinColumns=@JoinColumn(name="user")
+//	   )
+//	private List<User> users;
 	
 	/**
 	 * 嘉宾姓名
@@ -164,12 +164,21 @@ public class ActivityGuest {
 	}
 
 
-	public int getActivity() {
-		return activity;
+
+	/**
+	 * Returns the value of the field called 'activityId'.
+	 * @return Returns the activityId.
+	 */
+	public int getActivityId() {
+		return this.activity;
 	}
 
-	public void setActivity(int activity) {
-		this.activity = activity;
+	/**
+	 * Sets the field called 'activityId' to the given value.
+	 * @param activityId The activityId to set.
+	 */
+	public void setActivityId(int activityId) {
+		this.activity = activityId;
 	}
 
 	public Date getNotifyTime() {
@@ -425,17 +434,17 @@ public class ActivityGuest {
 	 * Returns the value of the field called 'users'.
 	 * @return Returns the users.
 	 */
-	public List<User> getUsers() {
-		return this.users;
-	}
+//	public List<User> getUsers() {
+//		return this.users;
+//	}
 
 	/**
 	 * Sets the field called 'users' to the given value.
 	 * @param users The users to set.
 	 */
-	public void setUsers(List<User> users) {
-		this.users = users;
-	}
+//	public void setUsers(List<User> users) {
+//		this.users = users;
+//	}
 
 	/**
 	 * Returns the value of the field called 'type'.
@@ -459,6 +468,22 @@ public class ActivityGuest {
 
 	public void setRank(int rank) {
 		this.rank = rank;
+	}
+
+	/**
+	 * Returns the value of the field called 'activity'.
+	 * @return Returns the activity.
+	 */
+	public int getActivity() {
+		return this.activity;
+	}
+
+	/**
+	 * Sets the field called 'activity' to the given value.
+	 * @param activity The activity to set.
+	 */
+	public void setActivity(int activity) {
+		this.activity = activity;
 	}
 	
 	

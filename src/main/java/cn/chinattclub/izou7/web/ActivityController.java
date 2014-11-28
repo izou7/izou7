@@ -226,6 +226,7 @@ public class ActivityController {
 		Activity activity = activityServiceImpl.findById(dto.getActivityId());
 		List<ActivityGuestsSetting> settings = activity.getSettings();
 		model.addAttribute("id",dto.getActivityId());
+		model.addAttribute("guests",activityGuestsServiceImpl.getGuestsByActivityId(dto.getActivityId()));
 		/**系统推荐*/
 		model.addAttribute("rcds",userInfoServiceImpl.recommend());
 		model.addAttribute("setting",(settings!=null&&settings.size()>0)?settings.get(0):null);
@@ -546,8 +547,7 @@ public class ActivityController {
 	@ResponseBody
 	public RestResponse addActivityTicket(@PathVariable int activityId)  {
 		RestResponse response = new RestResponse();
-		Activity activity = activityServiceImpl.findById(activityId);
-		response.getBody().put("guests", activity.getGuests());
+		response.getBody().put("guests", activityGuestsServiceImpl.getGuestsByActivityId(activityId));
 		response.setMessage("获取活动嘉宾信息成功!");
 		response.setStatusCode(ResponseStatusCode.OK);
 		return response;
@@ -562,9 +562,25 @@ public class ActivityController {
 	 */
 	@RequestMapping(value = "{activityId}/guest/{guestId}", method = RequestMethod.PUT)
 	@ResponseBody
-	public RestResponse addActivityTicket(@PathVariable int activityId,@PathVariable int guestId,boolean up)  {
+	public RestResponse addActivityTicket(@PathVariable int activityId,@PathVariable int guestId,@RequestBody String up)  {
 		RestResponse response = new RestResponse();
-		activityGuestsServiceImpl.execSequence(activityId,guestId,up);
+		activityGuestsServiceImpl.execSequence(activityId,guestId,Boolean.getBoolean(up));
+		response.setStatusCode(ResponseStatusCode.OK);
+		return response;
+	}
+	/**
+	 * 
+	 * 删除
+	 *
+	 * @param activityId
+	 * @param guestId
+	 * @return
+	 */
+	@RequestMapping(value = "{activityId}/guest/{guestId}", method = RequestMethod.DELETE)
+	@ResponseBody
+	public RestResponse deleteActivityTicket(@PathVariable int activityId,@PathVariable int guestId)  {
+		RestResponse response = new RestResponse();
+		activityGuestsServiceImpl.delete(guestId);
 		response.setStatusCode(ResponseStatusCode.OK);
 		return response;
 	}
@@ -599,11 +615,4 @@ public class ActivityController {
 		return tagsStr.toString();
 	}
 	
-	@RequestMapping(value = "test", method = RequestMethod.GET)
-	@ResponseBody
-	public RestResponse test(){
-		RestResponse re = new RestResponse();
-		System.out.println("----------------------");
-		return re;
-	}
 }
