@@ -19,4 +19,6 @@ public interface ActivityGuestsSettingService {
 	public List<ActivityGuestsSetting> getUnfixedActivity();
 
 	public void update(ActivityGuestsSetting activityGuestsSetting);
+
+	public void addOrUpdate(ActivityGuestsSetting setting);
 }

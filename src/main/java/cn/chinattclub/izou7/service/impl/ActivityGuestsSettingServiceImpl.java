@@ -18,16 +18,28 @@ import cn.chinattclub.izou7.service.ActivityGuestsSettingService;
 @Service
 public class ActivityGuestsSettingServiceImpl implements ActivityGuestsSettingService {
 	@Resource
-    private ActivityGuestsSettingDao activityGuestsSettingDao;
+    private ActivityGuestsSettingDao dao;
 
 	@Override
 	public List<ActivityGuestsSetting> getUnfixedActivity() {
-		return activityGuestsSettingDao.getUnfixedActivity();
+		return dao.getUnfixedActivity();
 	}
 
 	@Override
 	public void update(ActivityGuestsSetting activityGuestsSetting) {
-		activityGuestsSettingDao.update(activityGuestsSetting);
-		
+		dao.update(activityGuestsSetting);
+	}
+
+	@Override
+	public void addOrUpdate(ActivityGuestsSetting setting) {
+		// TODO Auto-generated method stub
+		if(setting.getId()==null){
+			dao.save(setting);
+		}else{
+			ActivityGuestsSetting persistentSetting = dao.get(setting.getId());
+			persistentSetting.setGuestNumber(setting.getGuestNumber());
+			persistentSetting.setGuestRegistrationDeadline(setting.getGuestRegistrationDeadline());
+			update(persistentSetting);
+		}
 	}
 }

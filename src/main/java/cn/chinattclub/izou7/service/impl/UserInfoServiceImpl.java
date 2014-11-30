@@ -75,7 +75,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 	}
 
 	@Override
-	public List<GuestDto> recommend() {
+	public List<GuestDto> recommend(int activityId) {
 		// TODO Auto-generated method stub
 		List<UserInfo> list = userInfoDao.list();
 		List<GuestDto> guestList = new ArrayList<>();

@@ -21,6 +21,6 @@ public interface UserInfoService {
 	 * 活动系统推荐用户
 	 * @return
 	 */
-	public List<GuestDto> recommend();
+	public List<GuestDto> recommend(int activityId);
 
 }

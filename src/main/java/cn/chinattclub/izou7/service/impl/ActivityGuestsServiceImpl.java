@@ -88,7 +88,14 @@ public class ActivityGuestsServiceImpl implements ActivityGuestsService {
 	@Override
 	public int getMaxRank(int activityId) {
 		// TODO Auto-generated method stub
-		return 0;
+		Activity activity = activityServiceImpl.findById(activityId);
+		int maxRank = 0;
+		for (ActivityGuest guest : activity.getGuests()) {
+			if(guest.getRank()>maxRank){
+				maxRank = guest.getRank();
+			}
+		}
+		return maxRank;
 	}
 
 	@Override

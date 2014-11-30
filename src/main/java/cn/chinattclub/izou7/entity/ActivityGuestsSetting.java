@@ -28,7 +28,7 @@ public class ActivityGuestsSetting {
 	/**
 	 * 活动
 	 */
-	private int activity;
+	private Integer activity;
 	
 	/**
 	 * 需求嘉宾人数
@@ -76,13 +76,11 @@ public class ActivityGuestsSetting {
 		this.id = id;
 	}
 
-
-
-	public int getActivity() {
+	public Integer getActivity() {
 		return activity;
 	}
 
-	public void setActivity(int activity) {
+	public void setActivity(Integer activity) {
 		this.activity = activity;
 	}
 

@@ -1,16 +1,9 @@
 $(function () {
 	$("div[name='title']").click(function (){titleClick(this);});
 	$("div[name='title']").next().hide();
-	$("#guestTBody").delegate("#delSpan","click",function(){delSpanClick(this);});
-	$("#guestTBody").delegate("span[name='upSpan']","click",function(){upSpanClick(this);});
+	$("#tagsDiv button").click(function(){tagsClicked(this)});
+	$("#cooperationTBody").delegate("#delSpan","click",function(){delSpanClick(this);});
 	var options = { 
-			target:        '#save', 
-			success:       successResponse,
-			error:		   errorResponse,
-			type:          "POST", 
-			dataType:      "JSON" 
-	}; 
-	var guestOptions = { 
 	        target:        '#add', 
 	        success:       successAdd,
 	        error:		   errorAdd,
@@ -18,22 +11,39 @@ $(function () {
 	        dataType:      "JSON",
 	        clearForm:		true
 	    }; 
-	$("#settingForm").ajaxForm(options);
-	$("#guestForm").ajaxForm(guestOptions);
+	$("#cooperationForm").ajaxForm(options);
+	$("#addSpan").click(function(){addSpanClick(this);});
 });
 var id = $("#id").val();
+var activityId = $("#id").val();
+function tagsClicked(obj){
+	if($(obj).attr("class").indexOf("btn-info")!=-1){
+		$(obj).attr("class",$(obj).attr("class").replace("btn-info","btn-danger"));
+	}else{
+		$(obj).attr("class",$(obj).attr("class").replace("btn-danger","btn-info"));
+	}
+	var tags = "";
+	$("#tagsDiv button[class='btn btn-sm btn-danger']").each(function(index){
+		if(index==0){
+			tags+=$(this).text();
+		}else{
+			tags+="|"+$(this).text();
+		}
+	});
+	$("#tags").val(tags);
+}
 function successAdd(){
-	$.Zebra_Dialog("添加嘉宾成功！", {
+	$.Zebra_Dialog("添加活动开放合作成功！", {
 		'type':     'information',
 		'title':    '提示',
 		'buttons':  ["确定"],
 		'onClose': function(caption) {
-			initGuestTable();
+			initCooperationTable();
 		}
 	});
 }
 function errorAdd(){
-	$.Zebra_Dialog("添加嘉宾失败！", {
+	$.Zebra_Dialog("添加活动开放合作失败！", {
 		'type':     'information',
 		'title':    '提示',
 		'buttons':  ["确定"],
@@ -41,34 +51,27 @@ function errorAdd(){
 		}
 	});
 }
-function successResponse(){
-	location.href='activity?step=SEVENTH&activityId='+id;
-}
-function errorResponse(){
-	$.Zebra_Dialog("保存嘉宾设置信息失败！", {
-		'type':     'information',
-		'title':    '提示',
-		'buttons':  ["确定"],
-		'onClose': function(caption) {
-		}
-	});
-}
-var activityId = $("#id").val();
-function upSpanClick(obj){
-	var up = $(obj).attr("data_up");
+
+function addSpanClick(obj){
 	var id = $(obj).attr("data_id");
 	$.ajax({
-		type : "PUT",
-		url  : activityId+"/guest/"+id,
+		type : "POST",
+		url  : activityId+"/cooperation/"+id,
 		dataType : "json",
-		data:up,
 		success : function(data){
 			if(data.statusCode == 200){
-				initGuestTable();
+				$.Zebra_Dialog("添加活动开放合作成功！", {
+					'type':     'information',
+					'title':    '提示',
+					'buttons':  ["确定"],
+					'onClose': function(caption) {
+						initCooperationTable();
+					}
+				});				
 			}
 		},
 		error:function(){
-			$.Zebra_Dialog("调整顺序失败！", {
+			$.Zebra_Dialog("新增开发合作失败！", {
 				'type':     'information',
 				'title':    '提示',
 				'buttons':  ["确定"],
@@ -78,9 +81,8 @@ function upSpanClick(obj){
 		}
 	});
 }
-
 function delSpanClick(obj){
-	$.Zebra_Dialog("确定删除该嘉宾吗？", {
+	$.Zebra_Dialog("确定删除该开放合作吗？", {
 		'type':     'information',
 		'title':    '提示',
 		'buttons':  ["取消","确定"],
@@ -90,11 +92,11 @@ function delSpanClick(obj){
 	        	var id = $(obj).attr("data_id");
 	        	$.ajax({
 					type : "DELETE",
-					url  : activityId+"/guest/"+id,
+					url  : "cooperation/"+id,
 					dataType : "json",
 					success : function(data){
 						if(data.statusCode == 200){
-							initGuestTable();
+							initCooperationTable();
 						}
 					},
 					error:function(){
@@ -114,25 +116,26 @@ function delSpanClick(obj){
 function titleClick(obj){
 	$(obj).next().slideToggle("slow");
 }
-function initGuestTable(){
+function initCooperationTable(){
 	var activityId = $("#id").val();
 	$.ajax({
 		type: "GET",
-		url: activityId+"/guests",
+		url: activityId+"/cooperations",
 		dataType : "json",
 		contentType:'application/json;charset=UTF-8', 
 		success: function(json) {
 			if (json.statusCode == 200) {
-				$("#guestTBody").empty();
-				var guests = json.body.guests;
+				$("#cooperationTBody").empty();
+				var cpts = json.body.cpts;
 				var tr = "";
-				for(var i=0;i<guests.length;i++){
-					var guest = guests[i];
-					tr+='<tr><td>'+guest.name+'</td><td>'+guest.position+'</td><td>'+guest.company+'</td><td>'+guest.researchArea+'</td><td>'+guest.phone+'</td><td>'+guest.rank+'</td><td><span name="upSpan" data_up="true" class="glyphicon glyphicon-arrow-up " data_id="'+guest.id+'"></span>  <span name="upSpan"  data_up="false" class="glyphicon glyphicon-arrow-down paddingleft20" data_id="'+guest.id+'"></span></td><td><span id="delSpan" class="glyphicon glyphicon-remove"  data_id="'+guest.id+'"></span></td></tr>';
+				for(var i=0;i<cpts.length;i++){
+					var cpat = cpts[i];
+					var isMine = cpat.mine==true?"是":"否";
+					tr+='<tr><td>'+cpat.wechatId+'</td><td>'+cpat.publicName+'</td><td>'+cpat.description+'</td><td>'+isMine+'</td><td><span id="delSpan" class="glyphicon glyphicon-remove" data_id="'+cpat.id+'"></span></td></tr>';
 				}
-				$("#guestTBody").append(tr);
+				$("#cooperationTBody").append(tr);
 			}else {
-				$.Zebra_Dialog("获取活动嘉宾失败", {
+				$.Zebra_Dialog("获取活动开放合作失败", {
 					'type':     'information',
 					'title':    '提示',
 					'buttons':  ["确定"]
@@ -140,7 +143,7 @@ function initGuestTable(){
 			}
 		},
 		fail : function(json){
-			$.Zebra_Dialog('获取活动嘉宾异常', {
+			$.Zebra_Dialog('获取活动开放合作异常', {
 				'type':     'information',
 				'title':    '提示',
 				'buttons':  ["确定"]

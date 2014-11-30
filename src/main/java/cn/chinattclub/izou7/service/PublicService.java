@@ -14,12 +14,19 @@ import cn.chinattclub.izou7.entity.User;
  */
 public interface PublicService {
 
-	void importPublic(PublicDto dto);
+	public void importPublic(PublicDto dto);
 	
-	List<Public> listPublic(User user);
+	public List<Public> listPublic(User user);
 	
-	void deletePublic(int id);
+	public void deletePublic(int id);
 	
-	Public getPublicById(int publicId);
+	public Public getPublicById(int publicId);
+
+	/**
+	 * 系统推荐
+	 * @param activityId
+	 * @return
+	 */
+	public List<Public> recommend(Integer activityId);
 
 }

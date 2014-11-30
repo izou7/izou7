@@ -37,6 +37,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import cn.chinattclub.izou7.dto.ActivityCrowdfundingRewardDto;
+import cn.chinattclub.izou7.dto.ActivityCrowdfundingSettingDto;
 import cn.chinattclub.izou7.dto.ActivityDto;
 import cn.chinattclub.izou7.dto.ActivityFormDto;
 import cn.chinattclub.izou7.dto.ActivityTicketDto;
@@ -45,6 +47,9 @@ import cn.chinattclub.izou7.dto.GuestDto;
 import cn.chinattclub.izou7.dto.UserDto;
 import cn.chinattclub.izou7.entity.Activity;
 import cn.chinattclub.izou7.entity.ActivityArticle;
+import cn.chinattclub.izou7.entity.ActivityCooperation;
+import cn.chinattclub.izou7.entity.ActivityCrowdfundingReward;
+import cn.chinattclub.izou7.entity.ActivityCrowdfundingSetting;
 import cn.chinattclub.izou7.entity.ActivityGuest;
 import cn.chinattclub.izou7.entity.ActivityGuestsSetting;
 import cn.chinattclub.izou7.entity.ActivityPoster;
@@ -55,19 +60,27 @@ import cn.chinattclub.izou7.entity.ApplyTemplate;
 import cn.chinattclub.izou7.entity.City;
 import cn.chinattclub.izou7.entity.Image;
 import cn.chinattclub.izou7.entity.Province;
+import cn.chinattclub.izou7.entity.Public;
 import cn.chinattclub.izou7.entity.User;
 import cn.chinattclub.izou7.enumeration.GuestRegistrationStatus;
+import cn.chinattclub.izou7.enumeration.InvitedStatus;
 import cn.chinattclub.izou7.service.ActivityArticleService;
+import cn.chinattclub.izou7.service.ActivityCooperationService;
+import cn.chinattclub.izou7.service.ActivityCrowdfundingRewardService;
+import cn.chinattclub.izou7.service.ActivityCrowdfundingSettingService;
 import cn.chinattclub.izou7.service.ActivityGuestsService;
 import cn.chinattclub.izou7.service.ActivityGuestsSettingService;
 import cn.chinattclub.izou7.service.ActivityScheduleService;
 import cn.chinattclub.izou7.service.ActivityService;
 import cn.chinattclub.izou7.service.ActivityTicketService;
 import cn.chinattclub.izou7.service.ApplyTemplateService;
+import cn.chinattclub.izou7.service.BankService;
 import cn.chinattclub.izou7.service.CityService;
 import cn.chinattclub.izou7.service.ProvinceService;
+import cn.chinattclub.izou7.service.PublicService;
 import cn.chinattclub.izou7.service.UserInfoService;
 import cn.chinattclub.izou7.service.UserService;
+import cn.chinattclub.izou7.entity.Public;
 import cn.zy.commons.webdev.constant.ResponseStatusCode;
 import cn.zy.commons.webdev.http.RestResponse;
 
@@ -119,6 +132,21 @@ public class ActivityController {
 	
 	@Resource
 	private UserInfoService userInfoServiceImpl; 
+	
+	@Resource
+	private ActivityCooperationService activityCooperationServiceImpl; 
+	
+	@Resource
+	private PublicService publicServiceImpl; 
+	
+	@Resource
+	private ActivityCrowdfundingSettingService activityCrowdfundingSettingServiceImpl; 
+	
+	@Resource
+	private ActivityCrowdfundingRewardService activityCrowdfundingRewardServiceImpl; 
+	
+	@Resource
+	private BankService bankServiceImpl; 
 	
 	
 	
@@ -209,12 +237,48 @@ public class ActivityController {
 			view = activityGuestPage(model,dto);
 			break;
 		case SEVENTH:
+			view = activityPublicPage(model,dto);
+			break;
+		case EIGHTH:
+			view = activityCrowdfundingPage(model,dto);
 			break;
 		default:
 			break;
 		}
 		return view;
 	}
+	/**
+	 * 第八步 众筹
+	 * @param model
+	 * @param dto
+	 * @return
+	 */
+	private String activityCrowdfundingPage(Model model, ActivityDto dto) {
+		// TODO Auto-generated method stub
+		ActivityCrowdfundingSetting setting = activityCrowdfundingSettingServiceImpl.findByActivityId(dto.getActivityId());
+		List<ActivityCrowdfundingReward> rewards =  activityCrowdfundingRewardServiceImpl.findByActivityId(dto.getActivityId());
+		model.addAttribute("id",dto.getActivityId());
+		model.addAttribute("setting", setting);
+		model.addAttribute("rewards", rewards);
+		model.addAttribute("banks", bankServiceImpl.list());
+		return "site.activity.crowdfunding";
+	}
+	/**
+	 * 第七步 开放合作
+	 * @param model
+	 * @param dto
+	 * @return
+	 */
+	private String activityPublicPage(Model model, ActivityDto dto) {
+		// TODO Auto-generated method stub
+		List<ActivityCooperation> cpts = activityCooperationServiceImpl.findByActivityId(dto.getActivityId());
+		List<Public> recommendPublics = publicServiceImpl.recommend(dto.getActivityId());
+		model.addAttribute("id",dto.getActivityId());
+		model.addAttribute("cpts", cpts);
+		model.addAttribute("rcpls", recommendPublics);
+		return "site.activity.cooperation";
+	}
+
 	/**
 	 * 第六步 邀请嘉宾
 	 * @param model
@@ -228,7 +292,7 @@ public class ActivityController {
 		model.addAttribute("id",dto.getActivityId());
 		model.addAttribute("guests",activityGuestsServiceImpl.getGuestsByActivityId(dto.getActivityId()));
 		/**系统推荐*/
-		model.addAttribute("rcds",userInfoServiceImpl.recommend());
+		model.addAttribute("rcds",userInfoServiceImpl.recommend(dto.getActivityId()));
 		model.addAttribute("setting",(settings!=null&&settings.size()>0)?settings.get(0):null);
 		return "site.activity.guests";
 	}
@@ -552,7 +616,17 @@ public class ActivityController {
 		response.setStatusCode(ResponseStatusCode.OK);
 		return response;
 	}
-	
+	/**
+	 */
+	@RequestMapping(value = "{activityId}/setting", method = RequestMethod.POST)
+	@ResponseBody
+	public RestResponse addActivityGuestsSetting(@PathVariable int activityId,ActivityGuestsSetting setting)  {
+		RestResponse response = new RestResponse();
+		setting.setActivity(activityId);
+		activityGuestsSettingServiceImpl.addOrUpdate(setting);
+		response.setStatusCode(ResponseStatusCode.OK);
+		return response;
+	}
 	/**
 	 * 嘉宾顺序调整
 	 * @param activityId
@@ -562,7 +636,7 @@ public class ActivityController {
 	 */
 	@RequestMapping(value = "{activityId}/guest/{guestId}", method = RequestMethod.PUT)
 	@ResponseBody
-	public RestResponse addActivityTicket(@PathVariable int activityId,@PathVariable int guestId,@RequestBody String up)  {
+	public RestResponse adjustActivityGuest(@PathVariable int activityId,@PathVariable int guestId,@RequestBody String up)  {
 		RestResponse response = new RestResponse();
 		activityGuestsServiceImpl.execSequence(activityId,guestId,Boolean.getBoolean(up));
 		response.setStatusCode(ResponseStatusCode.OK);
@@ -570,7 +644,7 @@ public class ActivityController {
 	}
 	/**
 	 * 
-	 * 删除
+	 * 删除活动嘉宾
 	 *
 	 * @param activityId
 	 * @param guestId
@@ -578,21 +652,165 @@ public class ActivityController {
 	 */
 	@RequestMapping(value = "{activityId}/guest/{guestId}", method = RequestMethod.DELETE)
 	@ResponseBody
-	public RestResponse deleteActivityTicket(@PathVariable int activityId,@PathVariable int guestId)  {
+	public RestResponse deleteActivityGuest(@PathVariable int activityId,@PathVariable int guestId)  {
 		RestResponse response = new RestResponse();
 		activityGuestsServiceImpl.delete(guestId);
 		response.setStatusCode(ResponseStatusCode.OK);
 		return response;
 	}
+	/**
+	 * 新增活动嘉宾
+	 * @param activityId
+	 * @param guest
+	 * @return
+	 */
 	@RequestMapping(value = "{activityId}/guest", method = RequestMethod.POST)
 	@ResponseBody
-	public RestResponse addActivityTicket(@PathVariable int activityId,@RequestBody GuestDto guest)  {
+	public RestResponse addActivityGuest(@PathVariable int activityId,GuestDto guest)  {
 		RestResponse response = new RestResponse();
 		ActivityGuest aGuest = guest.convert();
 		aGuest.setActivity(activityId);
 		int maxRank = activityGuestsServiceImpl.getMaxRank(activityId);
 		aGuest.setRank(maxRank);
+		aGuest.setSource(true);
+		aGuest.setType(1);
+		aGuest.setStatus(GuestRegistrationStatus.SEND);
 		activityGuestsServiceImpl.add(aGuest);
+		response.setStatusCode(ResponseStatusCode.OK);
+		return response;
+	}
+	/**
+	 * 新增活动开发合作
+	 * @param activityId
+	 * @param guest
+	 * @return
+	 */
+	@RequestMapping(value = "{activityId}/cooperation", method = RequestMethod.POST)
+	@ResponseBody
+	public RestResponse addActivityCooperation(@PathVariable int activityId,ActivityCooperation cooperation)  {
+		RestResponse response = new RestResponse();
+		cooperation.setActivity(activityId);
+		cooperation.setStatus(InvitedStatus.SEND);
+		cooperation.setType(1);
+		cooperation.setCreateTime(new Date());
+		activityCooperationServiceImpl.add(cooperation);
+		response.setStatusCode(ResponseStatusCode.OK);
+		return response;
+	}
+	/**
+	 * 
+	 * @param activityId
+	 * @param publicId
+	 * @return
+	 */
+	@RequestMapping(value = "{activityId}/cooperation/{publicId}", method = RequestMethod.POST)
+	@ResponseBody
+	public RestResponse addActivityCooperationByPublic(@PathVariable int activityId,@PathVariable int publicId)  {
+		RestResponse response = new RestResponse();
+		Public pbl = publicServiceImpl.getPublicById(publicId);
+		ActivityCooperation cprt = new ActivityCooperation();
+		cprt.setActivity(activityId);
+		cprt.setCreateTime(new Date());
+		cprt.setDescription(pbl.getDescription());
+		cprt.setMine(pbl.isMine());
+		cprt.setPublicName(pbl.getPublicName());
+		cprt.setTags(pbl.getTags());
+		cprt.setType(1);
+		cprt.setStatus(InvitedStatus.SEND);
+		cprt.setWechatId(pbl.getWechatId());
+		activityCooperationServiceImpl.add(cprt);
+		response.setStatusCode(ResponseStatusCode.OK);
+		return response;
+	}
+	/**
+	 * 获取活动开发合作
+	 * @param activityId
+	 * @return
+	 */
+	@RequestMapping(value = "{activityId}/cooperations", method = RequestMethod.GET)
+	@ResponseBody
+	public RestResponse findActivityCooperation(@PathVariable int activityId)  {
+		RestResponse response = new RestResponse();
+		List<ActivityCooperation> cpts = activityCooperationServiceImpl.findByActivityId(activityId);
+		response.setStatusCode(ResponseStatusCode.OK);
+		response.getBody().put("cpts", cpts);
+		return response;
+	}
+	
+	/**
+	 * 删除开发合作
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value = "cooperation/{id}", method = RequestMethod.DELETE)
+	@ResponseBody
+	public RestResponse addActivityCooperation(@PathVariable int id)  {
+		RestResponse response = new RestResponse();
+		activityCooperationServiceImpl.delete(id);
+		response.setStatusCode(ResponseStatusCode.OK);
+		return response;
+	}
+	
+	/**
+	 * 新增众筹设置
+	 * @param activityId
+	 * @param setting
+	 * @return
+	 */
+	@RequestMapping(value = "{activityId}/activityCrowdfunding/setting", method = RequestMethod.POST)
+	@ResponseBody
+	public RestResponse addActivityCooperation(@PathVariable int activityId,ActivityCrowdfundingSettingDto settingDto)  {
+		RestResponse response = new RestResponse();
+		ActivityCrowdfundingSetting setting = settingDto.convert();
+		setting.setActivity(activityId);
+		activityCrowdfundingSettingServiceImpl.addOrUpdate(setting);
+		response.setStatusCode(ResponseStatusCode.OK);
+		return response;
+	}
+	
+	/**
+	 * 新增回报
+	 * @param activityId
+	 * @param rewardDto
+	 * @return
+	 * @throws ParseException
+	 */
+	@RequestMapping(value = "{activityId}/activityCrowdfunding/reward", method = RequestMethod.POST)
+	@ResponseBody
+	public RestResponse addActivityCooperationReward(@PathVariable int activityId,ActivityCrowdfundingRewardDto rewardDto) throws ParseException  {
+		RestResponse response = new RestResponse();
+		ActivityCrowdfundingReward reward = rewardDto.convert();
+		reward.setActivity(activityId);
+		activityCrowdfundingRewardServiceImpl.add(reward);
+		response.setStatusCode(ResponseStatusCode.OK);
+		return response;
+	}
+	
+	/**
+	 * 获取活动下的所有回报设置
+	 * @param activityId
+	 * @return
+	 */
+	@RequestMapping(value = "{activityId}/activityCrowdfunding/rewards", method = RequestMethod.GET)
+	@ResponseBody
+	public RestResponse findActivityCooperationRewards(@PathVariable int activityId){
+		RestResponse response = new RestResponse();
+		List<ActivityCrowdfundingReward> rewards = activityCrowdfundingRewardServiceImpl.findByActivityId(activityId);
+		response.getBody().put("rewards", rewards);
+		response.setStatusCode(ResponseStatusCode.OK);
+		return response;
+	}
+	
+	/**
+	 * 删除回报设置
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value = "activityCrowdfunding/reward/{id}", method = RequestMethod.DELETE)
+	@ResponseBody
+	public RestResponse deleteActivityCooperationReward(@PathVariable int id){
+		RestResponse response = new RestResponse();
+		activityCrowdfundingRewardServiceImpl.delete(id);
 		response.setStatusCode(ResponseStatusCode.OK);
 		return response;
 	}
