@@ -8,7 +8,7 @@ package cn.chinattclub.izou7.enumeration;
  */
 public enum ActivityStep {
 
-	FIRST,SECOND,THIRD,FOURTH,FIFTH,SIXTH,SEVENTH,EIGHTH;
+	FIRST,SECOND,THIRD,FOURTH,FIFTH,SIXTH,SEVENTH,EIGHTH,SUCCESS;
 	
 }
 

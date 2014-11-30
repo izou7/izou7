@@ -18,27 +18,39 @@ import cn.chinattclub.izou7.service.ActivityService;
 public class ActivityServiceImpl implements ActivityService {
 
 	@Resource
-	private ActivityDao activityDao;
+	private ActivityDao dao;
 	
 	@Override
 	public Activity findById(int id) {
 		// TODO Auto-generated method stub
-		return activityDao.get(id);
+		return dao.get(id);
 	}
 
 	@Override
 	public void update(Activity activity) {
 		// TODO Auto-generated method stub
-		activityDao.update(activity);
+		dao.update(activity);
 	}
 	
 	public void add(Activity activity){
-		activityDao.save(activity);
+		dao.save(activity);
 	}
 
 	@Override
 	public List<Activity> getUnfixedActivity() {
 		// TODO Auto-generated method stub
-		return activityDao.getUnfixedActivity();
+		return dao.getUnfixedActivity();
+	}
+
+	@Override
+	public List<Activity> getDeployedActivity(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Activity> getWaitActivity(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

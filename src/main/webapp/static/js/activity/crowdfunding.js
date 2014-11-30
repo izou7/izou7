@@ -7,13 +7,13 @@ $(function () {
 			dataType:      "JSON"
 	}; 
 	var rewardOptions = { 
-	        target:        '#add', 
-	        success:       rewardSuccessAdd,
-	        error:		   errorAdd,
-	        type:          "POST", 
-	        dataType:      "JSON",
-	        clearForm:		true
-	    }; 
+			target:        '#add', 
+			success:       rewardSuccessAdd,
+			error:		   errorAdd,
+			type:          "POST", 
+			dataType:      "JSON",
+			clearForm:		true
+	}; 
 	$("#settingForm").ajaxForm(options);
 	$("#rewardForm").ajaxForm(rewardOptions);
     initCalendar("#rewardStartTime");
@@ -21,6 +21,8 @@ $(function () {
 	$("#rewardTBody").delegate("#delSpan","click",function(){delSpanClick(this);});
 	$("div[name='title']").click(function (){titleClick(this);});
 	$("div[name='title']").next().hide();
+	$("#add").click(function(){$("#submitType").val("add");});
+	$("#deploy").click(function(){$("#submitType").val("deploy");});
 });
 var id = $("#id").val();
 var activityId = $("#id").val();
@@ -106,13 +108,19 @@ function delSpanClick(obj){
 		});
 }
 function successAdd(){
-	$.Zebra_Dialog("添加成功！", {
-		'type':     'information',
-		'title':    '提示',
-		'buttons':  ["确定"],
-		'onClose': function(caption) {
-		}
-	});
+	var type = $("#submitType").val();
+	if(type=="deploy"){
+		location.href='activity?step=SUCCESS&activityId='+id;
+	}else{
+		$.Zebra_Dialog("添加成功！", {
+			'type':     'information',
+			'title':    '提示',
+			'buttons':  ["确定"],
+			'onClose': function(caption) {
+			}
+		});		
+	}
+
 }
 function errorAdd(){
 	$.Zebra_Dialog("添加失败！", {

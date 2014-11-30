@@ -101,7 +101,7 @@
 		</div>
 		<form class="form-horizontal" role="form" id="settingForm" action="${id!}/activityCrowdfunding/setting" method="POST">
 		<div class="panel-body">
-			<input type="hidden" id="id" value="${id!}">
+				<input type="hidden" id="id" value="${id!}">
 				<input type="hidden" name="id" value="${(setting.id)!}">
 			<div class="form-horizontal">
 			    <div class="form-group">
@@ -195,6 +195,7 @@
 				<div class="col-sm-2">
 				  <button type="submit" id="deploy" class="btn btn-info btn-block" >保存并发步</button>
 				</div>
+				<input type="hidden" id="submitType" value="">
 			 </div>
 			  
 			</div>

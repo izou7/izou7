@@ -148,11 +148,9 @@ public class ActivityController {
 	@Resource
 	private BankService bankServiceImpl; 
 	
-	
-	
-	
 	@Resource
 	private Properties appConfig;
+	
 	/**
 	 * 主办方主页
 	 * @return
@@ -162,48 +160,6 @@ public class ActivityController {
 		return "site.activity.index";
 	}
 	
-	@RequestMapping(value="/add", method = RequestMethod.GET)
-	@ResponseBody
-	public RestResponse add(ActivityFormDto dto) throws ParseException {
-		RestResponse response = new RestResponse();
-		int statusCode = ResponseStatusCode.OK;
-		String msg = "操作成功！";
-		Subject currentUser = SecurityUtils.getSubject();
-		User user = userServiceImpl.findByUsername(currentUser.getPrincipal().toString());
-		City city = cityServiceImpl.getCity(dto.getCity());
-		Activity activity = dto.convert(null);
-		if(StringUtils.isNotBlank(dto.getPosterUrl())){
-			ActivityPoster poster = new ActivityPoster();
-			poster.setActivity(activity);
-			poster.setPoster(dto.getPosterUrl());
-			poster.setCreateTime(new Date());
-			List<ActivityPoster> posters = new ArrayList<>();
-			posters.add(poster);
-			activity.setActivityPosters(posters);
-		}
-		activity.setCity(city);
-		activity.setUser(user);
-		activity.setStatus(0);
-		activityServiceImpl.add(activity);
-		response.setMessage(msg);
-		response.setStatusCode(statusCode);
-		response.getBody().put("id",activity.getId());
-		return response;
-		
-	}
-	@RequestMapping(value="/addUser", method = RequestMethod.POST)
-	@ResponseBody
-	public RestResponse addUser(@RequestBody List<UserDto> dtos) {
-		RestResponse response = new RestResponse();
-		int statusCode = ResponseStatusCode.OK;
-		String msg = "操作成功！";
-		Subject currentUser = SecurityUtils.getSubject();
-		
-		response.setMessage(msg);
-		response.setStatusCode(statusCode);
-		return response;
-
-	}
 	/**
 	 * 
 	 * 活动页面分发
@@ -214,9 +170,7 @@ public class ActivityController {
 	 */
 	@RequestMapping(value="/activity", method = RequestMethod.GET)
 	public String activityDispatch(Model model ,ActivityDto dto ) {
-		List<Province> provinces = provinceServiceImpl.findAll();
-		model.addAttribute("provinces",provinces);
-		String view = "site.activity.activity";
+		String view = "site.main.error";
 		switch (dto.getStep()) {
 		case FIRST:
 			view = activityPage(model,dto);
@@ -242,11 +196,19 @@ public class ActivityController {
 		case EIGHTH:
 			view = activityCrowdfundingPage(model,dto);
 			break;
+		case SUCCESS:
+			view = activitySuccessPage(model,dto);
+			break;
 		default:
 			break;
 		}
 		return view;
 	}
+	private String activitySuccessPage(Model model, ActivityDto dto) {
+		// TODO Auto-generated method stub
+		return "site.activity.success";
+	}
+
 	/**
 	 * 第八步 众筹
 	 * @param model
@@ -361,11 +323,89 @@ public class ActivityController {
 	 * @return
 	 */
 	public String activityPage(Model model ,ActivityDto dto){
+		List<Province> provinces = provinceServiceImpl.findAll();
+		model.addAttribute("provinces",provinces);
 		if(dto.getActivityId()!=null){
 			Activity activity = activityServiceImpl.findById(dto.getActivityId());
 			model.addAttribute("activity", activity);
 		}
 		return "site.activity.activity";
+	}
+	
+	/**
+	 * 新增活动
+	 * @param dto
+	 * @return
+	 * @throws ParseException
+	 */
+	@RequestMapping(value="/add", method = RequestMethod.GET)
+	@ResponseBody
+	public RestResponse add(ActivityFormDto dto) throws ParseException {
+		RestResponse response = new RestResponse();
+		int statusCode = ResponseStatusCode.OK;
+		String msg = "操作成功！";
+		Subject currentUser = SecurityUtils.getSubject();
+		User user = userServiceImpl.findByUsername(currentUser.getPrincipal().toString());
+		City city = cityServiceImpl.getCity(dto.getCity());
+		Activity activity = dto.convert(null);
+		if(StringUtils.isNotBlank(dto.getPosterUrl())){
+			ActivityPoster poster = new ActivityPoster();
+			poster.setActivity(activity);
+			poster.setPoster(dto.getPosterUrl());
+			poster.setCreateTime(new Date());
+			List<ActivityPoster> posters = new ArrayList<>();
+			posters.add(poster);
+			activity.setActivityPosters(posters);
+		}
+		activity.setCity(city);
+		activity.setUser(user);
+		activity.setStatus(0);
+		activityServiceImpl.add(activity);
+		response.setMessage(msg);
+		response.setStatusCode(statusCode);
+		response.getBody().put("id",activity.getId());
+		return response;
+		
+	}
+	
+	/**
+	 * 新增用户
+	 * @param dtos
+	 * @return
+	 */
+	@RequestMapping(value="/addUser", method = RequestMethod.POST)
+	@ResponseBody
+	public RestResponse addUser(@RequestBody List<UserDto> dtos) {
+		RestResponse response = new RestResponse();
+		int statusCode = ResponseStatusCode.OK;
+		String msg = "操作成功！";
+		Subject currentUser = SecurityUtils.getSubject();
+		
+		response.setMessage(msg);
+		response.setStatusCode(statusCode);
+		return response;
+		
+	}
+	
+	/**
+	 * 获取当前用户的活动
+	 * @param dtos
+	 * @return
+	 */
+	@RequestMapping(value="/myActivitys", method = RequestMethod.GET)
+	@ResponseBody
+	public RestResponse myActivitys(@RequestBody List<UserDto> dtos) {
+		RestResponse response = new RestResponse();
+		int statusCode = ResponseStatusCode.OK;
+		Subject currentUser = SecurityUtils.getSubject();
+		User user = userServiceImpl.findByUsername(currentUser.getPrincipal().toString());
+		List<Activity> deployedActivitys = activityServiceImpl.getDeployedActivity(user.getId());
+		List<Activity> waitActivitys = activityServiceImpl.getWaitActivity(user.getId());
+		response.getBody().put("deployedActivitys", deployedActivitys);
+		response.getBody().put("waitActivitys", waitActivitys);
+		response.setStatusCode(statusCode);
+		return response;
+
 	}
 	
 	/**

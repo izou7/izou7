@@ -11,26 +11,16 @@ import cn.chinattclub.izou7.entity.Activity;
  */
 public interface ActivityService {
 	
-	/**
-	 * 根据ID查询活动
-	 * @param id
-	 * @return
-	 */
 	public Activity findById(int id);
 	
-	/**
-	 * 更新活动
-	 * @param activity
-	 */
 	public void update(Activity activity);
 
-	/**
-	 * TODO Put here a description of what this method does.
-	 *
-	 * @param activity
-	 */
 	void add(Activity activity);
 
 	public List<Activity> getUnfixedActivity();
+
+	public List<Activity> getDeployedActivity(Integer id);
+
+	public List<Activity> getWaitActivity(Integer id);
 
 }
