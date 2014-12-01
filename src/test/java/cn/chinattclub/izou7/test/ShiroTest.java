@@ -37,7 +37,7 @@ import cn.chinattclub.izou7.service.UserService;
 		}
 )
 @TransactionConfiguration(defaultRollback = false)
-public class ShiroTest {
+public class ShiroTest { 
 
     @Autowired
     protected UserService userService;
