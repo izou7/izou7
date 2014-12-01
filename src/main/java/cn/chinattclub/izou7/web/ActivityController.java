@@ -896,7 +896,6 @@ public class ActivityController {
 		response.getBody().put("waitActivitys", waitActivitys);
 		response.setStatusCode(statusCode);
 		return response;
-		
 	}
 	
 	/**

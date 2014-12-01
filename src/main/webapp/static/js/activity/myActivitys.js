@@ -43,6 +43,8 @@ function delSpanClick(obj){
 		}
 		});
 }
+});
+
 function initDeployedActivity(){
 	$.ajax({
 		type: "GET",
@@ -57,6 +59,8 @@ function initDeployedActivity(){
 				for(var i=0;i<acts.length;i++){
 					var act = acts[i];
 					tr+='<tr><td><img src="'+act.poster+'" height="50" width="50"></td><td>'+act.deployTime+'</td><td>'+act.updateTime+'</td><td>'+act.name+'</td><td><span name="delSpan" class="glyphicon glyphicon-remove"  data_id="'+act.id+'"></span><span name="editSpan" class="glyphicon glyphicon-edit margin-left50"  data_id="'+act.id+'"></span></td>';
+					console.info(act);
+					tr+='<tr><td><img src="'+act.activityPosters[0].poster+'" height="50" width="50"></td><td>'+act.createTime+'</td><td>'+act.updateTime+'</td><td>'+act.name+'</td><td><span name="delSpan" class="glyphicon glyphicon-remove"  data_id="'+act.id+'"></span><span name="editSpan" class="glyphicon glyphicon-edit margin-left50"  data_id="'+act.id+'"></span></td>';
 				}
 				$("#deployedTBody").append(tr);
 				initPaginator4Deployed(json.body.page);

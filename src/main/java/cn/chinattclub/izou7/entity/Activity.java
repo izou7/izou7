@@ -114,7 +114,7 @@ public class Activity {
 	 */
 	private Integer status;
 	
-	@OneToMany(mappedBy="activity")
+	@OneToMany(mappedBy="activity",cascade=CascadeType.ALL,fetch=FetchType.EAGER)
 	private Set<ActivityPoster> activityPosters;
 	
 	/**
