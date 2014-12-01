@@ -13,6 +13,7 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
 
 import cn.chinattclub.izou7.dao.CityDao;
 import cn.chinattclub.izou7.entity.Activity;
+import cn.chinattclub.izou7.entity.ActivityGuest;
 import cn.chinattclub.izou7.entity.ActivityGuestsSetting;
 import cn.chinattclub.izou7.entity.City;
 import cn.chinattclub.izou7.entity.User;
@@ -23,11 +24,6 @@ import cn.chinattclub.izou7.service.ActivityService;
 import cn.chinattclub.izou7.service.CityService;
 import cn.chinattclub.izou7.service.UserService;
 
-/**
- * <p>User: Zhang Kaitao
- * <p>Date: 14-2-12
- * <p>Version: 1.0
- */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(
 		locations = {
@@ -37,7 +33,7 @@ import cn.chinattclub.izou7.service.UserService;
 		}
 )
 @TransactionConfiguration(defaultRollback = false)
-public class ShiroTest { 
+public class ShiroTest {
 
     @Autowired
     protected UserService userService;
