@@ -13,7 +13,6 @@ import org.springframework.test.context.transaction.TransactionConfiguration;
 
 import cn.chinattclub.izou7.dao.CityDao;
 import cn.chinattclub.izou7.entity.Activity;
-import cn.chinattclub.izou7.entity.ActivityGuests;
 import cn.chinattclub.izou7.entity.ActivityGuestsSetting;
 import cn.chinattclub.izou7.entity.City;
 import cn.chinattclub.izou7.entity.User;
