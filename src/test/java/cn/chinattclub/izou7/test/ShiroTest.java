@@ -24,11 +24,6 @@ import cn.chinattclub.izou7.service.ActivityService;
 import cn.chinattclub.izou7.service.CityService;
 import cn.chinattclub.izou7.service.UserService;
 
-/**
- * <p>User: Zhang Kaitao
- * <p>Date: 14-2-12
- * <p>Version: 1.0
- */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(
 		locations = {

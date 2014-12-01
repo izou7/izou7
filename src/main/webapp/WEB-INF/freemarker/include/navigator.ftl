@@ -27,7 +27,7 @@
   									<a href="/userInfo/get">个人资料</a>
   								</li>
   								<li>
-  									<a href="#">我发起的活动</a>
+  									<a href="/activity/myActivitys">我发起的活动</a>
   								</li>
   								<li>
   									<a href="/public/list">我录入的公众号</a>

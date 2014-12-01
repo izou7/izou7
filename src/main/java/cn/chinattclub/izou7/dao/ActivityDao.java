@@ -4,11 +4,11 @@ import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import cn.chinattclub.izou7.entity.Activity;
-import cn.chinattclub.izou7.entity.ActivityGuestsSetting;
 import cn.zy.commons.dao.hibernate.AdvancedHibernateDao;
 /**
  * 活动基本信息DAO
@@ -23,5 +23,13 @@ public class ActivityDao  extends AdvancedHibernateDao<Activity>{
 		criteria.createAlias("settings", "s").add(Restrictions.eq("s.over", false));
 		criteria.add(Restrictions.le("startTime", new Date()));
 		return criteria.list();
+	}
+
+	public Integer findCountByHQL(String hql,Object... params) {
+		Query query = this.getCurrentSession().createQuery(hql);
+		for (int i = 0; i < params.length; i++) {
+			query.setParameter(i, params[i]);
+		}
+		return ((Long) query.iterate().next()).intValue();
 	}
 }

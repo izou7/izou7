@@ -2,6 +2,7 @@ package cn.chinattclub.izou7.entity;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -15,8 +16,11 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 
 /**
@@ -83,6 +87,7 @@ public class Activity {
 	@Column(name = "head_count")
 	private Integer headCount;
 	
+	
 	/**
 	 * 活动标签
 	 */
@@ -105,12 +110,12 @@ public class Activity {
 	private String homepage;
 	
 	/**
-	 * 活动状态
+	 * 活动状态0为已保存，1为已发布
 	 */
 	private Integer status;
 	
-	@OneToMany(mappedBy="",cascade=CascadeType.ALL,fetch=FetchType.LAZY)
-	private List<ActivityPoster> activityPosters;
+	@OneToMany(mappedBy="activity")
+	private Set<ActivityPoster> activityPosters;
 	
 	/**
 	 * 报名模板
@@ -148,12 +153,14 @@ public class Activity {
 	 *  创建时间
 	 */
 	@Column(name = "create_time")
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss" ,timezone="GMT+8")
 	private Date createTime;
 	
 	/** 
 	 * 更新时间 
 	 */
 	@Column(name = "update_time", insertable = false, updatable = false)
+	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss" ,timezone="GMT+8")
 	private Date updateTime;
 
 	/**
@@ -429,11 +436,12 @@ public class Activity {
 		this.updateTime = updateTime;
 	}
 
+
 	/**
 	 * Returns the value of the field called 'activityPosters'.
 	 * @return Returns the activityPosters.
 	 */
-	public List<ActivityPoster> getActivityPosters() {
+	public Set<ActivityPoster> getActivityPosters() {
 		return this.activityPosters;
 	}
 
@@ -441,7 +449,7 @@ public class Activity {
 	 * Sets the field called 'activityPosters' to the given value.
 	 * @param activityPosters The activityPosters to set.
 	 */
-	public void setActivityPosters(List<ActivityPoster> activityPosters) {
+	public void setActivityPosters(Set<ActivityPoster> activityPosters) {
 		this.activityPosters = activityPosters;
 	}
 
