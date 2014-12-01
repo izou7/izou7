@@ -10,11 +10,13 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.Set;
 import java.util.UUID;
 
 import javax.annotation.Resource;
@@ -83,6 +85,7 @@ import cn.chinattclub.izou7.service.UserService;
 import cn.chinattclub.izou7.entity.Public;
 import cn.zy.commons.webdev.constant.ResponseStatusCode;
 import cn.zy.commons.webdev.http.RestResponse;
+import cn.zy.commons.webdev.vo.Page;
 
 /**
  * 
@@ -158,6 +161,17 @@ public class ActivityController {
 	@RequestMapping(value="/index", method = RequestMethod.GET)
 	public String sponsorPage() {
 		return "site.activity.index";
+	}
+	
+	/**
+	 * 
+	 * 我的活动页面
+	 *
+	 * @return
+	 */
+	@RequestMapping(value="/myActivitys", method = RequestMethod.GET)
+	public String myActivityPage() {
+		return "site.activity.myActivity";
 	}
 	
 	/**
@@ -353,7 +367,7 @@ public class ActivityController {
 			poster.setActivity(activity);
 			poster.setPoster(dto.getPosterUrl());
 			poster.setCreateTime(new Date());
-			List<ActivityPoster> posters = new ArrayList<>();
+			Set<ActivityPoster> posters = new HashSet<>();
 			posters.add(poster);
 			activity.setActivityPosters(posters);
 		}
@@ -385,27 +399,6 @@ public class ActivityController {
 		response.setStatusCode(statusCode);
 		return response;
 		
-	}
-	
-	/**
-	 * 获取当前用户的活动
-	 * @param dtos
-	 * @return
-	 */
-	@RequestMapping(value="/myActivitys", method = RequestMethod.GET)
-	@ResponseBody
-	public RestResponse myActivitys(@RequestBody List<UserDto> dtos) {
-		RestResponse response = new RestResponse();
-		int statusCode = ResponseStatusCode.OK;
-		Subject currentUser = SecurityUtils.getSubject();
-		User user = userServiceImpl.findByUsername(currentUser.getPrincipal().toString());
-		List<Activity> deployedActivitys = activityServiceImpl.getDeployedActivity(user.getId());
-		List<Activity> waitActivitys = activityServiceImpl.getWaitActivity(user.getId());
-		response.getBody().put("deployedActivitys", deployedActivitys);
-		response.getBody().put("waitActivitys", waitActivitys);
-		response.setStatusCode(statusCode);
-		return response;
-
 	}
 	
 	/**
@@ -855,6 +848,46 @@ public class ActivityController {
 		return response;
 	}
 	
+	/**
+	 * 获取当前用户的活动
+	 * @param dtos
+	 * @return
+	 */
+	@RequestMapping(value="/deployedActivitys", method = RequestMethod.GET)
+	@ResponseBody
+	public RestResponse findDeployedActivitys(Page page) {
+		RestResponse response = new RestResponse();
+		int statusCode = ResponseStatusCode.OK;
+		Subject currentUser = SecurityUtils.getSubject();
+		User user = userServiceImpl.findByUsername(currentUser.getPrincipal().toString());
+		List<Activity> deployedActivitys = activityServiceImpl.findActivitys(page,user.getId(),0);
+		response.getBody().put("deployedActivitys", deployedActivitys);
+		response.getBody().put("page", page);
+		response.setStatusCode(statusCode);
+		return response;
+		
+	}
+	/**
+	 * 
+	 * 待发布的活动
+	 *
+	 * @param page
+	 * @return
+	 */
+	@RequestMapping(value="/waitActivitys", method = RequestMethod.GET)
+	@ResponseBody
+	public RestResponse findWaitActivitys(Page page) {
+		RestResponse response = new RestResponse();
+		int statusCode = ResponseStatusCode.OK;
+		Subject currentUser = SecurityUtils.getSubject();
+		User user = userServiceImpl.findByUsername(currentUser.getPrincipal().toString());
+		List<Activity> waitActivitys = activityServiceImpl.findActivitys(page,user.getId(),0);
+		response.getBody().put("waitActivitys", waitActivitys);
+		response.setStatusCode(statusCode);
+		return response;
+
+	}
+	
 	
 	/**
 	 * 转换tags数组
@@ -872,5 +905,6 @@ public class ActivityController {
 		}
 		return tagsStr.toString();
 	}
+	
 	
 }

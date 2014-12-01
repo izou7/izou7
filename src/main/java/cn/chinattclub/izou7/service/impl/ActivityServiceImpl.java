@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import cn.chinattclub.izou7.dao.ActivityDao;
 import cn.chinattclub.izou7.entity.Activity;
 import cn.chinattclub.izou7.service.ActivityService;
+import cn.zy.commons.webdev.vo.Page;
 /**
  * 活动业务逻辑实现类
  * @author ZY
@@ -43,14 +44,11 @@ public class ActivityServiceImpl implements ActivityService {
 	}
 
 	@Override
-	public List<Activity> getDeployedActivity(Integer id) {
+	public List<Activity> findActivitys(Page page,int id,int status) {
 		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<Activity> getWaitActivity(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		String hql = "from Activity act where act.user.id=? and act.status=?";
+		String hqlCount = "select count(*) from Activity act where act.user.id=? and act.status=? "; 
+		page.setRecordCount(dao.findCountByHQL(hqlCount,id,status));
+		return dao.findByHQL(hql,page.getIndex()*page.getSize(),page.getSize(),id,status);
 	}
 }
