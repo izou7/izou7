@@ -136,6 +136,9 @@ public class Activity {
 	@NotFound(action = NotFoundAction.IGNORE)
 	private List<ActivityGuest> guests;
 	
+	/**
+	 * 嘉宾设置
+	 */
 	@OneToMany(fetch = FetchType.EAGER)
 	@JoinColumn(name="activity")
 	@NotFound(action = NotFoundAction.IGNORE)

@@ -15,12 +15,13 @@
 		<h3 class="panel-title">邀请嘉宾</h3>
 		</div>
 		<div class="panel-body">
-			<form class="form-horizontal" role="form">
-			<input type="hidden" id="id" name="id" value="${id!}">
+			<input type="hidden" id="id" value="${id!}">
+			<form class="form-horizontal" role="form" id="settingForm" action="${id!}/setting" method="POST">
+			<input type="hidden"  name="id" value="${(setting.id)!}">
 		   <div class="form-group">
 			<label class="col-sm-2 control-label" for="guestNumber">需求嘉宾人数：</label>
 			<div class="col-sm-2">
-			  <input class="form-control" type="text" id="guestNumber" name="guestNumber" value="${(setting.guestNumber)!}">
+			  <input class="form-control" type="number" id="guestNumber" name="guestNumber" value="${(setting.guestNumber)!}" required>
 			</div>
 			<div class="col-sm-1">
 			 <span> 人</span>
@@ -29,16 +30,14 @@
 		   <div class="form-group">
 			<label class="col-sm-2 control-label" for="guestRegistrationDeadline">报名期限：</label>
 			<div class="col-sm-2">
-			  <input class="form-control" type="text" id="guestRegistrationDeadline" name="guestRegistrationDeadline" value="${(setting.guestRegistrationDeadline)!}" >
+			  <input class="form-control" type="number" id="guestRegistrationDeadline" name="guestRegistrationDeadline" value="${(setting.guestRegistrationDeadline)!}" required >
 			</div>
 			<div class="col-sm-2">
 			  请求发出在几天内
 			</div>
 		   </div>
-		   </form>
-		   <form class="form-horizontal" role="form">
 			  <div class="form-group">
-				<div class="col-lg-6">
+				<div class="col-lg-10">
 					 <div class="table-responsive">
 					  <table class="table table-bordered">
 						<thead>
@@ -75,14 +74,18 @@
 				</div>
 			</div>
 			 <div class="form-group">
-				<div class="col-sm-2">
-				 
+				<div class="col-sm-6">
 				</div>
 				<div class="col-sm-2">
-				  <button type="button" class="btn btn-info btn-block" onclick="javascript:location.href='deploy4.html'">上一步</button>
+				  <button type="button" class="btn btn-info btn-block" onclick="javascript:location.href='activity?step=FIRST&activityId=${id!}';">上一步</button>
 				</div>
+				<!--
 				<div class="col-sm-2">
-				  <button type="button" class="btn btn-info btn-block" onclick="javascript:location.href='deploy6.html'">下一步</button>
+				  <button type="button" class="btn btn-info btn-block">保存</button>
+				</div>
+				-->
+				<div class="col-sm-2">
+				  <button type="submit" id="nextBtn" class="btn btn-info btn-block" >下一步</button>
 				</div>
 			 </div>
 			</form>
@@ -94,7 +97,7 @@
 	  </div>
 	  <div class="panel-body" >
 		<div class="form-group">
-						<div class="col-lg-6">
+						<div class="col-lg-10">
 							 <div class="table-responsive">
 							  <table class="table table-bordered">
 								<thead>
@@ -115,7 +118,7 @@
 									<td>${(rcd.company)!}</td>
 									<td>${(rcd.researchArea)!}</td>
 									<td>${(rcd.phone)!}</td>
-									<td><button type="button" class="btn btn-info" >添加</button></td>
+									<td><span class="glyphicon glyphicon-plus"></span></td>
 								  </tr>								
 								</#list>
 								</tbody>
@@ -131,7 +134,53 @@
 	    <h3 class="panel-title">手动添加</h3>
 	  </div>
 	  <div class="panel-body">
-	    Panel content
+	  <form class="form-horizontal" id="guestForm" action="${id!}/guest" method="POST">
+	  	<div class="form-group">
+		    <div class="form-group">
+					<label class="col-sm-2 control-label" for="name">姓名：</label>
+					<div class="col-sm-4">
+					  <input class="form-control" type="text" name="name"  id="name" placeholder="姓名" required>
+					</div>
+			</div>
+		    <div class="form-group">
+					<label class="col-sm-2 control-label" for="position">职位：</label>
+					<div class="col-sm-4">
+					  <input class="form-control" type="text" name="position"  id="position" placeholder="职位" required>
+					</div>
+			</div>
+		    <div class="form-group">
+					<label class="col-sm-2 control-label" for="company">公司：</label>
+					<div class="col-sm-4">
+					  <input class="form-control" type="text" name="company"  id="company" placeholder="公司" required>
+					</div>
+			</div>
+		    <div class="form-group">
+					<label class="col-sm-2 control-label" for="researchArea">研究方向：</label>
+					<div class="col-sm-4">
+					  <input class="form-control" type="text" name="researchArea"  id="researchArea" placeholder="研究方向" required>
+					</div>
+			</div>
+		    <div class="form-group">
+					<label class="col-sm-2 control-label" for="phone">手机号码：</label>
+					<div class="col-sm-4">
+					  <input class="form-control" type="text" name="phone"  id="phone" placeholder="手机号码" required>
+					</div>
+			</div>
+		    <div class="form-group">
+					<label class="col-sm-2 control-label" for="introduction">详细介绍：</label>
+					<div class="col-sm-4">
+					  <textarea class="form-control" rows="4" id="introduction" name="introduction" placeholder="详细介绍"></textarea>
+					</div>
+			</div>
+		    <div class="form-group">
+		    		<div class="col-sm-4">
+					</div>
+					<div class="col-sm-2">
+					  <button type="submit" id="add" class="btn btn-info btn-block" >添加</button>
+					</div>
+			</div>
+		</div>
+		</form>
 	  </div>
 	</div>
   </div>

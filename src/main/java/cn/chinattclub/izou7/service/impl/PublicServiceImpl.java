@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import cn.chinattclub.izou7.dao.PublicDao;
 import cn.chinattclub.izou7.dto.PublicDto;
-import cn.chinattclub.izou7.entity.ActivityArticle;
 import cn.chinattclub.izou7.entity.Article;
 import cn.chinattclub.izou7.entity.Public;
 import cn.chinattclub.izou7.entity.User;
@@ -24,7 +23,7 @@ import cn.chinattclub.izou7.service.PublicService;
 public class PublicServiceImpl implements PublicService {
 
 	@Resource
-	public PublicDao publicDao;
+	public PublicDao dao;
 
 	List<Article> getArticlesFromPublic(PublicDto dto){
 		List<Article> articles = new ArrayList<Article>();
@@ -53,26 +52,32 @@ public class PublicServiceImpl implements PublicService {
 	public void importPublic(PublicDto dto) {
 		
 		Public pub = getEntityFromFDto(dto);
-		publicDao.save(pub);
+		dao.save(pub);
 		
 	}
 
 	@Override
 	public List<Public> listPublic(User user) {
 		
-		List<Public> list = publicDao.listByUser(user);
+		List<Public> list = dao.listByUser(user);
 		return list;
 	}
 
 	@Override
 	public void deletePublic(int id) {
 		// TODO Auto-generated method stub
-		publicDao.delete(id);
+		dao.delete(id);
 	}
 
 	@Override
 	public Public getPublicById(int publicId) {
-		return publicDao.get(publicId);
+		return dao.get(publicId);
+	}
+
+	@Override
+	public List<Public> recommend(Integer activityId) {
+		// TODO Auto-generated method stub
+		return dao.list();
 	}
 	
 }

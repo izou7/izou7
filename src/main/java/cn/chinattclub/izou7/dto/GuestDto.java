@@ -79,6 +79,7 @@ public class GuestDto {
 		guest.setName(name);
 		guest.setPhone(phone);
 		guest.setPosition(position);
+		guest.setResearchArea(researchArea);
 		return guest;
 		
 	}
