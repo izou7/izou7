@@ -9,7 +9,7 @@
   <div class="container content">
   <!--页头-->
     <div class="page-header">
-		<h1>我发起的活动</h1>
+		<h1>我发起的活动！</h1>
 	</div>
 	<div class="row">
 	  <!-- Nav tabs -->
@@ -72,7 +72,6 @@
 <script src="${ (project.staticDomain)! }/libs/jquery/jquery-2.0.3.js"></script>
 <script src="${ (project.staticDomain)! }/libs/bootstrap/js/bootstrap.js"></script>
 <script src="${ (project.staticDomain)! }/libs/bootstrap-paginator/bootstrap-paginator.js"></script>
-<script src="${ (project.staticDomain)! }/libs/Zebra_Dialog/js/zebra_dialog.js"></script>
 <script src="${ (project.staticDomain)! }/js/activity/myActivitys.js"></script> 
 
 
