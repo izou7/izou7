@@ -43,7 +43,6 @@ function delSpanClick(obj){
 		}
 		});
 }
-});
 
 function initDeployedActivity(){
 	$.ajax({
