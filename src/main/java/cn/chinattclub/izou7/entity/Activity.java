@@ -39,7 +39,7 @@ public class Activity {
 	/**
 	 * 用户名
 	 */
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="user")
 	@NotFound(action = NotFoundAction.IGNORE)
 	private User user;
@@ -52,7 +52,7 @@ public class Activity {
 	/**
 	 * 活动举办城市
 	 */
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="city")
 	private City city;
 	
@@ -120,7 +120,7 @@ public class Activity {
 	/**
 	 * 报名模板
 	 */
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="apply_template_id")
 	@NotFound(action = NotFoundAction.IGNORE)
 	private ApplyTemplate template;

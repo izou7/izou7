@@ -46,17 +46,6 @@ public class ActivityGuest {
 	private int rank;
 	
 	/**
-	 * 用户
-	 */
-//	@ManyToMany
-//	@JoinTable(
-//	   name="i_activity_guests_vote",
-//	   joinColumns=@JoinColumn(name="activity_guests"),
-//	   inverseJoinColumns=@JoinColumn(name="user")
-//	   )
-//	private List<User> users;
-	
-	/**
 	 * 嘉宾姓名
 	 */
 	private String name;
@@ -165,22 +154,7 @@ public class ActivityGuest {
 
 
 
-	/**
-	 * Returns the value of the field called 'activityId'.
-	 * @return Returns the activityId.
-	 */
-	public int getActivityId() {
-		return this.activity;
-	}
-
-	/**
-	 * Sets the field called 'activityId' to the given value.
-	 * @param activityId The activityId to set.
-	 */
-	public void setActivityId(int activityId) {
-		this.activity = activityId;
-	}
-
+	
 	public Date getNotifyTime() {
 		return notifyTime;
 	}
@@ -430,21 +404,6 @@ public class ActivityGuest {
 		this.status = status;
 	}
 
-	/**
-	 * Returns the value of the field called 'users'.
-	 * @return Returns the users.
-	 */
-//	public List<User> getUsers() {
-//		return this.users;
-//	}
-
-	/**
-	 * Sets the field called 'users' to the given value.
-	 * @param users The users to set.
-	 */
-//	public void setUsers(List<User> users) {
-//		this.users = users;
-//	}
 
 	/**
 	 * Returns the value of the field called 'type'.
@@ -485,6 +444,5 @@ public class ActivityGuest {
 	public void setActivity(int activity) {
 		this.activity = activity;
 	}
-	
 	
 }

@@ -856,7 +856,9 @@ public class ActivityController {
 	 */
 	@RequestMapping(value="/deployedActivitys", method = RequestMethod.GET)
 	@ResponseBody
-	public RestResponse findDeployedActivitys(Page page) {
+	public RestResponse findDeployedActivitys(int index) {
+		Page page = new Page();
+		page.setIndex(index);
 		RestResponse response = new RestResponse();
 		int statusCode = ResponseStatusCode.OK;
 		Subject currentUser = SecurityUtils.getSubject();
@@ -922,6 +924,7 @@ public class ActivityController {
 	@RequestMapping(value="/{activityId}", method = RequestMethod.GET)
 	public String activityInfo(Model model,@PathVariable int activityId) {
 		Activity activity = activityServiceImpl.findById(activityId);
+		model.addAttribute("activity",activity);
 		return "site.activity.info";
 	}
 	

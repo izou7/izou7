@@ -23,7 +23,6 @@ public class ApplyTemplate {
 	@GeneratedValue
 	private Integer id;
 	
-	
 	/**
 	 * 模板预览路径
 	 */
@@ -111,5 +110,6 @@ public class ApplyTemplate {
 	public void setInstruction(String instruction) {
 		this.instruction = instruction;
 	}
+
 
 }

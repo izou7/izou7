@@ -57,4 +57,10 @@ public class ActivityServiceImpl implements ActivityService {
 		// TODO Auto-generated method stub
 		dao.delete(activityId);
 	}
+
+	@Override
+	public Activity findALLById(int activityId) {
+		// TODO Auto-generated method stub.
+		return dao.findAllById(activityId);
+	}
 }

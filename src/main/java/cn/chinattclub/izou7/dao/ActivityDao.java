@@ -32,4 +32,18 @@ public class ActivityDao  extends AdvancedHibernateDao<Activity>{
 		}
 		return ((Long) query.iterate().next()).intValue();
 	}
+
+	/**
+	 * TODO Put here a description of what this method does.
+	 *
+	 * @param activityId
+	 * @return
+	 */
+	public Activity findAllById(int activityId) {
+		// TODO Auto-generated method stub.
+		Criteria criteria = this.getCurrentSession().createCriteria(Activity.class,"act");
+		criteria.add(Restrictions.le("id", activityId));
+		criteria.setFetchMode("act.city", org.hibernate.FetchMode.JOIN);
+		return (Activity)criteria.uniqueResult();
+	}
 }

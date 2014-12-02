@@ -70,7 +70,7 @@ public class User {
 	/**
 	 * 关联用户信息
 	 */
-	@OneToOne
+	@OneToOne( fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_info_id")
 	private UserInfo userInfo;
 	

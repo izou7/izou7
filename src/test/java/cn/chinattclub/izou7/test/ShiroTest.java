@@ -95,7 +95,7 @@ public class ShiroTest {
 //    	activityGuestsSetting.setId(1);
 //    	List<ActivityGuests> tt = activityGuestsServiceImpl.getWaitingGuests(activityGuestsSetting);
 //    	System.out.println(tt.size());
-    	
+    	activityServiceImpl.findById(10);
     }
 
 }

@@ -31,7 +31,7 @@ public class Province {
 	private String name;
 	
 	
-	@OneToMany(mappedBy = "province",fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "province")
 	private List<City> citys;
 
 	/**

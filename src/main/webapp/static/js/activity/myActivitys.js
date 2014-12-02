@@ -3,7 +3,7 @@ $(function () {
 	    e.preventDefault();//取消事件的默认动作
 	    $(this).tab('show');
 	})
-	initDeployedActivity();
+	initDeployedActivity(1);
 	$("#deployedTBody").delegate("span[name='delSpan']","click",function(){delSpanClick(this);});
 	$("#deployedTBody").delegate("span[name='editSpan']","click",function(){editSpanClick(this);});
 });
@@ -44,12 +44,13 @@ function delSpanClick(obj){
 		});
 }
 
-function initDeployedActivity(){
+function initDeployedActivity(index){
 	$.ajax({
 		type: "GET",
 		url: "deployedActivitys",
 		dataType : "json",
-		contentType:'application/json;charset=UTF-8', 
+		contentType:'application/json;charset=UTF-8',
+		data:"index="+index,
 		success: function(json) {
 			if (json.statusCode == 200) {
 				$("#deployedTBody").empty();
@@ -58,8 +59,6 @@ function initDeployedActivity(){
 				for(var i=0;i<acts.length;i++){
 					var act = acts[i];
 					tr+='<tr><td><img src="'+act.poster+'" height="50" width="50"></td><td>'+act.deployTime+'</td><td>'+act.updateTime+'</td><td>'+act.name+'</td><td><span name="delSpan" class="glyphicon glyphicon-remove"  data_id="'+act.id+'"></span><span name="editSpan" class="glyphicon glyphicon-edit margin-left50"  data_id="'+act.id+'"></span></td>';
-					console.info(act);
-					tr+='<tr><td><img src="'+act.activityPosters[0].poster+'" height="50" width="50"></td><td>'+act.createTime+'</td><td>'+act.updateTime+'</td><td>'+act.name+'</td><td><span name="delSpan" class="glyphicon glyphicon-remove"  data_id="'+act.id+'"></span><span name="editSpan" class="glyphicon glyphicon-edit margin-left50"  data_id="'+act.id+'"></span></td>';
 				}
 				$("#deployedTBody").append(tr);
 				initPaginator4Deployed(json.body.page);
@@ -87,7 +86,7 @@ function initPaginator4Deployed(pageObj) {
 		totalPages : pageObj.count,
 		onPageClicked : function(event, originalEvent, type,
 				page) {
-			
+			initDeployedActivity(page);
 		}
 	};
     $('#deployedPaginator').bootstrapPaginator(options);

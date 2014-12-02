@@ -71,6 +71,7 @@
 
 <script src="${ (project.staticDomain)! }/libs/jquery/jquery-2.0.3.js"></script>
 <script src="${ (project.staticDomain)! }/libs/bootstrap/js/bootstrap.js"></script>
+<script src="${ (project.staticDomain)! }/libs/Zebra_Dialog/js/zebra_dialog.js"></script>
 <script src="${ (project.staticDomain)! }/libs/bootstrap-paginator/bootstrap-paginator.js"></script>
 <script src="${ (project.staticDomain)! }/js/activity/myActivitys.js"></script> 
 
