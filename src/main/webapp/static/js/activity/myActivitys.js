@@ -11,7 +11,6 @@ function initDeployedActivity(){
 		type: "GET",
 		url: "deployedActivitys",
 		dataType : "json",
-		data:'{}'
 		contentType:'application/json;charset=UTF-8', 
 		success: function(json) {
 			if (json.statusCode == 200) {

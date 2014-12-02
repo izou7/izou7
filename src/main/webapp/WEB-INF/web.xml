@@ -46,7 +46,10 @@
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
-
+	<!-- Add application configuration loader listener. -->
+	<listener>
+		<listener-class>cn.zy.commons.webdev.listener.ConfigureLoaderListener</listener-class>
+	</listener>
 	<!--- shiro 1.2 -->
 	<!-- shiro 安全过滤器 -->
 	<filter>
