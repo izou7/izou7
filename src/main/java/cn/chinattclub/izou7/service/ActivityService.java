@@ -22,4 +22,6 @@ public interface ActivityService {
 
 	public List<Activity> findActivitys(Page page,int id,int status);
 
+	public void delete(int activityId);
+
 }

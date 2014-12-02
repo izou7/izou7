@@ -51,4 +51,10 @@ public class ActivityServiceImpl implements ActivityService {
 		page.setRecordCount(dao.findCountByHQL(hqlCount,id,status));
 		return dao.findByHQL(hql,page.getIndex()*page.getSize(),page.getSize(),id,status);
 	}
+
+	@Override
+	public void delete(int activityId) {
+		// TODO Auto-generated method stub
+		dao.delete(activityId);
+	}
 }

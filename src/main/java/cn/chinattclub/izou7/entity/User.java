@@ -18,6 +18,8 @@ import javax.persistence.Table;
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 
 /**
  * 用户实体类
@@ -27,6 +29,7 @@ import org.hibernate.annotations.NotFoundAction;
  */
 @Entity
 @Table(name = "i_user")
+@JsonIgnoreProperties("activitys")
 public class User {
 
 	@Id

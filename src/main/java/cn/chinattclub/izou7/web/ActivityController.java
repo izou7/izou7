@@ -43,6 +43,7 @@ import cn.chinattclub.izou7.dto.ActivityCrowdfundingRewardDto;
 import cn.chinattclub.izou7.dto.ActivityCrowdfundingSettingDto;
 import cn.chinattclub.izou7.dto.ActivityDto;
 import cn.chinattclub.izou7.dto.ActivityFormDto;
+import cn.chinattclub.izou7.dto.ActivityListDto;
 import cn.chinattclub.izou7.dto.ActivityTicketDto;
 import cn.chinattclub.izou7.dto.CalendarDto;
 import cn.chinattclub.izou7.dto.GuestDto;
@@ -861,7 +862,17 @@ public class ActivityController {
 		Subject currentUser = SecurityUtils.getSubject();
 		User user = userServiceImpl.findByUsername(currentUser.getPrincipal().toString());
 		List<Activity> deployedActivitys = activityServiceImpl.findActivitys(page,user.getId(),0);
-		response.getBody().put("deployedActivitys", deployedActivitys);
+		List<ActivityListDto> alds = new ArrayList<ActivityListDto>();
+		for (Activity act : deployedActivitys) {
+			ActivityListDto dto = new ActivityListDto();
+			dto.setId(act.getId());
+			dto.setDeployTime(act.getCreateTime());
+			dto.setName(act.getName());
+			dto.setPoster(act.getActivityPosters().iterator().next().getPoster());
+			dto.setUpdateTime(act.getUpdateTime());
+			alds.add(dto);
+		}
+		response.getBody().put("deployedActivitys", alds);
 		response.getBody().put("page", page);
 		response.setStatusCode(statusCode);
 		return response;
@@ -885,7 +896,33 @@ public class ActivityController {
 		response.getBody().put("waitActivitys", waitActivitys);
 		response.setStatusCode(statusCode);
 		return response;
-
+	}
+	
+	/**
+	 * 删除活动
+	 * @param activityId
+	 * @return
+	 */
+	@RequestMapping(value="/{activityId}", method = RequestMethod.DELETE)
+	@ResponseBody
+	public RestResponse deleteActivity(@PathVariable int activityId) {
+		RestResponse response = new RestResponse();
+		int statusCode = ResponseStatusCode.OK;
+		activityServiceImpl.delete(activityId);
+		response.setStatusCode(statusCode);
+		return response;
+	}
+	
+	/**
+	 * 活动基本信息
+	 * @param model
+	 * @param activityId
+	 * @return
+	 */
+	@RequestMapping(value="/{activityId}", method = RequestMethod.GET)
+	public String activityInfo(Model model,@PathVariable int activityId) {
+		Activity activity = activityServiceImpl.findById(activityId);
+		return "site.activity.info";
 	}
 	
 	
