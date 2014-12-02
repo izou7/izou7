@@ -923,7 +923,7 @@ public class ActivityController {
 	 */
 	@RequestMapping(value="/{activityId}", method = RequestMethod.GET)
 	public String activityInfo(Model model,@PathVariable int activityId) {
-		Activity activity = activityServiceImpl.findById(activityId);
+		Activity activity = activityServiceImpl.findALLById(activityId);
 		model.addAttribute("activity",activity);
 		return "site.activity.info";
 	}

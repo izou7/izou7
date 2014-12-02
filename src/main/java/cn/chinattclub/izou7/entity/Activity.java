@@ -41,7 +41,6 @@ public class Activity {
 	 */
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="user")
-	@NotFound(action = NotFoundAction.IGNORE)
 	private User user;
 	
 	/**
@@ -130,7 +129,6 @@ public class Activity {
 	 */
 	@OneToMany
 	@JoinColumn(name="activity")
-	@NotFound(action = NotFoundAction.IGNORE)
 	private List<ActivityTicket> tickets;
 	
 	/**
@@ -138,7 +136,6 @@ public class Activity {
 	 */
 	@OneToMany
 	@JoinColumn(name="activity")
-	@NotFound(action = NotFoundAction.IGNORE)
 	private List<ActivityGuest> guests;
 	
 	/**
@@ -146,7 +143,6 @@ public class Activity {
 	 */
 	@OneToMany(fetch = FetchType.EAGER)
 	@JoinColumn(name="activity")
-	@NotFound(action = NotFoundAction.IGNORE)
 	private List<ActivityGuestsSetting> settings;
 	
 	/** 

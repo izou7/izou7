@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.FetchMode;
 import org.hibernate.Query;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
@@ -42,8 +43,8 @@ public class ActivityDao  extends AdvancedHibernateDao<Activity>{
 	public Activity findAllById(int activityId) {
 		// TODO Auto-generated method stub.
 		Criteria criteria = this.getCurrentSession().createCriteria(Activity.class,"act");
-		criteria.add(Restrictions.le("id", activityId));
-		criteria.setFetchMode("act.city", org.hibernate.FetchMode.JOIN);
+		criteria.add(Restrictions.eq("id", activityId));
+		criteria.setFetchMode("city", FetchMode.JOIN);
 		return (Activity)criteria.uniqueResult();
 	}
 }
