@@ -1,6 +1,7 @@
 package cn.chinattclub.izou7.service.impl;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.annotation.Resource;
 
@@ -52,7 +53,7 @@ public class ActivityGuestsServiceImpl implements ActivityGuestsService {
 	public void execSequence(int activityId, int guestId, boolean up) {
 		// TODO Auto-generated method stub
 		Activity activity = activityServiceImpl.findById(activityId);
-		List<ActivityGuest> guests = activity.getGuests();
+		Set<ActivityGuest> guests = activity.getGuests();
 		ActivityGuest guest = dao.get(guestId);
 		int rank = guest.getRank();
 		ActivityGuest waitGuest = null;

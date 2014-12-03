@@ -60,7 +60,7 @@ $(function () {
 		header: {
 			left: false,
 			center: 'title',
-			right: false
+			right:  'today prev,next'
 		},
 		defaultView : 'agendaWeek',
 		draggable:true,

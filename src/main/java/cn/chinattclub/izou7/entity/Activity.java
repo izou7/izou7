@@ -41,6 +41,7 @@ public class Activity {
 	 */
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="user")
+	@NotFound(action = NotFoundAction.IGNORE)
 	private User user;
 	
 	/**
@@ -129,21 +130,49 @@ public class Activity {
 	 */
 	@OneToMany
 	@JoinColumn(name="activity")
-	private List<ActivityTicket> tickets;
+	private Set<ActivityTicket> tickets;
+	
+	/**
+	 * 文章
+	 */
+	@OneToMany
+	@JoinColumn(name="activity")
+	private Set<ActivityArticle> articles;
 	
 	/**
 	 * 嘉宾
 	 */
 	@OneToMany
 	@JoinColumn(name="activity")
-	private List<ActivityGuest> guests;
+	private Set<ActivityGuest> guests;
 	
 	/**
 	 * 嘉宾设置
 	 */
 	@OneToMany(fetch = FetchType.EAGER)
 	@JoinColumn(name="activity")
-	private List<ActivityGuestsSetting> settings;
+	private Set<ActivityGuestsSetting> settings;
+	
+	/**
+	 * 开放合作
+	 */
+	@OneToMany
+	@JoinColumn(name="activity")
+	private Set<ActivityCooperation> cooperations;
+	
+	/**
+	 * 众筹回报设置
+	 */
+	@OneToMany
+	@JoinColumn(name="activity")
+	private Set<ActivityCrowdfundingReward> rewards;
+	
+	/**
+	 * 众筹设置
+	 */
+	@OneToMany
+	@JoinColumn(name="activity")
+	private Set<ActivityCrowdfundingSetting> cfSettings;
 	
 	/** 
 	 *  创建时间
@@ -457,30 +486,118 @@ public class Activity {
 		this.template = template;
 	}
 
-	public List<ActivityTicket> getTickets() {
-		return tickets;
+
+	/**
+	 * Returns the value of the field called 'tickets'.
+	 * @return Returns the tickets.
+	 */
+	public Set<ActivityTicket> getTickets() {
+		return this.tickets;
 	}
 
-	public void setTickets(List<ActivityTicket> tickets) {
+	/**
+	 * Sets the field called 'tickets' to the given value.
+	 * @param tickets The tickets to set.
+	 */
+	public void setTickets(Set<ActivityTicket> tickets) {
 		this.tickets = tickets;
 	}
 
-	public List<ActivityGuest> getGuests() {
-		return guests;
+	/**
+	 * Returns the value of the field called 'guests'.
+	 * @return Returns the guests.
+	 */
+	public Set<ActivityGuest> getGuests() {
+		return this.guests;
 	}
 
-	public void setGuests(List<ActivityGuest> guests) {
+	/**
+	 * Sets the field called 'guests' to the given value.
+	 * @param guests The guests to set.
+	 */
+	public void setGuests(Set<ActivityGuest> guests) {
 		this.guests = guests;
 	}
 
-	public List<ActivityGuestsSetting> getSettings() {
-		return settings;
+	
+
+	/**
+	 * Returns the value of the field called 'settings'.
+	 * @return Returns the settings.
+	 */
+	public Set<ActivityGuestsSetting> getSettings() {
+		return this.settings;
 	}
 
-	public void setSettings(List<ActivityGuestsSetting> settings) {
+	/**
+	 * Sets the field called 'settings' to the given value.
+	 * @param settings The settings to set.
+	 */
+	public void setSettings(Set<ActivityGuestsSetting> settings) {
 		this.settings = settings;
 	}
 
+	/**
+	 * Returns the value of the field called 'articles'.
+	 * @return Returns the articles.
+	 */
+	public Set<ActivityArticle> getArticles() {
+		return this.articles;
+	}
 
+	/**
+	 * Sets the field called 'articles' to the given value.
+	 * @param articles The articles to set.
+	 */
+	public void setArticles(Set<ActivityArticle> articles) {
+		this.articles = articles;
+	}
 
+	/**
+	 * Returns the value of the field called 'cooperations'.
+	 * @return Returns the cooperations.
+	 */
+	public Set<ActivityCooperation> getCooperations() {
+		return this.cooperations;
+	}
+
+	/**
+	 * Sets the field called 'cooperations' to the given value.
+	 * @param cooperations The cooperations to set.
+	 */
+	public void setCooperations(Set<ActivityCooperation> cooperations) {
+		this.cooperations = cooperations;
+	}
+
+	/**
+	 * Returns the value of the field called 'rewards'.
+	 * @return Returns the rewards.
+	 */
+	public Set<ActivityCrowdfundingReward> getRewards() {
+		return this.rewards;
+	}
+
+	/**
+	 * Sets the field called 'rewards' to the given value.
+	 * @param rewards The rewards to set.
+	 */
+	public void setRewards(Set<ActivityCrowdfundingReward> rewards) {
+		this.rewards = rewards;
+	}
+
+	/**
+	 * Returns the value of the field called 'cfSettings'.
+	 * @return Returns the cfSettings.
+	 */
+	public Set<ActivityCrowdfundingSetting> getCfSettings() {
+		return this.cfSettings;
+	}
+
+	/**
+	 * Sets the field called 'cfSettings' to the given value.
+	 * @param cfSettings The cfSettings to set.
+	 */
+	public void setCfSettings(Set<ActivityCrowdfundingSetting> cfSettings) {
+		this.cfSettings = cfSettings;
+	}
 }

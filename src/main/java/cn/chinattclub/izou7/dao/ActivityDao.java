@@ -45,6 +45,11 @@ public class ActivityDao  extends AdvancedHibernateDao<Activity>{
 		Criteria criteria = this.getCurrentSession().createCriteria(Activity.class,"act");
 		criteria.add(Restrictions.eq("id", activityId));
 		criteria.setFetchMode("city", FetchMode.JOIN);
+		criteria.setFetchMode("articles", FetchMode.JOIN);
+		criteria.setFetchMode("guests", FetchMode.JOIN);
+		criteria.setFetchMode("tickets", FetchMode.JOIN);
+		criteria.setFetchMode("rewards", FetchMode.JOIN);
+		criteria.setFetchMode("cfSettings", FetchMode.JOIN);
 		return (Activity)criteria.uniqueResult();
 	}
 }
