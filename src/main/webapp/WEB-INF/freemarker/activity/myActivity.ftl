@@ -15,7 +15,7 @@
 	  <!-- Nav tabs -->
 	<ul id="activityTab" class="nav nav-tabs" role="tablist">
 	  <li role="presentation" class="active"><a href="#deployedActivity" role="tab" data-toggle="tab">我发布的</a></li>
-	  <li role="presentation"><a href="#waitActivity" role="tab" data-toggle="tab">待发布的</a></li>
+	  <li role="presentation"><a href="#waitActivity" role="tab" data-toggle="tab" data_action="wait">待发布的</a></li>
 	</ul>
 	
 	<!-- Tab panes -->
@@ -60,6 +60,9 @@
 				
 				</tbody>
 			  </table>
+			</div>
+			<div class="modal-footer">
+				<div id="waitPaginator"></div>
 			</div>
 		  </div>	  
 	  </div>
