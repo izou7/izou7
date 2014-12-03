@@ -37,7 +37,7 @@ public class GuestInvitedSchedule {
 		
 		for(Activity activity:activities){
 			List<ActivityGuest> fixedGuests = activityGuestsServiceImpl.getFixedGuests(activity);
-			ActivityGuestsSetting activityGuestsSetting = activity.getSettings().get(0);
+			ActivityGuestsSetting activityGuestsSetting = activity.getSettings().iterator().next();
 			if (fixedGuests.size()>=activityGuestsSetting.getGuestNumber()){
 				activityGuestsSetting.setOver(true);
 				activityGuestsSettingServiceImpl.update(activityGuestsSetting);

@@ -265,12 +265,12 @@ public class ActivityController {
 	private String activityGuestPage(Model model, ActivityDto dto) {
 		// TODO Auto-generated method stub
 		Activity activity = activityServiceImpl.findById(dto.getActivityId());
-		List<ActivityGuestsSetting> settings = activity.getSettings();
+		Set<ActivityGuestsSetting> settings = activity.getSettings();
 		model.addAttribute("id",dto.getActivityId());
 		model.addAttribute("guests",activityGuestsServiceImpl.getGuestsByActivityId(dto.getActivityId()));
 		/**系统推荐*/
 		model.addAttribute("rcds",userInfoServiceImpl.recommend(dto.getActivityId()));
-		model.addAttribute("setting",(settings!=null&&settings.size()>0)?settings.get(0):null);
+		model.addAttribute("setting",settings.isEmpty()?null:settings.iterator().next());
 		return "site.activity.guests";
 	}
 
@@ -283,9 +283,9 @@ public class ActivityController {
 	private String activityTickedPage(Model model, ActivityDto dto) {
 		// TODO Auto-generated method stub
 		Activity activity = activityServiceImpl.findById(dto.getActivityId());
-		List<ActivityTicket> tickets = activity.getTickets();
+		Set<ActivityTicket> tickets = activity.getTickets();
 		model.addAttribute("id",dto.getActivityId());
-		model.addAttribute("ticket",(tickets!=null&&tickets.size()>0)?tickets.get(0):null);
+		model.addAttribute("ticket",tickets.isEmpty()?null:tickets.iterator().next());
 		return "site.activity.ticket";
 	}
 
