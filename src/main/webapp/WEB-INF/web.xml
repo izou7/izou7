@@ -8,11 +8,11 @@
 	</welcome-file-list>
 	<error-page>
 		<error-code>404</error-code>
-		<location>/index</location>
+		<location>/error</location>
 	</error-page>
 	<error-page>
 		<error-code>500</error-code>
-		<location>/index</location>
+		<location>/error</location>
 	</error-page>
 	<!-- Spring configuration location. -->
 	<context-param>

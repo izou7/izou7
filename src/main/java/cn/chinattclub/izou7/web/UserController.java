@@ -1,9 +1,12 @@
 
 package cn.chinattclub.izou7.web;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import cn.chinattclub.izou7.service.UserService;
 
@@ -21,6 +24,12 @@ public class UserController {
 	@Autowired
 	private UserService userServiceImpl;
 	
+//	@RequestMapping(value="logout", method = RequestMethod.GET)
+//	public String logoutPage() {
+//		Subject subject = SecurityUtils.getSubject();
+//		subject.logout();
+//		return "site.main.index";
+//	}
 	/**
 	 * 登录页
 	 * @return

@@ -33,7 +33,7 @@
   									<a href="/public/list">我录入的公众号</a>
   								</li>
   								<li>
-  									<a href="#">登出</a>
+  									<a href="/user/logout">登出</a>
   								</li>
   							</ul>
   						</li>

@@ -18,8 +18,13 @@
 		<h1>${(activity.name)!}</h1>
 		<input type="hidden" id="id" value="${(activity.id)!}">
 	</div>
-	<div class="jumbotron">
-		<div class="row">
+	<div class="panel panel-default">
+	  <div class="panel-heading">
+	  	活动基本信息
+	  	<a href="activity?step=FIRST&activityId=${(activity.id)!}">编辑</a>
+	  </div>
+	  <div class="panel-body">
+	  		<div class="row">
 			<div class="col-lg-5"><img src="/static/images/Chrysanthemum.jpg" width="100%" height="250"></div>
 			<div class="col-lg-7">
 			<p>
@@ -49,6 +54,7 @@
 				活动主页：${(activity.homepage)!} 
 			</p>
 			</div>
+		</div>
 		</div>
 	</div>
 	<div class="panel panel-default">
@@ -170,13 +176,14 @@
 	  </div>
 	  <div class="panel-body">
 	  	<div class="row">
-	  		<div class="col-lg-10">
 	  		<#list (activity.settings)! as setting>
-			  	需求嘉宾人数：${(setting.guestNumber)!}
-			  	<BR>
-			  	报名期限：${(setting.guestRegistrationDeadline)!} (请求发出在几天内)
-		  	</#list>
+	  		<div class="col-lg-5">
+			  	需求嘉宾人数：${(setting.guestNumber)!} 
 	  		</div>
+	  		<div class="col-lg-5">
+			  	 报名期限：${(setting.guestRegistrationDeadline)!} (请求发出在几天内)
+	  		</div>
+		  	</#list>
 	  	</div>
 	  	<div class="row">
 		<div class="col-lg-10">
