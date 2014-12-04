@@ -908,6 +908,20 @@ public class ActivityController {
 		model.addAttribute("activity",activity);
 		return "site.activity.info";
 	}
+	/**
+	 * 活动基本信息
+	 * @param model
+	 * @param activityId
+	 * @param type
+	 * @return
+	 */
+	@RequestMapping(value="/info/{type}/{activityId}", method = RequestMethod.GET)
+	public String activityInfo4OutSide(Model model,@PathVariable int activityId,@PathVariable int type) {
+		Activity activity = activityServiceImpl.findALLById(activityId);
+		model.addAttribute("activity",activity);
+		model.addAttribute("type",type);
+		return "site.activity.info";
+	}
 	
 	
 	/**

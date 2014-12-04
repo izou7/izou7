@@ -20,8 +20,9 @@
   						</li>
   					</ul>
   					<ul class="nav navbar-nav navbar-right">
-  						<li class="dropdown">
-  							<a href="#" class="dropdown-toggle" data-toggle="dropdown">张颖<span class="caret"></span></a>
+  					<#if realName??>
+  						<li class="dropdown">                                                                                                                           
+  							<a href="#" class="dropdown-toggle" data-toggle="dropdown">${(realName)!}<span class="caret"></span></a>
   							<ul class="dropdown-menu" role="menu">
   								<li>
   									<a href="/userInfo/get">个人资料</a>
@@ -37,6 +38,14 @@
   								</li>
   							</ul>
   						</li>
+  					<#else>
+  						<li >
+  						<a href="/login.jsp" >登陆</a>
+  						</li>
+  						<li >
+  						<a href="/regist" >注册</a>
+  						</li>
+  					</#if>
   					</ul>
   				</div>
   				<!-- /.navbar-collapse -->

@@ -1,4 +1,4 @@
-package cn.chinattclub.izou7.service.impl;
+package cn.chinattclub.izou7.util;
 
 import org.apache.shiro.crypto.RandomNumberGenerator;
 import org.apache.shiro.crypto.SecureRandomNumberGenerator;

@@ -1,5 +1,8 @@
 $(function () {
 	var activityId = $("#id").val();
+	if(type==1){
+		$(".panel-heading a").hide();
+	}
 	$('#calendar').fullCalendar({
 		timeFormat: 'H:mm{ - H:mm}',
 		allDaySlot:false,

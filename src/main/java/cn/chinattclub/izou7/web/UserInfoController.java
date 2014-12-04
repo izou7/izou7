@@ -48,24 +48,6 @@ public class UserInfoController {
 		return "site.userInfo.info";
 	}
 	
-	/**
-	@RequestMapping(value="/add", method = RequestMethod.POST)
-	@ResponseBody
-	public RestResponse addUserInfo(@RequestBody UserInfo userInfo) {
-		
-		RestResponse response = new RestResponse();
-		
-		try{
-			userInfoServiceImpl.addUserInfo(userInfo);
-			response.setMessage("添加信息成功");
-			response.setStatusCode(200);
-		}catch(Exception e){
-			response.setMessage("添加信息失败，内部错误");
-			response.setStatusCode(500);
-		}
-		return response;
-	}
-	**/
 	
 	@RequestMapping(value="/update", method = RequestMethod.POST)
 	@ResponseBody

@@ -72,7 +72,7 @@
 							<th>标题</th>
 							<th>标签</th>
 							<th>摘要</th>
-							<th>地址</th>
+							<th>下载</th>
 						  </tr>
 						</thead>
 						<tbody >
@@ -81,7 +81,7 @@
 								<td>${(article.title)!}</td>
 								<td>${(article.tags)!}</td>
 								<td>${(article.summary)!}</td>
-								<td>${(article.url)!}</td>
+								<td><a href="${(article.url)!}"><span class="glyphicon glyphicon-download-alt"></span></a></td>
 							</tr>
 						</#list>
 						</tbody>
@@ -319,7 +319,9 @@
 	
   </div>
   
-
+<script>
+var type = ${(type)!};
+</script>
 <script src="${ (project.staticDomain)! }/libs/jquery/jquery-2.0.3.js"></script>
 <script src="${ (project.staticDomain)! }/libs/fullcalendar/lib/jquery-ui.custom.min.js"></script>
 <script src='${ (project.staticDomain)! }/libs/fullcalendar/fullcalendar.js'></script>

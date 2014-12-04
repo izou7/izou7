@@ -68,7 +68,7 @@
 							<th>标题</th>
 							<th>标签</th>
 							<th>摘要</th>
-							<th>地址</th>
+							<th>下载</th>
 							<th>操作</th>
 						  </tr>
 						</thead>
@@ -78,7 +78,7 @@
 								<td>${(article.title)!}</td>
 								<td>${(article.tags)!}</td>
 								<td>${(article.summary)!}</td>
-								<td>${(article.url)!}</td>
+								<td><a href="${(article.url)!}"><span class="glyphicon glyphicon-download-alt"></span></a></td>
 								<td><button type="button" name="delBtn" class="btn btn-info" data_id="${(article.id)}">删除</button></td>
 							</tr>
 							</#list>

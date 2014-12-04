@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import cn.chinattclub.izou7.dao.UserDao;
 import cn.chinattclub.izou7.entity.User;
 import cn.chinattclub.izou7.service.UserService;
+import cn.chinattclub.izou7.util.PasswordHelper;
 /**
  * 用户业务逻辑类
  * @author ZY
@@ -56,7 +57,7 @@ public class UserServiceImpl implements UserService {
     }
 
 	@Override
-	public boolean exists(User user) {
-		return userDao.findByUsername(user.getUsername())==null?false:true;
+	public boolean exists(String  username) {
+		return userDao.findByUsername(username)==null?false:true;
 	}
 }

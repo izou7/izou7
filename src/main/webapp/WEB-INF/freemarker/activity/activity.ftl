@@ -43,7 +43,7 @@
 			  <div class="form-group">
 				<label class="col-sm-2 control-label" for="name">活动名称：</label>
 				<div class="col-sm-6">
-				  <input class="form-control" type="text" id="name" name="name" placeholder="活动名称" required>
+				  <input class="form-control" type="text" id="name" name="name" placeholder="活动名称" value="${(activity.name)!}" required>
 				</div>
 			  </div>
 			   <div class="form-group">
@@ -68,30 +68,30 @@
 			  <div class="form-group">
 				<label class="col-sm-2 control-label" for="place"></label>
 				<div class="col-sm-6">
-				  <input class="form-control" type="text" name="place"  id="place" placeholder="详细地址" required>
+				  <input class="form-control" type="text" name="place"  id="place" placeholder="详细地址" value="${(activity.place)!}" required>
 				</div>
 			  </div>		
 			  <div class="form-group">
 				<label class="col-lg-2 control-label" for="time">活动时间：</label>
 				<div class="col-lg-2" >
-				  <input class="form-control " type="text" name="startTime" id="startTime" style="width:220px;" required>
+				  <input class="form-control " type="text" name="startTime" id="startTime" style="width:220px;"  value="${(activity.startTime?string('yyyy-MM-dd'))!}" required>
 				</div>
 				<span class="col-lg-2 text-center" >到</span>
 				<div class="col-lg-2">
-				  <input class="form-control" type="text" id="endTime" name="endTime" style="width:220px;margin-left:-63px;" required>
+				  <input class="form-control" type="text" id="endTime" name="endTime" value="${(activity.endTime?string('yyyy-MM-dd'))!}" style="width:220px;margin-left:-63px;" required>
 				</div>
 			  </div>
 			  <div class="form-group">
 				<label class="col-lg-2 control-label" for="headCount">活动人数：</label>
 				<div class="col-lg-6">
-				  <input class="form-control" type="text" name="headCount" id="headCount" placeholder="活动人数" >
+				  <input class="form-control" type="text" name="headCount" id="headCount" placeholder="活动人数"  value="${(activity.headCount)!}" >
 				</div>
 			  </div>
 			  
 			  <div class="form-group">
 				<label class="col-lg-2 control-label" for="introduction">活动介绍：</label>
 				<div class="col-lg-6">
-				  <textarea class="form-control" rows="4" id="introduction" name="introduction" placeholder="活动介绍"></textarea>
+				  <textarea class="form-control" rows="4" id="introduction" name="introduction" placeholder="活动介绍" >${(activity.introduction)!}</textarea>
 				</div>
 			  </div>
 			  		        <!-- Redirect browsers with JavaScript disabled to the origin page -->
@@ -123,13 +123,23 @@
 				<label class="col-lg-2 control-label" for="opened">是否公开：</label>
 				<div class="col-lg-10">
 					<div class="checkbox">
+					<#if (activity.opened)! == false>
+						<label>
+						  <input type="radio" name="opened" value="true" > 是
+						</label>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<label>
+						  <input type="radio" name="opened" value="false" checked> 否
+						</label>					
+					<#else>
 						<label>
 						  <input type="radio" name="opened" value="true" checked> 是
 						</label>
 						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<label>
 						  <input type="radio" name="opened" value="false"> 否
-						</label>
+						</label>					
+					</#if>
 					</div>
 					
 				</div>
@@ -137,7 +147,7 @@
 			 <div class="form-group">
 				<label class="col-lg-2 control-label" for="homepage">活动主页地址：</label>
 				<div class="col-lg-6">
-				  <input class="form-control" type="text" id="homepage" name="homepage"  placeholder="活动主页地址">
+				  <input class="form-control" type="text" id="homepage" name="homepage"  placeholder="活动主页地址" value="${(activity.homepage)!}" >
 				</div>
 			 </div>	
 			 <div class="form-group">

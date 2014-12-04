@@ -34,5 +34,6 @@ public interface UserService {
      */
     public User findByUsername(String username);
     
-    public boolean exists(User user);
+    public boolean exists(String username);
+    
 }

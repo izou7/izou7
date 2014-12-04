@@ -105,6 +105,8 @@
                 /user/logout = logout
                 /error = anon
                 /index = anon
+                /regist = anon
+                /activity/info/** = anon
                 /activity/** = user
                 /public/** = user
                 /userInfo/** = user
