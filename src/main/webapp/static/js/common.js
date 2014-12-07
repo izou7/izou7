@@ -133,6 +133,9 @@ function initCalendar(mark)
 		WdatePicker({doubleCalendar:true,startDate:'%y-%M-01',dateFmt:'yyyy-MM-dd',alwaysUseStartDate:true,skin:'twoer'});
 	});
 }
+/**
+ * 序列化表单
+ */
 $.fn.serializeObject = function()    
 {    
    var o = {};    
@@ -148,4 +151,4 @@ $.fn.serializeObject = function()
        }    
    });    
    return o;    
-}; 
+};

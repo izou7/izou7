@@ -11,6 +11,7 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
+import cn.chinattclub.izou7.entity.User;
 import cn.chinattclub.izou7.service.UserService;
 
 
@@ -36,7 +37,15 @@ public class RequestAnalyzerInterceptor extends HandlerInterceptorAdapter {
 			HttpServletResponse response, Object handler) throws Exception {
 		Subject subject = SecurityUtils.getSubject();
 		if(subject.isAuthenticated()){
-			request.setAttribute("realName", userServiceImpl.findByUsername(subject.getPrincipal().toString()).getUserInfo().getRealName());
+			String realName = "";
+			User user = userServiceImpl.findByUsername(subject.getPrincipal().toString());
+			if(user.getUserInfo()==null){
+				realName = user.getUsername();
+			}else{
+				realName = user.getUserInfo().getRealName();
+				
+			}
+			request.setAttribute("realName", realName);
 		}
 		return true;
 	}

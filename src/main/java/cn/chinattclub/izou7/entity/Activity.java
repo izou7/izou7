@@ -15,6 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.NotFound;
@@ -114,8 +115,8 @@ public class Activity {
 	 */
 	private Integer status;
 	
-	@OneToMany(mappedBy="activity",cascade=CascadeType.ALL,fetch=FetchType.EAGER)
-	private Set<ActivityPoster> activityPosters;
+//	@OneToMany(mappedBy="activity",cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+//	private Set<ActivityPoster> activityPosters;
 	
 	/**
 	 * 报名模板
@@ -187,6 +188,12 @@ public class Activity {
 	@Column(name = "update_time", insertable = false, updatable = false)
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss" ,timezone="GMT+8")
 	private Date updateTime;
+	
+	/**
+	 * 海报url
+	 */
+	@Column(name="poster_url")
+	private String posterUrl;
 
 	/**
 	 * Returns the value of the field called 'id'.
@@ -462,22 +469,6 @@ public class Activity {
 	}
 
 
-	/**
-	 * Returns the value of the field called 'activityPosters'.
-	 * @return Returns the activityPosters.
-	 */
-	public Set<ActivityPoster> getActivityPosters() {
-		return this.activityPosters;
-	}
-
-	/**
-	 * Sets the field called 'activityPosters' to the given value.
-	 * @param activityPosters The activityPosters to set.
-	 */
-	public void setActivityPosters(Set<ActivityPoster> activityPosters) {
-		this.activityPosters = activityPosters;
-	}
-
 	public ApplyTemplate getTemplate() {
 		return template;
 	}
@@ -600,4 +591,16 @@ public class Activity {
 	public void setCfSettings(Set<ActivityCrowdfundingSetting> cfSettings) {
 		this.cfSettings = cfSettings;
 	}
+
+	public String getPosterUrl() {
+//		if(activityPosters!=null&&activityPosters.size()>0){
+//			this.posterUrl = activityPosters.iterator().next().getPoster();  
+//		}
+		return posterUrl;
+	}
+
+	public void setPosterUrl(String posterUrl) {
+		this.posterUrl = posterUrl;
+	}
+	
 }

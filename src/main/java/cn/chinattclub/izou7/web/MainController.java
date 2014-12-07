@@ -89,9 +89,14 @@ public class MainController {
 					user.setUsername(dto.getUsername());
 					user.setPassword(dto.getPassword());
 					userServiceImpl.createUser(user);
-					user.setPassword(dto.getPassword());
-					RestResponse response = login(user);
-					modelPage = "site.main.index";
+					User loginUser = new User();
+					loginUser.setUsername(dto.getUsername());
+					loginUser.setPassword(dto.getPassword());
+					RestResponse response = login(loginUser);
+					if(response.getStatusCode()!=ResponseStatusCode.OK){
+						error = response.getMessage();
+					}
+					modelPage = "redirect:/index";
 				}
 			}
 		}

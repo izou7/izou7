@@ -107,6 +107,7 @@
                 /index = anon
                 /regist = anon
                 /activity/info/** = anon
+                /activity/index = anon
                 /activity/** = user
                 /public/** = user
                 /userInfo/** = user
