@@ -33,7 +33,7 @@ public class RetryLimitHashedCredentialsMatcher extends
 			retryCount = new AtomicInteger(0);
 			passwordRetryCache.put(username, retryCount);
 		}
-		if (retryCount.incrementAndGet() > 5) {
+		if (retryCount.incrementAndGet() > 100) {
 			// if retry count > 5 throw
 			throw new ExcessiveAttemptsException();
 		}

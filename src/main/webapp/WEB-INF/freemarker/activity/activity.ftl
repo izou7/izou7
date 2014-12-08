@@ -26,19 +26,21 @@
 			  <div class="form-group">
 				<label class="col-sm-2 control-label">标签：</label>
 				<div id="tagsDiv" class="col-sm-6">
-					<button type="button" class="btn btn-sm btn-info">原创设计</button>
-					<button type="button" class="btn btn-sm btn-info">演唱会</button>
-					<button type="button" class="btn btn-sm btn-info">红丝带</button>
-					<button type="button" class="btn btn-sm btn-info">扶贫</button>
-					<button type="button" class="btn btn-sm btn-info">助学</button>
-					<button type="button" class="btn btn-sm btn-info">微电影</button>
-					<button type="button" class="btn btn-sm btn-info">生活育儿</button>
-					<button type="button" class="btn btn-sm btn-info">论坛</button>
-					<button type="button" class="btn btn-sm btn-info">点映</button>
-					<button type="button" class="btn btn-sm btn-info">首映</button>
-					<button type="button" class="btn btn-sm btn-info">其他</button>
+					<button type="button" class="btn btn-sm btn-info" value="原创设计">原创设计</button>
+					<button type="button" class="btn btn-sm btn-info" value="演唱会">演唱会</button>
+					<button type="button" class="btn btn-sm btn-info" value="红丝带">红丝带</button>
+					<button type="button" class="btn btn-sm btn-info" value="扶贫">扶贫</button>
+					<button type="button" class="btn btn-sm btn-info" value="助学">助学</button>
+					<button type="button" class="btn btn-sm btn-info" value="微电影">微电影</button>
+					<button type="button" class="btn btn-sm btn-info" value="生活育儿">生活育儿</button>
+					<button type="button" class="btn btn-sm btn-info" value="论坛">论坛</button>
+					<button type="button" class="btn btn-sm btn-info" value="点映">点映</button>
+					<button type="button" class="btn btn-sm btn-info" value="首映">首映</button>
+					<button type="button" class="btn btn-sm btn-info" value="其他">其他</button>
 				</div>
-				<input type="hidden" id="tags" name="tags" >
+				<input type="hidden" id="tags" name="tags" value="${(activity.tags)!}" >
+				<div id="tagsError" class="col-sm-4">
+				</div>
 			  </div>
 			  <div class="form-group">
 				<label class="col-sm-2 control-label" for="name">活动名称：</label>
@@ -61,7 +63,17 @@
 				</div>
 				<div class="col-lg-2">
 				  <select id="city" name="city" class="form-control" >
-					<option value="51">北京</option>
+				  <#if (activity.city.province.citys)??>
+					<#list (activity.city.province.citys) as city>
+						<#if (activity.city.city)! == city.city >
+				  			<option value="${(city.id)!}" selected>${(city.city)!}</option>
+				  		<#else>
+				  			<option value="${(city.id)!}">${(city.city)!}</option>
+				  		</#if> 
+					</#list>
+					<#else>
+						<option value="51">北京市</option>
+					</#if>
 				  </select>
 				</div>
 			  </div>
@@ -84,7 +96,7 @@
 			  <div class="form-group">
 				<label class="col-lg-2 control-label" for="headCount">活动人数：</label>
 				<div class="col-lg-6">
-				  <input class="form-control" type="text" name="headCount" id="headCount" placeholder="活动人数"  value="${(activity.headCount)!}" >
+				  <input class="form-control" type="text" name="headCount" id="headCount" placeholder="活动人数"  value="${(activity.headCount)!0}" >
 				</div>
 			  </div>
 			  
@@ -109,7 +121,7 @@
 			                </span>
 			            </div>
 			        </div>
-			        <input type="hidden" id="posterUrl" name="posterUrl" value="">
+			        <input type="hidden" id="posterUrl" name="posterUrl" value="${(activity.posterUrl)!}">
 			</div>
 	        <div class="form-group">
 				<label class="col-lg-2 control-label" ></label>
@@ -151,13 +163,20 @@
 				</div>
 			 </div>	
 			 <div class="form-group">
-				<div class="col-lg-6">
+				<div class="col-lg-2">
 				 
+				</div>
+				<div class="col-lg-2">
+				  <button  id="saveBtn" type="button" class="btn btn-info btn-block" >保存</button>
+				</div>
+				<div class="col-lg-2">
+				  <button  id="deployBtn" type="button" class="btn btn-info btn-block" >发布</button>
 				</div>
 				<div class="col-lg-2">
 				  <button  id="nextBtn" type="button" class="btn btn-info btn-block" >下一步</button>
 				</div>
 			 </div>
+			 <input type="hidden" id="type" name="type" value="NEXT"/>
 			</form>
 			
 		</div>
@@ -238,7 +257,10 @@
         </td>
     </tr>
 {% } %}
-</script> 
+</script>
+<script>
+var tags = "${(activity.tags)!}";
+</script>
 <script src="${ (project.staticDomain)! }/libs/jquery/jquery-2.0.3.js"></script>
 <script src="${ (project.staticDomain)! }/libs/jquery/jquery-migrate-1.2.1.min.js"></script>
 <!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
@@ -270,7 +292,7 @@
 <script src="${ (project.staticDomain)! }/libs/jqueryFileUpload/js/jquery.fileupload-ui.js"></script>
 <script src="${ (project.staticDomain)! }/libs/jqueryFileUpload/js/cors/jquery.xdr-transport.js"></script>
 
-<script src="${ (project.staticDomain)! }/libs/jquery-form/jquery-form-20131225.min.js"></script>
+<script src="${ (project.staticDomain)! }/libs/jquery-form/jquery.form.js"></script>
 <script src="${ (project.staticDomain)! }/libs/Zebra_Dialog/js/zebra_dialog.js"></script>
 <script src="${ (project.staticDomain)! }/js/common.js"></script>
 <script src="${ (project.staticDomain)! }/libs/My97DatePicker/WdatePicker.js"></script>

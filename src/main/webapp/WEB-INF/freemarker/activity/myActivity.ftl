@@ -9,7 +9,7 @@
   <div class="container content">
   <!--页头-->
     <div class="page-header">
-		<h1>我发起的活动！</h1>
+		<h1>我发起的活动</h1>
 	</div>
 	<div class="row">
 	  <!-- Nav tabs -->

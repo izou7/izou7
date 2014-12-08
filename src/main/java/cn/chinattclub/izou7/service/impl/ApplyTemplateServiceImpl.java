@@ -31,6 +31,5 @@ public class ApplyTemplateServiceImpl implements ApplyTemplateService {
 		// TODO Auto-generated method stub
 		return dao.get(id);
 	}
-	
-	
+
 }

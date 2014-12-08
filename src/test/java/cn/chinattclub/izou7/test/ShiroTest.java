@@ -4,6 +4,10 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,7 +58,7 @@ public class ShiroTest {
 
     protected String password = "123";
 
-    protected User2 u1;
+    protected User u1;
     protected User2 u2;
     protected User2 u3;
     protected User2 u4;
@@ -75,11 +79,15 @@ public class ShiroTest {
 
     @Test
     public void test() {
-//        Subject subject = SecurityUtils.getSubject();
-//        UsernamePasswordToken token = new UsernamePasswordToken("wu", password);
-//        subject.login(token);
-//
-//        Assert.assertTrue(subject.isAuthenticated());
+//    	u1 = new User();
+//    	u1.setPassword("123456");
+//    	u1.setUsername("zhangxiaoyinghao");
+//    	userService.createUser(u1);
+        Subject subject = SecurityUtils.getSubject();
+        UsernamePasswordToken token = new UsernamePasswordToken("zhaozengzhuan", "123456");
+        subject.login(token);
+
+        Assert.assertTrue(subject.isAuthenticated());
 //        subject.checkRole("admin");
 //        subject.checkPermission("user:create");
 //    	User u = new User();

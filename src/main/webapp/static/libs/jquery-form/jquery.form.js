@@ -1176,38 +1176,37 @@ $.fn.clearForm = function(includeHidden) {
  * Clears the selected form elements.
  */
 $.fn.clearFields = $.fn.clearInputs = function(includeHidden) {
-    var re = /^(?:color|date|datetime|email|month|number|password|range|search|tel|text|time|url|week)$/i; // 'hidden' is not in this list
-    return this.each(function() {
-        var t = this.type, tag = this.tagName.toLowerCase();
-        if (re.test(t) || tag == 'textarea') {
-            this.value = '';
-        }
-        else if (t == 'checkbox' || t == 'radio') {
-            this.checked = false;
-        }
-        else if (tag == 'select') {
-            this.selectedIndex = -1;
-        }
-        else if (t == "file") {
-            if (/MSIE/.test(navigator.userAgent)) {
-                $(this).replaceWith($(this).clone(true));
-            } else {
-                $(this).val('');
-            }
-        }
-        else if (includeHidden) {
-            // includeHidden can be the value true, or it can be a selector string
-            // indicating a special test; for example:
-            //  $('#myForm').clearForm('.special:hidden')
-            // the above would clean hidden inputs that have the class of 'special'
-            if ( (includeHidden === true && /hidden/.test(t)) ||
-                 (typeof includeHidden == 'string' && $(this).is(includeHidden)) ) {
-                this.value = '';
-            }
-        }
-    });
+	var re = /^(?:color|date|datetime|email|month|number|password|range|search|tel|text|time|url|week)$/i; // 'hidden' is not in this list
+	return this.each(function() {
+		var t = this.type, tag = this.tagName.toLowerCase();
+		if (re.test(t) || tag == 'textarea') {
+			this.value = '';
+		}
+		else if (t == 'checkbox' || t == 'radio') {
+			this.checked = false;
+		}
+		else if (tag == 'select') {
+			this.selectedIndex = -1;
+		}
+		else if (t == "file") {
+			if (/MSIE/.test(navigator.userAgent)) {
+				$(this).replaceWith($(this).clone(true));
+			} else {
+				$(this).val('');
+			}
+		}
+		else if (includeHidden) {
+			// includeHidden can be the value true, or it can be a selector string
+			// indicating a special test; for example:
+			//  $('#myForm').clearForm('.special:hidden')
+			// the above would clean hidden inputs that have the class of 'special'
+			if ( (includeHidden === true && /hidden/.test(t)) ||
+					(typeof includeHidden == 'string' && $(this).is(includeHidden)) ) {
+				this.value = '';
+			}
+		}
+	});
 };
-
 /**
  * Resets the form data.  Causes all form elements to be reset to their original value.
  */

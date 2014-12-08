@@ -150,7 +150,7 @@ public class User {
 	}
 
 	public String getCredentialsSalt() {
-		return username + salt;
+		return username+salt;
 	}
 
 	public Integer getSource() {

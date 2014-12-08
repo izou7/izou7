@@ -31,9 +31,6 @@ public class PasswordHelper {
         this.algorithmName = algorithmName;
     }
 
-    public void setHashIterations(int hashIterations) {
-        this.hashIterations = hashIterations;
-    }
 
     public void encryptPassword(User user) {
 
@@ -42,8 +39,7 @@ public class PasswordHelper {
         String newPassword = new SimpleHash(
                 algorithmName,
                 user.getPassword(),
-                ByteSource.Util.bytes(user.getCredentialsSalt()),
-                hashIterations).toHex();
+                ByteSource.Util.bytes(user.getCredentialsSalt()),hashIterations).toHex();
 
         user.setPassword(newPassword);
     }

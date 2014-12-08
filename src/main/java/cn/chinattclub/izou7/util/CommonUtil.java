@@ -6,12 +6,16 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import java.io.FileInputStream;
+import java.lang.reflect.Field;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import javax.annotation.Resource;
@@ -29,6 +33,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Component;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.apache.pdfbox.pdfparser.PDFParser;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.util.PDFTextStripper;
@@ -41,6 +47,9 @@ import org.apache.poi.hwpf.extractor.WordExtractor;
 
 import cn.chinattclub.izou7.entity.User;
 import cn.chinattclub.izou7.service.UserService;
+import cn.zy.commons.util.json.JsonConverter;
+import cn.zy.commons.webdev.constant.ResponseStatusCode;
+import cn.zy.commons.webdev.http.RestResponse;
 
 
 
@@ -59,6 +68,36 @@ public class CommonUtil {
 	@Resource
 	public void setUserService(UserService userService) {
 		CommonUtil.userService = userService;
+	}
+	
+	/**
+	 * 验证DTO
+	 * @param response
+	 * @param br
+	 * @return
+	 * @throws ClassNotFoundException 
+	 * @throws SecurityException 
+	 */
+	public static boolean validateDto(RestResponse response,BindingResult br,String dtoClassName) throws SecurityException, ClassNotFoundException{
+		if(br.hasErrors()){
+			Map<String,Object> errors = new LinkedHashMap<>();
+			String message = "";
+			for (FieldError error : br.getFieldErrors()) {
+				errors.put(error.getField().toString(), error.getDefaultMessage().toString());
+			}
+			Field[] fds = Class.forName(dtoClassName).getDeclaredFields();
+			for (Field field : fds) {
+				if(errors.containsKey(field.getName())){
+					message = errors.get(field.getName()).toString();
+					break;
+				}
+			}
+			System.out.println(JsonConverter.format(errors));
+//			response.getErrors().putAll(errors);
+			response.setMessage(message);
+			return false;
+		}
+		return true;
 	}
 	
 	public static User getCurrentUser(){

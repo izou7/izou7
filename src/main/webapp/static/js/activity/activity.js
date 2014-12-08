@@ -21,11 +21,14 @@ $(function () {
 	
     initCalendar("#startTime");
 	initCalendar("#endTime");
+	initTags(tags);
 	
 	$("#tagsDiv button").click(function(){tagsClicked(this)});
 	$("#province").change(function(){provinceChange(this)});
 	
 	$("#nextBtn").click(nextBtnClick);
+	$("#saveBtn").click(saveBtnClick);
+	$("#deployBtn").click(deployBtnClick);
 //	$("#fileupload").ajaxForm({
 //		dataType:  "json",
 //		success:    function( response ) {
@@ -35,29 +38,68 @@ $(function () {
 //		}
 //	});
 });
-function beforeRequest(){
-	var tags = $("#tags").val();
-	if(!tags){
-		$.Zebra_Dialog("活动标签不能为空！", {
-			'type':     'information',
-			'title':    '提示',
-			'buttons':  ["确定"]
-		});
-		return false;
+function initTags(tags){
+	if(tags){
+		var tagsArray = tags.split("|");
+		for(var i=0;i<tagsArray.length;i++){
+			$("#tagsDiv").find("button[value='"+tagsArray[i]+"']").attr("class","btn btn-sm btn-danger");
+		}
 	}
-	return true;
 }
-function nextBtnClick(){
+function saveBtnClick(){
+	$("#type").val("SAVE");
+	var id = $("#id").val();
+	if(id){
+		exeActivity("update");
+	}else{
+		exeActivity("add");
+	}
+}
+function deployBtnClick(){
+	$("#type").val("DEPLOY");
+	if(id){
+		exeActivity("update");
+	}else{
+		exeActivity("add");
+	}
+}
+function beforeRequest(){
+//	var tags = $("#tags").val();
+//	if(!tags){
+//		$.Zebra_Dialog("活动标签不能为空！", {
+//			'type':     'information',
+//			'title':    '提示',
+//			'buttons':  ["确定"]
+//		});
+//		return false;
+//	}
+//	return true;
+}
+
+function exeActivity(url){
 	var inputJson = $("#fileupload").serialize();
 	$.ajax({
 		type: "GET",
-		url: "add",
+		url: url,
 		dataType : "json",
 		data : inputJson,
 		contentType:'application/json;charset=UTF-8', 
 		success: function(json) {
 			if (json.statusCode == 200) {
-				location.href="activity?step=SECOND&activityId="+json.body.id;
+				var type = $.trim($("#type").val()); 
+				
+				if(type=="SAVE"){
+					$.Zebra_Dialog('保存成功', {
+						'type':     'information',
+						'title':    '提示',
+						'buttons':  ["确定"]
+					});
+					$("#id").val(json.body.id);
+				}else if (type=="DEPLOY"){
+					location.href="activity?step=SUCCESS&activityId="+json.body.id;
+				}else{
+					location.href="activity?step=SECOND&activityId="+json.body.id;
+				}
 			}else {
 				$.Zebra_Dialog(json.message, {
 					'type':     'information',
@@ -75,6 +117,15 @@ function nextBtnClick(){
 		}
 	}); 
 	
+}
+function nextBtnClick(){
+	var id = $("#id").val();
+	if(id){
+//		location.href="activity?step=SECOND&activityId="+id;
+		exeActivity("update");
+	}else{
+		exeActivity("add");
+	}
 }
 function createAndValidate(){
 }
@@ -105,7 +156,7 @@ function provinceChange(obj){
 			success: function(json) {
 				$("#city").empty();
 				if (json.statusCode == 200) {
-					var citys = json.data.citys;
+					var citys = json.body.citys;
 					if(citys){
 						for(var i=0;i<citys.length;i++){
 							$("#city").append('<option value="'+citys[i].id+'">'+citys[i].city+'</option>');

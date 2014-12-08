@@ -29,4 +29,11 @@ public interface ActivityArticleService {
 	 * @param articleId
 	 */
 	public void delete(int articleId);
+
+	/**
+	 * 验证文章数量
+	 *
+	 * @param article
+	 */
+	public boolean validateNum(ActivityArticle article);
 }

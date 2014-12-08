@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -31,6 +32,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -83,7 +87,9 @@ import cn.chinattclub.izou7.service.ProvinceService;
 import cn.chinattclub.izou7.service.PublicService;
 import cn.chinattclub.izou7.service.UserInfoService;
 import cn.chinattclub.izou7.service.UserService;
+import cn.chinattclub.izou7.util.CommonUtil;
 import cn.chinattclub.izou7.entity.Public;
+import cn.zy.commons.util.json.JsonConverter;
 import cn.zy.commons.webdev.constant.ResponseStatusCode;
 import cn.zy.commons.webdev.http.RestResponse;
 import cn.zy.commons.webdev.vo.Page;
@@ -221,6 +227,11 @@ public class ActivityController {
 	}
 	private String activitySuccessPage(Model model, ActivityDto dto) {
 		// TODO Auto-generated method stub
+		model.addAttribute("url", "http://localhost:8080/activity/info/1/"+dto.getActivityId());
+		Activity activity = activityServiceImpl.findById(dto.getActivityId());
+		if(activity.getTemplate()!=null){
+			model.addAttribute("content",activity.getTemplate());
+		}
 		return "site.activity.success";
 	}
 
@@ -348,37 +359,67 @@ public class ActivityController {
 	}
 	
 	/**
+	 * 更新活动
+	 * @param dto
+	 * @return
+	 * @throws ParseException
+	 * @throws ClassNotFoundException 
+	 * @throws SecurityException 
+	 */
+	@RequestMapping(value="/update", method = RequestMethod.GET)
+	@ResponseBody
+	public RestResponse update(@Valid ActivityFormDto dto, BindingResult br) throws ParseException, SecurityException, ClassNotFoundException {
+		RestResponse response = new RestResponse();
+		int statusCode = ResponseStatusCode.OK;
+		if(!CommonUtil.validateDto(response,br,dto.getClass().getName().toString())){
+			statusCode = ResponseStatusCode.INTERNAL_SERVER_ERROR;
+		}else{
+			City city = cityServiceImpl.getCity(dto.getCity());
+			Activity originalActivity = activityServiceImpl.findALLById(dto.getId()); 
+			Activity activity = dto.convert(originalActivity);
+			activity.setCity(city);  
+			activityServiceImpl.update(activity);
+			response.getBody().put("id",activity.getId());
+		}
+		response.setStatusCode(statusCode);
+		return response;
+		
+	}
+	/**
 	 * 新增活动
 	 * @param dto
 	 * @return
 	 * @throws ParseException
+	 * @throws ClassNotFoundException 
+	 * @throws SecurityException 
 	 */
 	@RequestMapping(value="/add", method = RequestMethod.GET)
 	@ResponseBody
-	public RestResponse add(ActivityFormDto dto) throws ParseException {
+	public RestResponse add(@Valid ActivityFormDto dto, BindingResult br) throws ParseException, SecurityException, ClassNotFoundException {
 		RestResponse response = new RestResponse();
 		int statusCode = ResponseStatusCode.OK;
-		String msg = "操作成功！";
-		Subject currentUser = SecurityUtils.getSubject();
-		User user = userServiceImpl.findByUsername(currentUser.getPrincipal().toString());
-		City city = cityServiceImpl.getCity(dto.getCity());
-		Activity activity = dto.convert(null);
-		if(StringUtils.isNotBlank(dto.getPosterUrl())){
-			ActivityPoster poster = new ActivityPoster();
-			poster.setActivity(activity);
-			poster.setPoster(dto.getPosterUrl());
-			poster.setCreateTime(new Date());
-			Set<ActivityPoster> posters = new HashSet<>();
-			posters.add(poster);
-			activity.setActivityPosters(posters);
+		if(!CommonUtil.validateDto(response,br,dto.getClass().getName().toString())){
+			statusCode = ResponseStatusCode.INTERNAL_SERVER_ERROR;
+		}else{
+			Subject currentUser = SecurityUtils.getSubject();
+			User user = userServiceImpl.findByUsername(currentUser.getPrincipal().toString());
+			City city = cityServiceImpl.getCity(dto.getCity());
+			Activity activity = dto.convert(null);
+//			if(StringUtils.isNotBlank(dto.getPosterUrl())){
+//				ActivityPoster poster = new ActivityPoster();
+//				poster.setActivity(activity);
+//				poster.setPoster(dto.getPosterUrl());
+//				poster.setCreateTime(new Date());
+//				Set<ActivityPoster> posters = new HashSet<>();
+//				posters.add(poster);
+//				activity.setActivityPosters(posters);
+//			}
+			activity.setCity(city);
+			activity.setUser(user);
+			activityServiceImpl.add(activity);
+			response.getBody().put("id",activity.getId());
 		}
-		activity.setCity(city);
-		activity.setUser(user);
-		activity.setStatus(0);
-		activityServiceImpl.add(activity);
-		response.setMessage(msg);
 		response.setStatusCode(statusCode);
-		response.getBody().put("id",activity.getId());
 		return response;
 		
 	}
@@ -427,7 +468,7 @@ public class ActivityController {
 			try {
 				mpf.transferTo(newFile);
 				image.setName(newFile.getName());
-				image.setUrl(appConfig.get("storageDirectory").toString().substring(appConfig.get("storageDirectory").toString().indexOf("static")) + "images/" + newFilename);
+				image.setUrl(appConfig.get("storageDirectory").toString().substring(appConfig.get("storageDirectory").toString().indexOf("static")-1) + "images/" + newFilename);
 			} catch(IOException e) {
 				log.error("Could not upload file "+mpf.getOriginalFilename(), e);
 				image.setError("上传失败！");
@@ -477,7 +518,11 @@ public class ActivityController {
                  article.setName(newFile.getName());
                  article.setActivity(id);
                  article.setCreateTime(new Date());
-                 activityArticleServiceImpl.add(article);
+                 boolean result = activityArticleServiceImpl.validateNum(article);
+                 if(result){
+                	 activityArticleServiceImpl.add(article);
+                 }
+                 article.setError("文章已超过最大数量限制！");
             } catch(IOException e) {
                 log.error("Could not upload file "+mpf.getOriginalFilename(), e);
                 article.setError("上传失败！");
@@ -870,7 +915,7 @@ public class ActivityController {
 			dto.setId(act.getId());
 			dto.setDeployTime(act.getCreateTime());
 			dto.setName(act.getName());
-			dto.setPoster(act.getActivityPosters().iterator().next().getPoster());
+			dto.setPoster(act.getPosterUrl());
 			dto.setUpdateTime(act.getUpdateTime());
 			alds.add(dto);
 		}
@@ -940,6 +985,5 @@ public class ActivityController {
 		}
 		return tagsStr.toString();
 	}
-	
 	
 }

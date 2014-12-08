@@ -59,11 +59,13 @@
         -->
         <input type="username" name="username" class="form-control" placeholder="账号" required>
         <input type="password" name="password" class="form-control" placeholder="密码" required>
+        <!-- 
         <div class="checkbox">
           <label>
             <input type="checkbox" value="remember-me"> Remember me
           </label>
         </div>
+         -->
         <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
       </form>
 
