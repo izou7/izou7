@@ -468,7 +468,7 @@ public class ActivityController {
 			try {
 				mpf.transferTo(newFile);
 				image.setName(newFile.getName());
-				image.setUrl(appConfig.get("storageDirectory").toString().substring(appConfig.get("storageDirectory").toString().indexOf("static")) + "images/" + newFilename);
+				image.setUrl(appConfig.get("storageDirectory").toString().substring(appConfig.get("storageDirectory").toString().indexOf("static")-1) + "images/" + newFilename);
 			} catch(IOException e) {
 				log.error("Could not upload file "+mpf.getOriginalFilename(), e);
 				image.setError("上传失败！");
@@ -518,7 +518,11 @@ public class ActivityController {
                  article.setName(newFile.getName());
                  article.setActivity(id);
                  article.setCreateTime(new Date());
-                 activityArticleServiceImpl.add(article);
+                 boolean result = activityArticleServiceImpl.validateNum(article);
+                 if(result){
+                	 activityArticleServiceImpl.add(article);
+                 }
+                 article.setError("文章已超过最大数量限制！");
             } catch(IOException e) {
                 log.error("Could not upload file "+mpf.getOriginalFilename(), e);
                 article.setError("上传失败！");

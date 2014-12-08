@@ -1,6 +1,7 @@
 package cn.chinattclub.izou7.service.impl;
 
 import java.util.List;
+import java.util.Properties;
 
 import javax.annotation.Resource;
 
@@ -20,6 +21,9 @@ public class ActivityArticleServiceImpl implements ActivityArticleService {
 	@Resource
 	private ActivityArticleDao dao;
 	
+	@Resource
+	private Properties appConfig;
+	
 	@Override
 	public List<ActivityArticle> findArticlesById(int id) {
 		// TODO Auto-generated method stub.
@@ -36,6 +40,16 @@ public class ActivityArticleServiceImpl implements ActivityArticleService {
 	public void delete(int articleId) {
 		// TODO Auto-generated method stub
 		dao.delete(articleId);
+	}
+
+	@Override
+	public boolean validateNum(ActivityArticle article) {
+		// TODO Auto-generated method stub.
+		List<ActivityArticle> articles = findArticlesById(article.getActivity());
+		if(articles!=null&&articles.size()>=Integer.parseInt(appConfig.get("maxArticles").toString())){
+			return false;
+		}
+		return true;
 	}
 	
 }

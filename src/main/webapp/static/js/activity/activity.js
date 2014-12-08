@@ -121,7 +121,8 @@ function exeActivity(url){
 function nextBtnClick(){
 	var id = $("#id").val();
 	if(id){
-		location.href="activity?step=SECOND&activityId="+id;
+//		location.href="activity?step=SECOND&activityId="+id;
+		exeActivity("update");
 	}else{
 		exeActivity("add");
 	}

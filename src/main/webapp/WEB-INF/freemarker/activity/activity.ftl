@@ -135,7 +135,7 @@
 				<label class="col-lg-2 control-label" for="opened">是否公开：</label>
 				<div class="col-lg-10">
 					<div class="checkbox">
-					<#if (activity.opened)?? && (activity.opened)! == false>
+					<#if  (activity.opened)?? && (activity.opened)! == false>
 						<label>
 						  <input type="radio" name="opened" value="true" > 是
 						</label>

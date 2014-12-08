@@ -93,7 +93,7 @@ public class CommonUtil {
 				}
 			}
 			System.out.println(JsonConverter.format(errors));
-			response.getErrors().putAll(errors);
+//			response.getErrors().putAll(errors);
 			response.setMessage(message);
 			return false;
 		}

@@ -25,7 +25,7 @@
 	  </div>
 	  <div class="panel-body">
 	  		<div class="row">
-			<div class="col-lg-5"><img src="/static/images/Chrysanthemum.jpg" width="100%" height="250"></div>
+			<div class="col-lg-5"><img src="${(activity.posterUrl)!}" width="100%" height="250"></div>
 			<div class="col-lg-7">
 			<p>
 				标签：${(activity.tags)!}
