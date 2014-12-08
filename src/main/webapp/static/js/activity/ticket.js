@@ -14,12 +14,19 @@ $(function () {
 	$("#saveBtn").click(function (){$("#submitType").val("save");});
 	$("#nextBtn").click(function (){$("#submitType").val("next");});
 	$("input[name='free']").click(function freeHander(){freeChecked(this);});
+	if(free!="false"){
+		$("input[type!='hidden'][name!='free']").attr("disabled",true);
+		$("textarea").attr("disabled",true);
+	}
 });
 function freeChecked(obj){
 	var free = $(obj).val();
 	if(free=="true"){
-		$("input[type!='hidden'][name!='free']").val("");
-		$("textarea").val("");
+		$("input[type!='hidden'][name!='free']").val("").attr("disabled",true);
+		$("textarea").val("").attr("disabled",true);
+	}else{
+		$("input[type!='hidden'][name!='free']").attr("disabled",false);
+		$("textarea").attr("disabled",false);
 	}
 }
 function errorHandler(){

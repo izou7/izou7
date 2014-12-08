@@ -22,28 +22,14 @@ $(function () {
 	        // $.ajax options can be used here too, for example: 
 	        //timeout:   3000 
 	    }; 
-	function beforeRequest(){
-		eventData = $('#calendarForm').serializeObject(); 
-	}
-	function successResponse(){
-		$("#closeBtn").trigger("click");
-		event = {
-				title: eventData.title,
-				start: eventData.start,
-				end: eventData.end,
-				allDay:false
-			};
-		$('#calendar').fullCalendar('renderEvent', event, true); // stick? = true
-		
-	}
-	function errorResponse(){
-		$("#closeBtn").trigger("click");
-		$('#calendar').fullCalendar('unselect');
-	}
+	
 	$('#calendarForm').ajaxForm(options); 
-	$('#calendar').fullCalendar({
+	var calendar = $('#calendar').fullCalendar({
 		timeFormat: 'H:mm{ - H:mm}',
+		aspectRatio: 0,
 		allDaySlot:false,
+		unselectAuto:false,
+		lazyFetching:false,
 		axisFormat:'H(:mm)点',
 		firstDay:1,
 		monthNames: ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],  
@@ -67,13 +53,14 @@ $(function () {
 		selectable: true,
 		selectHelper: true,
 		select: function(start, end) {
+			$('#calendarForm').clearForm();
 			$("#modalTrigger").trigger("click");
 			$("#editBtn").attr("class","btn btn-primary collapse");
 			$("#delBtn").attr("class","btn btn-primary collapse");
 			$("#addBtn").attr("class","btn btn-primary");
 			$("#start").val(start.Format("yyyy-MM-dd HH:mm:ss"));
 			$("#end").val(end.Format("yyyy-MM-dd HH:mm:ss"));
-			$('#calendarForm').clearForm();
+			
 		},
 		editable : true,
 		eventDrop:function( calEvent, dayDelta, minuteDelta, allDay, revertFunc, jsEvent, ui, view) {
@@ -133,8 +120,24 @@ $(function () {
 		}
 	});
 	$("#nextBtn").click(nextBtnClick);
+	$('#addModal').on('hidden.bs.modal', function (e) {
+		calendar.fullCalendar('unselect');
+	});
+
 
 });
+function beforeRequest(){
+	eventData = $('#calendarForm').serializeObject(); 
+}
+function successResponse(){
+	$("#closeBtn").trigger("click");
+	refreshView();
+	
+}
+function errorResponse(){
+	$("#closeBtn").trigger("click");
+	$('#calendar').fullCalendar('unselect');
+}
 function delBtnClick(){
 	$("#closeBtn").trigger("click");
 	var calendarId = $("#calendarId").val();
@@ -255,7 +258,7 @@ function updateCalendar(calendarId,data,revertFunc){
         }
     });
 }
-function refreshView(activityId){
+function refreshView(){
 	  $('#calendar').fullCalendar('refetchEvents');
 }
 function nextBtnClick(){

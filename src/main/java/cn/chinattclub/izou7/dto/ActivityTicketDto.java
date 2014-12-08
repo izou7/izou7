@@ -24,8 +24,10 @@ public class ActivityTicketDto {
 	 */
 	private Integer id;
 	
+	@NotNull
 	private Integer activity;
 	
+	@NotNull
 	private Boolean free;
 	
 	private Integer price;
