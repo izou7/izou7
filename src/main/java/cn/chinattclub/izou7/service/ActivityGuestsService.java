@@ -49,7 +49,7 @@ public interface ActivityGuestsService {
 	 *
 	 * @return
 	 */
-	public Object getGuestsByActivityId(int activityId);
+	public List<ActivityGuest> getGuestsByActivityId(int activityId);
 
 	/**
 	 * TODO Put here a description of what this method does.
@@ -58,5 +58,14 @@ public interface ActivityGuestsService {
 	 * @param guestId
 	 */
 	public void delete(int guestId);
+
+	/**
+	 * 验证该系统推荐用户是否已被添加
+	 *
+	 * @param activityId
+	 * @param sysGuestId
+	 * @return
+	 */
+	public boolean validateSysGuest(int activityId, int sysGuestId);
 
 }

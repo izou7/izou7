@@ -69,6 +69,8 @@ import cn.chinattclub.izou7.entity.Image;
 import cn.chinattclub.izou7.entity.Province;
 import cn.chinattclub.izou7.entity.Public;
 import cn.chinattclub.izou7.entity.User;
+import cn.chinattclub.izou7.entity.UserInfo;
+import cn.chinattclub.izou7.enumeration.ActivityExecuteType;
 import cn.chinattclub.izou7.enumeration.GuestRegistrationStatus;
 import cn.chinattclub.izou7.enumeration.InvitedStatus;
 import cn.chinattclub.izou7.service.ActivityArticleService;
@@ -230,7 +232,7 @@ public class ActivityController {
 		model.addAttribute("url", "http://localhost:8080/activity/info/1/"+dto.getActivityId());
 		Activity activity = activityServiceImpl.findById(dto.getActivityId());
 		if(activity.getTemplate()!=null){
-			model.addAttribute("content",activity.getTemplate());
+			model.addAttribute("content",activity.getTemplate().getContent());
 		}
 		return "site.activity.success";
 	}
@@ -662,22 +664,33 @@ public class ActivityController {
 	 * @param ActivityTicket
 	 * @return
 	 * @throws ParseException 
+	 * @throws ClassNotFoundException 
+	 * @throws SecurityException 
 	 */
 	@RequestMapping(value = "{activityId}/ticket", method = RequestMethod.POST)
 	@ResponseBody
-	public RestResponse addActivityTicket(@PathVariable int activityId,ActivityTicketDto ticket) throws ParseException {
+	public RestResponse addActivityTicket(@PathVariable int activityId,@Valid ActivityTicketDto ticket, BindingResult br) throws ParseException, SecurityException, ClassNotFoundException {
 		RestResponse response = new RestResponse();
 		String message ;
-		ActivityTicket activityTicket = ticket.convert();
-		if(ticket.getId()!=null){
-			activityTicketServiceImpl.update(activityTicket);
+		int statusCode = ResponseStatusCode.OK;
+		if(!CommonUtil.validateDto(response,br,ticket.getClass().getName().toString())){
+			statusCode = ResponseStatusCode.INTERNAL_SERVER_ERROR;
 		}else{
-			activityTicketServiceImpl.add(activityTicket);
+			if(ticket.getId()!=null){
+				ActivityTicket activityTicket = ticket.convert(activityTicketServiceImpl.findByActivityId(activityId));
+				if(ticket.getType().equals(ActivityExecuteType.DEPLOY)){
+					updateActivityStatus(activityId,1);
+				}
+				activityTicketServiceImpl.update(activityTicket);
+			}else{
+				ActivityTicket activityTicket = ticket.convert(null);
+				activityTicket.setCreateTime(new Date());
+				activityTicketServiceImpl.add(activityTicket);
+			}
+			response.setMessage("更新活动增加票务信息成功!");
 		}
-		message = "更新活动【"+activityId+"】增加票务信息成功!";
-		log.info(message);
-		response.setMessage("更新活动增加票务信息成功!");
-		response.setStatusCode(ResponseStatusCode.OK);
+		
+		response.setStatusCode(statusCode);
 		return response;
 	}
 	
@@ -696,14 +709,23 @@ public class ActivityController {
 		return response;
 	}
 	/**
+	 * @throws ClassNotFoundException 
+	 * @throws SecurityException 
 	 */
 	@RequestMapping(value = "{activityId}/setting", method = RequestMethod.POST)
 	@ResponseBody
-	public RestResponse addActivityGuestsSetting(@PathVariable int activityId,ActivityGuestsSetting setting)  {
+	public RestResponse addActivityGuestsSetting(@PathVariable int activityId,@Valid ActivityGuestsSetting setting, BindingResult br) throws SecurityException, ClassNotFoundException  {
 		RestResponse response = new RestResponse();
-		setting.setActivity(activityId);
-		activityGuestsSettingServiceImpl.addOrUpdate(setting);
-		response.setStatusCode(ResponseStatusCode.OK);
+		int statusCode = ResponseStatusCode.OK;
+		if(!CommonUtil.validateDto(response,br,setting.getClass().getName().toString())){
+			statusCode = ResponseStatusCode.INTERNAL_SERVER_ERROR;
+		}else{
+			if(setting.getGuestNumber()!=null||setting.getGuestRegistrationDeadline()!=null){
+				setting.setActivity(activityId);
+				activityGuestsSettingServiceImpl.addOrUpdate(setting);
+			}
+		}
+		response.setStatusCode(statusCode);
 		return response;
 	}
 	/**
@@ -715,9 +737,9 @@ public class ActivityController {
 	 */
 	@RequestMapping(value = "{activityId}/guest/{guestId}", method = RequestMethod.PUT)
 	@ResponseBody
-	public RestResponse adjustActivityGuest(@PathVariable int activityId,@PathVariable int guestId,@RequestBody String up)  {
+	public RestResponse adjustActivityGuest(@PathVariable int activityId,@PathVariable int guestId,String up)  {
 		RestResponse response = new RestResponse();
-		activityGuestsServiceImpl.execSequence(activityId,guestId,Boolean.getBoolean(up));
+		activityGuestsServiceImpl.execSequence(activityId,guestId,Boolean.valueOf(up));
 		response.setStatusCode(ResponseStatusCode.OK);
 		return response;
 	}
@@ -742,38 +764,110 @@ public class ActivityController {
 	 * @param activityId
 	 * @param guest
 	 * @return
+	 * @throws ClassNotFoundException 
+	 * @throws SecurityException 
 	 */
 	@RequestMapping(value = "{activityId}/guest", method = RequestMethod.POST)
 	@ResponseBody
-	public RestResponse addActivityGuest(@PathVariable int activityId,GuestDto guest)  {
+	public RestResponse addActivityGuest(@PathVariable int activityId,@Valid GuestDto guest, BindingResult br) throws SecurityException, ClassNotFoundException  {
 		RestResponse response = new RestResponse();
-		ActivityGuest aGuest = guest.convert();
-		aGuest.setActivity(activityId);
-		int maxRank = activityGuestsServiceImpl.getMaxRank(activityId);
-		aGuest.setRank(maxRank);
-		aGuest.setSource(true);
-		aGuest.setType(1);
-		aGuest.setStatus(GuestRegistrationStatus.SEND);
-		activityGuestsServiceImpl.add(aGuest);
-		response.setStatusCode(ResponseStatusCode.OK);
+		int statusCode = ResponseStatusCode.OK;
+		if(!CommonUtil.validateDto(response,br,guest.getClass().getName().toString())){
+			statusCode = ResponseStatusCode.INTERNAL_SERVER_ERROR;
+		}else{
+			ActivityGuest aGuest = guest.convert();
+			aGuest.setActivity(activityId);
+			int maxRank = activityGuestsServiceImpl.getMaxRank(activityId);
+			aGuest.setRank(maxRank+1);
+			aGuest.setSource(true);
+			aGuest.setType(1);
+			aGuest.setStatus(GuestRegistrationStatus.NOTSEND);
+			activityGuestsServiceImpl.add(aGuest);
+		}
+		response.setStatusCode(statusCode);
 		return response;
 	}
+	
+	/**
+	 * 
+	 * 增加系统嘉宾
+	 *
+	 * @param activityId
+	 * @param userInfoId
+	 * @return
+	 */
+	@RequestMapping(value = "{activityId}/sysGuest/{sysGuestId}", method = RequestMethod.POST)
+	@ResponseBody
+	public RestResponse addActivitySysGuest(@PathVariable int activityId,@PathVariable int sysGuestId) {
+		RestResponse response = new RestResponse();
+		int statusCode = ResponseStatusCode.OK;
+		String message = "新增系统推荐嘉宾成功";
+		if(validateSysGuest(activityId,sysGuestId)){
+			ActivityGuest aGuest = new ActivityGuest();
+			UserInfo uInfo = userInfoServiceImpl.findById(sysGuestId);
+			String careerInfo = uInfo.getCareerInfo();
+			Map<String,Object> careerMap = new HashMap<>();
+			if(StringUtils.isNotBlank(careerInfo)){
+				careerMap = JsonConverter.parse(careerInfo,Map.class);
+			}
+			aGuest.setName(uInfo.getRealName());
+			aGuest.setPosition(careerMap.get("position")!=null?careerMap.get("position").toString():"");
+			aGuest.setCompany(careerMap.get("company")!=null?careerMap.get("position").toString():"");
+			aGuest.setResearchArea(careerMap.get("researchArea")!=null?careerMap.get("researchArea").toString():"");
+			aGuest.setPhone(uInfo.getPhone());
+			aGuest.setIntroduction(uInfo.getIntroduction());
+			aGuest.setUser(uInfo.getUser());
+			int maxRank = activityGuestsServiceImpl.getMaxRank(activityId);
+			aGuest.setRank(maxRank+1);
+			aGuest.setSource(true);
+			aGuest.setType(1);
+			aGuest.setStatus(GuestRegistrationStatus.NOTSEND);
+			aGuest.setActivity(activityId);
+			aGuest.setCreateTime(new Date());
+			activityGuestsServiceImpl.add(aGuest);
+		}else{
+			message = "系统推荐嘉宾已添加，添加失败";
+			statusCode = ResponseStatusCode.INTERNAL_SERVER_ERROR;
+		}
+		response.setMessage(message);
+		response.setStatusCode(statusCode);
+		return response;
+	}
+	/**
+	 * 验证系统推荐嘉宾是否已经存在
+	 *
+	 * @param activityId
+	 * @param sysGuestId
+	 * @return
+	 */
+	private boolean validateSysGuest(int activityId, int sysGuestId) {
+		// TODO Auto-generated method stub.
+		return activityGuestsServiceImpl.validateSysGuest(activityId,sysGuestId);
+	}
+
 	/**
 	 * 新增活动开发合作
 	 * @param activityId
 	 * @param guest
 	 * @return
+	 * @throws ClassNotFoundException 
+	 * @throws SecurityException 
 	 */
 	@RequestMapping(value = "{activityId}/cooperation", method = RequestMethod.POST)
 	@ResponseBody
-	public RestResponse addActivityCooperation(@PathVariable int activityId,ActivityCooperation cooperation)  {
+	public RestResponse addActivityCooperation(@PathVariable int activityId,@Valid ActivityCooperation cooperation, BindingResult br) throws SecurityException, ClassNotFoundException  {
 		RestResponse response = new RestResponse();
-		cooperation.setActivity(activityId);
-		cooperation.setStatus(InvitedStatus.SEND);
-		cooperation.setType(1);
-		cooperation.setCreateTime(new Date());
-		activityCooperationServiceImpl.add(cooperation);
-		response.setStatusCode(ResponseStatusCode.OK);
+		int statusCode = ResponseStatusCode.OK;
+		if(!CommonUtil.validateDto(response,br,cooperation.getClass().getName().toString())){
+			statusCode = ResponseStatusCode.INTERNAL_SERVER_ERROR;
+		}else{
+			cooperation.setActivity(activityId);
+			cooperation.setStatus(InvitedStatus.SEND);
+			cooperation.setType(1);
+			cooperation.setCreateTime(new Date());
+			activityCooperationServiceImpl.add(cooperation);
+		}
+		response.setStatusCode(statusCode);
 		return response;
 	}
 	/**
@@ -921,6 +1015,26 @@ public class ActivityController {
 		}
 		response.getBody().put("activitys", alds);
 		response.getBody().put("page", page);
+		response.setStatusCode(statusCode);
+		return response;
+		
+	}
+	
+	/**
+	 * 
+	 * 更新活动状态
+	 *
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value="/{id}/status", method = RequestMethod.PUT)
+	@ResponseBody
+	public RestResponse updateActivityStatus(@PathVariable int id,int status) {
+		RestResponse response = new RestResponse();
+		int statusCode = ResponseStatusCode.OK;
+		Activity act = activityServiceImpl.findById(id);
+		act.setStatus(status);
+		activityServiceImpl.update(act);
 		response.setStatusCode(statusCode);
 		return response;
 		

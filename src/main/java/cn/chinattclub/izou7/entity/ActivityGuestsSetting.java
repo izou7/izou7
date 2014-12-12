@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.Range;
+
 
 /**
  * 活动嘉宾实体类
@@ -33,12 +35,14 @@ public class ActivityGuestsSetting {
 	 * 需求嘉宾人数
 	 */
 	@Column(name="guest_number")
+	@Range(min=0, max=1000,message="需求嘉宾人数应在0到1000之间")
 	private Integer guestNumber;
 	
 	/**
 	 * 嘉宾报名期限
 	 */
 	@Column(name="guest_registration_deadline")
+	@Range(min=0, max=30,message="嘉宾报名期限应在0到30之间")
 	private Integer guestRegistrationDeadline;
 	
 	/**

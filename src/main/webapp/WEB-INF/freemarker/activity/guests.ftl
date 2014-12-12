@@ -21,7 +21,7 @@
 		   <div class="form-group">
 			<label class="col-sm-2 control-label" for="guestNumber">需求嘉宾人数：</label>
 			<div class="col-sm-2">
-			  <input class="form-control" type="number" id="guestNumber" name="guestNumber" value="${(setting.guestNumber)!}" required>
+			  <input class="form-control" type="number" id="guestNumber" name="guestNumber" value="${(setting.guestNumber)!5}" >
 			</div>
 			<div class="col-sm-1">
 			 <span> 人</span>
@@ -30,7 +30,7 @@
 		   <div class="form-group">
 			<label class="col-sm-2 control-label" for="guestRegistrationDeadline">报名期限：</label>
 			<div class="col-sm-2">
-			  <input class="form-control" type="number" id="guestRegistrationDeadline" name="guestRegistrationDeadline" value="${(setting.guestRegistrationDeadline)!}" required >
+			  <input class="form-control" type="number" id="guestRegistrationDeadline" name="guestRegistrationDeadline" value="${(setting.guestRegistrationDeadline)!2}" >
 			</div>
 			<div class="col-sm-2">
 			  请求发出在几天内
@@ -74,10 +74,10 @@
 				</div>
 			</div>
 			 <div class="form-group">
-				<div class="col-sm-6">
+				<div class="col-sm-2">
 				</div>
 				<div class="col-sm-2">
-				  <button type="button" class="btn btn-info btn-block" onclick="javascript:location.href='activity?step=FIRST&activityId=${id!}';">上一步</button>
+				  <button type="button" class="btn btn-info btn-block" onclick="javascript:location.href='activity?step=FIFTH&activityId=${id!}';">上一步</button>
 				</div>
 				<!--
 				<div class="col-sm-2">
@@ -85,9 +85,16 @@
 				</div>
 				-->
 				<div class="col-sm-2">
+				  <button type="submit" name="subBtn" id="saveBtn"  class="btn btn-info btn-block" >保存</button>
+				</div>
+				<div class="col-sm-2">
+				  <button type="submit" name="subBtn" id="deployBtn"  class="btn btn-info btn-block" >发布</button>
+				</div>
+				<div class="col-sm-2">
 				  <button type="submit" id="nextBtn" class="btn btn-info btn-block" >下一步</button>
 				</div>
 			 </div>
+			 <input type="hidden" id="type" name="type" value="NEXT"/>
 			</form>
 		</div>
 	</div>
@@ -110,7 +117,7 @@
 									<th>操作</th>
 								  </tr>
 								</thead>
-								<tbody>
+								<tbody id="sysTBody">
 								<#list rcds as rcd>
 								  <tr>
 									<td>${(rcd.name)!}</td>
@@ -118,7 +125,7 @@
 									<td>${(rcd.company)!}</td>
 									<td>${(rcd.researchArea)!}</td>
 									<td>${(rcd.phone)!}</td>
-									<td><span class="glyphicon glyphicon-plus"></span></td>
+									<td><span id="sysAdd" class="glyphicon glyphicon-plus" data_id="${(rcd.id)!}"></span></td>
 								  </tr>								
 								</#list>
 								</tbody>

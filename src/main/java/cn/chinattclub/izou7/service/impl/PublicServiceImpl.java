@@ -8,8 +8,10 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import cn.chinattclub.izou7.dao.ActivityDao;
 import cn.chinattclub.izou7.dao.PublicDao;
 import cn.chinattclub.izou7.dto.PublicDto;
+import cn.chinattclub.izou7.entity.Activity;
 import cn.chinattclub.izou7.entity.Article;
 import cn.chinattclub.izou7.entity.Public;
 import cn.chinattclub.izou7.entity.User;
@@ -21,9 +23,12 @@ import cn.chinattclub.izou7.service.PublicService;
  */
 @Service
 public class PublicServiceImpl implements PublicService {
-
+	
 	@Resource
 	public PublicDao dao;
+
+	@Resource
+	public ActivityDao activityDao;
 
 	List<Article> getArticlesFromPublic(PublicDto dto){
 		List<Article> articles = new ArrayList<Article>();
@@ -77,7 +82,9 @@ public class PublicServiceImpl implements PublicService {
 	@Override
 	public List<Public> recommend(Integer activityId) {
 		// TODO Auto-generated method stub
-		return dao.list();
+		Activity act = activityDao.get(activityId);
+		String[] tags = act.getTags().split(",");
+		return dao.recommend(tags);
 	}
 	
 }

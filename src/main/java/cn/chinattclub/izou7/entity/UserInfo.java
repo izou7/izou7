@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -20,6 +21,12 @@ public class UserInfo {
 	@Id
 	@GeneratedValue
     private int id;
+	
+	/**
+	 * 关联用户
+	 */
+	@OneToOne( mappedBy="userInfo",fetch = FetchType.LAZY)
+	private User user;
 	
 	@Column(name = "real_name")
 	private String realName;
@@ -233,6 +240,22 @@ public class UserInfo {
 
 	public void setCity(City city) {
 		this.city = city;
+	}
+
+	/**
+	 * Returns the value of the field called 'user'.
+	 * @return Returns the user.
+	 */
+	public User getUser() {
+		return this.user;
+	}
+
+	/**
+	 * Sets the field called 'user' to the given value.
+	 * @param user The user to set.
+	 */
+	public void setUser(User user) {
+		this.user = user;
 	}
 	
 	

@@ -124,13 +124,13 @@ cn.videofact = {};
 function initCalendarSecond(mark)
 {
 	$(mark).focus(function(){
-		WdatePicker({doubleCalendar:true,startDate:'%y-%M-01 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss',alwaysUseStartDate:true,skin:'twoer'});
+		WdatePicker({readOnly:true,doubleCalendar:true,startDate:'%y-%M-01 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss',alwaysUseStartDate:true,skin:'twoer'});
 	});
 }
 function initCalendar(mark)
 {
 	$(mark).focus(function(){
-		WdatePicker({doubleCalendar:true,startDate:'%y-%M-01',dateFmt:'yyyy-MM-dd',alwaysUseStartDate:true,skin:'twoer'});
+		WdatePicker({readOnly:true,doubleCalendar:true,startDate:'%y-%M-01',dateFmt:'yyyy-MM-dd',alwaysUseStartDate:true,skin:'twoer'});
 	});
 }
 /**

@@ -54,11 +54,14 @@
 				</div>
 			  </div>
 			  <div class="form-group form-group-lg">
-				<div class="col-lg-8">
+				<div class="col-lg-6">
 				 
 				</div>
 				<div class="col-lg-2">
 				  <button type="button" class="btn btn-info btn-block" onclick="javascript:location.href='activity?step=THIRD&activityId=${id!}';">上一步</button>
+				</div>
+				<div class="col-lg-2">
+				  <button type="button" id="deployBtn" class="btn btn-info btn-block" >发布</button>
 				</div>
 				<div class="col-lg-2">
 				  <button type="button" id="nextBtn" class="btn btn-info btn-block" >下一步</button>
@@ -69,6 +72,7 @@
   </div>
 
 <script src="${ (project.staticDomain)! }/libs/jquery/jquery-2.0.3.js"></script>
+<script src="${ (project.staticDomain)! }/libs/Zebra_Dialog/js/zebra_dialog.js"></script>
 <script src="${ (project.staticDomain)! }/js/activity/template.js"></script> 
 
 

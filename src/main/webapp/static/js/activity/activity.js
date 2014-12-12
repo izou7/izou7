@@ -63,6 +63,16 @@ function deployBtnClick(){
 		exeActivity("add");
 	}
 }
+function nextBtnClick(){
+	var id = $("#id").val();
+	$("#type").val("NEXT");
+	if(id){
+//		location.href="activity?step=SECOND&activityId="+id;
+		exeActivity("update");
+	}else{
+		exeActivity("add");
+	}
+}
 function beforeRequest(){
 //	var tags = $("#tags").val();
 //	if(!tags){
@@ -118,15 +128,7 @@ function exeActivity(url){
 	}); 
 	
 }
-function nextBtnClick(){
-	var id = $("#id").val();
-	if(id){
-//		location.href="activity?step=SECOND&activityId="+id;
-		exeActivity("update");
-	}else{
-		exeActivity("add");
-	}
-}
+
 function createAndValidate(){
 }
 function tagsClicked(obj){

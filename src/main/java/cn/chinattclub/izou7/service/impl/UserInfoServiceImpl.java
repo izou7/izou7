@@ -87,9 +87,16 @@ public class UserInfoServiceImpl implements UserInfoService {
 			guest.setPhone(info.getPhone());
 			guest.setPosition("无");
 			guest.setResearchArea(info.getHeadPictureUrl());
+			guest.setId(info.getId());
 			guestList.add(guest);
 		}
 		return guestList;
+	}
+
+	@Override
+	public UserInfo findById(int id) {
+		// TODO Auto-generated method stub.
+		return userInfoDao.get(id);
 	}
 
 }

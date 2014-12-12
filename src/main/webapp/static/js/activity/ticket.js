@@ -7,18 +7,31 @@ $(function () {
 			dataType:"json",
 			error:errorHandler,
 			success:successHandler,
-			target:"button[name='save']",
 			type:"POST"
 	}
 	$('#ticketForm').ajaxForm(options);
-	$("#saveBtn").click(function (){$("#submitType").val("save");});
-	$("#nextBtn").click(function (){$("#submitType").val("next");});
+//	$("#saveBtn").click(function (){$("#submitType").val("save");});
+//	$("#nextBtn").click(function (){$("#submitType").val("next");});
+	
+	$("#nextBtn").click(nextBtnClick);
+	$("#saveBtn").click(saveBtnClick);
+	$("#deployBtn").click(deployBtnClick);
 	$("input[name='free']").click(function freeHander(){freeChecked(this);});
 	if(free!="false"){
 		$("input[type!='hidden'][name!='free']").attr("disabled",true);
 		$("textarea").attr("disabled",true);
 	}
 });
+var id = $("#id").val();
+function saveBtnClick(){
+	$("#type").val("SAVE");
+}
+function deployBtnClick(){
+	$("#type").val("DEPLOY");
+}
+function nextBtnClick(){
+	$("#type").val("NEXT");
+}
 function freeChecked(obj){
 	var free = $(obj).val();
 	if(free=="true"){
@@ -36,48 +49,36 @@ function errorHandler(){
 		'buttons':  ["确定"]
 	});
 }
-function successHandler(responseText,statusText,xhr,$form){
-	var submitType = $("#submitType").val();
-	if(submitType=="save"){
-		$.Zebra_Dialog("操作成功", {
-			'type':     'information',
-			'title':    '提示',
-			'buttons':  ["确定"]
-		});
-	}else{
-		location.href='activity?step=SIXTH&activityId='+$("#id").val();
-	}
-}
-function nextBtnClick(){
-	   
-	var ticket = JSON.stringify($("#ticketForm").serializeObject());
-	var activityId = $("#id").val();
-	console.info(ticket);
-	return;
-	$.ajax({
-		type: "POST",
-		url: activityId+"/ticket",
-		dataType : "json",
-		data : ticket,
-		contentType:'application/json;charset=UTF-8', 
-		success: function(json) {
-			if (json.statusCode == 200) {
-				location.href="activity?step=SIXTH&activityId="+activityId;
-			}else {
-				$.Zebra_Dialog("操作失败", {
-					'type':     'information',
-					'title':    '提示',
-					'buttons':  ["确定"]
-				});
-			}
-		},
-		fail : function(json){
-			$.Zebra_Dialog('操作异常', {
+function successHandler(data,statusText,xhr,$form){
+	var type = $("#type").val();
+	if(data.statusCode==200){
+		if(type=="DEPLOY"){
+			location.href="activity?step=SUCCESS&activityId="+id;
+		}else if(type=="NEXT"){
+			location.href="activity?step=SIXTH&activityId="+id;
+		}else{
+			$.Zebra_Dialog("保存成功", {
 				'type':     'information',
 				'title':    '提示',
 				'buttons':  ["确定"]
 			});
 		}
-	}); 
-
+	}else{
+		$.Zebra_Dialog(data.message, {
+			'type':     'information',
+			'title':    '提示',
+			'buttons':  ["确定"]
+		});
+	}
+//	var submitType = $("#submitType").val();
+//	if(submitType=="save"){
+//		$.Zebra_Dialog("操作成功", {
+//			'type':     'information',
+//			'title':    '提示',
+//			'buttons':  ["确定"]
+//		});
+//	}else{
+//		location.href='activity?step=SIXTH&activityId='+$("#id").val();
+//	}
 }
+

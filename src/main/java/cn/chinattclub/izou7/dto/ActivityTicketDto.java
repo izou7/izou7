@@ -7,7 +7,12 @@ import java.util.Date;
 
 import javax.validation.constraints.NotNull;
 
+import org.apache.commons.lang3.StringUtils;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.Range;
+
 import cn.chinattclub.izou7.entity.ActivityTicket;
+import cn.chinattclub.izou7.enumeration.ActivityExecuteType;
 
 
 /**
@@ -27,11 +32,12 @@ public class ActivityTicketDto {
 	@NotNull
 	private Integer activity;
 	
-	@NotNull
-	private Boolean free;
+	private boolean free;
 	
+	@Range(min=0, max=10000,message="票价应在0到10000元之间")
 	private Integer price;
 	
+	@Range(min=0, max=10000,message="限额应在0到10000张之间")
 	private Integer limit;
 	
 	private String ticketSaleStartTime;
@@ -42,7 +48,10 @@ public class ActivityTicketDto {
 	
 	private String ticketValidEndTime;
 	
+	@Length(min=0, max=65536)
 	private String introduction;
+	
+	private ActivityExecuteType type;
 
 	/**
 	 * Returns the value of the field called 'activity'.
@@ -60,21 +69,6 @@ public class ActivityTicketDto {
 		this.activity = activity;
 	}
 
-	/**
-	 * Returns the value of the field called 'free'.
-	 * @return Returns the free.
-	 */
-	public Boolean getFree() {
-		return this.free;
-	}
-
-	/**
-	 * Sets the field called 'free' to the given value.
-	 * @param free The free to set.
-	 */
-	public void setFree(Boolean free) {
-		this.free = free;
-	}
 
 	/**
 	 * Returns the value of the field called 'price'.
@@ -195,14 +189,50 @@ public class ActivityTicketDto {
 	public void setId(Integer id) {
 		this.id = id;
 	}
+	
+	/**
+	 * Returns the value of the field called 'free'.
+	 * @return Returns the free.
+	 */
+	public boolean isFree() {
+		return this.free;
+	}
+
+	/**
+	 * Sets the field called 'free' to the given value.
+	 * @param free The free to set.
+	 */
+	public void setFree(boolean free) {
+		this.free = free;
+	}
+
+	/**
+	 * Returns the value of the field called 'type'.
+	 * @return Returns the type.
+	 */
+	public ActivityExecuteType getType() {
+		return this.type;
+	}
+
+	/**
+	 * Sets the field called 'type' to the given value.
+	 * @param type The type to set.
+	 */
+	public void setType(ActivityExecuteType type) {
+		this.type = type;
+	}
 
 	/**
 	 * @return
 	 * @throws ParseException
 	 */
-	public ActivityTicket convert() throws ParseException{
-		ActivityTicket ticket = new ActivityTicket();
-		ticket.setCreateTime(new Date());
+	public ActivityTicket convert(ActivityTicket persistenceTicket) throws ParseException{
+		ActivityTicket ticket = null;
+		if(persistenceTicket!=null){
+			ticket = persistenceTicket;
+		}else{
+			ticket = new ActivityTicket();
+		}
 		ticket.setFree(free);
 		ticket.setId(id);
 		ticket.setActivity(activity);
@@ -212,10 +242,18 @@ public class ActivityTicketDto {
 		ticket.setIntroduction(introduction);
 		ticket.setLimit(limit);
 		ticket.setPrice(price);
-		ticket.setTicketSaleEndTime(df.parse(ticketSaleEndTime));
-		ticket.setTicketSaleStartTime(df.parse(ticketSaleStartTime));
-		ticket.setTicketValidEndTime(df.parse(ticketValidEndTime));
-		ticket.setTicketValidStartTime(df.parse(ticketValidStartTime));
+		if(StringUtils.isNotBlank(ticketSaleEndTime)){
+			ticket.setTicketSaleEndTime(df.parse(ticketSaleEndTime));
+		}
+		if(StringUtils.isNotBlank(ticketSaleStartTime)){
+			ticket.setTicketSaleStartTime(df.parse(ticketSaleStartTime));
+		}
+		if(StringUtils.isNotBlank(ticketValidEndTime)){
+			ticket.setTicketValidEndTime(df.parse(ticketValidEndTime));
+		}
+		if(StringUtils.isNotBlank(ticketValidStartTime)){
+			ticket.setTicketValidStartTime(df.parse(ticketValidStartTime));
+		}
 		return ticket;
 	}
 	

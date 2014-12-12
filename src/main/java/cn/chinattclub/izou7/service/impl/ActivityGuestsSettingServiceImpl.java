@@ -1,5 +1,6 @@
 package cn.chinattclub.izou7.service.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -34,6 +35,7 @@ public class ActivityGuestsSettingServiceImpl implements ActivityGuestsSettingSe
 	public void addOrUpdate(ActivityGuestsSetting setting) {
 		// TODO Auto-generated method stub
 		if(setting.getId()==null){
+			setting.setCreateTime(new Date());
 			dao.save(setting);
 		}else{
 			ActivityGuestsSetting persistentSetting = dao.get(setting.getId());

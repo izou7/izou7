@@ -23,11 +23,14 @@
 				<div id='calendar'></div>
 			  </div>
 			  <div class="form-group form-group-lg">
-				<div class="col-lg-8">
+				<div class="col-lg-6">
 				 
 				</div>
 				<div class="col-lg-2">
 				  <button type="button" class="btn btn-info btn-block" onclick="javascript:location.href='activity?step=SECOND&activityId=${id!}';">上一步</button>
+				</div>
+				<div class="col-lg-2">
+				  <button type="button" id="deployBtn" class="btn btn-info btn-block" >发布</button>
 				</div>
 				<div class="col-lg-2">
 				  <button type="button" class="btn btn-info btn-block" onclick="javascript:location.href='activity?step=FOURTH&activityId=${id!}';">下一步</button>

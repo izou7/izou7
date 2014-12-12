@@ -47,6 +47,7 @@ public class ActivityGuestsDao extends AdvancedHibernateDao<ActivityGuest> {
 	public List<ActivityGuest> getGuestsByActivityId(int activityId){
 		Criteria criteria = this.getCurrentSession().createCriteria(ActivityGuest.class);
 		criteria.add(Restrictions.eq("activity", activityId));
+		criteria.addOrder(Order.asc("rank"));
 		return criteria.list();
 	}
 

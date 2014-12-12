@@ -3,6 +3,8 @@ package cn.chinattclub.izou7.dao;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.criterion.Disjunction;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
@@ -23,6 +25,23 @@ public class PublicDao  extends AdvancedHibernateDao<Public>{
 		Criteria criteria = this.getCurrentSession().createCriteria(Public.class);
 		criteria.add(Restrictions.eq("user", user));
 		criteria.addOrder(Order.desc("createTime"));
+		return criteria.list();
+	}
+
+	/**
+	 * TODO Put here a description of what this method does.
+	 *
+	 * @param tags
+	 * @return
+	 */
+	public List<Public> recommend(String[] tags) {
+		// TODO Auto-generated method stub.
+		Criteria criteria = this.getCurrentSession().createCriteria(Public.class);
+		Disjunction dis=Restrictions.disjunction();
+		for (String tag : tags) {
+			dis.add(Restrictions.like("tags", tag, MatchMode.ANYWHERE));
+		}
+		criteria.add(dis);
 		return criteria.list();
 	}
 }

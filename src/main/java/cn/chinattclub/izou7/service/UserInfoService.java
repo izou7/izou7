@@ -4,6 +4,7 @@ import java.util.List;
 
 import cn.chinattclub.izou7.dto.GuestDto;
 import cn.chinattclub.izou7.dto.UserInfoDto;
+import cn.chinattclub.izou7.entity.UserInfo;
 
 /**
  * 活动业务逻辑接口
@@ -22,5 +23,7 @@ public interface UserInfoService {
 	 * @return
 	 */
 	public List<GuestDto> recommend(int activityId);
+	
+	public UserInfo findById(int id);
 
 }

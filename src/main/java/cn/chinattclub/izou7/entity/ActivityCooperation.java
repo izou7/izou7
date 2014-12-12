@@ -11,6 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
+
 import cn.chinattclub.izou7.enumeration.InvitedStatus;
 
 
@@ -39,17 +42,22 @@ public class ActivityCooperation {
 	 * 微信ID
 	 */
 	@Column(name="wechat_id")
+	@NotBlank(message="公众账号微信ID不能为空")
+	@Length(min=1,max=100,message="公众账号微信ID长度应该在1到100之间")
 	private String wechatId;
 	
 	/**
 	 * 公众号名
 	 */
 	@Column(name="public_name")
+	@NotBlank(message="公众号名称不能为空")
+	@Length(min=1,max=100,message="公众号名称长度应该在1到100之间")
 	private String publicName;
 	
 	/**
 	 * 公众号标签
 	 */
+	@NotBlank(message="标签不能为空")
 	private String tags;
 	
 	/**

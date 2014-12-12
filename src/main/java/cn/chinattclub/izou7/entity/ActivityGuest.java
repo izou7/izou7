@@ -22,6 +22,8 @@ import javax.persistence.TemporalType;
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import cn.chinattclub.izou7.enumeration.GuestRegistrationStatus;
 
 
@@ -33,6 +35,7 @@ import cn.chinattclub.izou7.enumeration.GuestRegistrationStatus;
  */
 @Entity
 @Table(name = "i_activity_guests")
+@JsonIgnoreProperties("user")
 public class ActivityGuest {
 
 
@@ -453,6 +456,22 @@ public class ActivityGuest {
 	 */
 	public void setActivity(int activity) {
 		this.activity = activity;
+	}
+
+	/**
+	 * Returns the value of the field called 'user'.
+	 * @return Returns the user.
+	 */
+	public User getUser() {
+		return this.user;
+	}
+
+	/**
+	 * Sets the field called 'user' to the given value.
+	 * @param user The user to set.
+	 */
+	public void setUser(User user) {
+		this.user = user;
 	}
 	
 }

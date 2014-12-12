@@ -20,17 +20,62 @@ $(function () {
 	    }; 
 	$("#settingForm").ajaxForm(options);
 	$("#guestForm").ajaxForm(guestOptions);
+	$("#sysTBody").delegate("#sysAdd","click",function(){sysAddBtnClick(this);});
+	$("#nextBtn").click(nextBtnClick);
+	$("#saveBtn").click(saveBtnClick);
+	$("#deployBtn").click(deployBtnClick);
 });
 var id = $("#id").val();
-function successAdd(){
-	$.Zebra_Dialog("添加嘉宾成功！", {
-		'type':     'information',
-		'title':    '提示',
-		'buttons':  ["确定"],
-		'onClose': function(caption) {
-			initGuestTable();
+function saveBtnClick(){
+	$("#type").val("SAVE");
+}
+function deployBtnClick(){
+	$("#type").val("DEPLOY");
+}
+function nextBtnClick(){
+	$("#type").val("NEXT");
+}
+function sysAddBtnClick(obj){
+	var gid = $(obj).attr("data_id");
+	$.ajax({
+		type : "POST",
+		url  : activityId+"/sysGuest/"+gid,
+		dataType : "json",
+		success : function(data){
+			if(data.statusCode == 200){
+				initGuestTable();
+			}else{
+				$.Zebra_Dialog(data.message, {
+					'type':     'information',
+					'title':    '提示',
+					'buttons':  ["确定"],
+					'onClose': function(caption) {
+					}
+				});
+			}
+		},
+		error:function(){
+			$.Zebra_Dialog("添加系统推荐用户失败！", {
+				'type':     'information',
+				'title':    '提示',
+				'buttons':  ["确定"],
+				'onClose': function(caption) {
+				}
+			});
 		}
 	});
+}
+function successAdd(data){
+	if(data.statusCode!=200){
+		$.Zebra_Dialog(data.message, {
+			'type':     'information',
+			'title':    '提示',
+			'buttons':  ["确定"]
+		});
+	}else{
+			initGuestTable();
+	}
+	
 }
 function errorAdd(){
 	$.Zebra_Dialog("添加嘉宾失败！", {
@@ -41,8 +86,27 @@ function errorAdd(){
 		}
 	});
 }
-function successResponse(){
-	location.href='activity?step=SEVENTH&activityId='+id;
+function successResponse(data){
+	var type = $("#type").val();
+	if(data.statusCode==200){
+		if(type=="DEPLOY"){
+			location.href="activity?step=SUCCESS&activityId="+id;
+		}else if(type=="NEXT"){
+			location.href="activity?step=SEVENTH&activityId="+id;
+		}else{
+			$.Zebra_Dialog("保存成功", {
+				'type':     'information',
+				'title':    '提示',
+				'buttons':  ["确定"]
+			});
+		}
+	}else{
+		$.Zebra_Dialog(data.message, {
+			'type':     'information',
+			'title':    '提示',
+			'buttons':  ["确定"]
+		});
+	}
 }
 function errorResponse(){
 	$.Zebra_Dialog("保存嘉宾设置信息失败！", {
@@ -61,7 +125,7 @@ function upSpanClick(obj){
 		type : "PUT",
 		url  : activityId+"/guest/"+id,
 		dataType : "json",
-		data:up,
+		data:"up="+up,
 		success : function(data){
 			if(data.statusCode == 200){
 				initGuestTable();

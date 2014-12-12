@@ -25,7 +25,7 @@ $(function () {
 			right:  'today prev,next'
 		},
 		defaultView : 'agendaWeek',
-		selectable: true,
+		selectable: false,
 		selectHelper: true,
 		events:function(start, end, callback) {$.getJSON(activityId+"/calendars", {start: start.getTime(), end: end.getTime()}, function(result) {callback(result);})}
 	});

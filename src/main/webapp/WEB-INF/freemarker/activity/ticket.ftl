@@ -45,7 +45,7 @@
 			  <div class="form-group">
 				<label class="col-sm-2 control-label" for="price">价格：</label>
 				<div class="col-sm-2">
-				  <input class="form-control" type="text" name="price" value="${(ticket.price)!}" >
+				  <input class="form-control" type="number" name="price" value="${(ticket.price)!}" >
 				</div>
 				<div class="col-sm-1">
 				  元
@@ -54,7 +54,7 @@
 			  <div class="form-group">
 				<label class="col-sm-2 control-label" for="limit">限额：</label>
 				<div class="col-sm-2">
-				  <input class="form-control" type="text" name="limit" id="limit" value="${(ticket.limit)!}" >
+				  <input class="form-control" type="number" name="limit" id="limit" value="${(ticket.limit)!}" >
 				</div>
 				<div class="col-sm-1">
 				  张
@@ -87,27 +87,29 @@
 				</div>
 			  </div>
 			 <div class="form-group">
-				<div class="col-sm-2">
-				 
+			 	<div class="col-sm-2">
 				</div>
-				<div class="col-sm-2">
+				<div class="col-sm-1">
 				  <button type="button" class="btn btn-info btn-block" onclick="javascript:location.href='activity?step=FOURTH&activityId=${id!}'">上一步</button>
 				</div>
-				<div class="col-sm-2">
-				  <button type="submit" id="saveBtn"  class="btn btn-info btn-block" >保存</button>
+				<div class="col-sm-1">
+				  <button type="submit" name="subBtn" id="saveBtn"  class="btn btn-info btn-block" >保存</button>
 				</div>
-				<div class="col-sm-2">
-				  <button type="submit" id="nextBtn"  class="btn btn-info btn-block" >下一步</button>
+				<div class="col-sm-1">
+				  <button type="submit" name="subBtn" id="deployBtn"  class="btn btn-info btn-block" >发布</button>
 				</div>
-				<input class="form-control" type="hidden" id="submitType"  value="" >
+				<div class="col-sm-1">
+				  <button type="submit" name="subBtn" id="nextBtn"  class="btn btn-info btn-block" >下一步</button>
+				</div>
 			 </div>
+			 <input type="hidden" id="type" name="type" value="NEXT"/>
 			</form>
 		</div>
 		
 	</div>
   </div>
 <script>
-var free = "${(ticket.free)!}";
+var free = "${(ticket.free?string('true','false'))!}";
 </script>
 <script src="${ (project.staticDomain)! }/libs/jquery/jquery-2.0.3.js"></script>
 <script src="${ (project.staticDomain)! }/libs/jquery-form/jquery.form.js"></script>

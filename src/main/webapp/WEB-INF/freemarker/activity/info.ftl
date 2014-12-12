@@ -320,7 +320,7 @@
   </div>
   
 <script>
-var type = ${(type)!};
+var type = "${(type)!}";
 </script>
 <script src="${ (project.staticDomain)! }/libs/jquery/jquery-2.0.3.js"></script>
 <script src="${ (project.staticDomain)! }/libs/fullcalendar/lib/jquery-ui.custom.min.js"></script>

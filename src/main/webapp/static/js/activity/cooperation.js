@@ -32,15 +32,24 @@ function tagsClicked(obj){
 	});
 	$("#tags").val(tags);
 }
-function successAdd(){
-	$.Zebra_Dialog("添加活动开放合作成功！", {
-		'type':     'information',
-		'title':    '提示',
-		'buttons':  ["确定"],
-		'onClose': function(caption) {
-			initCooperationTable();
-		}
-	});
+function successAdd(data){
+	if(data.statusCode == 200){
+		$.Zebra_Dialog("添加活动开放合作成功！", {
+			'type':     'information',
+			'title':    '提示',
+			'buttons':  ["确定"],
+			'onClose': function(caption) {
+				initCooperationTable();
+			}
+		});		
+	}else{
+		$.Zebra_Dialog(data.message, {
+			'type':     'information',
+			'title':    '提示',
+			'buttons':  ["确定"]
+		});	
+	}
+
 }
 function errorAdd(){
 	$.Zebra_Dialog("添加活动开放合作失败！", {
@@ -60,7 +69,7 @@ function addSpanClick(obj){
 		dataType : "json",
 		success : function(data){
 			if(data.statusCode == 200){
-				$.Zebra_Dialog("添加活动开放合作成功！", {
+				$.Zebra_Dialog("添加开放合作成功！", {
 					'type':     'information',
 					'title':    '提示',
 					'buttons':  ["确定"],
@@ -71,7 +80,7 @@ function addSpanClick(obj){
 			}
 		},
 		error:function(){
-			$.Zebra_Dialog("新增开发合作失败！", {
+			$.Zebra_Dialog("新增开放合作失败！", {
 				'type':     'information',
 				'title':    '提示',
 				'buttons':  ["确定"],

@@ -2,6 +2,8 @@ package cn.chinattclub.izou7.dto;
 
 import java.util.Date;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import cn.chinattclub.izou7.entity.ActivityGuest;
 
 
@@ -11,7 +13,10 @@ import cn.chinattclub.izou7.entity.ActivityGuest;
  *
  */
 public class GuestDto {
-
+	
+	private Integer id;
+	
+	@NotBlank(message="嘉宾姓名不能为空")
 	private String name;
 	
 	private String position;
@@ -71,6 +76,23 @@ public class GuestDto {
 	public void setIntroduction(String introduction) {
 		this.introduction = introduction;
 	}
+	
+	/**
+	 * Returns the value of the field called 'id'.
+	 * @return Returns the id.
+	 */
+	public Integer getId() {
+		return this.id;
+	}
+
+	/**
+	 * Sets the field called 'id' to the given value.
+	 * @param id The id to set.
+	 */
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
 	public ActivityGuest convert(){
 		ActivityGuest guest = new ActivityGuest();
 		guest.setCompany(company);
