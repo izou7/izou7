@@ -858,15 +858,22 @@ public class ActivityController {
 	public RestResponse addActivityCooperation(@PathVariable int activityId,@Valid ActivityCooperation cooperation, BindingResult br) throws SecurityException, ClassNotFoundException  {
 		RestResponse response = new RestResponse();
 		int statusCode = ResponseStatusCode.OK;
+		String message = "新增公众号成功！";
 		if(!CommonUtil.validateDto(response,br,cooperation.getClass().getName().toString())){
 			statusCode = ResponseStatusCode.INTERNAL_SERVER_ERROR;
 		}else{
-			cooperation.setActivity(activityId);
-			cooperation.setStatus(InvitedStatus.SEND);
-			cooperation.setType(1);
-			cooperation.setCreateTime(new Date());
-			activityCooperationServiceImpl.add(cooperation);
+			if(activityCooperationServiceImpl.validateCooperation(activityId,cooperation.getWechatId())){
+				cooperation.setActivity(activityId);
+				cooperation.setStatus(InvitedStatus.SEND);
+				cooperation.setType(1);
+				cooperation.setCreateTime(new Date());
+				activityCooperationServiceImpl.add(cooperation);
+			}else{
+				statusCode = ResponseStatusCode.CONFLICT;
+				message = "该公众号微信ID已存在，添加失败！";		
+			}
 		}
+		response.setMessage(message);
 		response.setStatusCode(statusCode);
 		return response;
 	}
@@ -880,21 +887,32 @@ public class ActivityController {
 	@ResponseBody
 	public RestResponse addActivityCooperationByPublic(@PathVariable int activityId,@PathVariable int publicId)  {
 		RestResponse response = new RestResponse();
+		String msg = "添加开放合作成功！";
+		int statusCode = ResponseStatusCode.OK;
 		Public pbl = publicServiceImpl.getPublicById(publicId);
 		ActivityCooperation cprt = new ActivityCooperation();
-		cprt.setActivity(activityId);
-		cprt.setCreateTime(new Date());
-		cprt.setDescription(pbl.getDescription());
-		cprt.setMine(pbl.isMine());
-		cprt.setPublicName(pbl.getPublicName());
-		cprt.setTags(pbl.getTags());
-		cprt.setType(1);
-		cprt.setStatus(InvitedStatus.SEND);
-		cprt.setWechatId(pbl.getWechatId());
-		activityCooperationServiceImpl.add(cprt);
-		response.setStatusCode(ResponseStatusCode.OK);
+		if(activityCooperationServiceImpl.validateCooperation(activityId,pbl.getWechatId())){
+			cprt.setActivity(activityId);
+			cprt.setCreateTime(new Date());
+			cprt.setDescription(pbl.getDescription());
+			cprt.setMine(pbl.isMine());
+			cprt.setPublicName(pbl.getPublicName());
+			cprt.setTags(pbl.getTags());
+			cprt.setType(1);
+			cprt.setStatus(InvitedStatus.SEND);
+			cprt.setWechatId(pbl.getWechatId());
+			activityCooperationServiceImpl.add(cprt);
+		}else{
+			statusCode = ResponseStatusCode.CONFLICT;
+			msg = "该公众号已被添加，添加失败！";
+		}
+		
+		response.setStatusCode(statusCode);
+		response.setMessage(msg);
 		return response;
 	}
+
+
 	/**
 	 * 获取活动开发合作
 	 * @param activityId

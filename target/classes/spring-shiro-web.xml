@@ -109,6 +109,7 @@
                 /activity/info/** = anon
                 /activity/index = anon
                 /activity/** = user
+                /public/description = anon
                 /public/** = user
                 /userInfo/** = user
             </value>

@@ -157,12 +157,18 @@
 	  <div class="row">
 	  	<div class="col-lg-5">
 	  		<p>
-			售票时间：${(ticket.ticketSaleStartTime?string('yyyy-MM-dd'))!}到${(ticket.ticketSaleEndTime?string('yyyy-MM-dd'))!}
+			售票时间：
+			<#if (ticket.ticketSaleStartTime)?? && (ticket.ticketSaleEndTime)??>
+				${(ticket.ticketSaleStartTime?string('yyyy-MM-dd'))!}到${(ticket.ticketSaleEndTime?string('yyyy-MM-dd'))!}
+			</#if>
 			</p>
 	  	</div>
 	  	<div class="col-lg-5">
 	  		<p>
-			有效期：${(ticket.ticketValidStartTime?string('yyyy-MM-dd'))!}到${(ticket.ticketValidEndTime?string('yyyy-MM-dd'))!}
+			有效期：
+			<#if (ticket.ticketValidStartTime)?? && (ticket.ticketValidEndTime)??>
+				${(ticket.ticketValidStartTime?string('yyyy-MM-dd'))!}到${(ticket.ticketValidEndTime?string('yyyy-MM-dd'))!}
+			</#if>
 			</p>
 	  	</div>
 	  </div>
@@ -254,6 +260,7 @@
 	  </div>
 	</div>
 	</div>
+	<!-- 
 	<div class="panel panel-default">
 	  <div class="panel-heading">众筹信息
 	  <a href="activity?step=EIGHTH&activityId=${(activity.id)!}">编辑</a>
@@ -315,7 +322,7 @@
 	  </#list>
 	  </div>
 	</div>	
-
+ -->
 	
   </div>
   

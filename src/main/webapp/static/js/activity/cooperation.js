@@ -27,7 +27,7 @@ function tagsClicked(obj){
 		if(index==0){
 			tags+=$(this).text();
 		}else{
-			tags+="|"+$(this).text();
+			tags+=","+$(this).text();
 		}
 	});
 	$("#tags").val(tags);
@@ -77,6 +77,15 @@ function addSpanClick(obj){
 						initCooperationTable();
 					}
 				});				
+			}else{
+				$.Zebra_Dialog(data.message, {
+					'type':     'information',
+					'title':    '提示',
+					'buttons':  ["确定"],
+					'onClose': function(caption) {
+						initCooperationTable();
+					}
+				});	
 			}
 		},
 		error:function(){
@@ -140,7 +149,7 @@ function initCooperationTable(){
 				for(var i=0;i<cpts.length;i++){
 					var cpat = cpts[i];
 					var isMine = cpat.mine==true?"是":"否";
-					tr+='<tr><td>'+cpat.wechatId+'</td><td>'+cpat.publicName+'</td><td>'+cpat.description+'</td><td>'+isMine+'</td><td><span id="delSpan" class="glyphicon glyphicon-remove" data_id="'+cpat.id+'"></span></td></tr>';
+					tr+='<tr><td>'+cpat.wechatId+'</td><td>'+cpat.publicName+'</td><td>'+(cpat.description==null?"":cpat.description)+'</td><td>'+isMine+'</td><td><span id="delSpan" class="glyphicon glyphicon-remove" data_id="'+cpat.id+'"></span></td></tr>';
 				}
 				$("#cooperationTBody").append(tr);
 			}else {

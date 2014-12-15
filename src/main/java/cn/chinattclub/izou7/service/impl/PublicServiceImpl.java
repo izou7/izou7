@@ -16,6 +16,7 @@ import cn.chinattclub.izou7.entity.Article;
 import cn.chinattclub.izou7.entity.Public;
 import cn.chinattclub.izou7.entity.User;
 import cn.chinattclub.izou7.service.PublicService;
+import cn.chinattclub.izou7.util.CommonUtil;
 /**
  * 活动业务逻辑实现类
  * @author ZY
@@ -85,6 +86,25 @@ public class PublicServiceImpl implements PublicService {
 		Activity act = activityDao.get(activityId);
 		String[] tags = act.getTags().split(",");
 		return dao.recommend(tags);
+	}
+
+	@Override
+	public void save(Public publicObj) {
+		// TODO Auto-generated method stub.
+		dao.save(publicObj);
+	}
+
+	@Override
+	public boolean validate(String wechatId) {
+		// TODO Auto-generated method stub.
+		User user = CommonUtil.getCurrentUser();
+		List<Public> publicList = listPublic(user);
+		for (Public publicObj : publicList) {
+			if(publicObj.getWechatId().equals(wechatId)){
+				return false;
+			}
+		}
+		return true;
 	}
 	
 }

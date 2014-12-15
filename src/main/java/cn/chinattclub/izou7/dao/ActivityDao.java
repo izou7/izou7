@@ -48,8 +48,8 @@ public class ActivityDao  extends AdvancedHibernateDao<Activity>{
 		criteria.setFetchMode("articles", FetchMode.JOIN);
 		criteria.setFetchMode("guests", FetchMode.JOIN);
 		criteria.setFetchMode("tickets", FetchMode.JOIN);
-		criteria.setFetchMode("rewards", FetchMode.JOIN);
-		criteria.setFetchMode("cfSettings", FetchMode.JOIN);
+//		criteria.setFetchMode("rewards", FetchMode.JOIN);
+//		criteria.setFetchMode("cfSettings", FetchMode.JOIN);
 		return (Activity)criteria.uniqueResult();
 	}
 }

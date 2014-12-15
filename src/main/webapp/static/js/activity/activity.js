@@ -40,7 +40,7 @@ $(function () {
 });
 function initTags(tags){
 	if(tags){
-		var tagsArray = tags.split("|");
+		var tagsArray = tags.split(",");
 		for(var i=0;i<tagsArray.length;i++){
 			$("#tagsDiv").find("button[value='"+tagsArray[i]+"']").attr("class","btn btn-sm btn-danger");
 		}
@@ -142,7 +142,7 @@ function tagsClicked(obj){
 		if(index==0){
 			tags+=$(this).text();
 		}else{
-			tags+="|"+$(this).text();
+			tags+=","+$(this).text();
 		}
 	});
 	$("#tags").val(tags);

@@ -29,4 +29,14 @@ public interface PublicService {
 	 */
 	public List<Public> recommend(Integer activityId);
 
+	public void save(Public publicObj);
+
+	/**
+	 * 验证微信ID是否存在
+	 *
+	 * @param wechatId
+	 * @return
+	 */
+	public boolean validate(String wechatId);
+
 }

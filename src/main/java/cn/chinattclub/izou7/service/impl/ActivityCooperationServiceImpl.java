@@ -37,5 +37,17 @@ public class ActivityCooperationServiceImpl implements ActivityCooperationServic
 		// TODO Auto-generated method stub
 		dao.delete(id);
 	}
+
+	@Override
+	public boolean validateCooperation(int activityId, String wechatId) {
+		// TODO Auto-generated method stub.
+		List<ActivityCooperation> copts = dao.findByActivityId(activityId);
+		for (ActivityCooperation ac : copts) {
+			if(ac.getWechatId().equals(wechatId)){
+				return false;
+			}
+		}
+		return true;
+	}
 	
 }

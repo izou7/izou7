@@ -193,7 +193,7 @@
 				  <button type="submit" id="save" class="btn btn-info btn-block" >保存</button>
 				</div>
 				<div class="col-sm-2">
-				  <button type="submit" id="deploy" class="btn btn-info btn-block" >保存并发步</button>
+				  <button type="submit" id="deploy" class="btn btn-info btn-block" >发布</button>
 				</div>
 				<input type="hidden" id="submitType" value="">
 			 </div>

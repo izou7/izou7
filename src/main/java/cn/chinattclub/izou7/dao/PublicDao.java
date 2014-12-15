@@ -29,7 +29,7 @@ public class PublicDao  extends AdvancedHibernateDao<Public>{
 	}
 
 	/**
-	 * TODO Put here a description of what this method does.
+	 * 系统推荐
 	 *
 	 * @param tags
 	 * @return
@@ -42,6 +42,8 @@ public class PublicDao  extends AdvancedHibernateDao<Public>{
 			dis.add(Restrictions.like("tags", tag, MatchMode.ANYWHERE));
 		}
 		criteria.add(dis);
+		criteria.setFirstResult(0);
+		criteria.setMaxResults(10);
 		return criteria.list();
 	}
 }

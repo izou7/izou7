@@ -18,5 +18,14 @@ public interface ActivityCooperationService {
 
 	public void delete(int id);
 
+	/**
+	 * 验证开放合作是否已存在
+	 *
+	 * @param activityId
+	 * @param wechatId
+	 * @return
+	 */
+	public boolean validateCooperation(int activityId, String wechatId);
+
 
 }

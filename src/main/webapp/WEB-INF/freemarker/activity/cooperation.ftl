@@ -55,18 +55,16 @@
 				</div>
 			</div>
 			 <div class="form-group">
-				<div class="col-sm-6">
+				<div class="col-sm-4">
 				</div>
 				<div class="col-sm-2">
 				  <button type="button" class="btn btn-info btn-block" onclick="javascript:location.href='activity?step=SIXTH&activityId=${id!}';">上一步</button>
 				</div>
-				<!--
 				<div class="col-sm-2">
-				  <button type="button" class="btn btn-info btn-block">保存</button>
+				  <button type="button" id="deployBtn" class="btn btn-info btn-block"  onclick="javascript:location.href='activity?step=SUCCESS&activityId=${id!}';" >发布</button>
 				</div>
-				-->
 				<div class="col-sm-2">
-				  <button type="button" id="nextBtn" class="btn btn-info btn-block" onclick="javascript:location.href='activity?step=EIGHTH&activityId=${id!}';" >下一步</button>
+				  <button type="button"  class="btn btn-info btn-block" onclick="javascript:location.href='activity?step=EIGHTH&activityId=${id!}';" >下一步</button>
 				</div>
 			 </div>
 			</form>
@@ -122,7 +120,7 @@
 	  <form class="form-horizontal" id="cooperationForm" action="${id!}/cooperation" method="POST">
 	  	<div class="form-group">
 		    <div class="form-group">
-					<label class="col-sm-2 control-label" for="name">公众账号微信ID：</label>
+					<label class="col-sm-2 control-label" for="name">微信ID：</label>
 					<div class="col-sm-4">
 					  <input class="form-control" type="text" name="wechatId"  id="wechatId" placeholder="公众账号微信ID" required>
 					</div>

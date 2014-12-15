@@ -16,7 +16,7 @@
   							<a class="deployment" href="#">参会者</a>
   						</li>         
   						<li>
-  							<a class="deployment" href="#">公众号录入</a>
+  							<a class="deployment" href="/public/description">公众号录入</a>
   						</li>
   					</ul>
   					<ul class="nav navbar-nav navbar-right">
