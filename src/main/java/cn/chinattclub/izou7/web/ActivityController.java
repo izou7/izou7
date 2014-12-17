@@ -1,6 +1,5 @@
 package cn.chinattclub.izou7.web;
 
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -10,9 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -21,7 +18,6 @@ import java.util.Set;
 import java.util.UUID;
 
 import javax.annotation.Resource;
-import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
@@ -33,8 +29,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -48,6 +42,7 @@ import cn.chinattclub.izou7.dto.ActivityCrowdfundingSettingDto;
 import cn.chinattclub.izou7.dto.ActivityDto;
 import cn.chinattclub.izou7.dto.ActivityFormDto;
 import cn.chinattclub.izou7.dto.ActivityListDto;
+import cn.chinattclub.izou7.dto.ActivityQueryDto;
 import cn.chinattclub.izou7.dto.ActivityTicketDto;
 import cn.chinattclub.izou7.dto.CalendarDto;
 import cn.chinattclub.izou7.dto.GuestDto;
@@ -59,8 +54,6 @@ import cn.chinattclub.izou7.entity.ActivityCrowdfundingReward;
 import cn.chinattclub.izou7.entity.ActivityCrowdfundingSetting;
 import cn.chinattclub.izou7.entity.ActivityGuest;
 import cn.chinattclub.izou7.entity.ActivityGuestsSetting;
-import cn.chinattclub.izou7.entity.ActivityPoster;
-import cn.chinattclub.izou7.entity.ActivityArticle;
 import cn.chinattclub.izou7.entity.ActivitySchedule;
 import cn.chinattclub.izou7.entity.ActivityTicket;
 import cn.chinattclub.izou7.entity.ApplyTemplate;
@@ -90,7 +83,6 @@ import cn.chinattclub.izou7.service.PublicService;
 import cn.chinattclub.izou7.service.UserInfoService;
 import cn.chinattclub.izou7.service.UserService;
 import cn.chinattclub.izou7.util.CommonUtil;
-import cn.chinattclub.izou7.entity.Public;
 import cn.zy.commons.util.json.JsonConverter;
 import cn.zy.commons.webdev.constant.ResponseStatusCode;
 import cn.zy.commons.webdev.http.RestResponse;
@@ -178,10 +170,54 @@ public class ActivityController {
 	 *
 	 * @return
 	 */
-	@RequestMapping(value="/myActivitys", method = RequestMethod.GET)
+	@RequestMapping(value="/myActivities", method = RequestMethod.GET)
 	public String myActivityPage() {
 		return "site.activity.myActivity";
 	}
+	
+	/**
+	 * 
+	 * 活动列表
+	 *
+	 * @return
+	 */
+	@RequestMapping(value="/list", method = RequestMethod.GET)
+	public String listPage(Model model ,Page page,ActivityQueryDto query) {
+		query.setStatus(1);
+		List<Activity> activitys = activityServiceImpl.findActivitys(page,query);
+		model.addAttribute("activities",activitys);
+		model.addAttribute("name",query.getName());
+		return "site.activity.list";
+	}
+	
+	
+//	@RequestMapping(value="/activitys", method = RequestMethod.GET)
+//	@ResponseBody
+//	public RestResponse findActivitys(int index) {
+//		Page page = new Page();
+//		page.setIndex(index);
+//		RestResponse response = new RestResponse();
+//		int statusCode = ResponseStatusCode.OK;
+//		Subject currentUser = SecurityUtils.getSubject();
+//		ActivityQueryDto query = new ActivityQueryDto();
+//		query.setStatus(1);
+//		List<Activity> deployedActivitys = activityServiceImpl.findActivitys(page,query);
+//		List<ActivityListDto> alds = new ArrayList<ActivityListDto>();
+//		for (Activity act : deployedActivitys) {
+//			ActivityListDto dto = new ActivityListDto();
+//			dto.setId(act.getId());
+//			dto.setDeployTime(act.getCreateTime());
+//			dto.setName(act.getName());
+//			dto.setPoster(act.getPosterUrl());
+//			dto.setUpdateTime(act.getUpdateTime());
+//			alds.add(dto);
+//		}
+//		response.getBody().put("activitys", alds);
+//		response.getBody().put("page", page);
+//		response.setStatusCode(statusCode);
+//		return response;
+//		
+//	}
 	
 	/**
 	 * 
@@ -470,7 +506,7 @@ public class ActivityController {
 			try {
 				mpf.transferTo(newFile);
 				image.setName(newFile.getName());
-				image.setUrl(appConfig.get("storageDirectory").toString().substring(appConfig.get("storageDirectory").toString().indexOf("static")-1) + "images/" + newFilename);
+				image.setUrl(appConfig.get("storageIP").toString() + "images/" + newFilename);
 			} catch(IOException e) {
 				log.error("Could not upload file "+mpf.getOriginalFilename(), e);
 				image.setError("上传失败！");
@@ -516,15 +552,16 @@ public class ActivityController {
                  mpf.transferTo(newFile);
                  article.setTags(convertTags(tags));
                  article.setTitle(title);
-                 article.setUrl(appConfig.get("storageDirectory").toString().substring(appConfig.get("storageDirectory").toString().indexOf("static")) + "articles/" + newFilename);
+                 article.setUrl(appConfig.get("storageIP").toString() + "articles/" + newFilename);
                  article.setName(newFile.getName());
                  article.setActivity(id);
                  article.setCreateTime(new Date());
                  boolean result = activityArticleServiceImpl.validateNum(article);
                  if(result){
                 	 activityArticleServiceImpl.add(article);
+                 }else{
+                	 article.setError("文章已超过最大数量限制！");
                  }
-                 article.setError("文章已超过最大数量限制！");
             } catch(IOException e) {
                 log.error("Could not upload file "+mpf.getOriginalFilename(), e);
                 article.setError("上传失败！");
@@ -1020,7 +1057,10 @@ public class ActivityController {
 		int statusCode = ResponseStatusCode.OK;
 		Subject currentUser = SecurityUtils.getSubject();
 		User user = userServiceImpl.findByUsername(currentUser.getPrincipal().toString());
-		List<Activity> deployedActivitys = activityServiceImpl.findActivitys(page,user.getId(),status);
+		ActivityQueryDto query = new ActivityQueryDto();
+		query.setStatus(status);
+		query.setUserId(user.getId());
+		List<Activity> deployedActivitys = activityServiceImpl.findActivitys(page,query);
 		List<ActivityListDto> alds = new ArrayList<ActivityListDto>();
 		for (Activity act : deployedActivitys) {
 			ActivityListDto dto = new ActivityListDto();
@@ -1117,5 +1157,4 @@ public class ActivityController {
 		}
 		return tagsStr.toString();
 	}
-	
 }

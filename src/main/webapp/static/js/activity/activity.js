@@ -48,7 +48,7 @@ function initTags(tags){
 }
 function saveBtnClick(){
 	$("#type").val("SAVE");
-	var id = $("#id").val();
+	
 	if(id){
 		exeActivity("update");
 	}else{
@@ -57,6 +57,7 @@ function saveBtnClick(){
 }
 function deployBtnClick(){
 	$("#type").val("DEPLOY");
+	var id = $("#id").val();
 	if(id){
 		exeActivity("update");
 	}else{

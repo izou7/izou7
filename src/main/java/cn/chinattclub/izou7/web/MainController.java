@@ -1,5 +1,7 @@
 package cn.chinattclub.izou7.web;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.validation.Valid;
 
@@ -22,11 +24,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import cn.chinattclub.izou7.dto.ActivityQueryDto;
 import cn.chinattclub.izou7.dto.RegistUserDto;
+import cn.chinattclub.izou7.entity.Activity;
 import cn.chinattclub.izou7.entity.User;
+import cn.chinattclub.izou7.service.ActivityService;
 import cn.chinattclub.izou7.service.UserService;
 import cn.zy.commons.webdev.constant.ResponseStatusCode;
 import cn.zy.commons.webdev.http.RestResponse;
+import cn.zy.commons.webdev.vo.Page;
 
 /**
  * 
@@ -44,9 +50,15 @@ public class MainController {
 
 	@Resource
 	private UserService userServiceImpl;
-
+	
+	@Resource
+	private ActivityService activityServiceImpl;
+	
 	@RequestMapping(value = "index", method = RequestMethod.GET)
-	public String loginPage(Model model) {
+	public String indexPage(Model model,Page page,ActivityQueryDto query) {
+		query.setStatus(1);
+		List<Activity> activitys = activityServiceImpl.findActivitys(page,query);
+		model.addAttribute("activities",activitys);
 		return "site.main.index";
 	}
 

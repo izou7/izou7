@@ -16,10 +16,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.chinattclub.izou7.dto.PublicDto;
-import cn.chinattclub.izou7.entity.ActivityCooperation;
 import cn.chinattclub.izou7.entity.Public;
 import cn.chinattclub.izou7.entity.User;
-import cn.chinattclub.izou7.enumeration.InvitedStatus;
 import cn.chinattclub.izou7.service.PublicService;
 import cn.chinattclub.izou7.util.CommonUtil;
 import cn.zy.commons.webdev.constant.ResponseStatusCode;
@@ -68,14 +66,15 @@ public class PublicController {
 			statusCode = ResponseStatusCode.INTERNAL_SERVER_ERROR;
 		}else{
 			if(publicServiceImpl.validate(publicObj.getWechatId())){
+				publicObj.setCreateTime(new Date());
+				publicObj.setUser(CommonUtil.getCurrentUser());
 				publicServiceImpl.save(publicObj);
 			}else{
 				statusCode = ResponseStatusCode.CONFLICT;
 				message = "该公众号微信ID已存在，添加失败！";		
 			}
-			
+			response.setMessage(message);
 		}
-		response.setMessage(message);
 		response.setStatusCode(statusCode);
 		return response;
 	}

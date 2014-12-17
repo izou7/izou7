@@ -14,6 +14,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
+
 
 @Entity
 @Table(name = "i_public")
@@ -24,11 +27,16 @@ public class Public {
 	private Integer id;
 	
 	@Column(name="wechat_id")
+	@NotBlank(message="公众账号微信ID不能为空")
+	@Length(min=1,max=100,message="公众账号微信ID长度应该在1到100之间")
 	private String wechatId;
 	
 	@Column(name="public_name")
+	@NotBlank(message="公众号名称不能为空")
+	@Length(min=1,max=100,message="公众号名称长度应该在1到100之间")
 	private String publicName;
 	
+	@NotBlank(message="标签不能为空")
 	private String tags;
 	
 	private String description;	

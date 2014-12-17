@@ -5,8 +5,7 @@ $(function () {
 	        success:       successAdd,
 	        error:		   errorAdd,
 	        type:          "POST", 
-	        dataType:      "JSON",
-	        clearForm:		true
+	        dataType:      "JSON"
 	    }; 
 	$("#publicForm").ajaxForm(options);
 });
@@ -32,7 +31,11 @@ function successAdd(data){
 		$.Zebra_Dialog("添加公众号成功！", {
 			'type':     'information',
 			'title':    '提示',
-			'buttons':  ["确定"]
+			'buttons':  ["确定"],
+			'onClose': function(caption) {
+				$("#publicForm").clearForm();
+				$("#tagsDiv button[class='btn btn-sm btn-danger']").attr("class","btn btn-sm btn-info");
+			}
 		});		
 	}else{
 		$.Zebra_Dialog(data.message, {

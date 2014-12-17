@@ -206,6 +206,7 @@
   </div>
 
 <script src="${ (project.staticDomain)! }/libs/jquery/jquery-2.0.3.js"></script>
+  <script src="${ (project.staticDomain)! }/libs/bootstrap/js/bootstrap.js"></script>
 <script src="${ (project.staticDomain)! }/libs/jquery-form/jquery.form.js"></script>
 <script src="${ (project.staticDomain)! }/libs/Zebra_Dialog/js/zebra_dialog.js"></script>
 <script src="${ (project.staticDomain)! }/libs/My97DatePicker/WdatePicker.js"></script>

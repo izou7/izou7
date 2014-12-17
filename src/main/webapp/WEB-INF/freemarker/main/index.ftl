@@ -36,6 +36,32 @@
   			</a>
 
   		</div>
+<div class="container content" >
+	<div class="row" style="margin:0;">
+	<h3>强力推荐</h3>
+	</div>
+	<div class="row">
+	<#list activities as activity>
+	  <div class="col-sm-4">
+	    <div class="thumbnail">
+	      <a href="/activity/info/1/${(activity.id)!}">
+	      	<img src="${(activity.posterUrl)!}" >
+	      </a>
+	      <div class="caption">
+	        <h3>${(activity.name)!}</h3>
+			<p>
+				活动地点：${(activity.city.province.name)!} ${(activity.city.city)!} ${(activity.place)!} 
+			</p>
+			<p>
+				活动时间：${(activity.startTime?string('yyyy-MM-dd'))!} 到 ${(activity.endTime?string('yyyy-MM-dd'))!} 
+			</p>
+	      </div>
+	    </div>
+	  </div>
+	</#list>
+	</div>  
+</div>
+</div>
   		
 <script src="${ (project.staticDomain)! }/libs/jquery/jquery-2.0.3.js"></script>
 <script src="${ (project.staticDomain)! }/libs/bootstrap/js/bootstrap.js"></script>

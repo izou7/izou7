@@ -13,10 +13,7 @@
   							<a href="/activity/index">主办方</a>
   						</li>
   						<li>
-  							<a class="deployment" href="#">参会者</a>
-  						</li>         
-  						<li>
-  							<a class="deployment" href="/public/description">公众号录入</a>
+  							<a class="deployment" href="/public/description">合作伙伴</a>
   						</li>
   					</ul>
   					<ul class="nav navbar-nav navbar-right">
@@ -28,7 +25,7 @@
   									<a href="/userInfo/get">个人资料</a>
   								</li>
   								<li>
-  									<a href="/activity/myActivitys">我发起的活动</a>
+  									<a href="/activity/myActivities">我发起的活动</a>
   								</li>
   								<li>
   									<a href="/public/list">我录入的公众号</a>

@@ -14,5 +14,4 @@
 	<task:executor id="resendTaskExecutor" pool-size="5" />
 	<task:scheduler id="resendTaskScheduler" pool-size="10" />
 	<task:annotation-driven executor="resendTaskExecutor" scheduler="resendTaskScheduler" />
-		
 </beans>

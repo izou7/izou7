@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import cn.chinattclub.izou7.dao.ActivityDao;
+import cn.chinattclub.izou7.dto.ActivityQueryDto;
 import cn.chinattclub.izou7.entity.Activity;
 import cn.chinattclub.izou7.service.ActivityService;
 import cn.zy.commons.webdev.vo.Page;
@@ -43,13 +44,18 @@ public class ActivityServiceImpl implements ActivityService {
 		return dao.getUnfixedActivity();
 	}
 
+//	@Override
+//	public List<Activity> findActivitys(Page page,int id,int status) {
+//		// TODO Auto-generated method stub
+//		String hql = "from Activity act where act.user.id=? and act.status=?";
+//		String hqlCount = "select count(*) from Activity act where act.user.id=? and act.status=? "; 
+//		page.setRecordCount(dao.findCountByHQL(hqlCount,id,status));
+//		return dao.findByHQL(hql,page.getIndex()*page.getSize(),page.getSize(),id,status);
+//	}
 	@Override
-	public List<Activity> findActivitys(Page page,int id,int status) {
-		// TODO Auto-generated method stub
-		String hql = "from Activity act where act.user.id=? and act.status=?";
-		String hqlCount = "select count(*) from Activity act where act.user.id=? and act.status=? "; 
-		page.setRecordCount(dao.findCountByHQL(hqlCount,id,status));
-		return dao.findByHQL(hql,page.getIndex()*page.getSize(),page.getSize(),id,status);
+	public List<Activity> findActivitys(Page page,ActivityQueryDto query){
+		page.setRecordCount(dao.findActivitysCount(query));
+		return dao.findActivitys(page,query);
 	}
 
 	@Override
