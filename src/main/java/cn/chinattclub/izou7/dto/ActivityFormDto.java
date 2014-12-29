@@ -25,7 +25,7 @@ import com.sun.istack.NotNull;
  */
 public class ActivityFormDto {
 
-	private static final DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+	private static final DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
 	private Integer id;
 

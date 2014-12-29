@@ -57,6 +57,7 @@ public class MainController {
 	@RequestMapping(value = "index", method = RequestMethod.GET)
 	public String indexPage(Model model,Page page,ActivityQueryDto query) {
 		query.setStatus(1);
+		page.setSize(6);
 		List<Activity> activitys = activityServiceImpl.findActivitys(page,query);
 		model.addAttribute("activities",activitys);
 		return "site.main.index";

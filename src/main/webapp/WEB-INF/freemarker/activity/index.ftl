@@ -11,7 +11,7 @@
   				<div class="item active">
   					<img src="${ (project.staticDomain)! }/images/shop.jpg" alt="" />
   					<div class="carousel-caption">
-  						<button type="button" class="btn btn-default btn-lg btn-outline" onclick="javascript:location.href='/activity/activity?step=FIRST'">发布活动</button>
+  						<button type="button" class="btn btn-success btn-lg" onclick="javascript:location.href='/activity/activity?step=FIRST'">发布活动</button>
   					</div>
   				</div>
   				<div class="item">

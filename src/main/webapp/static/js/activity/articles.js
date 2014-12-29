@@ -28,7 +28,7 @@ $(function () {
 	    	loadFilesTable();
 	    	var fileName = data.files[0].name;
 	    	files.remove(fileName);
-	    }).bind('fileuploadsend', function (e, data) {
+	    }).bind('fileuploadsubmit', function(e,data){
 	    	var title = $(e.target).parent().children().find("input[name^='title']").val();
 	    	var tags = $(e.target).parent().children().find("select[name^='multiple']").val();
 	    	if(title&&tags){
@@ -39,6 +39,7 @@ $(function () {
     				'title':    '提示',
     				'buttons':  ["确定"]
     			});
+	    		data.context.find('button').prop('disabled', false);
 	    		return false;
 	    	}
 	    });
@@ -59,10 +60,12 @@ $(function () {
 	});
 	
 	
+	
 	$("#tagsDiv button").click(function(){tagsClicked(this)});
 	$("#filesTable").click(function(e){filesTableClik(this,e)});
 //	待研究。。。
 //	$('button.cancel').click(function (e) {
+//		alert(1);
 //	    jqXHR.abort();
 //	});
 	$("#nextBtn").click(nextBtnClick);
@@ -154,7 +157,7 @@ function loadFilesTable(){
 				$("#tbodyId").empty();
 				for(var i=0;i<json.body.articles.length;i++){
 					var article = json.body.articles[i];
-					$("#tbodyId").append('<tr><td>'+article.title+'</td><td>'+article.tags+'</td><td>'+(article.summary==null?"":article.summary)+'</td><td>'+article.url+'</td><td><button type="button" class="btn btn-info" name="delBtn" data_id="'+article.id+'">删除</button></td></tr>');
+					$("#tbodyId").append('<tr><td>'+article.title+'</td><td>'+article.tags+'</td><td>'+(article.summary==null?"":article.summary)+'</td><td><a href="'+article.url+'"><span class="glyphicon glyphicon-download-alt"></span></a></td><td><button type="button" class="btn btn-info" name="delBtn" data_id="'+article.id+'">删除</button></td></tr>');
 				}
 			}else {
 				$.Zebra_Dialog('获取文章列表失败', {

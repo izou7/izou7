@@ -8,8 +8,8 @@
   				<a class="navbar-brand" href="/index">izou7</a></div>
   				<!-- Collect the nav links, forms, and other content for toggling -->
   				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-  					<ul class="nav navbar-nav">
-  						<li class="active">
+  					<ul class="nav navbar-nav" id="nav">
+  						<li >
   							<a href="/activity/index">主办方</a>
   						</li>
   						<li>

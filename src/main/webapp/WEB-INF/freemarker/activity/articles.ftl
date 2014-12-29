@@ -122,13 +122,13 @@
 		<td>
 			<div class="input-group width150">
   				<span class="input-group-addon">标题</span>
-  				<input  name="{%="title"+file.name.substring(0,file.name.indexOf("."))%}" type="text" class="form-control" placeholder="标题">
+  				<input  name="{%="title"+file.name.substring(0,file.name.lastIndexOf("."))%}" type="text" class="form-control" placeholder="标题">
 			</div>
 		</td>
 <td>
 	<div class="input-group btn-group width150">
 	<span class="input-group-addon">标签</span>
-	<select id="{%="multiple"+file.name.substring(0,file.name.indexOf("."))%}" name="{%="multiple"+file.name.substring(0,file.name.indexOf("."))%}" class="multiselect" multiple="multiple">
+	<select id="{%="multiple"+file.name.substring(0,file.name.indexOf("."))%}" name="{%="multiple"+file.name.substring(0,file.name.lastIndexOf("."))%}" class="multiselect" multiple="multiple">
 	  <option value="原创设计">原创设计</option>
 	  <option value="演唱会">演唱会</option>
 	  <option value="红丝带">红丝带</option>
@@ -144,7 +144,7 @@
         </td>
         <td>
             {% if (!i && !o.options.autoUpload) { %}
-                <button class="btn btn-primary start" disabled>
+                <button class="btn btn-primary start" name="startBtn" disabled>
                     <i class="glyphicon glyphicon-upload"></i>
                     <span>Start</span>
                 </button>

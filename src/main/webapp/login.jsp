@@ -25,6 +25,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+    
     <!-- 
     <link rel="icon" href="../../favicon.ico">
  	-->
@@ -53,7 +55,7 @@
 
       <form class="form-signin" role="form" action="" method="post">
         <h2 class="form-signin-heading">爱走起</h2>
-        <h6 class="form-signin-heading">${error}</h6>
+        
         <!--
         <input type="email" class="form-control" placeholder="Email address" required autofocus>
         -->
@@ -66,6 +68,9 @@
           </label>
         </div>
          -->
+         <c:if test="${!empty shiroLoginFailure}">
+        <h6 class="form-signin-heading">用户名或密码错误，请重新登陆！</h6>
+        </c:if>
         <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
       </form>
 
