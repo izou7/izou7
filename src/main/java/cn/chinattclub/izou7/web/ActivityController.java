@@ -7,6 +7,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -226,9 +227,10 @@ public class ActivityController {
 	 * @param model
 	 * @param dto
 	 * @return
+	 * @throws ParseException 
 	 */
 	@RequestMapping(value="/activity", method = RequestMethod.GET)
-	public String activityDispatch(Model model ,ActivityDto dto ) {
+	public String activityDispatch(Model model ,ActivityDto dto ) throws ParseException {
 		String view = "site.main.error";
 		switch (dto.getStep()) {
 		case FIRST:
@@ -385,12 +387,37 @@ public class ActivityController {
 	 * @param model
 	 * @param dto
 	 * @return
+	 * @throws ParseException 
 	 */
-	public String activityPage(Model model ,ActivityDto dto){
+	public String activityPage(Model model ,ActivityDto dto) throws ParseException{
 		List<Province> provinces = provinceServiceImpl.findAll();
 		model.addAttribute("provinces",provinces);
 		if(dto.getActivityId()!=null){
 			Activity activity = activityServiceImpl.findById(dto.getActivityId());
+			model.addAttribute("activity", activity);
+		}else{
+			Calendar cal = Calendar.getInstance();
+			ActivityFormDto aDto = new ActivityFormDto();
+			aDto.setCity(51);
+			cal.add(Calendar.DAY_OF_YEAR, 7);
+			aDto.setStartTime(df.format(cal.getTime()));
+			cal.add(Calendar.DAY_OF_YEAR, 3);
+			aDto.setEndTime(df.format(cal.getTime()));
+			aDto.setHeadCount(100);
+			aDto.setIntroduction("<p>活动介绍。。。</p>");
+			aDto.setName("我的活动");
+			aDto.setOpened(true);
+			aDto.setPlace("中关村科技大厦");
+			aDto.setPosterUrl("/static/images/default_poster.png");
+			aDto.setTags("其他");
+			aDto.setType(ActivityExecuteType.SAVE);
+			Subject currentUser = SecurityUtils.getSubject();
+			User user = userServiceImpl.findByUsername(currentUser.getPrincipal().toString());
+			City city = cityServiceImpl.getCity(aDto.getCity());
+			Activity activity = aDto.convert(null);
+			activity.setCity(city);  
+			activity.setUser(user);
+			activityServiceImpl.add(activity);
 			model.addAttribute("activity", activity);
 		}
 		return "site.activity.activity";

@@ -11,6 +11,16 @@
 <link rel="stylesheet" href="${ (project.staticDomain)! }/libs/jqueryFileUpload/css/jquery.fileupload-ui.css">
 <noscript><link rel="stylesheet" href="${ (project.staticDomain)! }/libs/jqueryFileUpload/css/jquery.fileupload-noscript.css"></noscript>
 <noscript><link rel="stylesheet" href="${ (project.staticDomain)! }/libs/jqueryFileUpload/css/jquery.fileupload-ui-noscript.css"></noscript>
+<link rel="stylesheet" href="${ (project.staticDomain)! }/libs/FixedNavigationTutorial/css/style.css">
+<ul id="navigation" style="position:absolute;top:20%;" >
+    <li ><a href="activity?step=FIRST&activityId=${ id! }" title="活动基本信息">活动基本信息</a></li>
+    <li ><a href="activity?step=SECOND&activityId=${ id! }" title="文章列表">文章列表</a></li>
+    <li ><a href="activity?step=THIRD&activityId=${ id! }" title="日历">日历</a></li>
+    <li ><a href="activity?step=FOURTH&activityId=${ id! }" title="报名模板">报名模板</a></li>
+    <li ><a href="activity?step=FIFTH&activityId=${ id! }" title="票务信息">票务信息</a></li>
+    <li ><a href="activity?step=SIXTH&activityId=${ id!}" title="嘉宾列表">嘉宾列表</a></li>
+    <li ><a href="activity?step=SEVENTH&activityId=${ id! }" title="开放合作">开放合作</a></li>
+</ul>
   <!-- 主要内容 -->
   <div class="container content">
   <!--页头-->
@@ -90,18 +100,22 @@
 				</div>
 			</div>
 			 <div class="form-group">
-			 	<div class="col-lg-6">
+			 	<div class="col-lg-10">
 				 
 				</div>
+				<!--
 				<div class="col-lg-2">
 				  <button type="button" class="btn btn-info btn-block" onclick="javascript:location.href='activity?step=FIRST&activityId=${id!}';">上一步</button>
 				</div>
+				-->
 				<div class="col-lg-2">
 				  <button type="button" id="deployBtn" class="btn btn-info btn-block" >发布</button>
 				</div>
+				<!--
 				<div class="col-lg-2">
 				  <button type="button" class="btn btn-info btn-block" onclick="javascript:location.href='activity?step=THIRD&activityId=${id!}';">下一步</button>
 				</div>
+				-->
 			 </div>
 		</div>
 	</div>

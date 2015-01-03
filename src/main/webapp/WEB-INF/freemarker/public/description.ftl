@@ -1,65 +1,118 @@
-  <!-- Generic page styles -->
-  <!-- 主要内容 -->
-  <style>
-  .row{
-  margin:20px 0 20px 0;
-  }
-  .content{
-  margin:10px 0 10px 0;
-  }
-  </style>
-  <div class="container content">
-  <!--页头-->
+<!-- Generic page styles -->
+<!-- 主要内容 -->
+<style>
+	.row {
+		margin: 20px 0 20px 0;
+	}
+	.content {
+		margin: 10px 0 10px 0;
+	}
+	.cooperation{
+	float:left;
+	margin-top:20px;
+	}
+</style>
+<div class="container content">
+	<!--页头-->
 	<div class="row">
 		<div class="col-lg-offset-1">
 			<div class="media">
-			  <a class="media-left" href="#">
-			    <img height="290" width="700" src="${ (project.staticDomain)! }/images/glacier-bay-63727-700x290.jpg" alt="..." class="img-rounded">
-			  </a>
-			  <div class="media-body">
-			    <h4 class="media-heading">媒体合作</h4>
-			    媒体合作是具有媒体谈判和整合能力的公关人员； 简单的说，媒体投放其一，是对媒体具有相当的了解并知其面对的消费群体，从而能够有效的甄选媒体进行投放； 其二，是制定公司年度媒体投放计划，包括金额，投放方向，及收益效果评估等等。
-			    <p><a class="btn btn-primary btn-sm" href="javascript:location.href='form';" role="button">录入公众号</a></p>
-			  </div>
+				<a class="media-left" href="#"> <img height="250" width="550" src="${ (project.staticDomain)! }/images/glacier-bay-63727-700x290.jpg" alt="..." class="img-rounded"> </a>
+				<div class="media-body">
+					<h4 class="media-heading">自媒体</h4>
+					<h6 >助力自媒体做互联网时代的主流媒体。</h6>
+					<div class="cooperation">
+						<ul>活动合作
+						  <li>活动合作媒体</li>
+						  <li>出任活动嘉宾</li>
+						</ul>
+					</div>
+					<div class="cooperation">
+						<ul>合作伙伴
+						  <li>广告客户</li>
+						  <li>流量互换</li>
+						</ul>
+					</div>					
+					<div class="cooperation">
+						<ul>主办活动
+						  <li>预售门票</li>
+						  <li>寻找赞助</li>
+						  <li>招募嘉宾</li>
+						</ul>
+					</div>	
+					<div class="cooperation">
+						<ul>社群领袖
+						  <li>课程</li>
+						  <li>咨询</li>
+						</ul>
+					</div>					
+				</div>
 			</div>
-		</div>	
+		</div>
 	</div>
 	<div class="row">
 		<div class="col-lg-offset-1">
 			<div class="media">
-			  <a class="media-left" href="#">
-			    <img height="290" width="700" src="${ (project.staticDomain)! }/images/slider-img-1-700x290.jpg" alt="..." class="img-rounded">
-			  </a>
-			  <div class="media-body">
-			    <h4 class="media-heading">赞助商合作</h4>
-			    赞助，是指企业为了实现自己的目标（获得宣传效果）而向某些活动（体育、艺术、社会团体提供资金支持的一种行为。体育赞助，是指企业为体育赛事或运动队提供经费、实物或相关服务等支持，而体育赛事组织者或运动队以允许赞助商享有某...
-			  </div>
-			</div>	
-		</div>	
+				<a class="media-left" href="#"> <img height="250" width="550" src="${ (project.staticDomain)! }/images/slider-img-1-700x290.jpg" alt="..." class="img-rounded"> </a>
+				<div class="media-body">
+					<h4 class="media-heading">公司</h4>
+					<h6 >高管演讲、新产品发布等。内容供给方。有宣传自己需要。</h6>
+					<div class="cooperation">
+						<ul>发现活动
+						  <li>活动合作对接</li>
+						  <li>锁定潜在客户</li>
+						</ul>
+					</div>
+					<div class="cooperation">
+						<ul>公司发布会
+						  <li>新品发布</li>
+						  <li>重要事件发布</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 	<div class="row">
 		<div class="col-lg-offset-1">
 			<div class="media">
-			  <a class="media-left" href="#">
-			    <img height="290" width="700" src="${ (project.staticDomain)! }/images/parcel-22189-700x290.jpg" alt="..." class="img-rounded">
-			  </a>
-			  <div class="media-body">
-			    <h4 class="media-heading">其他合作</h4>
-			    小伙伴们快快加入我们吧！
-			  </div>
-			</div>	
-		</div>	
+				<a class="media-left" href="#"> <img height="250" width="550" src="${ (project.staticDomain)! }/images/parcel-22189-700x290.jpg" alt="..." class="img-rounded"> </a>
+				<div class="media-body">
+					<h4 class="media-heading">大数据时代的赞助商</h4>
+					<div class="cooperation">
+						<ul>海量活动对接平台
+						  <li>目标活动每日推送</li>
+						  <li>直接联系潜在客户</li>
+						</ul>
+					</div>
+					<div class="cooperation">
+						<ul>赞助效果一目了然
+						  <li>赞助广告阅读次数</li>
+						  <li>不断积累目标客户</li>
+						</ul>
+					</div>					
+				</div>
+			</div>
+		</div>
 	</div>
-
-  </div>
-  <script src="${ (project.staticDomain)! }/libs/jquery/jquery-2.0.3.js"></script>
-  <script src="${ (project.staticDomain)! }/libs/bootstrap/js/bootstrap.js"></script>
+	<div class="row">
+		<div class="col-lg-offset-1">
+			<div class="media">
+				<a class="media-left" href="#"> <img height="250" width="550" src="${ (project.staticDomain)! }/images/horses-700x290.jpg" alt="..." class="img-rounded"> </a>
+				<div class="media-body">
+					<h4 class="media-heading">其他合作</h4>
+					<h6 class="media-heading">任何有合作需求的伙伴都可以登记信息，我们都将努力满足您的需求！</h6>	
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="${ (project.staticDomain)! }/libs/jquery/jquery-2.0.3.js"></script>
+<script src="${ (project.staticDomain)! }/libs/bootstrap/js/bootstrap.js"></script>
   <script>
-  $(){
-	  
-  }
+  $(function () {
+  $("img").click(function(){
+  location.href='form';
+  });
+  })();
   </script>
- 
-
-
-

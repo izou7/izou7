@@ -21,6 +21,20 @@ $(function () {
 	
 	initCalendarSecond("#startTime");
 	initCalendarSecond("#endTime");
+	var ue = UM.getEditor('editor');
+	ue.addListener('blur',function(){
+        $('#introduction').val(UM.getEditor('editor').getContent());
+    });
+    /**$('.form_datetime').datetimepicker({
+        //language:  'fr',
+        weekStart: 1,
+        todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		forceParse: 0,
+        showMeridian: 1
+    });**/
 	initTags(tags);
 	
 	$("#tagsDiv button").click(function(){tagsClicked(this)});

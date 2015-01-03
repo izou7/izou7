@@ -2,24 +2,29 @@
   	#tagsDiv button{
   	  margin:5px;
   	}
+  
+  	
   </style>
   <!-- Generic page styles -->
 <link rel="stylesheet" href="${ (project.staticDomain)! }/libs/jqueryFileUpload/css/style.css">
+<!--
 <link rel="stylesheet" href="http://blueimp.github.io/Gallery/css/blueimp-gallery.min.css">
+-->
 <link rel="stylesheet" href="${ (project.staticDomain)! }/libs/jqueryFileUpload/css/jquery.fileupload.css">
 <link rel="stylesheet" href="${ (project.staticDomain)! }/libs/jqueryFileUpload/css/jquery.fileupload-ui.css">
 <link rel="stylesheet" href="${ (project.staticDomain)! }/libs/FixedNavigationTutorial/css/style.css">
+<link rel="stylesheet" href="${ (project.staticDomain)! }/libs/umeditor/themes/default/css/umeditor.css">
 <noscript><link rel="stylesheet" href="${ (project.staticDomain)! }/libs/jqueryFileUpload/css/jquery.fileupload-noscript.css"></noscript>
 <noscript><link rel="stylesheet" href="${ (project.staticDomain)! }/libs/jqueryFileUpload/css/jquery.fileupload-ui-noscript.css"></noscript>
   <!-- 主要内容 -->
-<ul id="navigation" style="position:absolute;top:30%;">
-    <li class="home"><a href="" title="活动基本信息">活动基本信息</a></li>
-    <li class="about"><a href="" title="文章列表">文章列表</a></li>
-    <li class="search"><a href="" title="Search"></a></li>
-    <li class="photos"><a href="" title="Photos"></a></li>
-    <li class="rssfeed"><a href="" title="Rss Feed"></a></li>
-    <li class="podcasts"><a href="" title="Podcasts"></a></li>
-    <li class="contact"><a href="" title="Contact"></a></li>
+<ul id="navigation" style="position:absolute;top:20%;" >
+    <li ><a href="activity?step=FIRST&activityId=${ (activity.id)! }" title="活动基本信息">活动基本信息</a></li>
+    <li ><a href="activity?step=SECOND&activityId=${ (activity.id)! }" title="文章列表">文章列表</a></li>
+    <li ><a href="activity?step=THIRD&activityId=${ (activity.id)! }" title="日历">日历</a></li>
+    <li ><a href="activity?step=FOURTH&activityId=${ (activity.id)! }" title="报名模板">报名模板</a></li>
+    <li ><a href="activity?step=FIFTH&activityId=${ (activity.id)! }" title="票务信息">票务信息</a></li>
+    <li ><a href="activity?step=SIXTH&activityId=${ (activity.id)! }" title="嘉宾列表">嘉宾列表</a></li>
+    <li ><a href="activity?step=SEVENTH&activityId=${ (activity.id)! }" title="开放合作">开放合作</a></li>
 </ul>
   <div class="container content">
   <!--页头-->
@@ -113,7 +118,15 @@
 			  <div class="form-group">
 				<label class="col-lg-2 control-label" for="introduction">活动介绍：</label>
 				<div class="col-lg-6">
-				  <textarea class="form-control" rows="4" id="introduction" name="introduction" placeholder="活动介绍" >${(activity.introduction)!}</textarea>
+				  <input type="hidden" class="form-control" id="introduction" name="introduction" value="活动介绍。。。" ></textarea>
+				  <script id="editor" type="text/plain" style="width:900px;height:300px;">
+				  <#if (activity.introduction)?? >
+				  	${(activity.introduction)!"<p>活动介绍。。。</p>"}
+				  <#else>
+				  <p>活动介绍。。。</p>
+				  </#if>
+				  
+				  </script>
 				</div>
 			  </div>
 			  		        <!-- Redirect browsers with JavaScript disabled to the origin page -->
@@ -173,7 +186,7 @@
 				</div>
 			 </div>	
 			 <div class="form-group">
-				<div class="col-lg-2">
+				<div class="col-lg-4">
 				 
 				</div>
 				<div class="col-lg-2">
@@ -182,9 +195,11 @@
 				<div class="col-lg-2">
 				  <button  id="deployBtn" type="button" class="btn btn-info btn-block" >发布</button>
 				</div>
+				<!--
 				<div class="col-lg-2">
 				  <button  id="nextBtn" type="button" class="btn btn-info btn-block" >下一步</button>
 				</div>
+				-->
 			 </div>
 			 <input type="hidden" id="type" name="type" value="NEXT"/>
 			</form>
@@ -273,7 +288,9 @@ var tags = "${(activity.tags)!}";
 </script>
 <script src="${ (project.staticDomain)! }/libs/jquery/jquery-2.0.3.js"></script>
 <script src="${ (project.staticDomain)! }/libs/jquery/jquery-migrate-1.2.1.min.js"></script>
+<!--
 <script src="${ (project.staticDomain)! }/libs/sidr-package-1.2.1/jquery.sidr.min.js"></script>
+-->
 <!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
 <script src="${ (project.staticDomain)! }/libs/jqueryFileUpload/js/vendor/jquery.ui.widget.js"></script>
 <!-- The Templates plugin is included to render the upload/download listings -->
@@ -307,4 +324,7 @@ var tags = "${(activity.tags)!}";
 <script src="${ (project.staticDomain)! }/libs/Zebra_Dialog/js/zebra_dialog.js"></script>
 <script src="${ (project.staticDomain)! }/js/common.js"></script>
 <script src="${ (project.staticDomain)! }/libs/My97DatePicker/WdatePicker.js"></script>
+<script src="${ (project.staticDomain)! }/libs/umeditor/umeditor.config.js"></script>
+<script src="${ (project.staticDomain)! }/libs/umeditor/umeditor.min.js"></script>
+<script src="${ (project.staticDomain)! }/libs/umeditor/lang/zh-cn/zh-cn.js"></script>
 <script src="${ (project.staticDomain)! }/js/activity/activity.js"></script> 

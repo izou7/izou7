@@ -3,7 +3,17 @@
   	border:5px solid #428bca;
   	}
   </style>
+  <link rel="stylesheet" href="${ (project.staticDomain)! }/libs/FixedNavigationTutorial/css/style.css">
   <!-- Generic page styles -->
+  <ul id="navigation" style="position:absolute;top:20%;" >
+    <li ><a href="activity?step=FIRST&activityId=${ id! }" title="活动基本信息">活动基本信息</a></li>
+    <li ><a href="activity?step=SECOND&activityId=${ id! }" title="文章列表">文章列表</a></li>
+    <li ><a href="activity?step=THIRD&activityId=${ id! }" title="日历">日历</a></li>
+    <li ><a href="activity?step=FOURTH&activityId=${ id! }" title="报名模板">报名模板</a></li>
+    <li ><a href="activity?step=FIFTH&activityId=${ id! }" title="票务信息">票务信息</a></li>
+    <li ><a href="activity?step=SIXTH&activityId=${ id! }" title="嘉宾列表">嘉宾列表</a></li>
+    <li ><a href="activity?step=SEVENTH&activityId=${ id! }" title="开放合作">开放合作</a></li>
+</ul>
   <!-- 主要内容 -->
   <div class="container content">
   <!--页头-->
@@ -87,20 +97,24 @@
 				</div>
 			  </div>
 			 <div class="form-group">
-			 	<div class="col-sm-2">
+			 	<div class="col-sm-4">
 				</div>
+				<!--
 				<div class="col-sm-1">
 				  <button type="button" class="btn btn-info btn-block" onclick="javascript:location.href='activity?step=FOURTH&activityId=${id!}'">上一步</button>
 				</div>
-				<div class="col-sm-1">
+				-->
+				<div class="col-sm-2">
 				  <button type="submit" name="subBtn" id="saveBtn"  class="btn btn-info btn-block" >保存</button>
 				</div>
-				<div class="col-sm-1">
+				<div class="col-sm-2">
 				  <button type="submit" name="subBtn" id="deployBtn"  class="btn btn-info btn-block" >发布</button>
 				</div>
+				<!--
 				<div class="col-sm-1">
 				  <button type="submit" name="subBtn" id="nextBtn"  class="btn btn-info btn-block" >下一步</button>
 				</div>
+				-->
 			 </div>
 			 <input type="hidden" id="type" name="type" value="NEXT"/>
 			</form>

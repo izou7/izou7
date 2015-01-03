@@ -9,22 +9,36 @@
   			<!-- Wrapper for slides -->
   			<div class="carousel-inner">
   				<div class="item active">
-  					<img src="${ (project.staticDomain)! }/images/shop.jpg" alt="" />
-  					<div class="carousel-caption">
+  					<img src="${ (project.staticDomain)! }/images/sunset.jpg" alt="" />
+  					<div class="carousel-caption" >
+  					<!--
   						<button type="button" class="btn btn-success btn-lg"    >App下载马上就来</button>
+  						-->
+  						<h3>APP下载</h3>
+  						<h4>各种发现活动 / 最感兴趣的活动 / 最有深度的活动 / 某人也去的活动</h4>
   					</div>
+  					
   				</div>
   				<div class="item">
   					<img src="${ (project.staticDomain)! }/images/subway.jpg" alt="" />
-  					<div class="carousel-caption"></div>
+  					<div class="carousel-caption" >
+  						<h3>精准连接各种人脉</h3>
+  						<h4>遇见大牛 / 认识同行 / 发起聚会</h4>
+  					</div>
   				</div>
   				<div class="item">
-  					<img src="${ (project.staticDomain)! }/images/sunset.jpg" alt="" />
-  					<div class="carousel-caption"></div>
+  					<img src="${ (project.staticDomain)! }/images/shop.jpg" alt="" />
+  					<div class="carousel-caption">
+  						<h3>APP下载</h3>
+  						<h4>各种发现活动 / 最感兴趣的活动 / 最有深度的活动 / 某人也去的活动</h4>
+  					</div>
   				</div>
   				<div class="item">
   					<img src="${ (project.staticDomain)! }/images/wood.jpg" alt="" />
-  					<div class="carousel-caption"></div>
+  					<div class="carousel-caption">
+  						<h3>精准连接各种人脉</h3>
+  						<h4>遇见大牛 / 认识同行 / 发起聚会</h4>
+  					</div>
   				</div>
   			</div>
   			<!-- Controls -->
@@ -85,6 +99,5 @@
 	</div>  
 </div>
 </div>
-  		
 <script src="${ (project.staticDomain)! }/libs/jquery/jquery-2.0.3.js"></script>
 <script src="${ (project.staticDomain)! }/libs/bootstrap/js/bootstrap.js"></script>

@@ -25,3 +25,10 @@ body {
 .summary {
    padding:15px 15px 15px 15px;
 }
+
+#navigation a{
+  line-height:70px;
+  text-decoration:none;
+  color:#333;
+  padding-left: 10px;
+  }
