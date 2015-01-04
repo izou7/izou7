@@ -19,7 +19,9 @@
     <li ><a href="activity?step=FOURTH&activityId=${ id! }" title="报名模板">报名模板</a></li>
     <li ><a href="activity?step=FIFTH&activityId=${ id! }" title="票务信息">票务信息</a></li>
     <li ><a href="activity?step=SIXTH&activityId=${ id!}" title="嘉宾列表">嘉宾列表</a></li>
+    <!--
     <li ><a href="activity?step=SEVENTH&activityId=${ id! }" title="开放合作">开放合作</a></li>
+    -->
 </ul>
   <!-- 主要内容 -->
   <div class="container content">

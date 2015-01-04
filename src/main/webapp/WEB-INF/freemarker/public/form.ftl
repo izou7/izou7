@@ -8,11 +8,11 @@
   <div class="container content">
   <!--页头-->
     <div class="page-header">
-		<h1>录入公众号</h1>
+		<h1>录入合作信息</h1>
 	</div>
 	<div class="panel panel-default">
 				<div class="panel-heading">
-		<h3 class="panel-title">公众号信息</h3>
+		<h3 class="panel-title">合作信息</h3>
 		</div>
 		<div class="panel-body">
 		  <form class="form-horizontal" id="publicForm" action="public" method="POST">
@@ -20,13 +20,31 @@
 			    <div class="form-group">
 						<label class="col-sm-2 control-label" for="name">微信ID：</label>
 						<div class="col-sm-4">
-						  <input class="form-control" type="text" name="wechatId"  id="wechatId" placeholder="公众账号微信ID" required>
+						  <input class="form-control" type="text" name="wechatId"  id="wechatId" placeholder="公众账号微信ID" >
 						</div>
 				</div>
 			    <div class="form-group">
 						<label class="col-sm-2 control-label" for="publicName">公众号名称：</label>
 						<div class="col-sm-4">
-						  <input class="form-control" type="text" name="publicName"  id="publicName" placeholder="公众号名称" required>
+						  <input class="form-control" type="text" name="publicName"  id="publicName" placeholder="公众号名称" >
+						</div>
+				</div>
+			    <div class="form-group">
+						<label class="col-sm-2 control-label" for="weibo">微博：</label>
+						<div class="col-sm-4">
+						  <input class="form-control" type="text" name="weibo"  id="weibo" placeholder="微博" >
+						</div>
+				</div>
+			    <div class="form-group">
+						<label class="col-sm-2 control-label" for="company">公司：</label>
+						<div class="col-sm-4">
+						  <input class="form-control" type="text" name="company"  id="company" placeholder="公司" >
+						</div>
+				</div>
+			    <div class="form-group">
+						<label class="col-sm-2 control-label" for="website">网址：</label>
+						<div class="col-sm-4">
+						  <input class="form-control" type="text" name="website"  id="website" placeholder="网站" >
 						</div>
 				</div>
 			  <div class="form-group">
@@ -47,7 +65,7 @@
 				<input type="hidden" id="tags" name="tags" >
 			  </div>
 			    <div class="form-group">
-						<label class="col-sm-2 control-label" for="description">详细介绍：</label>
+						<label class="col-sm-2 control-label" for="description">合作需求：</label>
 						<div class="col-sm-4">
 						  <textarea class="form-control" rows="4" id="description" name="description" placeholder="详细介绍"></textarea>
 						</div>

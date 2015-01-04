@@ -223,6 +223,7 @@
 		</div>
 	  </div>
 	</div>
+	<!--
 	<div class="panel panel-default">
 	  <div class="panel-heading">开放合作
 	  <a href="activity?step=SEVENTH&activityId=${(activity.id)!}">编辑</a>
@@ -260,6 +261,7 @@
 	  </div>
 	</div>
 	</div>
+	-->
 	<!-- 
 	<div class="panel panel-default">
 	  <div class="panel-heading">众筹信息

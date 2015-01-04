@@ -1,6 +1,6 @@
 $(function () {
-	$("#browse").click(function(){browsePublic(this)});
-	$("#delete").click(function(){deletePublic(this)});
+	$("input[name='browse']").click(function(){browsePublic(this)});
+	$("input[name='delete']").click(function(){deletePublic(this)});
 });
 		
 

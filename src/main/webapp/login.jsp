@@ -69,7 +69,7 @@
         </div>
          -->
          <c:if test="${!empty shiroLoginFailure}">
-        <h6 class="form-signin-heading">用户名或密码错误，请重新登陆！</h6>
+        <h6 class="form-signin-heading" style="color:red;">用户名或密码错误，请重新登陆！</h6>
         </c:if>
         <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
       </form>

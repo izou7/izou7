@@ -17,7 +17,19 @@
 				<td>${(public.wechatId)!}</td>
 			</tr>
 			<tr>
-				<td>描述:</td>
+				<td>公司:</td>
+				<td>${(public.company)!}</td>
+			</tr>
+			<tr>
+				<td>微博:</td>
+				<td>${(public.weibo)!}</td>
+			</tr>
+			<tr>
+				<td>网址:</td>
+				<td>${(public.website)!}</td>
+			</tr>
+			<tr>
+				<td>合作需求:</td>
 				<td>${(public.description)!}</td>
 			</tr>
 			<tr>

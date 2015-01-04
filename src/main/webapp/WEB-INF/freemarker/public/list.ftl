@@ -7,7 +7,7 @@
   <div class="container content">
   <!--页头-->
     <div class="page-header">
-		<h1>我录入的公众号</h1>
+		<h1>我录入的合作信息</h1>
 	</div>
 
 	<div class="panel-body">
@@ -33,8 +33,8 @@
 							<#else> 是
 							</#if>
 						</td>
-						<td style="width:110px"><input type='button' class="btn btn-info" id='browse' name='browse' value='浏览' data='${(public.id)!}'/>
-						<input type='button' class="btn btn-info margin-left20" id='delete' name='delete' value='删除' data='${(public.id)!}'/></td>
+						<td style="width:110px"><input type='button' class="btn btn-info"  name='browse' value='浏览' data='${(public.id)!}'/>
+						<input type='button' class="btn btn-info margin-left20"  name='delete' value='删除' data='${(public.id)!}'/></td>
 					</tr>
 				</#list>	
 				</thead>

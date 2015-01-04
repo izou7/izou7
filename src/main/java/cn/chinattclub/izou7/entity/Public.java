@@ -27,19 +27,25 @@ public class Public {
 	private Integer id;
 	
 	@Column(name="wechat_id")
-	@NotBlank(message="公众账号微信ID不能为空")
-	@Length(min=1,max=100,message="公众账号微信ID长度应该在1到100之间")
+//	@NotBlank(message="公众账号微信ID不能为空")
+//	@Length(min=1,max=100,message="公众账号微信ID长度应该在1到100之间")
 	private String wechatId;
 	
 	@Column(name="public_name")
-	@NotBlank(message="公众号名称不能为空")
-	@Length(min=1,max=100,message="公众号名称长度应该在1到100之间")
+//	@NotBlank(message="公众号名称不能为空")
+//	@Length(min=1,max=100,message="公众号名称长度应该在1到100之间")
 	private String publicName;
 	
 	@NotBlank(message="标签不能为空")
 	private String tags;
 	
 	private String description;	
+	
+	private String company;
+	
+	private String weibo;
+	
+	private String website;
 	
 	@Column(name="is_mine")
 	private boolean mine;
@@ -137,6 +143,30 @@ public class Public {
 
 	public void setArticle(List<Article> article) {
 		this.article = article;
+	}
+
+	public String getCompany() {
+		return company;
+	}
+
+	public void setCompany(String company) {
+		this.company = company;
+	}
+
+	public String getWeibo() {
+		return weibo;
+	}
+
+	public void setWeibo(String weibo) {
+		this.weibo = weibo;
+	}
+
+	public String getWebsite() {
+		return website;
+	}
+
+	public void setWebsite(String website) {
+		this.website = website;
 	}
 
 
