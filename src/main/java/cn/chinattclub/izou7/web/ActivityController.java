@@ -81,6 +81,7 @@ import cn.chinattclub.izou7.service.BankService;
 import cn.chinattclub.izou7.service.CityService;
 import cn.chinattclub.izou7.service.ProvinceService;
 import cn.chinattclub.izou7.service.PublicService;
+import cn.chinattclub.izou7.service.TagService;
 import cn.chinattclub.izou7.service.UserInfoService;
 import cn.chinattclub.izou7.service.UserService;
 import cn.chinattclub.izou7.util.CommonUtil;
@@ -155,6 +156,9 @@ public class ActivityController {
 	
 	@Resource
 	private Properties appConfig;
+	
+	@Resource
+	private TagService tagServiceImpl;
 	
 	/**
 	 * 主办方主页
@@ -304,6 +308,7 @@ public class ActivityController {
 		model.addAttribute("id",dto.getActivityId());
 		model.addAttribute("cpts", cpts);
 		model.addAttribute("rcpls", recommendPublics);
+		model.addAttribute("tags", tagServiceImpl.list());
 		return "site.activity.cooperation";
 	}
 
@@ -380,6 +385,7 @@ public class ActivityController {
 			model.addAttribute("articles", articles);
 			model.addAttribute("id", dto.getActivityId());
 		}
+		model.addAttribute("tags", tagServiceImpl.list());
 		return "site.activity.articles";
 	}
 	/**
@@ -420,6 +426,7 @@ public class ActivityController {
 			activityServiceImpl.add(activity);
 			model.addAttribute("activity", activity);
 		}
+		model.addAttribute("tags",tagServiceImpl.list());
 		return "site.activity.activity";
 	}
 	

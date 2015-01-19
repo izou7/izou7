@@ -55,7 +55,7 @@ $(function () {
 	$(".files").bind("DOMNodeInserted",function(e){
 		if($(e.target).is("tr")){
 			var id = $(e.target).children().find("select[id^=multiple]").attr("id");
-			$("#"+id).multiselect({numberDisplayed: 0});
+			$("#"+id).multiselect({numberDisplayed: 0,maxHeight:300});
 		}
 	});
 	
@@ -74,15 +74,15 @@ $(function () {
 		loadFilesTable();
 	});
 	$("#deployBtn").click(deployBtnClick);
-	$('#navigation a').stop().animate({'marginLeft':'-85px'},1000);
-    $('#navigation > li').hover(
-        function () {
-            $('a',$(this)).stop().animate({'marginLeft':'-2px'},200);
-        },
-        function () {
-            $('a',$(this)).stop().animate({'marginLeft':'-85px'},200);
-        }
-    );
+	$('#navigation a').stop().animate({'marginLeft':'-50px'},1000);
+//    $('#navigation > li').hover(
+//        function () {
+//            $('a',$(this)).stop().animate({'marginLeft':'-2px'},200);
+//        },
+//        function () {
+//            $('a',$(this)).stop().animate({'marginLeft':'-85px'},200);
+//        }
+//    );
 });
 var id = $("#id").val();
 function deployBtnClick(){
