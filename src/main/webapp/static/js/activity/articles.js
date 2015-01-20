@@ -55,7 +55,7 @@ $(function () {
 	$(".files").bind("DOMNodeInserted",function(e){
 		if($(e.target).is("tr")){
 			var id = $(e.target).children().find("select[id^=multiple]").attr("id");
-			$("#"+id).multiselect({numberDisplayed: 0});
+			$("#"+id).multiselect({numberDisplayed: 0,maxHeight: 250});
 		}
 	});
 	

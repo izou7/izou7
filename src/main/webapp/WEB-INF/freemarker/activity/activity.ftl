@@ -3,7 +3,9 @@
   	  margin:5px;
   	}
   
-  	
+  	#navigation {
+  	margin-top:100px!important;
+  	}
   </style>
   <!-- Generic page styles -->
 <link rel="stylesheet" href="${ (project.staticDomain)! }/libs/jqueryFileUpload/css/style.css">
@@ -17,7 +19,7 @@
 <noscript><link rel="stylesheet" href="${ (project.staticDomain)! }/libs/jqueryFileUpload/css/jquery.fileupload-noscript.css"></noscript>
 <noscript><link rel="stylesheet" href="${ (project.staticDomain)! }/libs/jqueryFileUpload/css/jquery.fileupload-ui-noscript.css"></noscript>
   <!-- 主要内容 -->
-<ul id="navigation" style="position:absolute;top:20%;" >
+<ul id="navigation"  >
     <li ><a href="activity?step=FIRST&activityId=${ (activity.id)! }" title="活动基本信息">活动基本信息</a></li>
     <li ><a href="activity?step=SECOND&activityId=${ (activity.id)! }" title="文章列表">文章列表</a></li>
     <li ><a href="activity?step=THIRD&activityId=${ (activity.id)! }" title="日历">日历</a></li>
@@ -28,6 +30,7 @@
     <li ><a href="activity?step=SEVENTH&activityId=${ (activity.id)! }" title="开放合作">开放合作</a></li>
     -->
 </ul>
+
   <div class="container content">
   <!--页头-->
     <div class="page-header">
@@ -59,12 +62,13 @@
 				<div id="tagsError" class="col-sm-4">
 				</div>
 			  </div>
-			  <div class="form-group">
+			  <div class="form-group" >
 				<label class="col-sm-2 control-label" for="name">活动名称：</label>
 				<div class="col-sm-6">
 				  <input class="form-control" type="text" id="name" name="name" placeholder="活动名称" value="${(activity.name)!}" required>
 				</div>
 			  </div>
+			  
 			   <div class="form-group">
 				<label class="col-lg-2 control-label" for="place">活动地点：</label>
 				<div class="col-lg-2">
