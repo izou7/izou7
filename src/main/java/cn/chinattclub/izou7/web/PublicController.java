@@ -19,6 +19,7 @@ import cn.chinattclub.izou7.dto.PublicDto;
 import cn.chinattclub.izou7.entity.Public;
 import cn.chinattclub.izou7.entity.User;
 import cn.chinattclub.izou7.service.PublicService;
+import cn.chinattclub.izou7.service.TagService;
 import cn.chinattclub.izou7.util.CommonUtil;
 import cn.zy.commons.webdev.constant.ResponseStatusCode;
 import cn.zy.commons.webdev.http.RestResponse;
@@ -29,6 +30,9 @@ public class PublicController {
 	
 	@Resource 
 	private PublicService publicServiceImpl;
+	
+	@Resource
+	private TagService tagServiceImpl;
 	
 	/**
 	 * 
@@ -52,6 +56,7 @@ public class PublicController {
 	 */
 	@RequestMapping(value="/form", method = RequestMethod.GET)
 	public String publicPage(Model model) {
+		model.addAttribute("tags", tagServiceImpl.list());
 		return "site.public.form";
 	}
 	

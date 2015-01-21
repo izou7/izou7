@@ -3,9 +3,6 @@
   	  margin:5px;
   	}
   
-  	#navigation {
-  	margin-top:100px!important;
-  	}
   </style>
   <!-- Generic page styles -->
 <link rel="stylesheet" href="${ (project.staticDomain)! }/libs/jqueryFileUpload/css/style.css">
@@ -20,12 +17,13 @@
 <noscript><link rel="stylesheet" href="${ (project.staticDomain)! }/libs/jqueryFileUpload/css/jquery.fileupload-ui-noscript.css"></noscript>
   <!-- 主要内容 -->
 <ul id="navigation"  >
-    <li ><a href="activity?step=FIRST&activityId=${ (activity.id)! }" title="活动基本信息">活动基本信息</a></li>
-    <li ><a href="activity?step=SECOND&activityId=${ (activity.id)! }" title="文章列表">文章列表</a></li>
-    <li ><a href="activity?step=THIRD&activityId=${ (activity.id)! }" title="日历">日历</a></li>
-    <li ><a href="activity?step=FOURTH&activityId=${ (activity.id)! }" title="报名模板">报名模板</a></li>
-    <li ><a href="activity?step=FIFTH&activityId=${ (activity.id)! }" title="票务信息">票务信息</a></li>
-    <li ><a href="activity?step=SIXTH&activityId=${ (activity.id)! }" title="嘉宾列表">嘉宾列表</a></li>
+
+    <li ><a href="activity?step=FIRST&activityId=${ (activity.id)! }" title="基本信息"><h4>基本信息</h4></a></li>
+    <li ><a href="activity?step=SECOND&activityId=${ (activity.id)! }" title="文章列表"><h4>文章列表</h4></a></li>
+    <li ><a href="activity?step=THIRD&activityId=${ (activity.id)! }" title="日历"><h4>日历</h4></a></li>
+    <li ><a href="activity?step=FOURTH&activityId=${ (activity.id)! }" title="报名模板"><h4>报名模板</h4></a></li>
+    <li ><a href="activity?step=FIFTH&activityId=${ (activity.id)! }" title="票务信息"><h4>票务信息</h4></a></li>
+    <li ><a href="activity?step=SIXTH&activityId=${ (activity.id)! }" title="嘉宾列表"><h4>嘉宾列表</h4></a></li>
     <!--
     <li ><a href="activity?step=SEVENTH&activityId=${ (activity.id)! }" title="开放合作">开放合作</a></li>
     -->
@@ -46,17 +44,9 @@
 			  <div class="form-group">
 				<label class="col-sm-2 control-label">标签：</label>
 				<div id="tagsDiv" class="col-sm-6">
-					<button type="button" class="btn btn-sm btn-info" value="原创设计">原创设计</button>
-					<button type="button" class="btn btn-sm btn-info" value="演唱会">演唱会</button>
-					<button type="button" class="btn btn-sm btn-info" value="红丝带">红丝带</button>
-					<button type="button" class="btn btn-sm btn-info" value="扶贫">扶贫</button>
-					<button type="button" class="btn btn-sm btn-info" value="助学">助学</button>
-					<button type="button" class="btn btn-sm btn-info" value="微电影">微电影</button>
-					<button type="button" class="btn btn-sm btn-info" value="生活育儿">生活育儿</button>
-					<button type="button" class="btn btn-sm btn-info" value="论坛">论坛</button>
-					<button type="button" class="btn btn-sm btn-info" value="点映">点映</button>
-					<button type="button" class="btn btn-sm btn-info" value="首映">首映</button>
-					<button type="button" class="btn btn-sm btn-info" value="其他">其他</button>
+				<#list tags as tag>
+				<button type="button" class="btn btn-sm btn-info" value="${(tag.name)!}">${(tag.name)!}</button>
+				</#list>
 				</div>
 				<input type="hidden" id="tags" name="tags" value="${(activity.tags)!}" >
 				<div id="tagsError" class="col-sm-4">

@@ -50,17 +50,9 @@
 			  <div class="form-group">
 				<label class="col-sm-2 control-label">标签：</label>
 				<div id="tagsDiv" class="col-sm-6">
-					<button type="button" class="btn btn-sm btn-info">原创设计</button>
-					<button type="button" class="btn btn-sm btn-info">演唱会</button>
-					<button type="button" class="btn btn-sm btn-info">红丝带</button>
-					<button type="button" class="btn btn-sm btn-info">扶贫</button>
-					<button type="button" class="btn btn-sm btn-info">助学</button>
-					<button type="button" class="btn btn-sm btn-info">微电影</button>
-					<button type="button" class="btn btn-sm btn-info">生活育儿</button>
-					<button type="button" class="btn btn-sm btn-info">论坛</button>
-					<button type="button" class="btn btn-sm btn-info">点映</button>
-					<button type="button" class="btn btn-sm btn-info">首映</button>
-					<button type="button" class="btn btn-sm btn-info">其他</button>
+					<#list tags as tag>
+				<button type="button" class="btn btn-sm btn-info" value="${(tag.name)!}">${(tag.name)!}</button>
+				</#list>
 				</div>
 				<input type="hidden" id="tags" name="tags" >
 			  </div>

@@ -5,13 +5,13 @@
   </style>
   <link rel="stylesheet" href="${ (project.staticDomain)! }/libs/FixedNavigationTutorial/css/style.css">
   <!-- Generic page styles -->
-  <ul id="navigation" style="position:absolute;top:20%;" >
-    <li ><a href="activity?step=FIRST&activityId=${ id! }" title="活动基本信息">活动基本信息</a></li>
-    <li ><a href="activity?step=SECOND&activityId=${ id! }" title="文章列表">文章列表</a></li>
-    <li ><a href="activity?step=THIRD&activityId=${ id! }" title="日历">日历</a></li>
-    <li ><a href="activity?step=FOURTH&activityId=${ id! }" title="报名模板">报名模板</a></li>
-    <li ><a href="activity?step=FIFTH&activityId=${ id! }" title="票务信息">票务信息</a></li>
-    <li ><a href="activity?step=SIXTH&activityId=${ id! }" title="嘉宾列表">嘉宾列表</a></li>
+  <ul id="navigation" >
+    <li ><a href="activity?step=FIRST&activityId=${ id! }" title="基本信息"><h4>基本信息</h4></a></li>
+    <li ><a href="activity?step=SECOND&activityId=${ id! }" title="文章列表"><h4>文章列表</h4></a></li>
+    <li ><a href="activity?step=THIRD&activityId=${ id! }" title="日历"><h4>日历</h4></a></li>
+    <li ><a href="activity?step=FOURTH&activityId=${ id! }" title="报名模板"><h4>报名模板</h4></a></li>
+    <li ><a href="activity?step=FIFTH&activityId=${id! }" title="票务信息"><h4>票务信息</h4></a></li>
+    <li ><a href="activity?step=SIXTH&activityId=${id! }" title="嘉宾列表"><h4>嘉宾列表</h4></a></li>
     <!--
     <li ><a href="activity?step=SEVENTH&activityId=${ id! }" title="开放合作">开放合作</a></li>
     -->
