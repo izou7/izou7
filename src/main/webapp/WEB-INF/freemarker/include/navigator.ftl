@@ -10,7 +10,7 @@
   				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
   					<ul class="nav navbar-nav" id="nav">
   						<li >
-  							<a href="/activity/index">发布活动</a>
+  							<a  href="/activity/index">发布活动</a>
   						</li>
   						<li>
   							<a class="deployment" href="/public/description">合作伙伴</a>
