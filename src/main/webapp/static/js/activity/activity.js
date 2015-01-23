@@ -18,7 +18,7 @@ $(function () {
 	            '/cors/result.html?%s'
 	        )
 	    );
-	
+
 	initCalendarSecond("#startTime");
 	initCalendarSecond("#endTime");
 	var ue = UM.getEditor('editor');

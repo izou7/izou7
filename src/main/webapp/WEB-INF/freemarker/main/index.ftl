@@ -1,3 +1,5 @@
+<body style="background-color: #f6f6f6">
+
 <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
   			<!-- Indicators -->
   			<ol class="carousel-indicators">
@@ -67,7 +69,7 @@
 				活动地点：${(activity.city.province.name)!} ${(activity.city.city)!} ${(activity.place)!} 
 			</p>
 			<p>
-				活动时间：${(activity.startTime?string('yyyy-MM-dd'))!} 到 ${(activity.endTime?string('yyyy-MM-dd'))!} 
+				活动时间：${(activity.startTime?string('yyyy-MM-dd HH:mm:ss'))!} 到 ${(activity.endTime?string('yyyy-MM-dd HH:mm:ss'))!} 
 			</p>
 	      </div>
 	    </div>
@@ -90,7 +92,7 @@
 				活动地点：${(activity.city.province.name)!} ${(activity.city.city)!} ${(activity.place)!} 
 			</p>
 			<p>
-				活动时间：${(activity.startTime?string('yyyy-MM-dd'))!} 到 ${(activity.endTime?string('yyyy-MM-dd'))!} 
+				活动时间：${(activity.startTime?string('yyyy-MM-dd HH:mm:ss'))!} 到 ${(activity.endTime?string('yyyy-MM-dd HH:mm:ss'))!} 
 			</p>
 	      </div>
 	    </div>
@@ -99,5 +101,6 @@
 	</div>  
 </div>
 </div>
+</body>
 <script src="${ (project.staticDomain)! }/libs/jquery/jquery-2.0.3.js"></script>
 <script src="${ (project.staticDomain)! }/libs/bootstrap/js/bootstrap.js"></script>

@@ -43,6 +43,9 @@
   						<a href="/regist" >注册</a>
   						</li>
   					</#if>
+  						<li >
+  						<a href="/login.jsp" >添加活动</a>
+  						</li>
   					</ul>
   				</div>
   				<!-- /.navbar-collapse -->
