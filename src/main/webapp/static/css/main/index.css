@@ -1,0 +1,40 @@
+.recommend{
+	border:none;
+	-webkit-box-shadow:none;
+	
+}
+.grid > a >img{
+	height:149px;
+	width:252px!important;
+	float:left;
+	margin-right:10px;
+	
+}
+.grid{
+	height:350px;
+	width:260px;
+	float:left;
+	margin-right:10px;
+	
+}
+.title > a{
+	font-weight:400!important;
+	padding-top:15px!important;
+	line-height:28px;
+	color:#333
+}
+.title > p{
+	font-weight:400!important;
+	line-height:15px;
+	color:#a0a0a0;
+	font-size:12px;
+}
+.grid > .caption > h4{
+	font-weight:400!important;
+	line-height:28px;
+	color:#333
+}
+.grid > a > img{
+	height:149px;
+	width:252px!important;
+}

@@ -17,6 +17,7 @@
 							</li>
 						</ul>
 					</li>
+					<li class="divider"></li>
 					<li>
 						<h4> TT活动</h4>
 						<ul>
@@ -53,7 +54,6 @@
 							</li>							
 						</ul>
 					</li>						
-					<li class="divider"></li>
 					<li>
 						<h4> 关注我们</h4>
 						<ul>
