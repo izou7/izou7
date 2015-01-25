@@ -132,7 +132,7 @@
 		      <div class="caption title">
 		       <a href="/activity/info/1/${(activity.id)!}" title="${(activity.name)!}">
 		        <#if ((activity.name!?length) > 30)>
-		      	${(activity.name?substring(0,30))!}
+		      	${(activity.name?substring(0,30))!}...
 		      <#else>
 		      	${(activity.name)!}
 		      </#if>
@@ -143,9 +143,9 @@
 				<p>
 					活动地点：
 				<#if ((activity.place!?length) > 30)>
-			      	${(activity.place?substring(0,30))!}
+			      	${(activity.place?substring(0,30))!}...
 			      <#else>
-			      	${(activity.place)!}...
+			      	${(activity.place)!}
 			      </#if>
 				</p>
 		      </div>
@@ -156,6 +156,36 @@
 	    
 	  </ul>
 	</div>
+</div>
+
+
+<div class="container list" >
+<div class="row" >
+<div class="media ">
+
+  <div class="media-body">
+    <div class="caption title">
+		       <a href="#" title="2014社会创新周（主场活动）">
+		        2014社会创新周（主场活动）
+		      </a>
+		      <p>
+					活动简介： 中国国际数码互动娱乐产品及技术应用展览会，简称“ChinaJoy”游戏展，是继美国E3展、日本东京电玩展之后的又，中
+				</p>
+				<p>
+					活动时间： 2014年5月9日 19:30 ～ 2014年5月11日 20:00
+				</p>
+				<p>
+					活动地点：
+				北京朝阳北京剧院
+				</p>
+		      </div>
+  </div>
+    <a class="media-right" href="#">
+    <img src="http://cdn.huodongxing.com/logo/201501/9265759966300/291846048784581_v2small.jpg" alt="...">
+  </a>
+</div>
+  
+</div>
 </div>
 <div class="container content" >
 	<div class="row" style="margin:0;">
@@ -204,7 +234,6 @@
 	  </div>
 	</#list>
 	</div>  
-</div>
 </div>
 </body>
 <script src="${ (project.staticDomain)! }/libs/jquery/jquery-2.0.3.js"></script>

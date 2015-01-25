@@ -10,6 +10,7 @@
 	margin-right:10px;
 	
 }
+
 .grid{
 	height:350px;
 	width:260px;
@@ -25,7 +26,7 @@
 }
 .title > p{
 	font-weight:400!important;
-	line-height:15px;
+	line-height:1;
 	color:#a0a0a0;
 	font-size:12px;
 }
@@ -37,4 +38,18 @@
 .grid > a > img{
 	height:149px;
 	width:252px!important;
+}
+.list > a >img{
+	height:149px;
+	width:252px;
+}
+.list >div > div > div{
+	width:918px;
+}
+.list > .row{
+	margin:0;
+	background-color:#fff;
+}
+.media > .media-body{
+	padding:9px;
 }
