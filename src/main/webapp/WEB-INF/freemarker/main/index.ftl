@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="${ (project.staticDomain)! }/libs/bootstrap-paginator/bootstrap-combined.min.css">
 <link rel="stylesheet" href="${ (project.staticDomain)! }/libs/AmazeUI-2.1.0/css/amazeui.min.css">
 <link rel="stylesheet" href="${ (project.staticDomain)! }/libs/AmazeUI-2.1.0/css/app.css">
 <link rel="stylesheet" href="${ (project.staticDomain)! }/css/main/index.css">
@@ -67,22 +68,24 @@
 		      	<img src="${(activity.posterUrl)!}">
 		      </a>
 		      <div class="caption title">
+		      <h3 >
 		      <a href="/activity/info/1/${(activity.id)!}" title="${(activity.name)!}">
-		      <#if ((activity.name!?length) > 30)>
-		      	${(activity.name?substring(0,30))!}
+		      <#if ((activity.name!?length) > 25)>
+		      	${(activity.name?substring(0,25))!}...
 		      <#else>
 		      	${(activity.name)!}
 		      </#if>
 		      </a>
+		      </h3>
 				<p>
 					活动时间：${(activity.startTime?string('yyyy-MM-dd HH:mm:ss'))!} 
 				</p>
 				<p>
 					活动地点：
 					<#if ((activity.place!?length) > 30)>
-			      	${(activity.place?substring(0,30))!}
+			      	${(activity.place?substring(0,30))!}...
 			      <#else>
-			      	${(activity.place)!}...
+			      	${(activity.place)!}
 			      </#if> 
 					
 				</p>
@@ -95,26 +98,28 @@
 	    <#list activities as activity>
 	    	<#if (activity_index>3) && (activity_index<8) >
 	    	<div class="thumbnail grid">
-		      <a href="/activity/info/1/${(activity.id)!}">
+		      <a href="/activity/info/1/${(activity.id)!}" >
 		      	<img src="${(activity.posterUrl)!}">
 		      </a>
 		      <div class="caption title">
-		        <a href="/activity/info/1/${(activity.id)!}" title="${(activity.name)!}">
-		      	<#if ((activity.name!?length) > 30)>
-		      	${(activity.name?substring(0,30))!}
+		      <h3>
+		        <a href="/activity/info/1/${(activity.id)!}" title="${(activity.name)!}" >
+		      	<#if ((activity.name!?length) > 25)>
+		      	${(activity.name?substring(0,25))!}...
 		      <#else>
 		      	${(activity.name)!}
 		      </#if>
 		      </a>
+		      </h3>
 				<p>
 					活动时间：${(activity.startTime?string('yyyy-MM-dd HH:mm:ss'))!} 
 				</p>
 				<p>
 					活动地点：
 					<#if ((activity.place!?length) > 30)>
-			      	${(activity.place?substring(0,30))!}
+			      	${(activity.place?substring(0,30))!}...
 			      <#else>
-			      	${(activity.place)!}...
+			      	${(activity.place)!}
 			      </#if>
 				</p>
 		      </div>
@@ -126,17 +131,19 @@
 	    <#list activities as activity>
 	    	<#if (activity_index > 7) && (activity_index < 12)>
 	    	<div class="thumbnail grid">
-		      <a href="/activity/info/1/${(activity.id)!}">
+		      <a href="/activity/info/1/${(activity.id)!}" style="height:150px;margin:0px;">
 		      	<img src="${(activity.posterUrl)!}">
 		      </a>
 		      <div class="caption title">
+		      <h3 >
 		       <a href="/activity/info/1/${(activity.id)!}" title="${(activity.name)!}">
-		        <#if ((activity.name!?length) > 30)>
-		      	${(activity.name?substring(0,30))!}...
+		        <#if ((activity.name!?length) > 25)>
+		      	${(activity.name?substring(0,25))!}...
 		      <#else>
 		      	${(activity.name)!}
 		      </#if>
 		      </a>
+		      </h3>
 				<p>
 					活动时间：${(activity.startTime?string('yyyy-MM-dd HH:mm:ss'))!} 
 				</p>
@@ -160,82 +167,66 @@
 
 
 <div class="container list" >
+<#list activities as activity>
+<#if activity_index < 5>
 <div class="row" >
 <div class="media ">
-
   <div class="media-body">
     <div class="caption title">
-		       <a href="#" title="2014社会创新周（主场活动）">
-		        2014社会创新周（主场活动）
+		       <a href="/activity/info/1/${(activity.id)!}" title="${(activity.name)!}">
+		        <#if ((activity.name!?length) > 50)>
+		      	${(activity.name?substring(0,50))!}...
+		      <#else>
+		      	${(activity.name)!}
+		      </#if>
 		      </a>
 		      <p>
-					活动简介： 中国国际数码互动娱乐产品及技术应用展览会，简称“ChinaJoy”游戏展，是继美国E3展、日本东京电玩展之后的又，中
+					活动简介：
+					 <#if ((activity.introduction!?length) > 50)>
+			      	${(activity.introduction?substring(0,50))!}...
+			      <#else>
+			      	${(activity.introduction)!}
+			      </#if>
 				</p>
 				<p>
-					活动时间： 2014年5月9日 19:30 ～ 2014年5月11日 20:00
+					活动时间： ${(activity.startTime?string('yyyy-MM-dd HH:mm:ss'))!}
 				</p>
 				<p>
 					活动地点：
-				北京朝阳北京剧院
+					<#if ((activity.place!?length) > 50)>
+				      	${(activity.place?substring(0,50))!}...
+				      <#else>
+				      	${(activity.place)!}
+				      </#if>
 				</p>
 		      </div>
   </div>
     <a class="media-right" href="#">
-    <img src="http://cdn.huodongxing.com/logo/201501/9265759966300/291846048784581_v2small.jpg" alt="...">
+    <img src="${(activity.posterUrl)!}" >
   </a>
 </div>
-  
+</div>
+</#if>
+</#list>
+<div class="row">
+	<div id="paginator"></div>
+	<form class="form-inline pagination-form" style="display: inline-block;" role="form" action="list" method="get" id="paging-form" data-total-page="${(page.count)!}">
+		<div class="form-group">
+			<input type="hidden" value="${ (page.count)!0 }" id="hiddenCount">
+			<input type="text" class="form-control width50 page-index" id="page-index" name="index"/>
+		</div>
+	</form>
 </div>
 </div>
-<div class="container content" >
-	<div class="row" style="margin:0;">
-	<h3>强力推荐</h3>
-	</div>
-	<div class="row">
-	<#list activities as activity>
-	  <div class="col-sm-4">
-	    <div class="thumbnail">
-	      <a href="/activity/info/1/${(activity.id)!}">
-	      	<img src="${(activity.posterUrl)!}" >
-	      </a>
-	      <div class="caption">
-	        <h3>${(activity.name)!}</h3>
-			<p>
-				活动地点：${(activity.city.province.name)!} ${(activity.city.city)!} ${(activity.place)!} 
-			</p>
-			<p>
-				活动时间：${(activity.startTime?string('yyyy-MM-dd HH:mm:ss'))!} 到 ${(activity.endTime?string('yyyy-MM-dd HH:mm:ss'))!} 
-			</p>
-	      </div>
-	    </div>
-	  </div>
-	</#list>
-	</div>  
-	<div class="row" style="margin:0;">
-	<h3>即将开始</h3>
-	</div>
-	<div class="row">
-	<#list activities as activity>
-	  <div class="col-sm-4">
-	    <div class="thumbnail">
-	      <a href="/activity/info/1/${(activity.id)!}">
-	      	<img src="${(activity.posterUrl)!}" >
-	      </a>
-	      <div class="caption">
-	        <h3>${(activity.name)!}</h3>
-			<p>
-				活动地点：${(activity.city.province.name)!} ${(activity.city.city)!} ${(activity.place)!} 
-			</p>
-			<p>
-				活动时间：${(activity.startTime?string('yyyy-MM-dd HH:mm:ss'))!} 到 ${(activity.endTime?string('yyyy-MM-dd HH:mm:ss'))!} 
-			</p>
-	      </div>
-	    </div>
-	  </div>
-	</#list>
-	</div>  
-</div>
+
 </body>
+
+<script>
+var currentPage = 1;
+var totalPages = 10;
+</script>
 <script src="${ (project.staticDomain)! }/libs/jquery/jquery-2.0.3.js"></script>
 <script src="${ (project.staticDomain)! }/libs/AmazeUI-2.1.0/js/amazeui.min.js"></script>
 <script src="${ (project.staticDomain)! }/libs/bootstrap/js/bootstrap.js"></script>
+<script src="${ (project.staticDomain)! }/libs/bootstrap-paginator/bootstrap-paginator.js"></script>
+<script src="${ (project.staticDomain)! }/js/main/index.js"></script>

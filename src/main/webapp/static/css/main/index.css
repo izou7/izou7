@@ -1,6 +1,7 @@
 .recommend{
 	border:none;
 	-webkit-box-shadow:none;
+	margin:10px 0 0 0;
 	
 }
 .grid > a >img{
@@ -13,31 +14,45 @@
 
 .grid{
 	height:350px;
-	width:260px;
+	width:275px;
 	float:left;
 	margin-right:10px;
 	
 }
-.title > a{
+.title > h3 >a{
 	font-weight:400!important;
 	padding-top:15px!important;
 	line-height:28px;
-	color:#333
+	color:#333;
+}
+.title >a{
+	font-weight:400!important;
+	padding-top:15px!important;
+	line-height:28px;
+	color:#333;
+}
+.title > h3 {
+	height:200px;
 }
 .title > p{
 	font-weight:400!important;
-	line-height:1;
 	color:#a0a0a0;
 	font-size:12px;
+	height:5px;
+	margin-bottom:5px;
 }
 .grid > .caption > h4{
 	font-weight:400!important;
 	line-height:28px;
 	color:#333
 }
+.grid{
+	height:320px;
+}
 .grid > a > img{
 	height:149px;
 	width:252px!important;
+	margin-bottom:5px;
 }
 .list > a >img{
 	height:149px;
@@ -47,9 +62,15 @@
 	width:918px;
 }
 .list > .row{
-	margin:0;
+	margin:10px 0 0 0;
 	background-color:#fff;
+	margin:10px;
+	
 }
 .media > .media-body{
 	padding:9px;
+}
+.media > .media-body > .media-right > a > img{
+	widht:252px;
+	height:149px;
 }
