@@ -166,59 +166,17 @@
 </div>
 
 
-<div class="container list" >
-<#list activities as activity>
-<#if activity_index < 5>
-<div class="row" >
-<div class="media ">
-  <div class="media-body">
-    <div class="caption title">
-		       <a href="/activity/info/1/${(activity.id)!}" title="${(activity.name)!}">
-		        <#if ((activity.name!?length) > 50)>
-		      	${(activity.name?substring(0,50))!}...
-		      <#else>
-		      	${(activity.name)!}
-		      </#if>
-		      </a>
-		      <p>
-					活动简介：
-					 <#if ((activity.introduction!?length) > 50)>
-			      	${(activity.introduction?substring(0,50))!}...
-			      <#else>
-			      	${(activity.introduction)!}
-			      </#if>
-				</p>
-				<p>
-					活动时间： ${(activity.startTime?string('yyyy-MM-dd HH:mm:ss'))!}
-				</p>
-				<p>
-					活动地点：
-					<#if ((activity.place!?length) > 50)>
-				      	${(activity.place?substring(0,50))!}...
-				      <#else>
-				      	${(activity.place)!}
-				      </#if>
-				</p>
-		      </div>
-  </div>
-    <a class="media-right" href="#">
-    <img src="${(activity.posterUrl)!}" >
-  </a>
-</div>
-</div>
-</#if>
-</#list>
-<div class="row">
-	<div id="paginator"></div>
-	<form class="form-inline pagination-form" style="display: inline-block;" role="form" action="list" method="get" id="paging-form" data-total-page="${(page.count)!}">
-		<div class="form-group">
-			<input type="hidden" value="${ (page.count)!0 }" id="hiddenCount">
-			<input type="text" class="form-control width50 page-index" id="page-index" name="index"/>
-		</div>
-	</form>
-</div>
-</div>
+<div id="activities" class="container list" >
 
+
+</div>
+<div class="container">
+	<div class="row">
+		<div class="modal-footer">
+					<div id="paginator"></div>
+				</div>
+	</div>
+</div>
 </body>
 
 <script>

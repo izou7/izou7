@@ -1,5 +1,6 @@
 package cn.chinattclub.izou7.web;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import cn.chinattclub.izou7.dto.ActivityListDto;
 import cn.chinattclub.izou7.dto.ActivityQueryDto;
 import cn.chinattclub.izou7.dto.RegistUserDto;
 import cn.chinattclub.izou7.entity.Activity;
@@ -63,6 +65,35 @@ public class MainController {
 		return "site.main.index";
 	}
 
+	@RequestMapping(value="/activities", method = RequestMethod.GET)
+	@ResponseBody
+	public RestResponse activities(int index) {
+		RestResponse response = new RestResponse();
+		Page page = new Page();
+		page.setIndex(index);
+		ActivityQueryDto query = new ActivityQueryDto();
+		query.setStatus(1);
+		List<Activity> activities = activityServiceImpl.findActivitys(page,query);
+		List<ActivityListDto> alds = new ArrayList<ActivityListDto>();
+		for (Activity act : activities) {
+			ActivityListDto dto = new ActivityListDto();
+			dto.setId(act.getId());
+			dto.setDeployTime(act.getCreateTime());
+			dto.setName(act.getName());
+			dto.setPoster(act.getPosterUrl());
+			dto.setUpdateTime(act.getUpdateTime());
+			dto.setStartTime(act.getStartTime());
+			dto.setEndTime(act.getEndTime());
+			dto.setIntroduction(act.getIntroduction());
+			dto.setPlace(act.getPlace());
+			alds.add(dto);
+		}
+		response.getBody().put("activities", alds);
+		response.getBody().put("page", page);
+		response.setStatusCode(ResponseStatusCode.OK);
+		return response;
+	}
+	
 	@RequestMapping(value = "error", method = RequestMethod.GET)
 	public String errorPage() {
 		return "site.main.error";
