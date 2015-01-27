@@ -9,6 +9,7 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 <title>${ (project.title)! }</title>
+<link rel="icon" href="${ (project.staticDomain)! }/images/logo.png"/>
 <link rel="stylesheet" href="${ (project.staticDomain)! }/css/scaffold/sticky-footer.css">
 <link rel="stylesheet" href="${ (project.staticDomain)! }/libs/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" href="${ (project.staticDomain)! }/css/common.css">

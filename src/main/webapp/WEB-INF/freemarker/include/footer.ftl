@@ -36,7 +36,7 @@
 								<a href="#" target="_blank">创业圈子</a>
 							</li>
 							<li>
-								<a href="#" target="_blank">**助手</a>
+								<a href="#" target="_blank">招商助手</a>
 							</li>
 						</ul>
 					</li>
@@ -44,13 +44,13 @@
 						<h4> TT服务</h4>
 						<ul>
 							<li>
-								<a href="#" target="_blank">免费**</a>
+								<a href="#" target="_blank">免费资源</a>
 							</li>
 							<li>
 								<a href="#" target="_blank">工商注册</a>
 							</li>
 							<li>
-								<a href="#" target="_blank">**对接</a>
+								<a href="#" target="_blank">融资对接</a>
 							</li>							
 						</ul>
 					</li>						

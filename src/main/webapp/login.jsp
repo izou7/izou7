@@ -31,7 +31,7 @@
     <link rel="icon" href="../../favicon.ico">
  	-->
     <title>登录</title>
-
+	<link rel="icon" href="/static/images/logo.png"/>
     <!-- Bootstrap core CSS -->
     <link href="/static/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -54,7 +54,7 @@
     <div class="container">
 
       <form class="form-signin" role="form" action="" method="post">
-        <h2 class="form-signin-heading">爱走起</h2>
+        <h2 class="form-signin-heading">TT家族</h2>
         
         <!--
         <input type="email" class="form-control" placeholder="Email address" required autofocus>

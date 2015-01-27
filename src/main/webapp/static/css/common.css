@@ -51,12 +51,17 @@ body {
 	
 }
 .navbar-inverse .navbar-brand{
-	color:#FDFDFD;
+	color:#FDFDFD!important;
 }
 .navbar-inverse .navbar-nav>li>a{
-	color:#FDFDFD;
-	font-size:15px;
-	font-family: Microsoft Yahei;
+	color:#FDFDFD!important;
+	font-size:15px!important;
+	font-family: Microsoft Yahei!important;
+	padding-top:15px!important;
+	padding-bottom:15px!important;
+}
+.navbar-header{
+	float:none;
 }
 .divider{
 	width:1px;

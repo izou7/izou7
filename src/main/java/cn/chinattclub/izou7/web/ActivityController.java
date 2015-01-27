@@ -165,7 +165,13 @@ public class ActivityController {
 	 * @return
 	 */
 	@RequestMapping(value="/index", method = RequestMethod.GET)
-	public String sponsorPage() {
+	public String sponsorPage(Model model) {
+		Page page = new Page();
+		ActivityQueryDto query = new ActivityQueryDto();
+		query.setStatus(1);
+		page.setSize(12);
+		List<Activity> activitys = activityServiceImpl.findActivitys(page,query);
+		model.addAttribute("activities",activitys);
 		return "site.activity.index";
 	}
 	
@@ -195,6 +201,36 @@ public class ActivityController {
 		return "site.activity.list";
 	}
 	
+	@RequestMapping(value="/activities", method = RequestMethod.GET)
+	@ResponseBody
+	public RestResponse activities(int index) {
+		RestResponse response = new RestResponse();
+		System.out.println("------------------------------");
+		Page page = new Page();
+		page.setIndex(index);
+		page.setSize(5);
+		ActivityQueryDto query = new ActivityQueryDto();
+		query.setStatus(1);
+		List<Activity> activities = activityServiceImpl.findActivitys(page,query);
+		List<ActivityListDto> alds = new ArrayList<ActivityListDto>();
+		for (Activity act : activities) {
+			ActivityListDto dto = new ActivityListDto();
+			dto.setId(act.getId());
+			dto.setDeployTime(act.getCreateTime());
+			dto.setName(act.getName());
+			dto.setPoster(act.getPosterUrl());
+			dto.setUpdateTime(act.getUpdateTime());
+			dto.setStartTime(act.getStartTime());
+			dto.setEndTime(act.getEndTime());
+			dto.setIntroduction(act.getIntroduction());
+			dto.setPlace(act.getPlace());
+			alds.add(dto);
+		}
+		response.getBody().put("activities", alds);
+		response.getBody().put("page", page);
+		response.setStatusCode(ResponseStatusCode.OK);
+		return response;
+	}
 	
 //	@RequestMapping(value="/activitys", method = RequestMethod.GET)
 //	@ResponseBody

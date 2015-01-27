@@ -1,105 +1,162 @@
-  		<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-  			<!-- Indicators -->
-  			<ol class="carousel-indicators">
-  				<li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-  				<li data-target="#carousel-example-generic" data-slide-to="1"></li>
-  				<li data-target="#carousel-example-generic" data-slide-to="2"></li>
-  				<li data-target="#carousel-example-generic" data-slide-to="3"></li>
-  			</ol>
-  			<!-- Wrapper for slides -->
-  			<div class="carousel-inner">
-  				<div class="item active">
-  					<img src="${ (project.staticDomain)! }/images/shop.jpg" alt="" />
-  					<div class="carousel-caption">
-  						<button type="button" class="btn btn-success btn-lg" onclick="javascript:location.href='/activity/activity?step=FIRST'">发布活动</button>
-  					</div>
-  				</div>
-  				<div class="item">
-  					<img src="${ (project.staticDomain)! }/images/subway.jpg" alt="" />
-  					<div class="carousel-caption"></div>
-  				</div>
-  				<div class="item">
-  					<img src="${ (project.staticDomain)! }/images/sunset.jpg" alt="" />
-  					<div class="carousel-caption"></div>
-  				</div>
-  				<div class="item">
-  					<img src="${ (project.staticDomain)! }/images/wood.jpg" alt="" />
-  					<div class="carousel-caption"></div>
-  				</div>
-  			</div>
-  			<!-- Controls -->
-  			<a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-  				<span class="glyphicon glyphicon-chevron-left"></span>
-  			</a> 
-  			<a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-  				<span class="glyphicon glyphicon-chevron-right"></span>
-  			</a>
-  			
-  			
-  		</div>
-  		<!--编辑器-->
-  		
-  		<!-- 主要内容 -->
-  		<div class="container summary">
-  			<div class="col-sm-12 text-center" >
-  				<h3 style="font-size: 22px;color:#4B535D;margin-bottom:30px;">全方位助力活动！</h3>
-  			</div>
-  			<div class="row">
+<link rel="stylesheet" href="${ (project.staticDomain)! }/libs/bootstrap-paginator/bootstrap-combined.min.css">
+<link rel="stylesheet" href="${ (project.staticDomain)! }/libs/AmazeUI-2.1.0/css/amazeui.min.css">
+<link rel="stylesheet" href="${ (project.staticDomain)! }/libs/AmazeUI-2.1.0/css/app.css">
+<link rel="stylesheet" href="${ (project.staticDomain)! }/css/activity/index.css">
+<body style="background-color: #f6f6f6">
+<div data-am-widget="slider" class="am-slider am-slider-c3" data-am-slider='{&quot;controlNav&quot;:false}'>
+  <ul class="am-slides">
+    <li>
+      <img src="${ (project.staticDomain)! }/images/sunset.jpg">
+      <div class="am-slider-desc">
+        <div class="am-slider-counter">
+          <span class="am-active">1</span>/4</div>各种发现活动 / 最感兴趣的活动 / 最有深度的活动 / 某人也去的活动</div>
+    </li>
+    <li>
+      <img src="${ (project.staticDomain)! }/images/subway.jpg">
+      <div class="am-slider-desc">
+        <div class="am-slider-counter">
+          <span class="am-active">2</span>/4</div>遇见大牛 / 认识同行 / 发起聚会</div>
+    </li>
+    <li>
+      <img src="${ (project.staticDomain)! }/images/shop.jpg">
+      <div class="am-slider-desc">
+        <div class="am-slider-counter">
+          <span class="am-active">3</span>/4</div>各种发现活动 / 最感兴趣的活动 / 最有深度的活动 / 某人也去的活动</div>
+    </li>
+    <li>
+      <img src="${ (project.staticDomain)! }/images/wood.jpg">
+      <div class="am-slider-desc">
+        <div class="am-slider-counter">
+          <span class="am-active">4</span>/4</div>遇见大牛 / 认识同行 / 发起聚会</div>
+    </li>
+  </ul>
+</div>
 
-  				<div class="col-sm-2" >
-				<dl>
-				  <dt>自媒体合作</dt>
-				  <dd>优质自媒体轻松找</dd>
-				  <dd>活动直达目标人群</dd>
-				</dl>
-  				</div>
-  				<div class="col-sm-2" >
-				<dl>
-				  <dt>众筹资金</dt>
-				  <dd>发现赞助商</dd>
-				  <dd>预售门票</dd>
-				</dl>
-  				</div>
-  				<div class="col-sm-2" >
-				<dl>
-				  <dt>合作伙伴</dt>
-				  <dd>联合主办</dd>
-				  <dd>合作机构</dd>
-				</dl>
-  				</div>
-  				<div class="col-sm-2" >
-				<dl>
-				  <dt>嘉宾招募</dt>
-				  <dd>自主邀请</dd>
-				  <dd>嘉宾报名</dd>
-				</dl>
-  				</div>
-  				<div class="col-sm-2" >
-				<dl>
-				  <dt>用户管理</dt>
-				  <dd>实时报名统计</dd>
-				  <dd>积累目标用户</dd>
-				</dl>
-  				</div>
-  				<div class="col-sm-2" >
-				<dl>
-				  <dt>活动发布</dt>
-				  <dd>5分钟创建活动：网页版 +移动版</dd>
-				  <dd>SNS一键推广</dd>
-				</dl>
-  				</div>
-  			</div>
-  			<div class="row">
-  				<div class="col-sm-2" >
-				<dl>
-				  <dt>活动效果评估</dt>
-				  <dd>参会者构成</dd>
-				  <dd>嘉宾评价</dd>
-				</dl>
-  				</div>
-  			</div>
-  		</div>
-  			
-  		</div>
+<div class="container">
+	<div data-am-widget="slider" class="am-slider am-slider-b3 recommend" data-am-slider='{&quot;controlNav&quot;:false}'>
+	  <ul class="am-slides">
+	    <li>
+	    <#list activities as activity>
+	    	<#if activity_index < 4 >
+	    	<div class="thumbnail grid">
+		      <a href="/activity/info/1/${(activity.id)!}">
+		      	<img src="${(activity.posterUrl)!}" class="img-rounded">
+		      </a>
+		      <div class="caption title">
+		      <h3 >
+		      <a href="/activity/info/1/${(activity.id)!}" title="${(activity.name)!}">
+		      <#if ((activity.name!?length) > 25)>
+		      	${(activity.name?substring(0,25))!}...
+		      <#else>
+		      	${(activity.name)!}
+		      </#if>
+		      </a>
+		      </h3>
+				<p>
+					活动时间：${(activity.startTime?string('yyyy-MM-dd HH:mm:ss'))!} 
+				</p>
+				<p>
+					活动地点：
+					<#if ((activity.place!?length) > 30)>
+			      	${(activity.place?substring(0,30))!}...
+			      <#else>
+			      	${(activity.place)!}
+			      </#if> 
+					
+				</p>
+		      </div>
+		    </div>
+	    	</#if>
+		    </#list>
+	    </li>
+	    <li>
+	    <#list activities as activity>
+	    	<#if (activity_index>3) && (activity_index<8) >
+	    	<div class="thumbnail grid">
+		      <a href="/activity/info/1/${(activity.id)!}" >
+		      	<img src="${(activity.posterUrl)!}" class="img-rounded">
+		      </a>
+		      <div class="caption title">
+		      <h3>
+		        <a href="/activity/info/1/${(activity.id)!}" title="${(activity.name)!}" >
+		      	<#if ((activity.name!?length) > 25)>
+		      	${(activity.name?substring(0,25))!}...
+		      <#else>
+		      	${(activity.name)!}
+		      </#if>
+		      </a>
+		      </h3>
+				<p>
+					活动时间：${(activity.startTime?string('yyyy-MM-dd HH:mm:ss'))!} 
+				</p>
+				<p>
+					活动地点：
+					<#if ((activity.place!?length) > 30)>
+			      	${(activity.place?substring(0,30))!}...
+			      <#else>
+			      	${(activity.place)!}
+			      </#if>
+				</p>
+		      </div>
+		    </div>
+	    	</#if>
+		    </#list>
+	    </li>
+	    <li>
+	    <#list activities as activity>
+	    	<#if (activity_index > 7) && (activity_index < 12)>
+	    	<div class="thumbnail grid">
+		      <a href="/activity/info/1/${(activity.id)!}" style="height:150px;margin:0px;">
+		      	<img src="${(activity.posterUrl)!}" class="img-rounded">
+		      </a>
+		      <div class="caption title">
+		      <h3 >
+		       <a href="/activity/info/1/${(activity.id)!}" title="${(activity.name)!}">
+		        <#if ((activity.name!?length) > 25)>
+		      	${(activity.name?substring(0,25))!}...
+		      <#else>
+		      	${(activity.name)!}
+		      </#if>
+		      </a>
+		      </h3>
+				<p>
+					活动时间：${(activity.startTime?string('yyyy-MM-dd HH:mm:ss'))!} 
+				</p>
+				<p>
+					活动地点：
+				<#if ((activity.place!?length) > 30)>
+			      	${(activity.place?substring(0,30))!}...
+			      <#else>
+			      	${(activity.place)!}
+			      </#if>
+				</p>
+		      </div>
+		    </div>
+	    	</#if>
+		    </#list>
+	    </li>
+	    
+	  </ul>
+	</div>
+</div>
+
+
+<div id="activities" class="container list" >
+
+
+</div>
+<div class="container">
+	<div class="row">
+		<div class="modal-footer">
+					<div id="paginator" ></div>
+				</div>
+	</div>
+</div>
+</body>
+
 <script src="${ (project.staticDomain)! }/libs/jquery/jquery-2.0.3.js"></script>
+<script src="${ (project.staticDomain)! }/libs/AmazeUI-2.1.0/js/amazeui.min.js"></script>
 <script src="${ (project.staticDomain)! }/libs/bootstrap/js/bootstrap.js"></script>
+<script src="${ (project.staticDomain)! }/libs/bootstrap-paginator/bootstrap-paginator.js"></script>
+<script src="${ (project.staticDomain)! }/libs/Zebra_Dialog/js/zebra_dialog.js"></script>
+<script src="${ (project.staticDomain)! }/js/activity/index.js"></script>
