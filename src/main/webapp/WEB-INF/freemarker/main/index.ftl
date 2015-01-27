@@ -36,7 +36,7 @@
 	    </div>
 	</div>
 	<div class="row block">
-		<div class="col-xs-4 col-xs-offset-1">
+		<div class="col-xs-4 col-xs-offset-2">
 			<h3>活动资源</h3>
 			<h5>有思想，就能讲</h5>
 	    </div>
