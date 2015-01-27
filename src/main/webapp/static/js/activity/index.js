@@ -1,4 +1,11 @@
 $(function () {
+    $('#slider').flexslider({  
+        playAfterPaused: 3000,  
+        animation: "fade",  
+        animationLoop: true,  
+        smoothHeight: true,  
+        animationSpeed: 5000  
+    });  
 	initActivities(1);
 });
 function initActivities(index){

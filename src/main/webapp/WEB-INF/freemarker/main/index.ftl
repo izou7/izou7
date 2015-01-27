@@ -26,7 +26,7 @@
 </div>
 <div class="container title">
 	<div class="row block">
-		<div class="col-xs-4 col-xs-offset-2">
+		<div class="col-xs-4 col-xs-offset-2" >
 			<h3>一起”活动“</h3>
 			<h5>发现伙伴，碰撞思想</h5>
 	    </div>
@@ -36,7 +36,7 @@
 	    </div>
 	</div>
 	<div class="row block">
-		<div class="col-xs-4 col-xs-offset-2">
+		<div class="col-xs-4 col-xs-offset-1">
 			<h3>活动资源</h3>
 			<h5>有思想，就能讲</h5>
 	    </div>

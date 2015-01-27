@@ -8,15 +8,28 @@ body {
   /* Margin bottom by footer height */
   margin-bottom: 60px;
 }
-.footer {
+.footer_back {
   position: absolute;
   bottom: -256px;
   width: 100%;
   /* Set the fixed height of the footer here */
   height:256px;
-  background:#A9A9A9;
-  border-color: #9A9A9;
+  background:#5D5D5D;
+  border-color: #5D5D5D;
   font-family:Microsoft YaHei
+  filter:alpha(opacity=40); /*IE滤镜，透明度50%*/
+  -moz-opacity:0.4; /*Firefox私有，透明度50%*/
+  opacity:0.4;/*其他，透明度50%*/
+  z-index:-1;
+}
+.footer {
+  position: absolute;
+  bottom: -256px!important;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height:256px;
+  font-family:Microsoft YaHei;
+  z-index:1;
 }
 .footer h4{
 	font-weight:400!important;

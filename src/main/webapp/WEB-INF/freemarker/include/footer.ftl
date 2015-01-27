@@ -1,3 +1,11 @@
+<div class="footer_back" >
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12 container-lg" >
+			</div>
+		</div>
+	</div>
+</div>
 <div class="footer" >
 	<div class="container">
 		<div class="row">
@@ -76,15 +84,5 @@
 				</ul>
 			</div>
 		</div>
-		<!--
-		<footer >
-			<p class="pull-right" >
-				<a href="#top"  >回到顶部</a>
-			</p>
-			<p>
-				2014 TT家族
-			</p>
-		</footer>
-		-->
 	</div>
 </div>

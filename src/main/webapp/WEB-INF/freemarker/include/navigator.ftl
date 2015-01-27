@@ -35,7 +35,7 @@
   						</li>
   					<#else>
   						<li >
-  						<a href="/login.jsp" >登陆</a>
+  						<a href="/login.jsp" >登录</a>
   						</li>
   						<li >
   						<a href="/regist" >注册</a>

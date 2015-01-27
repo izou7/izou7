@@ -14,12 +14,12 @@
 	opacity:0.5;/*其他，透明度50%*/
 }
 .blockCtn{
-	padding-top:100px;
+	padding-top:5%;
 	position:absolute;
 	z-index:-1;
 }
 .title{
-	margin-top:150px;
+	margin-top:8%;
 	color:#FFFFFF;
 }
 .title > .block{

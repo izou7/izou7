@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="${ (project.staticDomain)! }/libs/AmazeUI-2.1.0/css/app.css">
 <link rel="stylesheet" href="${ (project.staticDomain)! }/css/activity/index.css">
 <body style="background-color: #f6f6f6">
-<div data-am-widget="slider" class="am-slider am-slider-c3" data-am-slider='{&quot;controlNav&quot;:false}'>
+<div id="slider"  data-am-widget="slider" class="am-slider am-slider-c3" data-am-slider='{&quot;controlNav&quot;:false}'>
   <ul class="am-slides">
     <li>
       <img src="${ (project.staticDomain)! }/images/sunset.jpg">
