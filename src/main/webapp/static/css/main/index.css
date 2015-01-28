@@ -1,6 +1,3 @@
-.footer{
-	bottom:-80px;
-}
 .block > div > div{
 	background-color:#DDDDDD;
 	width:300px;
@@ -13,16 +10,38 @@
 	-moz-opacity:0.5; /*Firefox私有，透明度50%*/
 	opacity:0.5;/*其他，透明度50%*/
 }
+.block2 > div > div{
+	width:300px;
+	height:170px;
+	margin:30px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	cursor:pointer;
+}
+.background{
+	position:absolute;
+	z-index:-1;
+	width:100%;
+	height:100%;
+	top:0px;
+	left:0px;
+}
+
 .blockCtn{
-	padding-top:5%;
+	padding-top:15%;
 	position:absolute;
 	z-index:-1;
 }
+.blockCtn2{
+	padding-top:15%;
+	position:absolute;
+	z-index:1;
+}
 .title{
-	margin-top:8%;
+	margin:3% 0 0 2%;
 	color:#FFFFFF;
 }
 .title > .block{
-	margin-bottom:150px;
 	padding-left:20px;
+	margin-bottom:150px;
 }

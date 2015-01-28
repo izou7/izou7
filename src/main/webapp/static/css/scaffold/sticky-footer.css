@@ -33,6 +33,10 @@ body {
 }
 .footer h4{
 	font-weight:400!important;
+	font-size:18px;
+}
+.footer a{
+	font-size:14px;
 }
 
 .container-lg{
@@ -49,7 +53,8 @@ body {
 .container-lg > ul{
 	list-style-type:none;
 	text-align:left;
-	margin-left:0px;
+	margin:0px 0px 10px 0px!important;
+	padding-left:50px;
 }
 .container-lg > ul > li{
 	display:list-item;
@@ -60,6 +65,7 @@ body {
 .container-lg > ul > li > ul{
 	padding-left:0px;
 	list-style:none; 
+	margin:0!important;
 }
 .container-lg > ul > li > ul > li{
 	margin-top:10px;
@@ -73,4 +79,5 @@ body {
 footer{
 	margin-top:20px;
 }
+
 

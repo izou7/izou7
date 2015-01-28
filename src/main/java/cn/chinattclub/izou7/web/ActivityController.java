@@ -205,7 +205,6 @@ public class ActivityController {
 	@ResponseBody
 	public RestResponse activities(int index) {
 		RestResponse response = new RestResponse();
-		System.out.println("------------------------------");
 		Page page = new Page();
 		page.setIndex(index);
 		page.setSize(5);
