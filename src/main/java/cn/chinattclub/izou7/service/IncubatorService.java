@@ -18,4 +18,12 @@ public interface IncubatorService {
 
 	public List<Incubator> find(Page page);
 
+	/**
+	 * TODO Put here a description of what this method does.
+	 *
+	 * @param id
+	 * @return
+	 */
+	Incubator get(int id);
+
 }

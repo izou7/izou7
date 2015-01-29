@@ -1,0 +1,32 @@
+body{
+	font-family:Microsoft YaHei;
+}
+.list{
+	padding-top:20px;
+	padding-bottom:20px;
+}
+.media-object{
+	width:120px;
+	height:120px;
+}
+.media{
+	margin-left:10px;
+	margin-top:10px;
+	background-color: rgb(246, 246, 246);
+}
+.media-body{
+	padding-top:5px;
+	width:88%;
+}
+.media-body a{
+	float:right;
+	text-decoration:none;
+	color:#333;
+}
+.media-body > p{
+	font-weight:400!important;
+	margin-top:20px;
+	color:#a0a0a0;
+	font-size:12px;
+	height:10px;
+}

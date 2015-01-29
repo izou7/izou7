@@ -1,0 +1,24 @@
+body{
+	font-family:Microsoft YaHei;
+}
+.row{
+	margin:20px;
+}
+p{
+	font-weight:400!important;
+	margin-top:20px;
+	font-size:14px;
+	height:10px;
+}
+.littlePoster img{
+	width:80px;
+	height:80px;
+}
+.bigPoster{
+	text-align:center;
+}
+.bigPoster img{
+	
+	width:500px;
+	height:300px;
+}

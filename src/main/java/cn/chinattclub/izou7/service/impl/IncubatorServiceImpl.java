@@ -27,4 +27,9 @@ public class IncubatorServiceImpl implements IncubatorService {
 		page.setRecordCount(dao.findCount());
 		return dao.find(page);
 	}
+	
+	@Override
+	public Incubator get(int id){
+		return dao.get(id);
+	}
 }

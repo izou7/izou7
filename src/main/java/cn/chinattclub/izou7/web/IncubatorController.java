@@ -42,6 +42,12 @@ public class IncubatorController {
 		return "site.incubator.list";
 	}
 	
+	@RequestMapping(value="/incubatorPage", method = RequestMethod.GET)
+	public String info(Model model ,int id) {
+		model.addAttribute("incubator",incubatorServiceImpl.get(id));
+		return "site.incubator.info";
+	}
+	
 	@RequestMapping(value="/incubators", method = RequestMethod.GET)
 	@ResponseBody
 	public RestResponse incubators(int index) {

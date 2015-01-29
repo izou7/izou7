@@ -28,13 +28,14 @@ function initIncubators(index){
 						name = name.substr(0,50);
 					}
 					html+='<div class="media">'+
-				      '<a class="media-left" href="#">'+
+				      '<a class="media-left" href="incubatorPage?id='+ibt.id+'">'+
 				        '<img class="media-object" src="'+ibt.littlePosterUrl+'" >'+
 				      '</a>'+
 				      '<div class="media-body">'+
 				        '<h4 class="media-heading">'+name+'</h4>'+
 				        '<p>'+introduction+'</p>'+
 				        '<p>'+address+'</p>'+
+				        '<a href="incubatorPage?id='+ibt.id+'">more</a>'+
 				      '</div>'+
 				    '</div>'
 				}
