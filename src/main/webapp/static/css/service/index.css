@@ -1,0 +1,31 @@
+body{
+background-color:rgb(246, 246, 246);
+}
+
+.index{
+	margin-top:20px;
+}
+.row{
+	margin-top:10px;
+}
+.imgplace{
+	height:150px;
+	width:150px;
+	border-radius:50%;
+	
+}
+p{
+	margin-top:10px;
+}
+.title{
+	margin-top:30px;
+}
+.imgplace1{
+	background-color:#00FFCC;
+	border:0px solid #00FFCC;
+}
+.imgplace1 h4{
+	padding-top:40%;
+	padding-left:18%;
+
+}

@@ -28,12 +28,12 @@
 }
 
 .blockCtn{
-	padding-top:15%;
+	padding-top:10%;
 	position:absolute;
 	z-index:-1;
 }
 .blockCtn2{
-	padding-top:15%;
+	padding-top:10%;
 	position:absolute;
 	z-index:1;
 }

@@ -57,7 +57,7 @@
 			</div>
 	    </div>
 		<div class="col-xs-4">
-			<div class="rblock2">
+			<div class="rblock2" onclick="javascript:location.href='service/index';">
 			<h3>TT服务</h3>
 			<h5>一起来撸大公司的羊毛</h5>			
 			</div>
