@@ -9,23 +9,23 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  * 
- * @ClassName: MainController
- * @Description:孵化器控制类
+ * @ClassName: ResourceController
+ * @Description:活动资源控制类
  * @author: zy
  * @date: 2014-11-9 下午8:00:36
  * 
  */
 @Controller
-@RequestMapping("service")
-public class ServiceController {
+@RequestMapping("resource")
+public class ResourceController {
 
 	private static final Logger logger = LoggerFactory
-			.getLogger(ServiceController.class);
+			.getLogger(ResourceController.class);
 	
 	
 	@RequestMapping(value="/index", method = RequestMethod.GET)
 	public String list(Model model  ) {
-		return "site.service.index";
+		return "site.resource.index";
 	}
 	
 	

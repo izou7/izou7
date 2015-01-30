@@ -51,7 +51,7 @@
 	</div>
 	<div class="row block2">
 		<div class="col-xs-4 col-xs-offset-2">
-			<div  class="lblock2" >
+			<div  class="lblock2" onclick="javascript:location.href='resource/index';" >
 			<h3>活动资源</h3>
 			<h5>有思想，就能讲</h5>			
 			</div>

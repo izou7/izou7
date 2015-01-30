@@ -38,10 +38,19 @@
 	z-index:1;
 }
 .title{
-	margin:3% 0 0 2%;
 	color:#FFFFFF;
 }
 .title > .block{
 	padding-left:20px;
 	margin-bottom:150px;
+}
+.title  .lblock2{
+	padding-left:5%;
+	padding-top:5%;
+	padding:5% 0 0 5%;
+}
+.title  .rblock2{
+	padding-left:5%;
+	padding-top:5%;
+	padding:5% 0 0 5%;
 }
