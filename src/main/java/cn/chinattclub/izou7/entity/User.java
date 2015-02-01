@@ -1,6 +1,7 @@
 package cn.chinattclub.izou7.entity;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -76,6 +77,9 @@ public class User {
 	
 	@OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
 	private List<Public> pub;
+	
+	@OneToMany
+	private Set<Media> mediaInfos;
 
 	public List<Public> getPub() {
 		return pub;
@@ -159,6 +163,14 @@ public class User {
 
 	public void setSource(Integer source) {
 		this.source = source;
+	}
+
+	public Set<Media> getMediaInfos() {
+		return mediaInfos;
+	}
+
+	public void setMediaInfos(Set<Media> mediaInfos) {
+		this.mediaInfos = mediaInfos;
 	}
 
 }

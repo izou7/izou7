@@ -1,10 +1,13 @@
 package cn.chinattclub.izou7.entity;
 
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.NotFound;
@@ -21,6 +24,9 @@ public class City {
 	private int id;
 	
 	private String city;
+	
+	@OneToMany(mappedBy="city")
+	private Set<Site> sites;
 	
 //	private int pid;
 	
@@ -74,6 +80,14 @@ public class City {
 	 */
 	public void setProvince(Province province) {
 		this.province = province;
+	}
+
+	public Set<Site> getSites() {
+		return sites;
+	}
+
+	public void setSites(Set<Site> sites) {
+		this.sites = sites;
 	}
 
 }

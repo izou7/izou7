@@ -64,6 +64,11 @@ public class Incubator {
 	private String bigPosterUrl;
 	
 	/**
+	 * 标签
+	 */
+	private String tags;
+	
+	/**
 	 * 小海报
 	 */
 	@Column(name = "little_posterUrl")
@@ -249,6 +254,14 @@ public class Incubator {
 	 */
 	public void setEnable(boolean enable) {
 		this.enable = enable;
+	}
+
+	public String getTags() {
+		return tags;
+	}
+
+	public void setTags(String tags) {
+		this.tags = tags;
 	}
 	
 	
