@@ -54,6 +54,22 @@ public class UserInfo {
 	@Column(name = "career_info")
 	private String careerInfo;
 	
+	/**
+	 * 教育背景
+	 */
+	@Column(name = "education_info")
+	private String educationInfo;
+	
+	/**
+	 * 公司
+	 */
+	private String company;
+	
+	/**
+	 * 职位
+	 */
+	private String position;
+	
 	private String introduction;
 	
 	@Column(name = "praise_number")
@@ -256,6 +272,30 @@ public class UserInfo {
 	 */
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public String getEducationInfo() {
+		return educationInfo;
+	}
+
+	public void setEducationInfo(String educationInfo) {
+		this.educationInfo = educationInfo;
+	}
+
+	public String getCompany() {
+		return company;
+	}
+
+	public void setCompany(String company) {
+		this.company = company;
+	}
+
+	public String getPosition() {
+		return position;
+	}
+
+	public void setPosition(String position) {
+		this.position = position;
 	}
 	
 	

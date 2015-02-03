@@ -38,6 +38,7 @@ public class Site {
 	@Length(min=1, max=500,message="简介长度应在1到500个字符之间")
 	private String introduction;
 	
+	@Column(name="user_id")
 	private int userId;
 	
 	@Length(min=1, max=200,message="海报不能为空")
