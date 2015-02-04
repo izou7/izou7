@@ -42,7 +42,7 @@
   						</li>
   					</#if>
   						<li >
-  						<a href="/login.jsp" >添加活动</a>
+  						<a href="/activity/activity?step=FIRST" >添加活动</a>
   						</li>
   					</ul>
   				</div>
