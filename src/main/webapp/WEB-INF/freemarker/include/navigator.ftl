@@ -8,6 +8,9 @@
   				<a class="navbar-brand" href="/index">TT家族</a>
   					<ul class="nav navbar-nav" id="nav">
   						<li >
+  							<a  href="/entrepreneur/index">创业者</a>
+  						</li>
+  						<li >
   							<a  href="/activity/index">发布活动</a>
   						</li>
   						<li>

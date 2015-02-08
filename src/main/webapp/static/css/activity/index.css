@@ -19,23 +19,23 @@
 	margin-right:10px;
 	
 }
-.title > h3 >a{
+.summary > h3 >a{
 	font-weight:400!important;
 	padding-top:15px!important;
 	line-height:28px;
 	color:#333;
 }
-.title >a{
+.summary >a{
 	font-weight:400!important;
 	padding-top:15px!important;
 	line-height:28px;
 	color:#333;
 }
-.title > h3 {
+.summary > h3 {
 	height:200px;
 	line-height:20px;
 }
-.title > p{
+.summary > p{
 	font-weight:400!important;
 	color:#a0a0a0;
 	font-size:12px;
