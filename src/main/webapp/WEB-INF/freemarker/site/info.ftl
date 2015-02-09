@@ -210,4 +210,3 @@ var tags = "${(site.tags)!}";
 <script src="${ (project.staticDomain)! }/libs/jquery-form/jquery.form.js"></script>
 <script src="${ (project.staticDomain)! }/libs/Zebra_Dialog/js/zebra_dialog.js"></script>
 <script src="${ (project.staticDomain)! }/js/common.js"></script>
-<script src="${ (project.staticDomain)! }/js/activity/activity.js"></script> 
