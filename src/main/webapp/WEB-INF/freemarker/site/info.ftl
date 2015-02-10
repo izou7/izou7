@@ -44,20 +44,7 @@
 				  <input class="form-control" type="text" id="name" name="name" placeholder="名称" value="${(site.name)!}" required>
 				</div>
 			  </div>
-			  
-			   <div class="form-group">
-				<label class="col-lg-2 control-label" for="place">地址：</label>
-				<div class="col-lg-2">
-				<input class="form-control" type="text" id="address" name="address" placeholder="地址" value="${(site.address)!}" required>
-				</div>
-			  </div>
-			  <div class="form-group">
-				<label class="col-sm-2 control-label" for="place"></label>
-				<div class="col-sm-6">
-				  <input class="form-control" type="text" name="introduction"  id="introduction" placeholder="简介" value="${(site.introduction)!}" required>
-				</div>
-			  </div>		
-			   		        <!-- Redirect browsers with JavaScript disabled to the origin page -->
+			   	        <!-- Redirect browsers with JavaScript disabled to the origin page -->
 		        <noscript><input type="hidden" name="redirect" value="https://blueimp.github.io/jQuery-File-Upload/"></noscript>
 		        <div class="form-group">
 		        	<label class="col-lg-2 control-label" for="poster">上传海报：</label>
@@ -72,7 +59,7 @@
 			                </span>
 			            </div>
 			        </div>
-			        <input type="hidden" id="posterUrl" name="posterUrl" value="${(activity.posterUrl)!}">
+			        <input type="hidden" id="posterUrl" name="posterUrl" value="${(site.posterUrl)!}">
 			</div>
 	        <div class="form-group">
 				<label class="col-lg-2 control-label" ></label>
@@ -81,6 +68,47 @@
 	        		<table role="presentation" class="table table-striped"><tbody class="files"></tbody></table>
 				</div>
 		  	</div>
+			     <div class="form-group">
+				<label class="col-lg-2 control-label" for="address">详细地址：</label>
+				<div class="col-lg-2">
+				  <select id="province" name="province" class="form-control" >
+				  <#list provinces! as province>
+				  		<#if (site.city.province.name)! == province.name >
+				  			<option value="${(province.id)!}" selected>${(province.name)!}</option>
+				  		<#else>
+				  			<option value="${(province.id)!}">${(province.name)!}</option>
+				  		</#if>
+				  </#list>
+				  </select>
+				</div>
+				<div class="col-lg-2">
+				  <select id="city" name="city" class="form-control" >
+				  <#if (site.city.province.citys)??>
+					<#list (site.city.province.citys) as city>
+						<#if (site.city.city)! == city.city >
+				  			<option value="${(city.id)!}" selected>${(city.city)!}</option>
+				  		<#else>
+				  			<option value="${(city.id)!}">${(city.city)!}</option>
+				  		</#if> 
+					</#list>
+					<#else>
+						<option value="51">北京市</option>
+					</#if>
+				  </select>
+				</div>
+			  </div>
+			  <div class="form-group">
+				<label class="col-sm-2 control-label" for="place"></label>
+				<div class="col-sm-6">
+				  <input class="form-control" type="text" name="address"  id="address" placeholder="详细地址" value="${(site.address)!}" required>
+				</div>
+			  </div>		
+			  <div class="form-group">
+				<label class="col-sm-2 control-label" for="introduction">简介：</label>
+				<div class="col-sm-6">
+				  <textarea class="form-control" rows="5" placeholder="简介" >${(site.introduction)!}</textarea>
+				</div>
+			  </div>		
 				  	
 			 <div class="form-group">
 				<div class="col-lg-4">
@@ -210,3 +238,4 @@ var tags = "${(site.tags)!}";
 <script src="${ (project.staticDomain)! }/libs/jquery-form/jquery.form.js"></script>
 <script src="${ (project.staticDomain)! }/libs/Zebra_Dialog/js/zebra_dialog.js"></script>
 <script src="${ (project.staticDomain)! }/js/common.js"></script>
+<script src="${ (project.staticDomain)! }/js/site/info.js"></script>

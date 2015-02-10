@@ -1,5 +1,7 @@
 package cn.chinattclub.izou7.web;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.apache.shiro.SecurityUtils;
@@ -11,8 +13,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import cn.chinattclub.izou7.entity.Province;
 import cn.chinattclub.izou7.entity.User;
 import cn.chinattclub.izou7.entity.UserInfo;
+import cn.chinattclub.izou7.service.ProvinceService;
 import cn.chinattclub.izou7.service.SiteService;
 import cn.chinattclub.izou7.service.TagService;
 import cn.chinattclub.izou7.service.UserService;
@@ -41,21 +45,23 @@ public class SiteController {
 	@Resource
 	private UserService userServiceImpl;
 	
+	@Resource
+	private ProvinceService provinceServiceImpl;
+	
+	
+	
 	
 	@RequestMapping(value = "index", method = RequestMethod.GET)
 	public String indexPage(Model model) {
+		List<Province> provinces = provinceServiceImpl.findAll();
 		Subject subject = SecurityUtils.getSubject();
-		if(subject.isAuthenticated()){
-			String realName = "";
-			User user = userServiceImpl.findByUsername(subject.getPrincipal().toString());
-			UserInfo userInfo  = user.getUserInfo();
-			model.addAttribute("tags", tagServiceImpl.list());
-			return "site.site.info";
-		}else{
-			//调到登陆页面
-			return "site.main.login";
-		}
-
+		String realName = "";
+		User user = userServiceImpl.findByUsername(subject.getPrincipal().toString());
+		UserInfo userInfo  = user.getUserInfo();
+		model.addAttribute("tags", tagServiceImpl.list());
+		model.addAttribute("userInfo", userInfo);
+		model.addAttribute("provinces", provinces);
+		return "site.site.info";
 	}
 
 	
