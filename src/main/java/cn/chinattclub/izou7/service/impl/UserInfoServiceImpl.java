@@ -99,4 +99,10 @@ public class UserInfoServiceImpl implements UserInfoService {
 		return userInfoDao.get(id);
 	}
 
+	@Override
+	public void update(UserInfo userInfo) {
+		// TODO Auto-generated method stub.
+		userInfoDao.update(userInfo);
+	}
+
 }

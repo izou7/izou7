@@ -102,7 +102,7 @@ function deployBtnClick(){
 				});
 			}
 		},
-		fail : function(json){
+		error : function(json){
 			$.Zebra_Dialog('发布异常', {
 				'type':     'information',
 				'title':    '提示',
@@ -144,7 +144,7 @@ function delArticle(id){
 				});
 			}
 		},
-		fail : function(json){
+		error : function(json){
 			$.Zebra_Dialog('删除文章异常', {
 				'type':     'information',
 				'title':    '提示',
@@ -176,7 +176,7 @@ function loadFilesTable(){
 				});
 			}
 		},
-		fail : function(json){
+		error : function(json){
 			$.Zebra_Dialog('获取文章列表异常', {
 				'type':     'information',
 				'title':    '提示',

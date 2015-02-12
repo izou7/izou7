@@ -16,20 +16,9 @@ $(function () {
 	            '/cors/result.html?%s'
 	        )
 	    );
-	    $("#saveBtn").click(function(){addSite()});
-    /**$('.form_datetime').datetimepicker({
-        //language:  'fr',
-        weekStart: 1,
-        todayBtn:  1,
-		autoclose: 1,
-		todayHighlight: 1,
-		startView: 2,
-		forceParse: 0,
-        showMeridian: 1
-    });**/
+	$("#saveBtn").click(function(){addSponsor()});
 	$("#tagsDiv button").click(function(){tagsClicked(this)});
 	initTags(tags);
-	$("#province").change(function(){provinceChange(this)});
 });
 	
 function initTags(tags){
@@ -40,22 +29,21 @@ function initTags(tags){
 		}
 	}
 }
-function addSite(){
-	var site = {
+function addSponsor(){
+	var sponsor = {
 			"tags":$("#tags").val(),
 			"name":$("#name").val(),
 			"posterUrl":$("#posterUrl").val(),
-			"cityId":$("#cityId").val(),
 			"realName":$("#realName").val(),
 			"phone":$("#phone").val(),
-			"address":$("#address").val(),
 			"introduction":$("#introduction").val()
 	};
+	console.info(JSON.stringify(sponsor));
 	$.ajax({
 		type: "POST",
 		url: "add",
 		dataType : "json",
-		data : JSON.stringify(site),
+		data : JSON.stringify(sponsor),
 		contentType:'application/json;charset=UTF-8', 
 		success: function(json) {
 			if (json.statusCode == 200) {
@@ -67,8 +55,6 @@ function addSite(){
 							location.href = "index";
 						}
 					});
-					
-				
 			}else {
 				$.Zebra_Dialog(json.message, {
 					'type':     'information',
@@ -88,9 +74,6 @@ function addSite(){
 	
 }
 
-function beforeRequest(){
-
-}
 
 function tagsClicked(obj){
 	if($(obj).attr("class").indexOf("btn-info")!=-1){
@@ -109,37 +92,3 @@ function tagsClicked(obj){
 	$("#tags").val(tags);
 }
 
-function provinceChange(obj){
-	if($(obj).val()!=0){
-		var url = "/city/"+$(obj).val();
-		$.ajax({
-			type: "GET",
-			url: url,
-			dataType : "json",
-			success: function(json) {
-				$("#city").empty();
-				if (json.statusCode == 200) {
-					var citys = json.body.citys;
-					if(citys){
-						for(var i=0;i<citys.length;i++){
-							$("#city").append('<option value="'+citys[i].id+'">'+citys[i].city+'</option>');
-						}
-					}
-				}else {
-					$.Zebra_Dialog('获取城市失败！', {
-						'type':     'information',
-						'title':    '提示',
-						'buttons':  ["确定"]
-					});
-				}
-			},
-			error : function(json){
-				$.Zebra_Dialog('获取城市失败！', {
-					'type':     'information',
-					'title':    '提示',
-					'buttons':  ["确定"]
-				});
-			}
-		});
-	}
-}

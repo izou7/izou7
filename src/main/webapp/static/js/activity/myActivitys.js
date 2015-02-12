@@ -73,7 +73,7 @@ function initDeployedActivity(index){
 				});
 			}
 		},
-		fail : function(json){
+		error : function(json){
 			$.Zebra_Dialog('获取活动异常', {
 				'type':     'information',
 				'title':    '提示',
@@ -108,7 +108,7 @@ function initWaitActivity(index){
 				});
 			}
 		},
-		fail : function(json){
+		error : function(json){
 			$.Zebra_Dialog('获取活动异常', {
 				'type':     'information',
 				'title':    '提示',

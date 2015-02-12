@@ -27,7 +27,7 @@
   <div class="container content">
   <!--页头-->
     <div class="page-header">
-		<h1>添加场地</h1>
+		<h1>添加赞助商</h1>
 	</div>
 	<div class="panel panel-default">
 		<div class="panel-heading">
@@ -36,7 +36,7 @@
 		<div class="panel-body">
 			<form class="form-horizontal" role="form" id="fileupload" action="add" method="POST" enctype="multipart/form-data">
 			<input type="hidden" id="id" name="id" value="${ (site.id)! }">
-			<input type="hidden" id="fileType" name="fileType" value="site">
+			<input type="hidden" id="fileType" name="fileType" value="sponsor">
 			  <div class="form-group">
 				<label class="col-sm-2 control-label">标签：</label>
 				<div id="tagsDiv" class="col-sm-6">
@@ -78,41 +78,6 @@
 	        		<table role="presentation" class="table table-striped"><tbody class="files"></tbody></table>
 				</div>
 		  	</div>
-			     <div class="form-group">
-				<label class="col-lg-2 control-label" for="address">详细地址：</label>
-				<div class="col-lg-2">
-				  <select id="province" name="province" class="form-control" >
-				  <#list provinces! as province>
-				  		<#if (site.city.province.name)! == province.name >
-				  			<option value="${(province.id)!}" selected>${(province.name)!}</option>
-				  		<#else>
-				  			<option value="${(province.id)!}">${(province.name)!}</option>
-				  		</#if>
-				  </#list>
-				  </select>
-				</div>
-				<div class="col-lg-2">
-				  <select id="cityId" name="cityId" class="form-control" >
-				  <#if (site.city.province.citys)??>
-					<#list (site.city.province.citys) as city>
-						<#if (site.city.city)! == city.city >
-				  			<option value="${(city.id)!}" selected>${(city.city)!}</option>
-				  		<#else>
-				  			<option value="${(city.id)!}">${(city.city)!}</option>
-				  		</#if> 
-					</#list>
-					<#else>
-						<option value="51">北京市</option>
-					</#if>
-				  </select>
-				</div>
-			  </div>
-			  <div class="form-group">
-				<label class="col-sm-2 control-label" for="place"></label>
-				<div class="col-sm-6">
-				  <input class="form-control" type="text" name="address"  id="address" placeholder="详细地址" value="${(site.address)!}" required>
-				</div>
-			  </div>		
 			  <div class="form-group">
 				<label class="col-sm-2 control-label" for="realName">姓名：</label>
 				<div class="col-sm-2">
@@ -124,9 +89,9 @@
 				</div>
 			  </div>		
 			  <div class="form-group">
-				<label class="col-sm-2 control-label" for="introduction">简介：</label>
+				<label class="col-sm-2 control-label" for="introduction">推广需求：</label>
 				<div class="col-sm-6">
-				  <textarea class="form-control" id="introduction" rows="5" placeholder="简介" >${(site.introduction)!}</textarea>
+				  <textarea class="form-control" id="introduction" rows="5" placeholder="推广需求" >${(site.introduction)!}</textarea>
 				</div>
 			  </div>		
 				  	
@@ -258,4 +223,4 @@ var tags = "${(site.tags)!}";
 <script src="${ (project.staticDomain)! }/libs/jquery-form/jquery.form.js"></script>
 <script src="${ (project.staticDomain)! }/libs/Zebra_Dialog/js/zebra_dialog.js"></script>
 <script src="${ (project.staticDomain)! }/js/common.js"></script>
-<script src="${ (project.staticDomain)! }/js/site/info.js"></script>
+<script src="${ (project.staticDomain)! }/js/sponsor/info.js"></script>

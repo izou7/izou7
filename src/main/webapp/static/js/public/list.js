@@ -51,7 +51,7 @@ function deletePublic(obj){
 								});
 							}
 						},
-						fail : function(json){
+						error : function(json){
 							$.Zebra_Dialog('失败', {
 								'type':     'information',
 								'title':    '提示',

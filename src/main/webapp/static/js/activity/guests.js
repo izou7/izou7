@@ -212,7 +212,7 @@ function initGuestTable(){
 				});
 			}
 		},
-		fail : function(json){
+		error : function(json){
 			$.Zebra_Dialog('获取活动嘉宾异常', {
 				'type':     'information',
 				'title':    '提示',

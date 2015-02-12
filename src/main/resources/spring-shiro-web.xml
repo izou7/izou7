@@ -115,6 +115,9 @@
                 /public/** = user
                 /userInfo/** = user
                 /site/** = user
+                /sponsor/** = user
+                /guest/** = user
+                /media/** = user
             </value>
         </property>
     </bean>

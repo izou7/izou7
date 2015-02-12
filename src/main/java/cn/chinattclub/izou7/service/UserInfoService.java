@@ -25,5 +25,7 @@ public interface UserInfoService {
 	public List<GuestDto> recommend(int activityId);
 	
 	public UserInfo findById(int id);
+	
+	public void update(UserInfo userInfo);
 
 }

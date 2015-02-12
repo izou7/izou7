@@ -31,7 +31,7 @@ function deployBtnClick(){
 				});
 			}
 		},
-		fail : function(json){
+		error : function(json){
 			$.Zebra_Dialog('发布异常', {
 				'type':     'information',
 				'title':    '提示',
@@ -63,7 +63,7 @@ function saveBtnClick(){
 				});
 			}
 		},
-		fail : function(json){
+		error : function(json){
 			$.Zebra_Dialog('操作异常', {
 				'type':     'information',
 				'title':    '提示',
@@ -91,7 +91,7 @@ function nextBtnClick(){
 				});
 			}
 		},
-		fail : function(json){
+		error : function(json){
 			$.Zebra_Dialog('操作异常', {
 				'type':     'information',
 				'title':    '提示',

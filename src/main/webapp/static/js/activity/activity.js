@@ -142,7 +142,7 @@ function exeActivity(url){
 				});
 			}
 		},
-		fail : function(json){
+		error : function(json){
 			$.Zebra_Dialog('操作异常', {
 				'type':     'information',
 				'title':    '提示',
@@ -196,7 +196,7 @@ function provinceChange(obj){
 					});
 				}
 			},
-			fail : function(json){
+			error : function(json){
 				$.Zebra_Dialog('获取城市失败！', {
 					'type':     'information',
 					'title':    '提示',
