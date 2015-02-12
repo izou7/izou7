@@ -19,11 +19,16 @@
 <ul id="navigation"  >
 
     <li ><a href="activity?step=FIRST&activityId=${ (activity.id)! }" title="基本信息"><h4>基本信息</h4></a></li>
+    <li ><a href="activity?step=SIXTH&activityId=${ (activity.id)! }" title="嘉宾列表"><h4>嘉宾</h4></a></li>
+    <li ><a href="#" title="赞助商"><h4>赞助商</h4></a></li>
+    <li ><a href="#" title="场地"><h4>场地</h4></a></li>
+    <li ><a href="#" title="媒体"><h4>媒体</h4></a></li>
+    <!--
     <li ><a href="activity?step=SECOND&activityId=${ (activity.id)! }" title="文章列表"><h4>文章列表</h4></a></li>
     <li ><a href="activity?step=THIRD&activityId=${ (activity.id)! }" title="日历"><h4>日历</h4></a></li>
     <li ><a href="activity?step=FOURTH&activityId=${ (activity.id)! }" title="报名模板"><h4>报名模板</h4></a></li>
     <li ><a href="activity?step=FIFTH&activityId=${ (activity.id)! }" title="票务信息"><h4>票务信息</h4></a></li>
-    <li ><a href="activity?step=SIXTH&activityId=${ (activity.id)! }" title="嘉宾列表"><h4>嘉宾列表</h4></a></li>
+    -->
     <!--
     <li ><a href="activity?step=SEVENTH&activityId=${ (activity.id)! }" title="开放合作">开放合作</a></li>
     -->

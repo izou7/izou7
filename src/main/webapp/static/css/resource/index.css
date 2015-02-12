@@ -2,7 +2,17 @@ body{
 	background-color:#F6F6F6;
 }
 .index{
-	margin-top:20px;
+	padding-left:3%;
+}
+.index h4{
+	font-size: 18px;
+	font-weight:500;
+	line-height:1.1;
+}
+.index h5{
+	font-size: 14px;
+	font-weight:500;
+	line-height:1.1;
 }
 .index > .row{
 	margin-bottom:10px;
@@ -56,7 +66,12 @@ p{
 	height:160px;
 }
 .entry{
-	padding-top:110px;
+	padding-top:100px;
+}
+.entry a{
+	font-size: 14px;
+	font-weight:500;
+	line-height:1.1;
 }
 .logo > img{
 	width:95px;

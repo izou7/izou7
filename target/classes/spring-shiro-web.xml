@@ -114,6 +114,7 @@
                 /public/description = anon
                 /public/** = user
                 /userInfo/** = user
+                /site/** = user
             </value>
         </property>
     </bean>
