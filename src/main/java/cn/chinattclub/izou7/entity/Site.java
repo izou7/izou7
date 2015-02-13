@@ -36,24 +36,29 @@ public class Site {
 	
 	@Length(min=1, max=200,message="地址长度应在1到200个字符之间")
 	private String address;
+
+	@Length(min=1, max=500,message="简介长度应在1到500个字符之间")
+	private String introduction;
 	
 	@Transient
 	private Integer cityId;
 	
-	@Transient
 	@Length(min=1,max=50,message="真实姓名字符长度应在1到50位之间")
+	@Column(name="real_name")
 	private String realName;
 	
-	@Transient
 	@Pattern(regexp="1[3|5|7|8|][0-9]{9}",message="手机号格式不合法")
 	private String phone;
+	
+	@Length(min=1,max=50,message="公司名称字符长度应在1到50位之间")
+	private String company;
+	
+	@Length(min=1,max=50,message="职位名称字符长度应在1到50位之间")
+	private String position;
 	
 	@ManyToOne
 	@JoinColumn(name = "city_id")
 	private City city;
-	
-	@Length(min=1, max=500,message="简介长度应在1到500个字符之间")
-	private String introduction;
 	
 	@Column(name="user_id")
 	private int userId;
@@ -64,6 +69,8 @@ public class Site {
 	
 	@Column(name = "update_time", insertable = false, updatable = false)
 	private Date updateTime;
+	
+	private boolean self;
 	
 	private boolean enable= true;
 	
@@ -201,6 +208,54 @@ public class Site {
 	 */
 	public void setRealName(String realName) {
 		this.realName = realName;
+	}
+
+	/**
+	 * Returns the value of the field called 'company'.
+	 * @return Returns the company.
+	 */
+	public String getCompany() {
+		return this.company;
+	}
+
+	/**
+	 * Sets the field called 'company' to the given value.
+	 * @param company The company to set.
+	 */
+	public void setCompany(String company) {
+		this.company = company;
+	}
+
+	/**
+	 * Returns the value of the field called 'position'.
+	 * @return Returns the position.
+	 */
+	public String getPosition() {
+		return this.position;
+	}
+
+	/**
+	 * Sets the field called 'position' to the given value.
+	 * @param position The position to set.
+	 */
+	public void setPosition(String position) {
+		this.position = position;
+	}
+
+	/**
+	 * Returns the value of the field called 'self'.
+	 * @return Returns the self.
+	 */
+	public boolean isSelf() {
+		return this.self;
+	}
+
+	/**
+	 * Sets the field called 'self' to the given value.
+	 * @param self The self to set.
+	 */
+	public void setSelf(boolean self) {
+		this.self = self;
 	}
 
 	

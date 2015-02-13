@@ -30,6 +30,11 @@ $(function () {
 	$("#tagsDiv button").click(function(){tagsClicked(this)});
 	initTags(tags);
 	$("#province").change(function(){provinceChange(this)});
+	$("input[name='self']").click(selfClicked);
+	var realName = "";
+	var company = "";
+	var position = "";
+	var phone = "";
 });
 	
 function initTags(tags){
@@ -40,6 +45,23 @@ function initTags(tags){
 		}
 	}
 }
+function selfClicked(){
+	if($("input[name='self']:checked").val()=="true"){
+		realName = $("#realName").val(realName);
+		phone  = $("#phone").val(phone);
+		position  = $("#position").val(position);
+		company  = $("#company").val(company);
+	}else{
+		realName = $("#realName").val();
+		phone  = $("#phone").val();
+		position  = $("#position").val();
+		company  = $("#company").val();
+		$("#realName").val("");
+		$("#phone").val("");
+		$("#position").val("");
+		$("#company").val("");
+	}
+}
 function addSite(){
 	var site = {
 			"tags":$("#tags").val(),
@@ -48,6 +70,9 @@ function addSite(){
 			"cityId":$("#cityId").val(),
 			"realName":$("#realName").val(),
 			"phone":$("#phone").val(),
+			"company":$("#company").val(),
+			"position":$("#position").val(),
+			"self":$("input[name='self']:checked").val(),
 			"address":$("#address").val(),
 			"introduction":$("#introduction").val()
 	};

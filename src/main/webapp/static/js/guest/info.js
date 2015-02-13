@@ -16,9 +16,10 @@ $(function () {
 	            '/cors/result.html?%s'
 	        )
 	    );
-	$("#saveBtn").click(function(){addSponsor()});
-	$("#tagsDiv button").click(function(){tagsClicked(this)});
-	initTags(tags);
+	$("#saveBtn").click(function(){addGuest()});
+	$("#tagsDiv4Adept button").click(function(){tagsClicked(this,"tagsDiv4Adept","adeptTags")});
+	$("#tagsDiv4Interest button").click(function(){tagsClicked(this,"tagsDiv4Interest","interestTags")});
+	//initTags(tags);
 	$("input[name='self']").click(selfClicked);
 	var realName = "";
 	var company = "";
@@ -30,7 +31,7 @@ function initTags(tags){
 	if(tags){
 		var tagsArray = tags.split(",");
 		for(var i=0;i<tagsArray.length;i++){
-			$("#tagsDiv").find("button[value='"+tagsArray[i]+"']").attr("class","btn btn-sm btn-danger");
+			$("#tagsDiv4Adept").find("button[value='"+tagsArray[i]+"']").attr("class","btn btn-sm btn-danger");
 		}
 	}
 }
@@ -51,24 +52,32 @@ function selfClicked(){
 		$("#company").val("");
 	}
 }
-function addSponsor(){
-	var sponsor = {
-			"tags":$("#tags").val(),
-			"name":$("#name").val(),
+function addGuest(){
+	var ways = "";
+	$("input[name='ways']:checked").each(function(index){
+		if(index==0){
+			ways+=$(this).val();
+		}else{
+			ways+=","+$(this).val();
+		}
+	});
+	var guest = {
+			"interestTags":$("#interestTags").val(),
+			"adeptTags":$("#adeptTags").val(),
+			"ways":ways,
 			"posterUrl":$("#posterUrl").val(),
 			"realName":$("#realName").val(),
 			"phone":$("#phone").val(),
 			"company":$("#company").val(),
 			"position":$("#position").val(),
 			"self":$("input[name='self']:checked").val(),
-			"introduction":$("#introduction").val()
 	};
-	console.info(JSON.stringify(sponsor));
+	console.info(JSON.stringify(guest));
 	$.ajax({
 		type: "POST",
 		url: "add",
 		dataType : "json",
-		data : JSON.stringify(sponsor),
+		data : JSON.stringify(guest),
 		contentType:'application/json;charset=UTF-8', 
 		success: function(json) {
 			if (json.statusCode == 200) {
@@ -100,20 +109,20 @@ function addSponsor(){
 }
 
 
-function tagsClicked(obj){
+function tagsClicked(obj,divId,tagsId){
 	if($(obj).attr("class").indexOf("btn-info")!=-1){
 		$(obj).attr("class",$(obj).attr("class").replace("btn-info","btn-danger"));
 	}else{
 		$(obj).attr("class",$(obj).attr("class").replace("btn-danger","btn-info"));
 	}
 	var tags = "";
-	$("#tagsDiv button[class='btn btn-sm btn-danger']").each(function(index){
+	$("#"+divId+" button[class='btn btn-sm btn-danger']").each(function(index){
 		if(index==0){
 			tags+=$(this).text();
 		}else{
 			tags+=","+$(this).text();
 		}
 	});
-	$("#tags").val(tags);
+	$("#"+tagsId).val(tags);
 }
 

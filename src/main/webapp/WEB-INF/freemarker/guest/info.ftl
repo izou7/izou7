@@ -1,6 +1,9 @@
 
 <style>
-#tagsDiv button {
+#tagsDiv4Interest button {
+	margin: 5px;
+}
+#tagsDiv4Adept button {
 	margin: 5px;
 }
 
@@ -39,7 +42,7 @@
 <div class="container content">
 	<!--页头-->
 	<div class="page-header">
-		<h1>添加赞助商</h1>
+		<h1>添加嘉宾</h1>
 	</div>
 	<div class="panel panel-default">
 		<div class="panel-heading">
@@ -48,25 +51,29 @@
 		<div class="panel-body">
 			<form class="form-horizontal" role="form" id="fileupload"
 				action="add" method="POST" enctype="multipart/form-data">
-				<input type="hidden" id="id" name="id" value="${ (site.id)! }">
-				<input type="hidden" id="fileType" name="fileType" value="sponsor">
+				<input type="hidden" id="id" name="id" value="${ (guest.id)! }">
+				<input type="hidden" id="fileType" name="fileType" value="guest">
 				<div class="form-group">
-					<label class="col-sm-2 control-label">标签：</label>
-					<div id="tagsDiv" class="col-sm-6">
+					<label class="col-sm-2 control-label">感兴趣的活动标签：</label>
+					<div id="tagsDiv4Interest" class="col-sm-6">
 						<#list tags as tag>
 						<button type="button" class="btn btn-sm btn-info"
 							value="${(tag.name)!}">${(tag.name)!}</button>
 						</#list>
 					</div>
-					<input type="hidden" id="tags" name="tags" value="${(site.tags)!}">
+					<input type="hidden" id="interestTags" name="interestTags" value="${(guest.interestTags)!}">
 					<div id="tagsError" class="col-sm-4"></div>
 				</div>
 				<div class="form-group">
-					<label class="col-sm-2 control-label" for="name">名称：</label>
-					<div class="col-sm-6">
-						<input class="form-control" type="text" id="name" name="name"
-							placeholder="名称" value="${(site.name)!}" required>
+					<label class="col-sm-2 control-label">擅长领域的标签：</label>
+					<div id="tagsDiv4Adept" class="col-sm-6">
+						<#list tags as tag>
+						<button type="button" class="btn btn-sm btn-info"
+							value="${(tag.name)!}">${(tag.name)!}</button>
+						</#list>
 					</div>
+					<input type="hidden" id="adeptTags" name="adeptTags" value="${(guest.adeptTags)!}">
+					<div id="tagsError" class="col-sm-4"></div>
 				</div>
 				<!-- Redirect browsers with JavaScript disabled to the origin page -->
 				<noscript>
@@ -86,7 +93,7 @@
 						</div>
 					</div>
 					<input type="hidden" id="posterUrl" name="posterUrl"
-						value="${(site.posterUrl)!}">
+						value="${(guest.posterUrl)!}">
 				</div>
 				<div class="form-group">
 					<label class="col-lg-2 control-label"></label>
@@ -98,10 +105,16 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-sm-2 control-label" for="introduction">推广需求：</label>
-					<div class="col-sm-6">
-						<textarea class="form-control" id="introduction" rows="5"
-							placeholder="推广需求">${(site.introduction)!}</textarea>
+					<label class="col-sm-2 control-label" for="way">赞助方式：</label>
+					<div class="col-sm-2">
+						<div class="checkbox">
+						    <label>
+						      <input type="checkbox" name="ways" value="资金"> 资金
+						    </label>
+						    <label>
+						      <input type="checkbox" name="ways" value="产品"> 产品
+						    </label>
+						  </div>
 					</div>
 				</div>
 				<div class="form-group">
@@ -230,7 +243,8 @@
 {% } %}
 </script>
 <script>
-	var tags = "${(site.tags)!}";
+	var interestTags = "${(guest.interestTags)!}";
+	var adeptTags = "${(guest.adeptTags)!}";
 </script>
 <script src="${ (project.staticDomain)! }/libs/jquery/jquery-2.0.3.js"></script>
 <script
@@ -287,4 +301,4 @@
 <script
 	src="${ (project.staticDomain)! }/libs/Zebra_Dialog/js/zebra_dialog.js"></script>
 <script src="${ (project.staticDomain)! }/js/common.js"></script>
-<script src="${ (project.staticDomain)! }/js/sponsor/info.js"></script>
+<script src="${ (project.staticDomain)! }/js/guest/info.js"></script>

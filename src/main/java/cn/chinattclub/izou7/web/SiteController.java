@@ -96,10 +96,14 @@ public class SiteController {
 			site.setCreateTime(new Date());
 			site.setCity(cityServiceImpl.getCity(site.getCityId()));
 			site.setUserId(CommonUtil.getCurrentUser().getId());
-			UserInfo userInfo = userServiceImpl.findByUsername(CommonUtil.getCurrentUser().getUsername()).getUserInfo();
-			userInfo.setRealName(site.getRealName());
-			userInfo.setPhone(site.getPhone());
-			userInfoServiceImpl.update(userInfo);
+			if(site.isSelf()){
+				UserInfo userInfo = userServiceImpl.findByUsername(CommonUtil.getCurrentUser().getUsername()).getUserInfo();
+				userInfo.setRealName(site.getRealName());
+				userInfo.setPhone(site.getPhone());
+				userInfo.setCompany(site.getCompany());
+				userInfo.setPosition(site.getPosition());
+				userInfoServiceImpl.update(userInfo);
+			}
 			siteServiceImpl.save(site);
 			response.setMessage(message);
 		}

@@ -16,7 +16,7 @@ $(function () {
 	            '/cors/result.html?%s'
 	        )
 	    );
-	$("#saveBtn").click(function(){addSponsor()});
+	$("#saveBtn").click(function(){addMedia()});
 	$("#tagsDiv button").click(function(){tagsClicked(this)});
 	initTags(tags);
 	$("input[name='self']").click(selfClicked);
@@ -51,10 +51,12 @@ function selfClicked(){
 		$("#company").val("");
 	}
 }
-function addSponsor(){
-	var sponsor = {
+function addMedia(){
+	var media = {
 			"tags":$("#tags").val(),
 			"name":$("#name").val(),
+			"publicName":$("#publicName").val(),
+			"publicId":$("#publicId").val(),
 			"posterUrl":$("#posterUrl").val(),
 			"realName":$("#realName").val(),
 			"phone":$("#phone").val(),
@@ -63,12 +65,12 @@ function addSponsor(){
 			"self":$("input[name='self']:checked").val(),
 			"introduction":$("#introduction").val()
 	};
-	console.info(JSON.stringify(sponsor));
+	console.info(JSON.stringify(media));
 	$.ajax({
 		type: "POST",
 		url: "add",
 		dataType : "json",
-		data : JSON.stringify(sponsor),
+		data : JSON.stringify(media),
 		contentType:'application/json;charset=UTF-8', 
 		success: function(json) {
 			if (json.statusCode == 200) {
