@@ -65,7 +65,7 @@ function tagsClicked(obj){
 
 function provinceChange(obj){
 	if($(obj).val()!=0){
-		var url = "/activity/city/"+$(obj).val();
+		var url = "/city/"+$(obj).val();
 		$.ajax({
 			type: "GET",
 			url: url,
