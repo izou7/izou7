@@ -66,7 +66,7 @@ function initRewardTable(){
 				});
 			}
 		},
-		fail : function(json){
+		error : function(json){
 			$.Zebra_Dialog('获取活动回报设置列表异常', {
 				'type':     'information',
 				'title':    '提示',

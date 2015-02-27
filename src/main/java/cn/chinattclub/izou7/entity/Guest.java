@@ -8,32 +8,36 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
 
 
 @Entity
-@Table(name = "i_sponsor")
-public class Sponsor {
+@Table(name = "i_guest")
+public class Guest {
 
 	@Id
 	@GeneratedValue
 	private Integer id;
 	
-	@Length(min=1, max=50,message="标签长度应在1到50个字符之间")
-	private String tags;
+	@Length(min=1, max=50,message="兴趣标签长度应在1到50个字符之间")
+	@Column(name="interest_tags")
+	private String interestTags;
 	
-	@Length(min=1, max=50,message="名称长度应在1到50个字符之间")
-	private String name;
+	@Length(min=1, max=50,message="擅长标签长度应在1到50个字符之间")
+	@Column(name="adept_tags")
+	private String adeptTags;
 	
 	@Column(name="user_id")
 	private int userId;
 	
-	@Length(min=1, max=200,message="海报不能为空")
+	@Length(min=1, max=200,message="图像不能为空")
 	@Column(name="poster_url")
 	private String posterUrl;
+	
+	private String ways;
 	
 	@Length(min=1,max=50,message="真实姓名字符长度应在1到50位之间")
 	@Column(name="real_name")
@@ -48,9 +52,6 @@ public class Sponsor {
 	@Length(min=1,max=50,message="职位名称字符长度应在1到50位之间")
 	private String position;
 	
-	@Length(min=1, max=500,message="推广需求长度应在1到500个字符之间")
-	private String introduction;
-	
 	@Column(name="create_time")
 	private Date createTime;
 	
@@ -61,66 +62,82 @@ public class Sponsor {
 	
 	private boolean self;
 
+	/**
+	 * Returns the value of the field called 'id'.
+	 * @return Returns the id.
+	 */
 	public Integer getId() {
-		return id;
+		return this.id;
 	}
 
+	/**
+	 * Sets the field called 'id' to the given value.
+	 * @param id The id to set.
+	 */
 	public void setId(Integer id) {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	/**
+	 * Returns the value of the field called 'interestTags'.
+	 * @return Returns the interestTags.
+	 */
+	public String getInterestTags() {
+		return this.interestTags;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	/**
+	 * Sets the field called 'interestTags' to the given value.
+	 * @param interestTags The interestTags to set.
+	 */
+	public void setInterestTags(String interestTags) {
+		this.interestTags = interestTags;
 	}
 
-	public String getIntroduction() {
-		return introduction;
+	/**
+	 * Returns the value of the field called 'adeptTags'.
+	 * @return Returns the adeptTags.
+	 */
+	public String getAdeptTags() {
+		return this.adeptTags;
 	}
 
-	public void setIntroduction(String introduction) {
-		this.introduction = introduction;
+	/**
+	 * Sets the field called 'adeptTags' to the given value.
+	 * @param adeptTags The adeptTags to set.
+	 */
+	public void setAdeptTags(String adeptTags) {
+		this.adeptTags = adeptTags;
 	}
 
+	/**
+	 * Returns the value of the field called 'userId'.
+	 * @return Returns the userId.
+	 */
 	public int getUserId() {
-		return userId;
+		return this.userId;
 	}
 
+	/**
+	 * Sets the field called 'userId' to the given value.
+	 * @param userId The userId to set.
+	 */
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
 
-	public Date getCreateTime() {
-		return createTime;
-	}
-
-	public void setCreateTime(Date createTime) {
-		this.createTime = createTime;
-	}
-
-	public Date getUpdateTime() {
-		return updateTime;
-	}
-
-	public void setUpdateTime(Date updateTime) {
-		this.updateTime = updateTime;
-	}
-
-	public boolean isEnable() {
-		return enable;
-	}
-
-	public void setEnable(boolean enable) {
-		this.enable = enable;
-	}
-
+	/**
+	 * Returns the value of the field called 'posterUrl'.
+	 * @return Returns the posterUrl.
+	 */
 	public String getPosterUrl() {
-		return posterUrl;
+		return this.posterUrl;
 	}
 
+	/**
+	 * Sets the field called 'posterUrl' to the given value.
+	 * @param posterUrl The posterUrl to set.
+	 */
 	public void setPosterUrl(String posterUrl) {
 		this.posterUrl = posterUrl;
 	}
@@ -158,22 +175,6 @@ public class Sponsor {
 	}
 
 	/**
-	 * Returns the value of the field called 'tags'.
-	 * @return Returns the tags.
-	 */
-	public String getTags() {
-		return this.tags;
-	}
-
-	/**
-	 * Sets the field called 'tags' to the given value.
-	 * @param tags The tags to set.
-	 */
-	public void setTags(String tags) {
-		this.tags = tags;
-	}
-
-	/**
 	 * Returns the value of the field called 'company'.
 	 * @return Returns the company.
 	 */
@@ -206,6 +207,54 @@ public class Sponsor {
 	}
 
 	/**
+	 * Returns the value of the field called 'createTime'.
+	 * @return Returns the createTime.
+	 */
+	public Date getCreateTime() {
+		return this.createTime;
+	}
+
+	/**
+	 * Sets the field called 'createTime' to the given value.
+	 * @param createTime The createTime to set.
+	 */
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+
+	/**
+	 * Returns the value of the field called 'updateTime'.
+	 * @return Returns the updateTime.
+	 */
+	public Date getUpdateTime() {
+		return this.updateTime;
+	}
+
+	/**
+	 * Sets the field called 'updateTime' to the given value.
+	 * @param updateTime The updateTime to set.
+	 */
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
+	}
+
+	/**
+	 * Returns the value of the field called 'enable'.
+	 * @return Returns the enable.
+	 */
+	public boolean isEnable() {
+		return this.enable;
+	}
+
+	/**
+	 * Sets the field called 'enable' to the given value.
+	 * @param enable The enable to set.
+	 */
+	public void setEnable(boolean enable) {
+		this.enable = enable;
+	}
+
+	/**
 	 * Returns the value of the field called 'self'.
 	 * @return Returns the self.
 	 */
@@ -220,5 +269,6 @@ public class Sponsor {
 	public void setSelf(boolean self) {
 		this.self = self;
 	}
+
 	
 }

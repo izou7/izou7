@@ -169,7 +169,7 @@ function initCooperationTable(){
 				});
 			}
 		},
-		fail : function(json){
+		error : function(json){
 			$.Zebra_Dialog('获取活动开放合作异常', {
 				'type':     'information',
 				'title':    '提示',

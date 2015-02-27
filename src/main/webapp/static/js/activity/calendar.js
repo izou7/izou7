@@ -152,7 +152,7 @@ function deployBtnClick(){
 				});
 			}
 		},
-		fail : function(json){
+		error : function(json){
 			$.Zebra_Dialog('发布异常', {
 				'type':     'information',
 				'title':    '提示',
