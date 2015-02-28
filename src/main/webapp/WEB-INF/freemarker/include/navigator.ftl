@@ -11,11 +11,16 @@
   							<a  href="/entrepreneur/index">创业者</a>
   						</li>
   						<li >
-  							<a  href="/activity/index">发布活动</a>
+  							<a  href="/activity/index">活动</a>
   						</li>
+  						<li >
+  							<a  href="#">孵化器</a>
+  						</li>
+  						<!--  
   						<li>
   							<a class="deployment" href="/public/description">合作伙伴</a>
   						</li>
+  						-->
   					</ul>
   					<ul class="nav navbar-nav navbar-right">
   					<#if realName??>
@@ -28,9 +33,11 @@
   								<li>
   									<a href="/activity/myActivities">我发起的活动</a>
   								</li>
+  								<!--  
   								<li>
   									<a href="/public/list">我录入的合作信息</a>
   								</li>
+  								-->
   								<li>
   									<a href="/user/logout">登出</a>
   								</li>

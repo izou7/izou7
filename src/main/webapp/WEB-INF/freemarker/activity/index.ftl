@@ -187,7 +187,7 @@
 				<img src="http://itjuzi.com/asset/v2/img/juzi_logo.png">
 			</div>	
 			<div class="col-sm-2 entry">
-				<a href="#">媒体登记入口</a>
+				<a href="/media/index">媒体登记入口</a>
 			</div>	
 			
 		</div>	
@@ -213,7 +213,7 @@
 				<img src="http://itjuzi.com/asset/v2/img/juzi_logo.png">
 			</div>	
 			<div class="col-sm-2 entry">
-				<a href="#">登记为认证嘉宾</a>
+				<a href="/guest/index">登记为认证嘉宾</a>
 			</div>		
 		</div>	
 	</div>
@@ -234,7 +234,7 @@
 				<img src="http://itjuzi.com/asset/v2/img/juzi_logo.png">
 			</div>	
 			<div class="col-sm-2 entry">
-				<a href="#">免费场地登记</a>
+				<a href="/site/index">免费场地登记</a>
 			</div>					
 		</div>	
 	</div>
@@ -255,7 +255,7 @@
 				<img src="http://itjuzi.com/asset/v2/img/juzi_logo.png">
 			</div>	
 			<div class="col-sm-2 entry">
-				<a href="#">赞助商登记</a>
+				<a href="/sponsor/index">赞助商登记</a>
 			</div>		
 		</div>	
 	</div>
