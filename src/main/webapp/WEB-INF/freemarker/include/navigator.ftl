@@ -10,11 +10,13 @@
   						<li >
   							<a  href="/entrepreneur/index">创业者</a>
   						</li>
+  						<!--  
   						<li >
   							<a  href="/activity/index">活动</a>
   						</li>
+  						-->
   						<li >
-  							<a  href="#">孵化器</a>
+  							<a  href="/community/index">孵化器</a>
   						</li>
   						<!--  
   						<li>
@@ -32,6 +34,9 @@
   								</li>
   								<li>
   									<a href="/activity/myActivities">我发起的活动</a>
+  								</li>
+  								<li>
+  									<a href="/community/listPage">我的社区</a>
   								</li>
   								<!--  
   								<li>
@@ -51,9 +56,11 @@
   						<a href="/regist" >注册</a>
   						</li>
   					</#if>
+  					<!--  
   						<li >
   						<a href="/activity/activity?step=FIRST" >添加活动</a>
   						</li>
+  					-->
   					</ul>
   				</div>
   				<!-- /.navbar-collapse -->

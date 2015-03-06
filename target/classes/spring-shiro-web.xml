@@ -118,6 +118,11 @@
                 /sponsor/** = user
                 /guest/** = user
                 /media/** = user
+                /community/listPage = user
+                /community/addPage = user
+                /community/add = user
+                /member/** = user
+                /dynamic/** = user
             </value>
         </property>
     </bean>

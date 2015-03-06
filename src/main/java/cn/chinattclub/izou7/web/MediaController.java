@@ -28,7 +28,7 @@ import cn.zy.commons.webdev.http.RestResponse;
 
 /**
  * 
- * @ClassName: MainController
+ * @ClassName: MediaController
  * @Description:场地控制类
  * @author: zy
  * @date: 2015-01-31 下午8:00:36
