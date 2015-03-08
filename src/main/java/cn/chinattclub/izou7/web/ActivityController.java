@@ -432,7 +432,7 @@ public class ActivityController {
 	 */
 	public String activityPage(Model model ,ActivityDto dto) throws ParseException{
 		List<Province> provinces = provinceServiceImpl.findAll();
-		model.addAttribute("provinces",provinces);
+		model.addAttribute("tags",provinces);
 		if(dto.getActivityId()!=null){
 			Activity activity = activityServiceImpl.findById(dto.getActivityId());
 			model.addAttribute("activity", activity);
