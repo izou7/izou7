@@ -20,6 +20,7 @@ import cn.chinattclub.izou7.entity.Community;
 import cn.chinattclub.izou7.entity.CommunityDynamic;
 import cn.chinattclub.izou7.service.CommunityDynamicService;
 import cn.chinattclub.izou7.service.CommunityService;
+import cn.chinattclub.izou7.util.CommonUtil;
 import cn.zy.commons.webdev.constant.ResponseStatusCode;
 import cn.zy.commons.webdev.http.RestResponse;
 import cn.zy.commons.webdev.vo.Page;
@@ -94,6 +95,13 @@ public class CommunityDynamicController {
 		RestResponse response = new RestResponse();
 		int statusCode = ResponseStatusCode.OK;
 		String message = "删除动态成功！";
+		CommunityDynamic communityDynamic = communityDynamicServiceImpl.findById(id);
+		if(communityDynamic.getCommunity().getAdmin().getId()!=CommonUtil.getCurrentUser().getId()){
+			logger.warn(communityDynamic.getCommunity().getAdmin().getUsername()+"有盗链行为，请注意！");
+			response.setMessage("内部异常");
+			response.setStatusCode(ResponseStatusCode.BAD_REQUEST);
+			return response;
+		}
 		communityDynamicServiceImpl.delete(id);
 		response.setStatusCode(statusCode);
 		return response;

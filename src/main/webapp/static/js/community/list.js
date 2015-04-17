@@ -1,5 +1,5 @@
 $(function () {
-	$("#delete").click(function(){deleteClicked(this);});
+	$("a[name='delete']").click(function(){deleteClicked(this);});
 });
 function deleteClicked (obj){
 	$.Zebra_Dialog("确定删除该社区吗？", {
@@ -16,7 +16,7 @@ function deleteClicked (obj){
 					dataType : "json",
 					success : function(data){
 						if(data.statusCode == 200){
-							location.href = "/community/index";
+							location.href = "/community/listPage";
 						}
 					},
 					error:function(){

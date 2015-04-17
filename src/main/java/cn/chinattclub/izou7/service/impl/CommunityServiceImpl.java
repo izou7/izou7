@@ -55,7 +55,9 @@ public class CommunityServiceImpl  implements CommunityService {
 		// TODO Auto-generated method stub.
 		Community cmt = this.findById(id);
 		cmt.setEnable(false);
-		dao.save(cmt);
+		cmt.setPhone("15245698520");
+		cmt.setRealName("sb");
+		dao.update(cmt);
 	}
 
 	

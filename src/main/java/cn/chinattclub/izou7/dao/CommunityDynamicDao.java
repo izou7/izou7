@@ -10,6 +10,7 @@ import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import cn.chinattclub.izou7.entity.CommunityDynamic;
+import cn.chinattclub.izou7.util.CommonUtil;
 import cn.zy.commons.dao.hibernate.AdvancedHibernateDao;
 import cn.zy.commons.webdev.vo.Page;
 
@@ -27,6 +28,7 @@ public class CommunityDynamicDao extends AdvancedHibernateDao<CommunityDynamic>{
 		// TODO Auto-generated method stub.
 		Criteria criteria = this.getCurrentSession().createCriteria(CommunityDynamic.class,"cd");
 		criteria.add(Restrictions.eq("cd.community.id", communityId));
+		criteria.add(Restrictions.eq("cd.community.user", CommonUtil.getCurrentUser()));
 		if(StringUtils.isNotBlank(content)||StringUtils.isNotEmpty(content)){
 			criteria.add(Restrictions.like("cd.content", "%"+content+"%"));
 		}
@@ -45,6 +47,7 @@ public class CommunityDynamicDao extends AdvancedHibernateDao<CommunityDynamic>{
 		// TODO Auto-generated method stub.
 		Criteria criteria = this.getCurrentSession().createCriteria(CommunityDynamic.class,"cd");
 		criteria.add(Restrictions.eq("cd.community.id", communityId));
+		criteria.add(Restrictions.eq("cd.community.user", CommonUtil.getCurrentUser()));
 		if(StringUtils.isNotBlank(content)||StringUtils.isNotEmpty(content)){
 			criteria.add(Restrictions.like("cd.content", "%"+content+"%"));
 		}

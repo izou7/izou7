@@ -41,6 +41,12 @@ public class CommunityDynamicServiceImpl  implements CommunityDynamicService {
 		// TODO Auto-generated method stub.
 		dao.delete(id);
 	}
+
+	@Override
+	public CommunityDynamic findById(int id) {
+		// TODO Auto-generated method stub.
+		return dao.get(id);
+	}
 	
 	
 

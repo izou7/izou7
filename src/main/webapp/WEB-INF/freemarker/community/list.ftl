@@ -23,7 +23,7 @@
 					<th>社区名称</th>
 					<th>所属城市</th>
 					<th>标签</th>
-					<th>简介</th>
+					<th>介绍</th>
 					<th>创建时间</th>
 					<th>操作</th>
 				  </tr>
@@ -47,7 +47,7 @@
 						  &nbsp;&nbsp;
 						  <a href="/member/listPage?communityId=${(com.id)!}" title="成员"><span class="glyphicon glyphicon-user" aria-hidden="true"></span></a>
 						  &nbsp;&nbsp;
-						  <a id="delete" data_id="${(com.id)!}" href="#" title="删除"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+						  <a name="delete" data_id="${(com.id)!}" href="#" title="删除"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
 						  &nbsp;&nbsp;
 						  <a href="/dynamic/dynamicPage?communityId=${(com.id)!}" title="动态"><span class="glyphicon glyphicon-file" aria-hidden="true"></span></a>
 					  </td>

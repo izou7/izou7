@@ -3,6 +3,7 @@ package cn.chinattclub.izou7.entity;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.Pattern;
 
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
@@ -23,7 +25,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 /**
- * 活动实体类
+ * 社区实体类
  * 
  * @author ZY
  * 
@@ -70,14 +72,23 @@ public class Community {
 	@Transient
 	private int cityId;
 	
+	@Transient
+	@NotBlank(message="联系人不能为空")
+	@Length(max=50,message="联系人长度应小于50个字符")
+	private String realName;
+	
+	@Transient
+	@NotBlank(message="手机不能为空")
+	@Pattern(regexp = "^1[3-8]{1}\\d{9}$", message = "手机格式不正确")
+	private String phone;
 	/**
 	 * 地址
 	 */
-	@NotBlank(message="地址不能为空")
-	@Length(max=200,message="地址长度应小于200个字符")
+//	@NotBlank(message="地址不能为空")
+//	@Length(max=200,message="地址长度应小于200个字符")
 	private String address;
 	
-	@OneToMany(mappedBy = "community")
+	@OneToMany(mappedBy = "community",cascade=CascadeType.REMOVE)
 	private List<CommunityMember> communityMembers;
 	
 	/**
@@ -97,12 +108,17 @@ public class Community {
 	/**
 	 * 活动介绍
 	 */
-	@NotBlank(message="简介不能为空")
-	@Length(max=500,message="简介长度小于500个字符之间")
+	@NotBlank(message="介绍不能为空")
+	@Length(max=500,message="介绍长度小于500个字符之间")
 	private String description;
 	
 	private String reserve;
 
+	/**
+	 * 微信公众号
+	 */
+	@Column(name = "public_number")
+	private String publicNumber;
 	/** 
 	 *  创建时间
 	 */
@@ -283,4 +299,55 @@ public class Community {
 	public void setCityId(int cityId) {
 		this.cityId = cityId;
 	}
+
+	/**
+	 * Returns the value of the field called 'publicNumber'.
+	 * @return Returns the publicNumber.
+	 */
+	public String getPublicNumber() {
+		return this.publicNumber;
+	}
+
+	/**
+	 * Sets the field called 'publicNumber' to the given value.
+	 * @param publicNumber The publicNumber to set.
+	 */
+	public void setPublicNumber(String publicNumber) {
+		this.publicNumber = publicNumber;
+	}
+
+	/**
+	 * Returns the value of the field called 'realName'.
+	 * @return Returns the realName.
+	 */
+	public String getRealName() {
+		return this.realName;
+	}
+
+	/**
+	 * Sets the field called 'realName' to the given value.
+	 * @param realName The realName to set.
+	 */
+	public void setRealName(String realName) {
+		this.realName = realName;
+	}
+
+	/**
+	 * Returns the value of the field called 'phone'.
+	 * @return Returns the phone.
+	 */
+	public String getPhone() {
+		return this.phone;
+	}
+
+	/**
+	 * Sets the field called 'phone' to the given value.
+	 * @param phone The phone to set.
+	 */
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	
+	
+	
 }

@@ -107,4 +107,21 @@ public class MemberController {
 		response.setStatusCode(statusCode);
 		return response;
 	}	
+	/**
+	 * 
+	 * 审核通过
+	 *
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value = "{id}", method = RequestMethod.PUT)
+	@ResponseBody
+	public RestResponse audit(@PathVariable("id") Integer id)  {
+		RestResponse response = new RestResponse();
+		int statusCode = ResponseStatusCode.OK;
+		String message = "审核成员成功！";
+		communityMemberServiceImpl.passMember(id);
+		response.setStatusCode(statusCode);
+		return response;
+	}	
 }

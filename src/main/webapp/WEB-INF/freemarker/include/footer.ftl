@@ -1,88 +1,22 @@
-<div class="footer_back" >
-	<div class="container">
-		<div class="row">
-			<div class="col-sm-12 container-lg" >
-			</div>
+	<div class="footer">
+		<div class="inner">
+			<p class="p1">    
+				<a href="/contact">联系我们</a>
+				|
+				<a href="/join">加入我们</a>
+				|
+				<a href="/agency">代理政策</a>
+			</p>
+			<p class="p2">               
+				<a href="" class="a1">QQ登录</a>
+				<a href="" class="a2">微信登录</a>
+				<a href="" class="a3">微博登录</a>
+			</p>
+			<p class="p3">               
+				QQ群：289620898   400电话：400-996-9916   公司地址：广州市海珠区广州大道南448号财智大厦   ©2015 TT.com 京ICP备14001206号
+			</p>
 		</div>
 	</div>
-</div>
-<div class="footer" >
-	<div class="container">
-		<div class="row">
-			<div class="col-sm-12 container-lg" >
-				<ul>
-					<li>
-						<h4> TT家族</h4>
-						<ul>
-							<li>
-								<a href="#" target="_blank">关于我们</a>
-							</li>
-							<li>
-								<a href="#" target="_blank">联系我们</a>
-							</li>
-							<li>
-								<a href="#" target="_blank">APP下载</a>
-							</li>
-						</ul>
-					</li>
-					<li class="divider"></li>
-					<li>
-						<h4> TT活动</h4>
-						<ul>
-							<li>
-								<a href="#" target="_blank">发现活动</a>
-							</li>
-							<li>
-								<a href="#" target="_blank">发起活动</a>
-							</li>
-						</ul>
-					</li>
-					<li>
-						<h4> TT办公</h4>
-						<ul>
-							<li>
-								<a href="#" target="_blank">创业圈子</a>
-							</li>
-							<li>
-								<a href="#" target="_blank">招商助手</a>
-							</li>
-						</ul>
-					</li>
-					<li>
-						<h4> TT服务</h4>
-						<ul>
-							<li>
-								<a href="#" target="_blank">免费资源</a>
-							</li>
-							<li>
-								<a href="#" target="_blank">工商注册</a>
-							</li>
-							<li>
-								<a href="#" target="_blank">融资对接</a>
-							</li>							
-						</ul>
-					</li>						
-					<li>
-						<h4> 关注我们</h4>
-						<ul>
-							<li>
-								<a href="#" target="_blank"><span class="weibo"></span>新浪微博</a>
-							</li>
-							<li>
-								<a href="#" target="_blank"><span class="qq"></span>微信公号</a>
-							</li>
-						</ul>
-					</li>
-					<li>
-						<h4> 微信扫一扫</h4>
-						<img src="http://cdn.huodongxing.com/Content/v2.0/img/qr_normal.png" alt="" >
-					</li>
-					<li>
-						<h4>TT家族APP</h4>
-						<img src="http://cdn.huodongxing.com/Content/v2.0/img/app/qr_normal.png" alt="">
-					</li>
-				</ul>
-			</div>
-		</div>
+	<div class="fixed_top">
+		<a id="toTopBtn" href="#"></a>
 	</div>
-</div>

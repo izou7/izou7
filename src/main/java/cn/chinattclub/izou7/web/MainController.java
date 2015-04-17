@@ -29,9 +29,15 @@ import cn.chinattclub.izou7.dto.ActivityListDto;
 import cn.chinattclub.izou7.dto.ActivityQueryDto;
 import cn.chinattclub.izou7.dto.RegistUserDto;
 import cn.chinattclub.izou7.entity.Activity;
+import cn.chinattclub.izou7.entity.Agency;
+import cn.chinattclub.izou7.entity.Contact;
 import cn.chinattclub.izou7.entity.User;
+import cn.chinattclub.izou7.entity.UserInfo;
 import cn.chinattclub.izou7.service.ActivityService;
+import cn.chinattclub.izou7.service.AgencyService;
+import cn.chinattclub.izou7.service.ContactService;
 import cn.chinattclub.izou7.service.UserService;
+import cn.chinattclub.izou7.util.CommonUtil;
 import cn.zy.commons.webdev.constant.ResponseStatusCode;
 import cn.zy.commons.webdev.http.RestResponse;
 import cn.zy.commons.webdev.vo.Page;
@@ -56,9 +62,15 @@ public class MainController {
 	@Resource
 	private ActivityService activityServiceImpl;
 	
-	@RequestMapping(value = "index", method = RequestMethod.GET)
+	@Resource
+	private ContactService contactServiceImpl;
+	
+	@Resource
+	private AgencyService agencyServiceImpl;
+	
+	@RequestMapping(value = {"/index","/"}, method = RequestMethod.GET)
 	public String indexPage(Model model,Page page,ActivityQueryDto query) {
-		return "site.main.index";
+		return "site.community.index";
 	}
 
 	
@@ -84,7 +96,7 @@ public class MainController {
 	 * 注册
 	 * 
 	 * @return
-	 */
+	 
 	@RequestMapping(value = "regist", method = RequestMethod.POST)
 	public String regist(Model model, @Valid RegistUserDto dto, BindingResult br) {
 		String modelPage = "site.main.regist";
@@ -96,12 +108,15 @@ public class MainController {
 				error = "密码两次输入不一致";
 			} else {
 				if (userServiceImpl.exists(dto.getUsername())) {
-					error = "该用户名已经存在";
+					error = "该邮箱已经被注册";
 				} else {
 					User user = new User();
 					user.setUsername(dto.getUsername());
 					user.setPassword(dto.getPassword());
 					userServiceImpl.createUser(user);
+					UserInfo userInfo = new UserInfo();
+					userInfo.setEmail(dto.getUsername());
+					
 					User loginUser = new User();
 					loginUser.setUsername(dto.getUsername());
 					loginUser.setPassword(dto.getPassword());
@@ -116,7 +131,7 @@ public class MainController {
 		model.addAttribute("error", error);
 		return modelPage;
 	}
-
+*/
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	@ResponseBody
 	public RestResponse login(@RequestBody User user) {
@@ -153,5 +168,69 @@ public class MainController {
 		response.setStatusCode(statusCode);
 		return response;
 	}
-
+	
+	/**
+	 * 
+	 * 联系我们
+	 *
+	 * @return
+	 */
+	@RequestMapping(value = "contact", method = RequestMethod.GET)
+	public String contactUs() {
+		return "site.main.contact";
+	}
+	@RequestMapping(value = "contact", method = RequestMethod.POST)
+	@ResponseBody
+	public RestResponse addContactUs(@RequestBody @Valid Contact contact,BindingResult br) throws SecurityException, ClassNotFoundException {
+		RestResponse response = new RestResponse();
+		int statusCode = ResponseStatusCode.OK;
+		String message = "添加联系成功";
+		if(!CommonUtil.validateDto(response,br,contact.getClass().getName().toString())){
+			statusCode = ResponseStatusCode.INTERNAL_SERVER_ERROR;
+		}else{
+			contactServiceImpl.add(contact);
+		}
+		response.setStatusCode(statusCode);
+		return response;
+	}
+	/**
+	 * 
+	 * 加入我们
+	 *
+	 * @return
+	 */
+	@RequestMapping(value = "join", method = RequestMethod.GET)
+	public String joinUs() {
+		return "site.main.join";
+	}
+	/**
+	 * 
+	 * 代理
+	 *
+	 * @return
+	 */
+	@RequestMapping(value = "agency", method = RequestMethod.GET)
+	public String agency() {
+		return "site.main.agency";
+	}
+	
+	
+	@RequestMapping(value = "agency", method = RequestMethod.POST)
+	@ResponseBody
+	public RestResponse addAgency(@RequestBody @Valid Agency agency,BindingResult br) throws SecurityException, ClassNotFoundException {
+		RestResponse response = new RestResponse();
+		int statusCode = ResponseStatusCode.OK;
+		String message = "添加代理成功";
+		if(!CommonUtil.validateDto(response,br,agency.getClass().getName().toString())){
+			statusCode = ResponseStatusCode.INTERNAL_SERVER_ERROR;
+		}else{
+			agencyServiceImpl.add(agency);
+		}
+		response.setStatusCode(statusCode);
+		return response;
+	}
+	
+	
+	
+	
 }

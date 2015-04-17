@@ -22,12 +22,17 @@ public class UserRealm extends AuthorizingRealm {
         this.userService = userService;
     }
 
+    /**
+     * 授权信息
+     */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
         return authorizationInfo;
     }
-
+	/**
+	 * 认证信息
+	 */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
 

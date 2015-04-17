@@ -12,4 +12,6 @@ public interface CommunityMemberService {
 	public List<CommunityMember> findCommunityMember(Page page,int communityId);
 	
 	public void deleteMember(int id);
+	
+	public void passMember(int id);
 }

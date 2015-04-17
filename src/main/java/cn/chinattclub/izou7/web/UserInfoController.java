@@ -61,6 +61,10 @@ public class UserInfoController {
 				response.setMessage("添加信息成功");
 				response.setStatusCode(200);
 			}else{
+				User user = CommonUtil.getCurrentUser();
+				if(user.getId()!=userInfoDto.getId()){
+					throw new Exception();
+				}
 				userInfoServiceImpl.updateUserInfo(userInfoDto,userInfoDto.getId());
 				response.setMessage("修改信息成功");
 				response.setStatusCode(200);

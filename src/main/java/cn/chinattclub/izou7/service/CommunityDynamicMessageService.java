@@ -29,6 +29,8 @@ public interface CommunityDynamicMessageService {
 	 * @param id
 	 */
 	public void delete(Integer id);
+	
+	public CommunityDynamicMessage findById(int id);
 
 
 }
