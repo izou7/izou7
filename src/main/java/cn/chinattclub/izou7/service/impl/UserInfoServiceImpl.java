@@ -70,6 +70,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 	@Override
 	public void updateUserInfo(UserInfoDto userInfoDto, int userInfoId) {
 		UserInfo userInfo = userInfoDao.get(userInfoId);
+		User user = CommonUtil.getCurrentUser();
 		userInfo = userInfoDto.toUserInfo(userInfo);
 		userInfoDao.update(userInfo);
 	}

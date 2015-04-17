@@ -35,4 +35,10 @@ public class CommunityDynamicMessageServiceImpl  implements CommunityDynamicMess
 		dao.delete(id);
 	}
 
+	@Override
+	public CommunityDynamicMessage findById(int id) {
+		// TODO Auto-generated method stub.
+		return dao.get(id);
+	}
+
 }

@@ -65,6 +65,7 @@ function initMembers(index){
 					}
 					var deleteStr = '管理员';
 					if(mds[i].userId!=json.body.currentUserId){
+						
 						deleteStr = '<a name="delete" data_id="'+mds[i].id+'" href="#" title="删除"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>';
 					}
 					tr+= '<tr><td>'+mds[i].headPictureUrl+'</td><td>'+mds[i].username+'</td><td>'+introduction+'</td><td>'+dateStr+'</td><td>'+phoneStr+'</td><td>'+deleteStr+'</td></tr>';

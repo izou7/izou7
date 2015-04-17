@@ -106,23 +106,12 @@
                 /error = anon
                 /index = anon
                 /regist = anon
-                /activity/info/** = anon
-                /activity/activities/** = anon
-                /activity/index = anon
-                /activity/list = anon
-                /activity/** = user
-                /public/description = anon
-                /public/** = user
-                /userInfo/** = user
-                /site/** = user
-                /sponsor/** = user
-                /guest/** = user
-                /media/** = user
-                /community/listPage = user
-                /community/addPage = user
-                /community/add = user
-                /member/** = user
-                /dynamic/** = user
+                /contact = anon
+                /agancy = anon
+                /entrepreneur/index = anon
+                /community/index = anon
+                / = anon
+                /** = user
             </value>
         </property>
     </bean>

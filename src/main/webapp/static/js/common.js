@@ -19,10 +19,42 @@ cn.videofact = {};
 	/* Add common event listener.
 	 ==========================================*/
 	function addCommonEventListener(){
+		
+		/**
+		 * from limongsong
+		 */
+		$(".fixed_top a").click(function(){
+			$("html").animate({'scrollTop':0},1000);
+		})
+
+
+		$(".con_form_box li input,.con_form_box li textarea").focus(function(){
+			$(this).parent().find("label").hide();
+		})
+		$(".con_form_box li  input,.con_form_box li textarea").blur(function(){
+			if($(this).val() == ""){
+				$(this).parent().find("label").show();
+			}
+		})
+		$(".con_form_box li label").click(function(){
+			$(this).hide();
+			$(".con_form_box li input").focus();
+		})
+
+		$(".con_box .hd a").click(function(){
+			var index = $(".con_box .hd a").index($(this))
+			$(".con_box .hd a").removeClass();
+			$(this).addClass("on");
+			$(".con_box .bd .item").hide().eq(index).show();
+		})
+		
 		$(".batch-check .all").click(batchCheckAllClicked);
 		$(".batch-check .inverse").click(batchCheckInverseClicked);
 		$(".batch-check .cancel").click(batchCheckCancelClicked);
+		
+		$("#toTopBtn").click(toTopBtnClicked);
 	}
+	
 	function batchCheckAllClicked(event){
 		var target = event.target;
 		var dataTarget = $(target).closest(".batch-check").data("target");
@@ -152,3 +184,10 @@ $.fn.serializeObject = function()
    });    
    return o;    
 };
+
+function toTopBtnClicked(){
+	window.scrollBy(0,-10); 
+	scrolldelay = setTimeout('toTopBtnClicked()',100);
+	if(document.documentElement.scrollTop==0)
+		clearTimeout(scrolldelay);
+}

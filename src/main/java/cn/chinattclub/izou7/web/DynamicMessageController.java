@@ -19,6 +19,7 @@ import cn.chinattclub.izou7.dto.MemberDto;
 import cn.chinattclub.izou7.dto.MessageDto;
 import cn.chinattclub.izou7.entity.CommunityDynamicMessage;
 import cn.chinattclub.izou7.service.CommunityDynamicMessageService;
+import cn.chinattclub.izou7.util.CommonUtil;
 import cn.zy.commons.webdev.constant.ResponseStatusCode;
 import cn.zy.commons.webdev.http.RestResponse;
 
@@ -80,6 +81,14 @@ public class DynamicMessageController {
 		RestResponse response = new RestResponse();
 		int statusCode = ResponseStatusCode.OK;
 		String message = "删除留言成功！";
+		CommunityDynamicMessage dynamicMessage = communityDynamicMessageServiceImpl.findById(id);
+		
+		if(dynamicMessage.getCommunityDynamic().getCommunity().getAdmin().getId()!=CommonUtil.getCurrentUser().getId()){
+			logger.warn(dynamicMessage.getCommunityDynamic().getCommunity().getAdmin().getUsername()+"有盗链行为，请注意！");
+			response.setMessage("内部异常");
+			response.setStatusCode(ResponseStatusCode.BAD_REQUEST);
+			return response;
+		}
 		communityDynamicMessageServiceImpl.delete(id);
 		response.setStatusCode(statusCode);
 		return response;

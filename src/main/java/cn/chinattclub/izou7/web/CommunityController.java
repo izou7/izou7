@@ -24,10 +24,14 @@ import cn.chinattclub.izou7.entity.Community;
 import cn.chinattclub.izou7.entity.CommunityMember;
 import cn.chinattclub.izou7.entity.Province;
 import cn.chinattclub.izou7.entity.User;
+import cn.chinattclub.izou7.entity.UserInfo;
 import cn.chinattclub.izou7.service.CityService;
 import cn.chinattclub.izou7.service.CommunityService;
 import cn.chinattclub.izou7.service.ProvinceService;
 import cn.chinattclub.izou7.service.TagService;
+import cn.chinattclub.izou7.service.UserInfoService;
+import cn.chinattclub.izou7.service.impl.CommunityMemberServiceImpl;
+import cn.chinattclub.izou7.service.impl.UserInfoServiceImpl;
 import cn.chinattclub.izou7.util.CommonUtil;
 import cn.zy.commons.webdev.constant.ResponseStatusCode;
 import cn.zy.commons.webdev.http.RestResponse;
@@ -59,7 +63,9 @@ public class CommunityController {
 	@Resource
 	private TagService tagServiceImpl; 
 	
-	
+	@Resource
+	private UserInfoService userInfoServiceImpl;
+
 	@RequestMapping(value = "index", method = RequestMethod.GET)
 	public String indexPage(Model model) {
 		return "site.community.index";
@@ -69,7 +75,8 @@ public class CommunityController {
 	public String infoPage(Model model) {
 		List<Province> provinces = provinceServiceImpl.findAll();
 		model.addAttribute("provinces",provinces);
-		model.addAttribute("tags", tagServiceImpl.list());
+		model.addAttribute("userInfo",CommonUtil.getCurrentUser().getUserInfo());
+//		model.addAttribute("tags", tagServiceImpl.list());
 		return "site.community.info";
 	}
 	
@@ -77,9 +84,14 @@ public class CommunityController {
 	public String editPage(Model model,@PathVariable("id") Integer id) {
 		List<Province> provinces = provinceServiceImpl.findAll();
 		Community community = communityServiceImpl.findById(id);
+		if(community.getAdmin().getId()!=CommonUtil.getCurrentUser().getId()){
+			logger.warn(community.getAdmin().getUsername()+"有盗链行为，请注意！");
+			return "site.main.error";
+		}
 		model.addAttribute("com",community);
 		model.addAttribute("provinces",provinces);
 		model.addAttribute("tags", tagServiceImpl.list());
+		model.addAttribute("userInfo",CommonUtil.getCurrentUser().getUserInfo());
 		return "site.community.info";
 	}
 	
@@ -131,12 +143,28 @@ public class CommunityController {
 			statusCode = ResponseStatusCode.INTERNAL_SERVER_ERROR;
 		}else{
 			Community oldCommunity = communityServiceImpl.findById(com.getId());
-			oldCommunity.setAddress(com.getAddress());
+			if(oldCommunity.getAdmin().getId()!=CommonUtil.getCurrentUser().getId()){
+				logger.warn(oldCommunity.getAdmin().getUsername()+"有盗链行为，请注意！");
+				response.setMessage("内部异常");
+				response.setStatusCode(ResponseStatusCode.BAD_REQUEST);
+				return response;
+			}
+			if(StringUtils.isNotBlank(com.getAddress())){
+				oldCommunity.setAddress(com.getAddress());
+			}
 			oldCommunity.setCity(cityServiceImpl.getCity(com.getCityId()));
 			oldCommunity.setDescription(com.getDescription());
 			oldCommunity.setName(com.getName());
 			oldCommunity.setTags(com.getTags());
+			oldCommunity.setPublicNumber(com.getPublicNumber());
+			oldCommunity.setPoster(com.getPoster());
+			oldCommunity.setPhone(com.getPhone());
+			oldCommunity.setRealName(com.getRealName());
 			communityServiceImpl.update(oldCommunity);
+			UserInfo userInfo = CommonUtil.getCurrentUser().getUserInfo();
+			userInfo.setRealName(com.getRealName());
+			userInfo.setPhone(com.getPhone());
+			userInfoServiceImpl.update(userInfo);
 			response.setMessage(message);
 		}
 		response.setStatusCode(statusCode);
@@ -164,6 +192,10 @@ public class CommunityController {
 			community.setAdmin(CommonUtil.getCurrentUser());
 			community.setCreateTime(new Date());
 			communityServiceImpl.add(community);
+			UserInfo userInfo = CommonUtil.getCurrentUser().getUserInfo();
+			userInfo.setRealName(community.getRealName());
+			userInfo.setPhone(community.getPhone());
+			userInfoServiceImpl.update(userInfo);
 			response.setMessage(message);
 		}
 		response.setStatusCode(statusCode);
@@ -183,6 +215,13 @@ public class CommunityController {
 		RestResponse response = new RestResponse();
 		int statusCode = ResponseStatusCode.OK;
 		String message = "删除社区成功！";
+		Community community = communityServiceImpl.findById(id);
+		if(community.getAdmin().getId()!=CommonUtil.getCurrentUser().getId()){
+			logger.warn(community.getAdmin().getUsername()+"有盗链行为，请注意！");
+			response.setMessage("内部异常");
+			response.setStatusCode(ResponseStatusCode.BAD_REQUEST);
+			return response;
+		}
 		communityServiceImpl.delete(id);
 		response.setStatusCode(statusCode);
 		return response;
@@ -202,6 +241,12 @@ public class CommunityController {
 		int statusCode = ResponseStatusCode.OK;
 		String msg = "获取社区详情成功！";
 		Community community =  communityServiceImpl.findById(id);
+		if(community.getAdmin().getId()!=CommonUtil.getCurrentUser().getId()){
+			logger.warn(community.getAdmin().getUsername()+"有盗链行为，请注意！");
+			response.setMessage("内部异常");
+			response.setStatusCode(ResponseStatusCode.BAD_REQUEST);
+			return response;
+		}
 		response.setMessage(msg);
 		response.setStatusCode(statusCode);
 		response.getBody().put("community",community);
@@ -219,6 +264,10 @@ public class CommunityController {
 	@RequestMapping(value = "postsPage", method = RequestMethod.GET)
 	public String postsPage(Model model,@PathVariable("id") Integer id) {
 		Community community = communityServiceImpl.findById(id);
+		if(community.getAdmin().getId()!=CommonUtil.getCurrentUser().getId()){
+			logger.warn(community.getAdmin().getUsername()+"有盗链行为，请注意！");
+			return "site.main.error";
+		}
 		model.addAttribute("com",community);
 		return "site.community.posts";
 	}

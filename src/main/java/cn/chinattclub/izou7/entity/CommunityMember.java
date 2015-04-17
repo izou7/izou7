@@ -52,6 +52,8 @@ public class CommunityMember {
 	 */
 	@Column(name = "update_time", insertable = false, updatable = false)
 	private Date updateTime = new Date();
+	
+	private int status;
 
 	/**
 	 * Returns the value of the field called 'id'.
@@ -115,6 +117,22 @@ public class CommunityMember {
 	 */
 	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
+	}
+
+	/**
+	 * Returns the value of the field called 'status'.
+	 * @return Returns the status.
+	 */
+	public int getStatus() {
+		return this.status;
+	}
+
+	/**
+	 * Sets the field called 'status' to the given value.
+	 * @param status The status to set.
+	 */
+	public void setStatus(int status) {
+		this.status = status;
 	}
 
 	

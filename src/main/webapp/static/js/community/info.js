@@ -1,4 +1,21 @@
 $(function () {
+	'use strict';
+
+    $('#fileupload').fileupload({
+        url: '/activity/upload',
+		maxFileSize: 2000000,
+		maxNumberOfFiles: 1,
+		acceptFileTypes:/(\.|\/)(gif|jpe?g|png)$/i
+    });
+
+    $('#fileupload').fileupload(
+        'option',
+        'redirect',
+        window.location.href.replace(
+            /\/[^\/]*$/,
+            '/cors/result.html?%s'
+        )
+    );
 	$("#saveBtn").click(function(){addCommunity()});
 	$("#tagsDiv button").click(function(){tagsClicked(this)});
 	initTags(tags);
@@ -16,13 +33,22 @@ function initTags(tags){
 
 function addCommunity(){
 	var action = "/community/add";
+	var poster = $("#posterUrl").val(); 
+	if(!poster){
+		poster = "http://localhost:8090/file/images/community.png"; 
+	}
+	
 	var community = {
-			"id":$("#id").val(),
+			"id":parseInt($("#id").val()),
 			"tags":$("#tags").val(),
 			"name":$("#name").val(),
 			"cityId":parseInt($("#city").val()),
 			"address":$("#address").val(),
-			"description":$("#description").val()
+			"description":$("#description").val(),
+			"realName":$("#realName").val(),
+			"phone":$("#phone").val(),
+			"publicNumber":$("#publicNumber").val(),
+			"poster":poster
 	};
 	if($.trim($("#id").val())!=""){
 		action = "/community/update";
