@@ -11,14 +11,14 @@ function submitBtnClicked(){
 		contentType:'application/json;charset=UTF-8',
         success:function(json){
         	if (json.statusCode == 200) {
-				alert("操作成功！");
+				showMessage("提交成功！");
 				location.href = "/contact";
 			}else {
-				alert(json.message);
+				showMessage(json.message);
 			}
         },
 		error:function(json){
-	    	alert("操作异常！");
+	    	showMessage("操作异常！");
 	    }
     });
 }

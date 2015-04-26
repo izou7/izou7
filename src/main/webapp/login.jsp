@@ -75,7 +75,7 @@
 						</div>
 						-->
 						<div class="login_btn">
-							<input type='submit' value="确认登录">
+							<input type='submit' value="">
 						</div>
 					</form>
 				</div>

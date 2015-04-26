@@ -217,7 +217,7 @@
 						</div>
 					</div>
 					<#if dys?size gt 0>
-		                <div id="demo2" style="font-family:none;">                   
+		                <div id="pager" style="font-family:none;">                   
 		                </div>
 				 </#if>
 					
@@ -240,20 +240,7 @@
 			<a id="deleteBtn" href="javascript:void(0);" class="sure_btn">是</a>
 		</div>
 	</div>
-<div id="infoBox" class="pop_box pop_edit pop_edit_name">
-		<div class="hd">
-			<span class="tit" id="title">信息提示</span>
-		</div>
-		<div class="bd">
-			<div class="clearfix">
-				<label id="message"></label>
-			</div>
-		</div>
-		<div class="ft">
-			<a id="deleteBtn" href="javascript:hideMessage();" class="sure_btn">确认</a>
-		</div>
-	</div>		
-	<div class="mask"></div>
+
 </body>
 <script src="${ (project.staticDomain)! }/libs/jPaginate/jquery-1.3.2.js" type="text/javascript"></script>
 <script src="${ (project.staticDomain)! }/libs/jPaginate/jquery.paginate.js" type="text/javascript"></script>
@@ -262,23 +249,4 @@
 <script type="text/javascript">
 var count = "${(page.count)!}";
 var start = "${(page.index)!}";
-//alert(parseInt(count));
-//alert(parseInt(start)+1);
-		$(function() {
-			
-			$("#demo2").paginate({
-				count 		: parseInt(count),
-				start 		: parseInt(start)+1,
-				display     : 10,
-				border					: false,
-				text_color  			: '#888',
-				background_color    	: '#EEE',	
-				text_hover_color  		: 'black',
-				background_hover_color	: '#CFCFCF',
-				onChange                : function(page){
-					location.href = "/community/manager?id="+$("#communityId").val()+"&index="+page;
-				}
-			});
-			
-		});
-		</script>
+</script>

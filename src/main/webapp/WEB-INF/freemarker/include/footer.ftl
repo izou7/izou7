@@ -1,3 +1,18 @@
+
+<div id="infoBox" class="pop_box pop_edit pop_edit_name">
+	<div class="hd">
+		<span class="tit" id="title">信息提示</span>
+	</div>
+	<div class="bd">
+		<div class="clearfix">
+			<label id="message"></label>
+		</div>
+	</div>
+	<div class="ft">
+		<a  href="javascript:hideMessage();" class="sure_btn">确认</a>
+	</div>
+</div>
+<div class="mask"></div>
 	<div class="footer">
 		<div class="inner">
 			<p class="p1">    

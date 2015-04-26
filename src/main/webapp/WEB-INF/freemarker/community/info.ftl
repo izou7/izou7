@@ -121,20 +121,7 @@ select{
 <script>
 	var tags = "${(com.tags)!}";
 </script>
-<div id="infoBox" class="pop_box pop_edit pop_edit_name">
-		<div class="hd">
-			<span class="tit" id="title">信息提示</span>
-		</div>
-		<div class="bd">
-			<div class="clearfix">
-				<label id="message"></label>
-			</div>
-		</div>
-		<div class="ft">
-			<a id="deleteBtn" href="javascript:hideMessage();" class="sure_btn">确认</a>
-		</div>
-	</div>	
-<div class="mask"></div>
+	
 <script src="${ (project.staticDomain)! }/libs/jquery/jquery-2.0.3.js"></script>
 <script src="${ (project.staticDomain)! }/js/common.js"></script>
 <script src="${ (project.staticDomain)! }/js/community/info.js"></script>
