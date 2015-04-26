@@ -24,7 +24,7 @@ public interface UserService {
      * @param userId
      * @param newPassword
      */
-    public void changePassword(Long userId, String newPassword);
+    public void updatePassword(int userId, String newPassword);
 
     
     /**
@@ -35,5 +35,31 @@ public interface UserService {
     public User findByUsername(String username);
     
     public boolean exists(String username);
+
+	/**
+	 * TODO Put here a description of what this method does.
+	 *
+	 * @param key
+	 */
+	public void updateAndDecodeUser(String key);
+	
+	public User get(int id);
+
+	/**
+	 * TODO Put here a description of what this method does.
+	 *
+	 * @param oldPassword
+	 * @param user
+	 * @return
+	 */
+	public String getEncryptPassword(String oldPassword, User user);
+
+	/**
+	 * TODO Put here a description of what this method does.
+	 *
+	 * @param user
+	 * @param encryptPassword
+	 */
+//	public void updatePasswordNew(User user, String encryptPassword);
     
 }

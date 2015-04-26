@@ -110,6 +110,8 @@
                 /agancy = anon
                 /entrepreneur/index = anon
                 /community/index = anon
+                /service = anon
+                /outer/** = anon
                 / = anon
                 /** = user
             </value>

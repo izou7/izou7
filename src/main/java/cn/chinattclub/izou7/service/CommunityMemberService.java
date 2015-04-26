@@ -13,5 +13,5 @@ public interface CommunityMemberService {
 	
 	public void deleteMember(int id);
 	
-	public void passMember(int id);
+	public void execPassMember(int id,int pass);
 }

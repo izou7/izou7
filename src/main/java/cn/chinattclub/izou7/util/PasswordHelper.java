@@ -31,7 +31,20 @@ public class PasswordHelper {
         this.algorithmName = algorithmName;
     }
 
+    public String password(String password,String salt,String username) {
 
+        //user.setSalt(randomNumberGenerator.nextBytes().toHex());
+
+        String newPassword = new SimpleHash(
+                algorithmName,
+                password,
+                ByteSource.Util.bytes(username+salt),
+                hashIterations).toHex();
+
+        //user.setPassword(newPassword);
+        return newPassword;
+    }
+    
     public void encryptPassword(User user) {
 
         user.setSalt(randomNumberGenerator.nextBytes().toHex());

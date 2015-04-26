@@ -1,13 +1,16 @@
 package cn.chinattclub.izou7.entity;
 
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 
@@ -31,6 +34,9 @@ public class CommunityDynamic {
 	@ManyToOne
 	@JoinColumn(name="community")
 	private Community community;
+	
+	@OneToMany(mappedBy = "communityDynamic",cascade=CascadeType.REMOVE)
+	private List<CommunityDynamicMessage> communityDynamicMessages;
 	
 	/**
 	 * 活动
@@ -138,5 +144,21 @@ public class CommunityDynamic {
 		this.updateTime = updateTime;
 	}
 
-	
+	/**
+	 * Returns the value of the field called 'communityDynamicMessages'.
+	 * @return Returns the communityDynamicMessages.
+	 */
+	public List<CommunityDynamicMessage> getCommunityDynamicMessages() {
+		return this.communityDynamicMessages;
+	}
+
+	/**
+	 * Sets the field called 'communityDynamicMessages' to the given value.
+	 * @param communityDynamicMessages The communityDynamicMessages to set.
+	 */
+	public void setCommunityDynamicMessages(
+			List<CommunityDynamicMessage> communityDynamicMessages) {
+		this.communityDynamicMessages = communityDynamicMessages;
+	}
+
 }

@@ -28,7 +28,7 @@ public class CommunityServiceImpl  implements CommunityService {
 	public List<Community> getMyCommunities() {
 		// TODO Auto-generated method stub.
 		User user = CommonUtil.getCurrentUser();
-		String hql = "from Community c where c.admin.id=? and c.enable=1";
+		String hql = "from Community c where c.admin.id=? and c.enable=1 order by c.createTime desc";
 		return dao.findByHQL(hql,0,0,user.getId());
 	}
 	

@@ -4,9 +4,13 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import cn.chinattclub.izou7.dao.ContactDao;
 import cn.chinattclub.izou7.dao.UserDao;
+import cn.chinattclub.izou7.entity.Contact;
 import cn.chinattclub.izou7.entity.User;
+import cn.chinattclub.izou7.service.ContactService;
 import cn.chinattclub.izou7.service.UserService;
+import cn.chinattclub.izou7.util.Base64Util;
 import cn.chinattclub.izou7.util.PasswordHelper;
 /**
  * 用户业务逻辑类
@@ -15,13 +19,16 @@ import cn.chinattclub.izou7.util.PasswordHelper;
  */
 @Service("userService")
 public class UserServiceImpl implements UserService {
+	
+	
 	@Resource
     private UserDao userDao;
+	@Resource
+	private ContactDao dao;
 	
 	@Resource
     private PasswordHelper passwordHelper;
-
-   
+	
 
     /**
      * 创建用户
@@ -39,8 +46,9 @@ public class UserServiceImpl implements UserService {
      * @param userId
      * @param newPassword
      */
-    public void changePassword(Long userId, String newPassword) {
-        User user =userDao.get(userId);
+    @Override
+    public void updatePassword(int userId, String newPassword) {
+        User user = userDao.get(userId);
         user.setPassword(newPassword);
         passwordHelper.encryptPassword(user);
         userDao.update(user);
@@ -60,4 +68,36 @@ public class UserServiceImpl implements UserService {
 	public boolean exists(String  username) {
 		return userDao.findByUsername(username)==null?false:true;
 	}
+	
+	@Override
+	public String getEncryptPassword(String oldPassword, User user) {
+		PasswordHelper passwordHelper = new PasswordHelper();
+		return passwordHelper.password(oldPassword, user.getSalt(), user.getUsername());
+	}
+	
+	@Override
+	public void updateAndDecodeUser(String key){
+		
+		String decodeStr = Base64Util.getFromBase64(key);
+		String password = String.valueOf((Integer.parseInt(decodeStr.substring(decodeStr.length()-6,decodeStr.length()))+11111));
+		String id = decodeStr.replace(decodeStr.substring(decodeStr.length()-6,decodeStr.length()),"");
+//		User user = get(Integer.parseInt(id));
+//		String newEncryptPassword = getEncryptPassword(password,user);
+//		updatePasswordNew(user,newEncryptPassword);
+		updatePassword(Integer.parseInt(id),password);
+	}
+	
+//	@Override
+//	public void updatePasswordNew(User user, String encryptPassword) {
+//		// TODO Auto-generated method stub
+//		user.setPassword(encryptPassword);
+//		userDao.update(user);
+//	}
+
+	@Override
+	public User get(int id) {
+		// TODO Auto-generated method stub.
+		return userDao.get(id);
+	}
+
 }

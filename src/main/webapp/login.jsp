@@ -32,52 +32,82 @@
  	-->
     <title>登录</title>
 	<link rel="icon" href="/static/images/logo.png"/>
-    <!-- Bootstrap core CSS -->
-    <link href="/static/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="/static/libs/login/signin.css" rel="stylesheet">
-
-    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-    <!--[if lt IE 9]><script src="/static/libs/login/ie8-responsive-file-warning.js"></script><![endif]-->
-    <script src="/static/libs/login/ie-emulation-modes-warning.js"></script>
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+	<link rel="stylesheet" type="text/css" href="/static/css/main.css?125">
   </head>
 
-  <body>
-
-    <div class="container">
-
-      <form class="form-signin" role="form" action="" method="post">
-        <h2 class="form-signin-heading">TT家族</h2>
-        
-        <!--
-        <input type="email" class="form-control" placeholder="Email address" required autofocus>
-        -->
-        <input type="username" name="username" class="form-control" placeholder="账号" required>
-        <input type="password" name="password" class="form-control" placeholder="密码" required>
-        <!-- 
-        <div class="checkbox">
-          <label>
-            <input type="checkbox" value="remember-me"> Remember me
-          </label>
-        </div>
-         -->
-         <c:if test="${!empty shiroLoginFailure}">
-        <h6 class="form-signin-heading" style="color:red;">用户名或密码错误，请重新登陆！</h6>
-        </c:if>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
-      </form>
-
-    </div> <!-- /container -->
-
-
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="/static/libs/login/ie10-viewport-bug-workaround.js"></script>
-  </body>
+<body class="bg494949">
+<div class="header">
+		<div class="inner clearfix">
+			<div class="logo">
+				<a href="index.html"><img src="/static/images/logo.png"></a>
+			</div>
+			<div class="fl nav">                                                                  
+				<span class="fl s1">
+					<a href="/entrepreneur/index">我是创业社区</a>
+					<a href="/community/index">我是创业者</a>
+				</span>                                                            
+				<span class="fr s3" style="margin-left:55%;float:none;">
+					<a href="/service">付费服务</a>
+				</span>
+			</div>
+		</div>
+	</div>
+	<div class="login_w">
+		<div class="login_wrap">
+			<div class="inner">
+				<div class="hd clearfix">
+					<span class="fl">用户登录</span>
+					<!-- 
+					<a href="reg.html" class="fr">我还没注册</a>
+					 -->
+				</div>
+				<div class="bd">
+					<form action="" method="post">
+						<div class="text user_text">
+							<input type="username" name="username" required  placeholder="手机号">
+						</div>
+						<div class="text pw_text">
+							<input type="password" name="password"  required placeholder="密码">
+						</div>
+						<!--  
+						<div class="forget_box">
+							<a href="">忘记密码?</a>
+						</div>
+						-->
+						<div class="login_btn">
+							<input type='submit' value="确认登录">
+						</div>
+					</form>
+				</div>
+				<!--  
+				<div class="ft clearfix">
+					<span>其他登录方式</span>
+					<a href="" class="qq_btn"></a>
+					<a href="" class="wx_btn"></a>
+					<a href="" class="wb_btn"></a>
+				</div>
+				-->
+			</div>
+		</div>
+	</div>
+	<div class="footer">
+		<div class="inner">
+			<p class="p1">    
+				<a href="/contact">联系我们</a>
+				|
+				<a href="/join">加入我们</a>
+				|
+				<a href="/agency">代理政策</a>
+			</p>
+			<p class="p2">               
+				<a href="" class="a1">QQ登录</a>
+				<a href="" class="a2">微信登录</a>
+				<a href="" class="a3">微博登录</a>
+			</p>
+			<p class="p3">               
+				QQ群：289620898   400电话：400-996-9916   公司地址：广州市海珠区广州大道南448号财智大厦   ©2015 TT.com 京ICP备14001206号
+			</p>
+		</div>
+	</div>
+</body>
 </html>

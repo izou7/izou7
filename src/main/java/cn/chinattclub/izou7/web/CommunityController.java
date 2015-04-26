@@ -3,6 +3,7 @@ package cn.chinattclub.izou7.web;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Properties;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
@@ -21,11 +22,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.chinattclub.izou7.dto.MemberDto;
 import cn.chinattclub.izou7.entity.Community;
+import cn.chinattclub.izou7.entity.CommunityDynamic;
 import cn.chinattclub.izou7.entity.CommunityMember;
 import cn.chinattclub.izou7.entity.Province;
 import cn.chinattclub.izou7.entity.User;
 import cn.chinattclub.izou7.entity.UserInfo;
 import cn.chinattclub.izou7.service.CityService;
+import cn.chinattclub.izou7.service.CommunityDynamicService;
 import cn.chinattclub.izou7.service.CommunityService;
 import cn.chinattclub.izou7.service.ProvinceService;
 import cn.chinattclub.izou7.service.TagService;
@@ -65,10 +68,42 @@ public class CommunityController {
 	
 	@Resource
 	private UserInfoService userInfoServiceImpl;
+	
+	@Resource
+	private CommunityDynamicService communityDynamicServiceImpl;
+	
+	@Resource
+	private Properties appConfig;
 
 	@RequestMapping(value = "index", method = RequestMethod.GET)
 	public String indexPage(Model model) {
 		return "site.community.index";
+	}
+	
+	
+	@RequestMapping(value = "manager", method = RequestMethod.GET)
+	public String managerPage(Model model,Integer id,Integer index) {
+		Page page = new Page();
+		page.setIndex(index==null?0:index);
+		List<Community> communities =  communityServiceImpl.getMyCommunities();
+		if(id == null){
+			if(communities!=null&&communities.size()>1){
+				model.addAttribute("com",communities.get(0));
+				id = communities.get(0).getId();
+			}
+		}else{
+			for (Community community : communities) {
+				if(community.getId()==id){
+					model.addAttribute("com",community);
+					break;
+				}
+			}
+		}
+		List<CommunityDynamic> dys = communityDynamicServiceImpl.findDynamics(page,id,null);
+		model.addAttribute("dys",dys);
+		model.addAttribute("page",page);
+		model.addAttribute("communities",communities);
+		return "site.community.manager";
 	}
 	
 	@RequestMapping(value = "addPage", method = RequestMethod.GET)
@@ -96,12 +131,12 @@ public class CommunityController {
 	}
 	
 	
-	@RequestMapping(value = "listPage", method = RequestMethod.GET)
-	public String listPage(Model model) {
-		List<Community> communities =  communityServiceImpl.getMyCommunities();
-		model.addAttribute("communities",communities);
-		return "site.community.list";
-	}
+//	@RequestMapping(value = "listPage", method = RequestMethod.GET)
+//	public String listPage(Model model) {
+//		List<Community> communities =  communityServiceImpl.getMyCommunities();
+//		model.addAttribute("communities",communities);
+//		return "site.community.list";
+//	}
 	
 	/**
 	 * 
@@ -157,7 +192,9 @@ public class CommunityController {
 			oldCommunity.setName(com.getName());
 			oldCommunity.setTags(com.getTags());
 			oldCommunity.setPublicNumber(com.getPublicNumber());
-			oldCommunity.setPoster(com.getPoster());
+			if(StringUtils.isNotBlank(com.getPoster())){
+				oldCommunity.setPoster(com.getPoster());
+			}
 			oldCommunity.setPhone(com.getPhone());
 			oldCommunity.setRealName(com.getRealName());
 			communityServiceImpl.update(oldCommunity);
@@ -188,6 +225,9 @@ public class CommunityController {
 		if(!CommonUtil.validateDto(response,br,community.getClass().getName().toString())){
 			statusCode = ResponseStatusCode.INTERNAL_SERVER_ERROR;
 		}else{
+			if(StringUtils.isBlank(community.getPoster())){
+				community.setPoster(appConfig.get("defaultCommunityImgPath").toString());
+			}
 			community.setCity(cityServiceImpl.getCity(community.getCityId()));
 			community.setAdmin(CommonUtil.getCurrentUser());
 			community.setCreateTime(new Date());

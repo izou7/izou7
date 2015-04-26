@@ -1,23 +1,6 @@
 $(function () {
-	'use strict';
-
-    $('#fileupload').fileupload({
-        url: '/activity/upload',
-		maxFileSize: 2000000,
-		maxNumberOfFiles: 1,
-		acceptFileTypes:/(\.|\/)(gif|jpe?g|png)$/i
-    });
-
-    $('#fileupload').fileupload(
-        'option',
-        'redirect',
-        window.location.href.replace(
-            /\/[^\/]*$/,
-            '/cors/result.html?%s'
-        )
-    );
 	$("#saveBtn").click(function(){addCommunity()});
-	$("#tagsDiv button").click(function(){tagsClicked(this)});
+	$(".tag").click(function(){tagsClicked(this)});
 	initTags(tags);
 	$("#province").change(function(){provinceChange(this)});
 });
@@ -26,7 +9,7 @@ function initTags(tags){
 	if(tags){
 		var tagsArray = tags.split(",");
 		for(var i=0;i<tagsArray.length;i++){
-			$("#tagsDiv").find("button[value='"+tagsArray[i]+"']").attr("class","btn btn-sm btn-danger");
+			$("a[value='"+tagsArray[i]+"']").removeClass("tag").addClass("tag2");
 		}
 	}
 }
@@ -34,10 +17,6 @@ function initTags(tags){
 function addCommunity(){
 	var action = "/community/add";
 	var poster = $("#posterUrl").val(); 
-	if(!poster){
-		poster = "http://localhost:8090/file/images/community.png"; 
-	}
-	
 	var community = {
 			"id":parseInt($("#id").val()),
 			"tags":$("#tags").val(),
@@ -62,28 +41,13 @@ function addCommunity(){
 		contentType:'application/json;charset=UTF-8', 
 		success: function(json) {
 			if (json.statusCode == 200) {
-					$.Zebra_Dialog('保存成功', {
-						'type':     'information',
-						'title':    '提示',
-						'buttons':  ["确定"],
-						'onClose': function(caption) {
-							location.href = "/community/listPage";
-						}
-					});
+					showMessage("操作成功");
 			}else {
-				$.Zebra_Dialog(json.message, {
-					'type':     'information',
-					'title':    '提示',
-					'buttons':  ["确定"]
-				});
+				showMessage(json.message);
 			}
 		},
 		error : function(json){
-			$.Zebra_Dialog('操作异常', {
-				'type':     'information',
-				'title':    '提示',
-				'buttons':  ["确定"]
-			});
+			showMessage("操作异常，获取更多帮助，请联系管理员！");
 		}
 	}); 
 	
@@ -91,13 +55,28 @@ function addCommunity(){
 
 
 function tagsClicked(obj){
-	if($(obj).attr("class").indexOf("btn-info")!=-1){
-		$(obj).attr("class",$(obj).attr("class").replace("btn-info","btn-danger"));
+//	if($(obj).attr("class").indexOf("btn-info")!=-1){
+//		$(obj).attr("class",$(obj).attr("class").replace("btn-info","btn-danger"));
+//	}else{
+//		$(obj).attr("class",$(obj).attr("class").replace("btn-danger","btn-info"));
+//	}
+//	var tags = "";
+//	$("#tagsDiv button[class='btn btn-sm btn-danger']").each(function(index){
+//		if(index==0){
+//			tags+=$(this).text();
+//		}else{
+//			tags+=","+$(this).text();
+//		}
+//	});
+//	$("#tags").val(tags);
+	//$("#tagsDiv").find("a[value='"+tagsArray[i]+"']").removeClass("tag").addClass("tag2");
+	if($(obj).attr("class")=="tag2"){
+		$(obj).removeClass("tag2").addClass("tag");
 	}else{
-		$(obj).attr("class",$(obj).attr("class").replace("btn-danger","btn-info"));
+		$(obj).removeClass("tag").addClass("tag2");
 	}
 	var tags = "";
-	$("#tagsDiv button[class='btn btn-sm btn-danger']").each(function(index){
+	$("a[class='tag2']").each(function(index){
 		if(index==0){
 			tags+=$(this).text();
 		}else{
