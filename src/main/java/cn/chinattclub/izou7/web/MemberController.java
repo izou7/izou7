@@ -114,13 +114,13 @@ public class MemberController {
 	 * @param id
 	 * @return
 	 */
-	@RequestMapping(value = "{id}", method = RequestMethod.PUT)
+	@RequestMapping(value = "{id}/{pass}", method = RequestMethod.PUT)
 	@ResponseBody
-	public RestResponse audit(@PathVariable("id") Integer id)  {
+	public RestResponse audit(@PathVariable("id") Integer id,@PathVariable("pass") int pass)  {
 		RestResponse response = new RestResponse();
 		int statusCode = ResponseStatusCode.OK;
 		String message = "审核成员成功！";
-		communityMemberServiceImpl.passMember(id);
+		communityMemberServiceImpl.execPassMember(id,pass);
 		response.setStatusCode(statusCode);
 		return response;
 	}	

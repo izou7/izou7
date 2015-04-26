@@ -91,6 +91,9 @@ public class Community {
 	@OneToMany(mappedBy = "community",cascade=CascadeType.REMOVE)
 	private List<CommunityMember> communityMembers;
 	
+	@OneToMany(mappedBy = "community",cascade=CascadeType.REMOVE)
+	private List<CommunityDynamic> communityDynamics;
+	
 	/**
 	 * 地点横坐标
 	 */
@@ -346,6 +349,22 @@ public class Community {
 	 */
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+
+	/**
+	 * Returns the value of the field called 'communityDynamics'.
+	 * @return Returns the communityDynamics.
+	 */
+	public List<CommunityDynamic> getCommunityDynamics() {
+		return this.communityDynamics;
+	}
+
+	/**
+	 * Sets the field called 'communityDynamics' to the given value.
+	 * @param communityDynamics The communityDynamics to set.
+	 */
+	public void setCommunityDynamics(List<CommunityDynamic> communityDynamics) {
+		this.communityDynamics = communityDynamics;
 	}
 	
 	

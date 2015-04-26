@@ -1,6 +1,6 @@
 <body class="cysq_body">
 	<div class="banner" style="background: url(${ (project.staticDomain)! }/images/cysq_banner.jpg) no-repeat center 0;  height: 545px;">
-		<a href=""></a>
+		<a href="/community/addPage"></a>
 	</div>
 	<div class="modal modal_1">
 		<div class="inner">

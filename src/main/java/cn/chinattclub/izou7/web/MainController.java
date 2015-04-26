@@ -179,6 +179,8 @@ public class MainController {
 	public String contactUs() {
 		return "site.main.contact";
 	}
+	
+	
 	@RequestMapping(value = "contact", method = RequestMethod.POST)
 	@ResponseBody
 	public RestResponse addContactUs(@RequestBody @Valid Contact contact,BindingResult br) throws SecurityException, ClassNotFoundException {
@@ -193,6 +195,14 @@ public class MainController {
 		response.setStatusCode(statusCode);
 		return response;
 	}
+	
+	
+	@RequestMapping(value = "service", method = RequestMethod.GET)
+	public String service() {
+		return "site.main.service";
+	}
+	
+	
 	/**
 	 * 
 	 * 加入我们

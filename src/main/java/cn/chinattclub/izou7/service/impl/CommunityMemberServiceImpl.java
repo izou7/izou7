@@ -45,13 +45,17 @@ public class CommunityMemberServiceImpl  implements CommunityMemberService {
 	}
 
 	@Override
-	public void passMember(int id) {
+	public void execPassMember(int id,int pass) {
 		// TODO Auto-generated method stub.
 		CommunityMember member = dao.get(id);
 		User user = member.getCommunity().getAdmin();
 		if(user.getId()==CommonUtil.getCurrentUser().getId()){
-			member.setStatus(1);
-			dao.update(member);
+			if(pass==1){
+				member.setStatus(1);
+				dao.update(member);
+			}
+			else
+				dao.delete(id);
 		}else{
 			log.warn(user.getUsername()+"有盗链行为，请注意！");
 		}
