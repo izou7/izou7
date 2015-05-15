@@ -198,10 +198,10 @@ public class CommunityController {
 			oldCommunity.setPhone(com.getPhone());
 			oldCommunity.setRealName(com.getRealName());
 			communityServiceImpl.update(oldCommunity);
-			UserInfo userInfo = CommonUtil.getCurrentUser().getUserInfo();
-			userInfo.setRealName(com.getRealName());
-			userInfo.setPhone(com.getPhone());
-			userInfoServiceImpl.update(userInfo);
+//			UserInfo userInfo = CommonUtil.getCurrentUser().getUserInfo();
+//			userInfo.setRealName(com.getRealName());
+//			userInfo.setPhone(com.getPhone());
+//			userInfoServiceImpl.update(userInfo);
 			response.setMessage(message);
 		}
 		response.setStatusCode(statusCode);
@@ -232,10 +232,10 @@ public class CommunityController {
 			community.setAdmin(CommonUtil.getCurrentUser());
 			community.setCreateTime(new Date());
 			communityServiceImpl.add(community);
-			UserInfo userInfo = CommonUtil.getCurrentUser().getUserInfo();
-			userInfo.setRealName(community.getRealName());
-			userInfo.setPhone(community.getPhone());
-			userInfoServiceImpl.update(userInfo);
+//			UserInfo userInfo = CommonUtil.getCurrentUser().getUserInfo();
+//			userInfo.setRealName(community.getRealName());
+//			userInfo.setPhone(community.getPhone());
+//			userInfoServiceImpl.update(userInfo);
 			response.setMessage(message);
 		}
 		response.setStatusCode(statusCode);

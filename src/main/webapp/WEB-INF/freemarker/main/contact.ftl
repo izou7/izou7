@@ -41,7 +41,7 @@
 							<textarea name="description" class="textarea" placeholder="想说点什么..."></textarea>
 						</li>
 						<li>
-							<button id="submitBtn" type="button"  class="submit_btn" >提交</button>
+							<button id="submitBtn" type="button"  class="submit_btn" ></button>
 						</li>
 					</ul>
 				</form>

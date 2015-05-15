@@ -77,10 +77,12 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	public void updateAndDecodeUser(String key){
-		
 		String decodeStr = Base64Util.getFromBase64(key);
 		String password = String.valueOf((Integer.parseInt(decodeStr.substring(decodeStr.length()-6,decodeStr.length()))+11111));
-		String id = decodeStr.replace(decodeStr.substring(decodeStr.length()-6,decodeStr.length()),"");
+		String idAndPre = decodeStr.replace(decodeStr.substring(decodeStr.length()-6,decodeStr.length()),"");
+		String pre = idAndPre.substring(idAndPre.length()-2,idAndPre.length());
+		String id = idAndPre.substring(0,idAndPre.length()-2);
+		password = pre+password;
 //		User user = get(Integer.parseInt(id));
 //		String newEncryptPassword = getEncryptPassword(password,user);
 //		updatePasswordNew(user,newEncryptPassword);

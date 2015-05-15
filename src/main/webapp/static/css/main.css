@@ -14,14 +14,14 @@ input:focus{
 }
 
 body{
-    padding-top: 97px;
+    padding-top: 50px;
 }
 .header{
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    height: 97px;
+    height: 50px;
     background: #e62f17;
     min-width: 1200px;
     z-index:99;
@@ -47,7 +47,7 @@ body{
     margin-left: 20px;
 }
 .header .inner .nav{
-    padding: 40px 0 0 0;
+    padding: 15px 0 0 0;
     width:100%;
     position: relative;
 }
@@ -911,7 +911,7 @@ body{
     margin-bottom: 17px;
 }
 .fffw_w .t_box .list_box .l2{
-    color: #939393;
+    color: #000000;
 }
 .fffw_w .b_box{
     width: 958px;

@@ -30,8 +30,8 @@
     <!-- 
     <link rel="icon" href="../../favicon.ico">
  	-->
-    <title>登录</title>
-	<link rel="icon" href="/static/images/logo.png"/>
+    <title>TT家族  登录</title>
+	<link rel="icon" href="/static/images/icon.png"/>
 	<link rel="stylesheet" type="text/css" href="/static/css/main.css?125">
   </head>
 
@@ -39,7 +39,7 @@
 <div class="header">
 		<div class="inner clearfix">
 			<div class="logo">
-				<a href="index.html"><img src="/static/images/logo.png"></a>
+				<a href="/community/index"><img src="/static/images/logo.png"></a>
 			</div>
 			<div class="fl nav">                                                                  
 				<span class="fl s1">
@@ -75,7 +75,7 @@
 						</div>
 						-->
 						<div class="login_btn">
-							<input type='submit' value="确认登录">
+							<input type='submit' value="">
 						</div>
 					</form>
 				</div>
@@ -105,7 +105,7 @@
 				<a href="" class="a3">微博登录</a>
 			</p>
 			<p class="p3">               
-				QQ群：289620898   400电话：400-996-9916   公司地址：广州市海珠区广州大道南448号财智大厦   ©2015 TT.com 京ICP备14001206号
+				QQ群：107317233    公司地址：中关村发展大厦
 			</p>
 		</div>
 	</div>

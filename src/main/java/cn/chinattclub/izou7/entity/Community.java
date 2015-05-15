@@ -50,8 +50,8 @@ public class Community {
 	/**
 	 * 社区标签
 	 */
-	@NotBlank(message="标签不能为空")
-	@Length(max=50,message="标签长度应小于50个字符")
+//	@NotBlank(message="标签不能为空")
+//	@Length(max=50,message="标签长度应小于50个字符")
 	private String tags;
 	
 	
@@ -73,19 +73,19 @@ public class Community {
 	private int cityId;
 	
 	@Transient
-	@NotBlank(message="联系人不能为空")
-	@Length(max=50,message="联系人长度应小于50个字符")
+//	@NotBlank(message="联系人不能为空")
+//	@Length(max=50,message="联系人长度应小于50个字符")
 	private String realName;
 	
 	@Transient
-	@NotBlank(message="手机不能为空")
-	@Pattern(regexp = "^1[3-8]{1}\\d{9}$", message = "手机格式不正确")
+//	@NotBlank(message="手机不能为空")
+//	@Pattern(regexp = "^1[3-8]{1}\\d{9}$", message = "手机格式不正确")
 	private String phone;
 	/**
 	 * 地址
 	 */
-//	@NotBlank(message="地址不能为空")
-//	@Length(max=200,message="地址长度应小于200个字符")
+	@NotBlank(message="地址不能为空")
+	@Length(max=200,message="地址长度应小于200个字符")
 	private String address;
 	
 	@OneToMany(mappedBy = "community",cascade=CascadeType.REMOVE)

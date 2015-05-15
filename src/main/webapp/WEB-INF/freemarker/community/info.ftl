@@ -32,23 +32,47 @@ select{
 	border-radius: 3px;
 	border: 1px solid #dcdcdc;
 }
+.btn_box2{
+ text-align:center;
+ }
+.btn_box2 input{
+	width: 253px;
+    height: 42px;
+    color: #fff;
+    border: 0 none;
+    margin: 0 auto;
+    font-family: "微软雅黑";
+    background-color:#e62f17;
+    -moz-border-radius: 3px;      /* Gecko browsers */
+    -webkit-border-radius: 3px;   /* Webkit browsers */
+    border-radius:3px;            /* W3C syntax */
+    cursor:pointer;
+   
+}
 </style>
 </head>
 <body>
 	<div class="cjsq_w">
 		<div class="inner">
 			<div class="hd">
-				<span>创建社区</span>
+				
+				<#if (com.id)??>
+						<span>修改空间</span>
+					<#else>
+						<span>创建空间</span>
+					</#if>
 			</div>
 			<input type="hidden" id="id" name="id" value="${ (com.id)! }">
 			<div class="bd">
 				<form>
 					<dl>
-						<dt>社区信息</dt>
+						<dt>空间信息</dt>
+						<!--  
 						<dd>
 							<a class="tag" href="/community/addPage" value="众创空间">众创空间</a>&nbsp;&nbsp;<a class="tag" href="#" value="品牌社群">品牌社群</a>
 							<input type="hidden" id="tags" name="tags" value="${(com.tags)!}">
 						</dd>
+						-->
 						<dd>
 							<input name="name"  id="name" type="text" class="text" placeholder="社区名称" value="${(com.name)!}">
 						</dd>
@@ -81,6 +105,9 @@ select{
 						<dd>
 						<input name="address"  id="address" type="text" class="text" placeholder="详细地址" value="${(com.address)!}">
 						</dd>
+						<dd>
+						<input name="poster"  id="poster" type="text" class="text" placeholder="海报地址" value="${(com.poster)!}">
+						</dd>
 						  <!--  
 						<dd>
 							<input type="file" class="text" value="海报">
@@ -93,19 +120,8 @@ select{
 							<textarea id="description" placeholder="介绍" >${(com.description)!}</textarea>
 						</dd>
 					</dl>
-					<dl>
-						<dt>社区运营机构联系信息（供TT家族使用）</dt>
-						<dd>
-							<input id="realName" type="text" class="text" placeholder="联系人" value="${(userInfo.realName)!}">
-						</dd>
-						<dd>
-							<input id="phone" type="text" class="text" placeholder="手机" value="${(userInfo.phone)!}">
-						</dd>
-						<dd>
-							<input id="publicNumber" type="text" class="text" placeholder="微信公众号"  value="${(com.publicNumber)!}">
-						</dd>
-					</dl>
-					<div class="btn_box" >
+					
+					<div class="btn_box2" >
 					<#if (com.id)??>
 						<input id="saveBtn" type="button" value="确认修改">
 					<#else>

@@ -64,7 +64,7 @@
 							<textarea name="description" class="textarea" name="" placeholder="公司介绍"></textarea>
 						</li>
 						<li>
-							<button id="submitBtn" type="button"  class="submit_btn" >提交</button>
+							<button id="submitBtn" type="button"  class="submit_btn" ></button>
 						</li>
 					</ul>
 				</form>

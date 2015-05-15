@@ -18,12 +18,12 @@ $(function(){
 		$(".con_form_box li input").focus();
 	})
 
-//	$(".con_box .hd a").click(function(){
-//		var index = $(".con_box .hd a").index($(this))
-//		$(".con_box .hd a").removeClass();
-//		$(this).addClass("on");
-//		$(".con_box .bd .item").hide().eq(index).show();
-//	})
+	$(".con_box .hd a").click(function(){
+		var index = $(".con_box .hd a").index($(this))
+		$(".con_box .hd a").removeClass();
+		$(this).addClass("on");
+		$(".con_box .bd .item").hide().eq(index).show();
+	})
 
 	$(".pop_box .close_btn").click(function(){
 		$(".pop_box").hide();

@@ -1,7 +1,7 @@
 $(function () {
 	$("#saveBtn").click(function(){addCommunity()});
-	$(".tag").click(function(){tagsClicked(this)});
-	initTags(tags);
+	//$(".tag").click(function(){tagsClicked(this)});
+	//initTags(tags);
 	$("#province").change(function(){provinceChange(this)});
 });
 	

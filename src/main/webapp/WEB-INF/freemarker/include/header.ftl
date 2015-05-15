@@ -9,5 +9,5 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 <title>${ (project.title)! }</title>
-<link rel="icon" href="${ (project.staticDomain)! }/images/logo.png"/>
+<link rel="icon" href="${ (project.staticDomain)! }/images/icon.png"/>
 <link rel="stylesheet" type="text/css" href="${ (project.staticDomain)! }/css/main.css?125">
