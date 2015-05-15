@@ -1,4 +1,17 @@
 $(function () {
+	$("#pager").paginate({
+			count 		: parseInt(count),
+			start 		: parseInt(start)+1,
+			display     : 10,
+			border					: false,
+			text_color  			: '#888',
+			background_color    	: '#EEE',	
+			text_hover_color  		: 'black',
+			background_hover_color	: '#CFCFCF',
+			onChange                : function(page){
+				location.href = "/community/manager?id="+$("#communityId").val()+"&index="+page;
+			}
+		});
 	//$("a[name='delete']").click(function(){deleteClicked(this);});
 	$("div[name='communityArea']").click(function(){communityAreaClicked(this)});
 	$("a[name='dynDeleteBtn']").click(function(){dynDeleteBtnClicked(this)});

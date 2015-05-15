@@ -31,11 +31,13 @@ import cn.chinattclub.izou7.dto.RegistUserDto;
 import cn.chinattclub.izou7.entity.Activity;
 import cn.chinattclub.izou7.entity.Agency;
 import cn.chinattclub.izou7.entity.Contact;
+import cn.chinattclub.izou7.entity.Customer;
 import cn.chinattclub.izou7.entity.User;
 import cn.chinattclub.izou7.entity.UserInfo;
 import cn.chinattclub.izou7.service.ActivityService;
 import cn.chinattclub.izou7.service.AgencyService;
 import cn.chinattclub.izou7.service.ContactService;
+import cn.chinattclub.izou7.service.CustomerService;
 import cn.chinattclub.izou7.service.UserService;
 import cn.chinattclub.izou7.util.CommonUtil;
 import cn.zy.commons.webdev.constant.ResponseStatusCode;
@@ -67,6 +69,9 @@ public class MainController {
 	
 	@Resource
 	private AgencyService agencyServiceImpl;
+	
+	@Resource
+	private CustomerService customerServiceImpl;
 	
 	@RequestMapping(value = {"/index","/"}, method = RequestMethod.GET)
 	public String indexPage(Model model,Page page,ActivityQueryDto query) {
@@ -176,7 +181,7 @@ public class MainController {
 	 * @return
 	 */
 	@RequestMapping(value = "contact", method = RequestMethod.GET)
-	public String contactUs() {
+	public String contactUsPage() {
 		return "site.main.contact";
 	}
 	
@@ -198,10 +203,9 @@ public class MainController {
 	
 	
 	@RequestMapping(value = "service", method = RequestMethod.GET)
-	public String service() {
+	public String servicePage() {
 		return "site.main.service";
 	}
-	
 	
 	/**
 	 * 
@@ -210,7 +214,7 @@ public class MainController {
 	 * @return
 	 */
 	@RequestMapping(value = "join", method = RequestMethod.GET)
-	public String joinUs() {
+	public String joinUsPage() {
 		return "site.main.join";
 	}
 	/**
@@ -220,7 +224,7 @@ public class MainController {
 	 * @return
 	 */
 	@RequestMapping(value = "agency", method = RequestMethod.GET)
-	public String agency() {
+	public String agencyPage() {
 		return "site.main.agency";
 	}
 	
@@ -239,6 +243,28 @@ public class MainController {
 		response.setStatusCode(statusCode);
 		return response;
 	}
+	
+	@RequestMapping(value = "customer", method = RequestMethod.GET)
+	public String customerPage() {
+		return "site.main.customer";
+	}
+	
+	
+	@RequestMapping(value = "customer", method = RequestMethod.POST)
+	@ResponseBody
+	public RestResponse addAgency(@RequestBody @Valid Customer customer,BindingResult br) throws SecurityException, ClassNotFoundException {
+		RestResponse response = new RestResponse();
+		int statusCode = ResponseStatusCode.OK;
+		String message = "添加客户成功";
+		if(!CommonUtil.validateDto(response,br,customer.getClass().getName().toString())){
+			statusCode = ResponseStatusCode.INTERNAL_SERVER_ERROR;
+		}else{
+			customerServiceImpl.add(customer);
+		}
+		response.setStatusCode(statusCode);
+		return response;
+	}
+	
 	
 	
 	
