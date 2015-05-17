@@ -61,10 +61,10 @@ float:left;
 			<div class="b_box">
 				<div class="hd">
 					<p>
-						<strong>私人定制</strong>
+						<strong style="font-size:32px;">私人定制</strong>
 					</p>
 					<p>                  
-						<span>打造众创空间品牌</span>
+						<span style="font-size:18px;">打造众创空间品牌</span>
 					</p>
 				</div>
 				<div class="bd">

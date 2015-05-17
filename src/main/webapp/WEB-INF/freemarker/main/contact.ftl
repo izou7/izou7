@@ -1,3 +1,8 @@
+<style>
+.form_box input,textarea{
+font-size:15px;
+}
+</style>
 <body>
 	<div class="three_box">
 		<div class="sub_nav">                  
@@ -9,12 +14,11 @@
 		</div>
 		<div class="intro_box">
 			<p>
-				付费用户： vip@ ttjiazu.com
+				付费用户：zhouzhou@ttjiazu.com
 				<br/><br/>
-				基础使用：hi@ttjiazu.com<br/>
-				技术支持：support@ttjiazu.com<br/>
-				技术技巧 & bugs反馈：bug@ttjiazu.com
-				<br/><br/>
+				技术支持 &bugs反馈：zhangying@ttjiazu.com<br/>
+				
+				<br/>
 				QQ群：107317233
 			</p>
 		</div>

@@ -1,3 +1,8 @@
+<style>
+.form_box input,textarea{
+font-size:15px;
+}
+</style>
 <body>
 	<div class="three_box">
 		<div class="sub_nav">                  
@@ -7,7 +12,7 @@
 			|
 			<a href="/agency" class="on">代理政策</a>
 		</div>
-		<div class="intro_box dl_box">
+		<div class="intro_box dl_box" style="padding:0px;">
 			<div class="t_box">
 				<ul class="clearfix">
 					<li>
@@ -28,8 +33,11 @@
 			</div>
 			<div class="b_box">
 				<div class="d1">代理商资质要求</div>
-				<div class="d2"> 联系客户，向我司传递客户明确需求。有社区运营经验或垂直领域资源者优先。<br/>欢迎有实力的机构/个人成为区域代理，我们将与您深度合作，共创未来。 </div>
-				<div class="d3">申请成为代理商，享受丰厚代理费。</div>
+				<div class="d2"> 欢迎有实力的机构/个人成为区域代理，我们将与您深度合作，共创未来。 </div>
+				</br>
+				</br>
+
+				<div class="d1">申请成为代理商</div>
 			</div>
 		</div>
 		<div class="con_box con_form_box contact_box">
