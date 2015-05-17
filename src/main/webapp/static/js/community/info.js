@@ -62,7 +62,14 @@ function initTags(tags){
 
 function addCommunity(){
 	var action = "/community/add";
-	var poster = $("#posterUrl").attr("scr"); 
+	var poster = $("#posterUrl").attr("scr");
+	var price = $.trim($("#price").val().replace("元 人/月","").replace("元","").replace("人","").replace("月","").replace("/",""));
+	try{ 
+		price = parseInt(price);
+	}catch(e){ 
+		showMessage("价格格式错误，请填入正整数的价格！");
+		return;
+	}
 	var community = {
 			"id":parseInt($("#id").val()),
 			"tags":$("#tags").val(),
@@ -73,7 +80,8 @@ function addCommunity(){
 			"realName":$("#realName").val(),
 			"phone":$("#phone").val(),
 			"publicNumber":$("#publicNumber").val(),
-			"poster":poster
+			"poster":poster,
+			"price":price
 	};
 	if($.trim($("#id").val())!=""){
 		action = "/community/update";

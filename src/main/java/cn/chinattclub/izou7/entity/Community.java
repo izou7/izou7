@@ -122,6 +122,9 @@ public class Community {
 	 */
 	@Column(name = "public_number")
 	private String publicNumber;
+	
+	
+	private Integer price;
 	/** 
 	 *  创建时间
 	 */
@@ -365,6 +368,14 @@ public class Community {
 	 */
 	public void setCommunityDynamics(List<CommunityDynamic> communityDynamics) {
 		this.communityDynamics = communityDynamics;
+	}
+
+	public Integer getPrice() {
+		return price;
+	}
+
+	public void setPrice(Integer price) {
+		this.price = price;
 	}
 	
 	

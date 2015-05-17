@@ -106,6 +106,9 @@ select{
 						<dd>
 						<input name="address"  id="address" type="text" class="text" placeholder="详细地址" value="${(com.address)!}">
 						</dd>
+						<dd>
+						<input name="price"  id="price" type="text" class="text" placeholder="价格" value="${(com.price)!0}元 人/月">
+						</dd>
 						<!--
 						<dd>
 						<input name="poster"  id="poster" type="text" class="text" placeholder="海报地址" value="${(com.poster)!}">

@@ -191,12 +191,13 @@ public class CommunityController {
 			oldCommunity.setDescription(com.getDescription());
 			oldCommunity.setName(com.getName());
 			oldCommunity.setTags(com.getTags());
-			oldCommunity.setPublicNumber(com.getPublicNumber());
+//			oldCommunity.setPublicNumber(com.getPublicNumber());
 			if(StringUtils.isNotBlank(com.getPoster())){
 				oldCommunity.setPoster(com.getPoster());
 			}
-			oldCommunity.setPhone(com.getPhone());
-			oldCommunity.setRealName(com.getRealName());
+//			oldCommunity.setPhone(com.getPhone());
+//			oldCommunity.setRealName(com.getRealName());
+			oldCommunity.setPrice(com.getPrice());
 			communityServiceImpl.update(oldCommunity);
 //			UserInfo userInfo = CommonUtil.getCurrentUser().getUserInfo();
 //			userInfo.setRealName(com.getRealName());
