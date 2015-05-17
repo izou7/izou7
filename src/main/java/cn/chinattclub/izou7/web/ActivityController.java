@@ -550,97 +550,97 @@ public class ActivityController {
 		
 	}
 	
-	/**
-	 * 
-	 * 图片上传
-	 *
-	 * @param request
-	 * @param response
-	 * @return
-	 */
-	@RequestMapping(value = "/upload", method = RequestMethod.POST)
-	@ResponseBody
-	public  Map upload(MultipartHttpServletRequest request, HttpServletResponse response) {
-		Iterator<String> itr = request.getFileNames();
-		MultipartFile mpf;
-		List<Image> list = new LinkedList<>();
-		while (itr.hasNext()) {
-			mpf = request.getFile(itr.next());
-			String newFilenameBase = UUID.randomUUID().toString();
-			String originalFileExtension = mpf.getOriginalFilename().substring(mpf.getOriginalFilename().lastIndexOf("."));
-			String newFilename = newFilenameBase + originalFileExtension;
-			String storageDirectory = appConfig.get("storageDirectory").toString().trim()+"images";
-			File newFile = new File(storageDirectory + "/" + newFilename);
-			Image image = new Image();
-			try {
-				mpf.transferTo(newFile);
-				image.setName(newFile.getName());
-				image.setUrl(appConfig.get("storageIP").toString() + "images/" + newFilename);
-			} catch(IOException e) {
-				log.error("Could not upload file "+mpf.getOriginalFilename(), e);
-				image.setError("上传失败！");
-			}
-			list.add(image);
-		}
-		Map<String, Object> files = new HashMap<>();
-		files.put("files", list);
-		return files;
-	}
-	/**
-	 * 
-	 * 文章上传
-	 *
-	 * @param request
-	 * @param response
-	 * @return
-	 * @throws UnsupportedEncodingException
-	 */
-	@RequestMapping(value = "/uploadArticles", method = RequestMethod.POST)
-	@ResponseBody
-    public  Map uploadArticles(MultipartHttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
-        Iterator<String> itr = request.getFileNames();
-        MultipartFile mpf;
-        List<ActivityArticle> list = new LinkedList<>();
-        while (itr.hasNext()) {
-            mpf = request.getFile(itr.next());
-            String newFilenameBase = UUID.randomUUID().toString();
-            String originalFileExtension = mpf.getOriginalFilename().substring(mpf.getOriginalFilename().lastIndexOf("."));
-            String originalFileName = mpf.getOriginalFilename().substring(0,mpf.getOriginalFilename().lastIndexOf("."));
-            ActivityArticle article = new ActivityArticle();
-            try {
-            	 int id = Integer.parseInt(request.getParameter("id").toString());
-            	 String title = new String(request.getParameter("title"+originalFileName).getBytes("ISO8859-1"),"UTF-8"); 
-                 String[] tags = request.getParameterValues("multiple"+originalFileName);
-                 
-                 for (int i=0;i<tags.length;i++) {
-                 	tags[i] = new String(tags[i].getBytes("ISO8859-1"),"UTF-8");
-     			}
-                 String newFilename = newFilenameBase + originalFileExtension;
-                 String storageDirectory = appConfig.get("storageDirectory").toString().trim()+"articles";
-                 File newFile = new File(storageDirectory + "/" + newFilename);
-                 mpf.transferTo(newFile);
-                 article.setTags(convertTags(tags));
-                 article.setTitle(title);
-                 article.setUrl(appConfig.get("storageIP").toString() + "articles/" + newFilename);
-                 article.setName(newFile.getName());
-                 article.setActivity(id);
-                 article.setCreateTime(new Date());
-                 boolean result = activityArticleServiceImpl.validateNum(article);
-                 if(result){
-                	 activityArticleServiceImpl.add(article);
-                 }else{
-                	 article.setError("文章已超过最大数量限制！");
-                 }
-            } catch(IOException e) {
-                log.error("Could not upload file "+mpf.getOriginalFilename(), e);
-                article.setError("上传失败！");
-            }
-            list.add(article);
-        }
-        Map<String, Object> files = new HashMap<>();
-        files.put("files", list);
-        return files;
-	}
+//	/**
+//	 * 
+//	 * 图片上传
+//	 *
+//	 * @param request
+//	 * @param response
+//	 * @return
+//	 */
+//	@RequestMapping(value = "/upload", method = RequestMethod.POST)
+//	@ResponseBody
+//	public  Map upload(MultipartHttpServletRequest request, HttpServletResponse response) {
+//		Iterator<String> itr = request.getFileNames();
+//		MultipartFile mpf;
+//		List<Image> list = new LinkedList<>();
+//		while (itr.hasNext()) {
+//			mpf = request.getFile(itr.next());
+//			String newFilenameBase = UUID.randomUUID().toString();
+//			String originalFileExtension = mpf.getOriginalFilename().substring(mpf.getOriginalFilename().lastIndexOf("."));
+//			String newFilename = newFilenameBase + originalFileExtension;
+//			String storageDirectory = appConfig.get("storageDirectory").toString().trim()+"images";
+//			File newFile = new File(storageDirectory + "/" + newFilename);
+//			Image image = new Image();
+//			try {
+//				mpf.transferTo(newFile);
+//				image.setName(newFile.getName());
+//				image.setUrl(appConfig.get("storageIP").toString() + "images/" + newFilename);
+//			} catch(IOException e) {
+//				log.error("Could not upload file "+mpf.getOriginalFilename(), e);
+//				image.setError("上传失败！");
+//			}
+//			list.add(image);
+//		}
+//		Map<String, Object> files = new HashMap<>();
+//		files.put("files", list);
+//		return files;
+//	}
+//	/**
+//	 * 
+//	 * 文章上传
+//	 *
+//	 * @param request
+//	 * @param response
+//	 * @return
+//	 * @throws UnsupportedEncodingException
+//	 */
+//	@RequestMapping(value = "/uploadArticles", method = RequestMethod.POST)
+//	@ResponseBody
+//    public  Map uploadArticles(MultipartHttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
+//        Iterator<String> itr = request.getFileNames();
+//        MultipartFile mpf;
+//        List<ActivityArticle> list = new LinkedList<>();
+//        while (itr.hasNext()) {
+//            mpf = request.getFile(itr.next());
+//            String newFilenameBase = UUID.randomUUID().toString();
+//            String originalFileExtension = mpf.getOriginalFilename().substring(mpf.getOriginalFilename().lastIndexOf("."));
+//            String originalFileName = mpf.getOriginalFilename().substring(0,mpf.getOriginalFilename().lastIndexOf("."));
+//            ActivityArticle article = new ActivityArticle();
+//            try {
+//            	 int id = Integer.parseInt(request.getParameter("id").toString());
+//            	 String title = new String(request.getParameter("title"+originalFileName).getBytes("ISO8859-1"),"UTF-8"); 
+//                 String[] tags = request.getParameterValues("multiple"+originalFileName);
+//                 
+//                 for (int i=0;i<tags.length;i++) {
+//                 	tags[i] = new String(tags[i].getBytes("ISO8859-1"),"UTF-8");
+//     			}
+//                 String newFilename = newFilenameBase + originalFileExtension;
+//                 String storageDirectory = appConfig.get("storageDirectory").toString().trim()+"articles";
+//                 File newFile = new File(storageDirectory + "/" + newFilename);
+//                 mpf.transferTo(newFile);
+//                 article.setTags(convertTags(tags));
+//                 article.setTitle(title);
+//                 article.setUrl(appConfig.get("storageIP").toString() + "articles/" + newFilename);
+//                 article.setName(newFile.getName());
+//                 article.setActivity(id);
+//                 article.setCreateTime(new Date());
+//                 boolean result = activityArticleServiceImpl.validateNum(article);
+//                 if(result){
+//                	 activityArticleServiceImpl.add(article);
+//                 }else{
+//                	 article.setError("文章已超过最大数量限制！");
+//                 }
+//            } catch(IOException e) {
+//                log.error("Could not upload file "+mpf.getOriginalFilename(), e);
+//                article.setError("上传失败！");
+//            }
+//            list.add(article);
+//        }
+//        Map<String, Object> files = new HashMap<>();
+//        files.put("files", list);
+//        return files;
+//	}
 	/**
 	 * 获取文章列表
 	 * @param arcitityId

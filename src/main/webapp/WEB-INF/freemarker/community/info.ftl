@@ -2,6 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link rel="stylesheet" href="${ (project.staticDomain)! }/libs/jqueryJcrop/css/jquery.Jcrop.css" type="text/css" />
 	<title>社区</title>
 <style>
 .tag{
@@ -64,7 +65,7 @@ select{
 			</div>
 			<input type="hidden" id="id" name="id" value="${ (com.id)! }">
 			<div class="bd">
-				<form>
+				<form action="/fileUpload/upload" method="POST" enctype="multipart/form-data" target='frameFile'>
 					<dl>
 						<dt>空间信息</dt>
 						<!--  
@@ -105,8 +106,21 @@ select{
 						<dd>
 						<input name="address"  id="address" type="text" class="text" placeholder="详细地址" value="${(com.address)!}">
 						</dd>
+						<!--
 						<dd>
 						<input name="poster"  id="poster" type="text" class="text" placeholder="海报地址" value="${(com.poster)!}">
+						</dd>
+						-->
+						<dd>
+						<input type="file" name="pic" id="fileInput" value="添加图片" />  
+						</dd>
+						<dd>
+						<#if (com.id)??>
+							<img id="posterUrl" src="${(com.poster)!}" style="width:300px;height:180px;">
+						<#else>
+							<img id="posterUrl" src="${(com.poster)!}" style="width:300px;height:180px;display:none;">
+						</#if>
+						
 						</dd>
 						  <!--  
 						<dd>
@@ -138,6 +152,7 @@ select{
 	var tags = "${(com.tags)!}";
 </script>
 	
-<script src="${ (project.staticDomain)! }/libs/jquery/jquery-2.0.3.js"></script>
+<script src="${ (project.staticDomain)! }/libs/jquery/jquery-2.0.3.min.js"></script>
+<script src="${ (project.staticDomain)! }/libs/ajaxfileupload/ajaxfileupload.js"></script>
 <script src="${ (project.staticDomain)! }/js/common.js"></script>
 <script src="${ (project.staticDomain)! }/js/community/info.js"></script>

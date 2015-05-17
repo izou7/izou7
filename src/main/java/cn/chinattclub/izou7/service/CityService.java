@@ -22,6 +22,13 @@ public interface CityService {
 	 * @return
 	 */
 	public List<City> findCityIdByProvince(int id);
+	
+	/**
+	 * 通过name查询城市
+	 * @param name
+	 * @return
+	 */
+	public City findCityByName(String name);
 
 	/**
 	 * TODO Put here a description of what this method does.

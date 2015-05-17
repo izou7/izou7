@@ -1,10 +1,10 @@
 package cn.chinattclub.izou7.util;
 
+import java.awt.Image;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-
 import java.io.FileInputStream;
 import java.lang.reflect.Field;
 import java.text.DateFormat;
@@ -19,6 +19,7 @@ import java.util.Map;
 import java.util.Properties;
 
 import javax.annotation.Resource;
+import javax.imageio.ImageIO;
 import javax.mail.BodyPart;
 import javax.mail.Message;
 import javax.mail.Multipart;
@@ -248,5 +249,27 @@ public class CommonUtil {
 			e.printStackTrace();
 		}
 	}
+	/**
+     * 通过判断图片的宽度和高度来确定是否是图片
+     * @param imageFile
+     * @return
+     */ 
+     public static boolean isImage(File imageFile) { 
+            if (!imageFile.exists()) { 
+                return false; 
+            } 
+            Image img = null; 
+            try { 
+                img = ImageIO.read(imageFile); 
+                if (img == null || img.getWidth(null) <= 0 || img.getHeight(null) <= 0) { 
+                    return false; 
+                } 
+                return true; 
+            } catch (Exception e) { 
+                return false; 
+            } finally { 
+                img = null; 
+            } 
+        }
 	
 }

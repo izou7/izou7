@@ -1,6 +1,8 @@
 package cn.chinattclub.izou7.web;
 
+import java.text.Collator;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -30,16 +32,19 @@ import cn.chinattclub.izou7.dto.ActivityQueryDto;
 import cn.chinattclub.izou7.dto.RegistUserDto;
 import cn.chinattclub.izou7.entity.Activity;
 import cn.chinattclub.izou7.entity.Agency;
+import cn.chinattclub.izou7.entity.City;
 import cn.chinattclub.izou7.entity.Contact;
 import cn.chinattclub.izou7.entity.Customer;
 import cn.chinattclub.izou7.entity.User;
 import cn.chinattclub.izou7.entity.UserInfo;
 import cn.chinattclub.izou7.service.ActivityService;
 import cn.chinattclub.izou7.service.AgencyService;
+import cn.chinattclub.izou7.service.CityService;
 import cn.chinattclub.izou7.service.ContactService;
 import cn.chinattclub.izou7.service.CustomerService;
 import cn.chinattclub.izou7.service.UserService;
 import cn.chinattclub.izou7.util.CommonUtil;
+import cn.chinattclub.izou7.util.PinyinUtil;
 import cn.zy.commons.webdev.constant.ResponseStatusCode;
 import cn.zy.commons.webdev.http.RestResponse;
 import cn.zy.commons.webdev.vo.Page;
@@ -72,6 +77,9 @@ public class MainController {
 	
 	@Resource
 	private CustomerService customerServiceImpl;
+	
+	@Resource
+	private CityService cityServiceImpl;
 	
 	@RequestMapping(value = {"/index","/"}, method = RequestMethod.GET)
 	public String indexPage(Model model,Page page,ActivityQueryDto query) {
@@ -262,6 +270,34 @@ public class MainController {
 			customerServiceImpl.add(customer);
 		}
 		response.setStatusCode(statusCode);
+		return response;
+	}
+	
+	@RequestMapping(value = "test", method = RequestMethod.GET)
+	@ResponseBody
+	public RestResponse test(){
+		RestResponse response = new RestResponse();
+		List<City> citys = cityServiceImpl.list();
+		String[] cityNames = new String[citys.size()];
+		for(int i=0;i<citys.size();i++){
+			cityNames[i] = citys.get(i).getCity();
+		}
+		Collator cmp = Collator.getInstance(java.util.Locale.CHINA);
+		Arrays.sort(cityNames, cmp); 
+		String html = "<dl class=\"layout city-list\"><dt>A</dt>";
+		String last = "";
+		for (int j=0;j<cityNames.length;j++) {
+			if(last==""){
+				last = PinyinUtil.converterToFirstSpell(cityNames[j].substring(0,1).trim());
+			}
+			String current = PinyinUtil.converterToFirstSpell(cityNames[j].substring(0,1).trim());
+			if(!current.equals(last)){
+				last = current;
+				html += "</dl>\n<dl class=\"layout city-list\">\n<dt>"+current.toUpperCase()+"</dt>\n";
+			}
+			html+= "<dd id='"+cityServiceImpl.findCityByName(cityNames[j]).getId()+"'>"+cityNames[j]+"</dd>\n";
+		} 
+		System.out.println(html);
 		return response;
 	}
 	

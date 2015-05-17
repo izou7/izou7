@@ -3,8 +3,54 @@ $(function () {
 	//$(".tag").click(function(){tagsClicked(this)});
 	//initTags(tags);
 	$("#province").change(function(){provinceChange(this)});
+	//$('#originalImg').Jcrop();
+	//animHandler([217,122,382,284]);
+	//$("#uploadBtn").click(uploadBtnClick);
+	$("#fileInput").change(fileInputChanged);
 });
+function fileInputChanged(){
 	
+	var file = $("#fileInput").val();
+	if(file){
+		//$("#uploadBtn").css("display","block");
+		uploadBtnClick();
+	}else{
+		//$("#uploadBtn").css("display","none");
+	}
+}
+function uploadBtnClick(){
+    ajaxFileUpload();
+}
+function ajaxFileUpload() {
+	$.ajaxFileUpload
+	(
+	    {
+	    url: '/fileUpload/upload', //用于文件上传的服务器端请求地址
+	    secureuri: false, //是否需要安全协议，一般设置为false
+	    fileElementId: 'fileInput', //文件上传域的ID
+	    dataType: 'json', //返回值类型 一般设置为json
+	    success: function (data, status)  //服务器成功响应处理函数
+	    {
+	       $("#posterUrl").attr("src","http://www.xinhuanet.com/photo/static/arr_left.cur");
+           $("#posterUrl").css("display","block");
+	    },
+	    error: function (data, status, e)//服务器响应失败处理函数
+        {
+        	showMessage("上传失败！");
+        	showMessage(data.responseBody.message);
+        	
+            
+        }
+	    }
+	    )
+	    return false;
+	}
+function animHandler(v) {
+	return function() {
+		jcrop_api.animateTo(v);
+		return false;
+	};
+};
 function initTags(tags){
 	if(tags){
 		var tagsArray = tags.split(",");
@@ -16,7 +62,7 @@ function initTags(tags){
 
 function addCommunity(){
 	var action = "/community/add";
-	var poster = $("#posterUrl").val(); 
+	var poster = $("#posterUrl").attr("scr"); 
 	var community = {
 			"id":parseInt($("#id").val()),
 			"tags":$("#tags").val(),
@@ -47,7 +93,7 @@ function addCommunity(){
 			}
 		},
 		error : function(json){
-			showMessage("操作异常，获取更多帮助，请联系管理员！");
+			showMessage("操作异常，请检查网络！");
 		}
 	}); 
 	
@@ -102,19 +148,11 @@ function provinceChange(obj){
 						}
 					}
 				}else {
-					$.Zebra_Dialog('获取城市失败！', {
-						'type':     'information',
-						'title':    '提示',
-						'buttons':  ["确定"]
-					});
+					showMessage("获取城市失败！");
 				}
 			},
 			error : function(json){
-				$.Zebra_Dialog('获取城市失败！', {
-					'type':     'information',
-					'title':    '提示',
-					'buttons':  ["确定"]
-				});
+				showMessage("获取城市异常，请检查网络！");
 			}
 		});
 	}

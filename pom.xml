@@ -279,6 +279,7 @@
 			<artifactId>web-commons</artifactId>
 			<version>${web-commons.version}</version>
 		</dependency>
+		
 	</dependencies>
 	<build>
 		<finalName>${artifactId}-${version}</finalName>
