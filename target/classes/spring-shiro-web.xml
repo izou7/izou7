@@ -80,7 +80,7 @@
     <bean id="formAuthenticationFilter" class="org.apache.shiro.web.filter.authc.FormAuthenticationFilter">
         <property name="usernameParam" value="username"/>
         <property name="passwordParam" value="password"/>
-        <property name="successUrl" value="/index"/>
+        <property name="successUrl" value="/community/manager"/>
         <property name="loginUrl" value="/login.jsp"/>
     </bean>
     
@@ -92,7 +92,7 @@
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <property name="securityManager" ref="securityManager"/>
         <property name="loginUrl" value="/login.jsp"/>
-        <property name="successUrl" value="/index"/>
+        <property name="successUrl" value="/community/manager"/>
         <property name="filters">
             <util:map>
                 <entry key="authc" value-ref="formAuthenticationFilter"/>
@@ -106,6 +106,7 @@
                 /error = anon
                 /index = anon
                 /regist = anon
+                /registSecond = anon
                 /contact = anon
                 /agency = anon
                 /join = anon

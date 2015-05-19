@@ -3,11 +3,13 @@ package cn.chinattclub.izou7.web;
 import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.ExcessiveAttemptsException;
@@ -29,12 +31,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.chinattclub.izou7.dto.ActivityListDto;
 import cn.chinattclub.izou7.dto.ActivityQueryDto;
+import cn.chinattclub.izou7.dto.RegistDto;
 import cn.chinattclub.izou7.dto.RegistUserDto;
 import cn.chinattclub.izou7.entity.Activity;
 import cn.chinattclub.izou7.entity.Agency;
 import cn.chinattclub.izou7.entity.City;
 import cn.chinattclub.izou7.entity.Contact;
 import cn.chinattclub.izou7.entity.Customer;
+import cn.chinattclub.izou7.entity.Province;
 import cn.chinattclub.izou7.entity.User;
 import cn.chinattclub.izou7.entity.UserInfo;
 import cn.chinattclub.izou7.service.ActivityService;
@@ -42,6 +46,7 @@ import cn.chinattclub.izou7.service.AgencyService;
 import cn.chinattclub.izou7.service.CityService;
 import cn.chinattclub.izou7.service.ContactService;
 import cn.chinattclub.izou7.service.CustomerService;
+import cn.chinattclub.izou7.service.ProvinceService;
 import cn.chinattclub.izou7.service.UserService;
 import cn.chinattclub.izou7.util.CommonUtil;
 import cn.chinattclub.izou7.util.PinyinUtil;
@@ -81,6 +86,9 @@ public class MainController {
 	@Resource
 	private CityService cityServiceImpl;
 	
+	@Resource
+	private ProvinceService provinceServiceImpl;
+	
 	@RequestMapping(value = {"/index","/"}, method = RequestMethod.GET)
 	public String indexPage(Model model,Page page,ActivityQueryDto query) {
 		return "site.community.index";
@@ -103,6 +111,32 @@ public class MainController {
 	public String registPage() {
 		return "site.main.regist";
 	}
+	
+	
+	@RequestMapping(value = "registSecond", method = RequestMethod.GET)
+	public String registSecondPage(Model model,RegistDto user) {
+		List<Province> provinces = provinceServiceImpl.findAll();
+		model.addAttribute("provinces",provinces);
+		model.addAttribute("user", user);
+		return "site.main.registSecond";
+	}
+	
+//	@RequestMapping(value = "regist", method = RequestMethod.POST)
+//	@ResponseBody
+//	public RestResponse regist(@RequestBody @Valid RegistDto user) {
+//		RestResponse response = new RestResponse();
+//		int statusCode = ResponseStatusCode.OK;
+//		String message = "新增社区成功！";
+//		if(!CommonUtil.validateDto(response,br,user.getClass().getName().toString())){
+//			statusCode = ResponseStatusCode.INTERNAL_SERVER_ERROR;
+//		}else{
+//			User user = New User();
+//			user.set
+//			response.setMessage(message);
+//		}
+//		response.setStatusCode(statusCode);
+//		return response;
+//	}
 
 	/**
 	 * 

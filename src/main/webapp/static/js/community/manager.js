@@ -72,19 +72,20 @@ function deleteBtnClicked(){
 		url  : url,
 		dataType : "json",
 		success : function(data){
+			$("#confirmBox").hide();
 			if(data.statusCode == 200){
 				$("#"+type+val).remove();
-				$("#confirmBox").hide();
 				$(".mask").hide();
 			}else{
+				
 				$("#infoBox").show();
 				$(".mask").show();
 			}
 			
 		},
 		error:function(){
-			$("#infoBox").show();
-			$(".mask").show();
+			$("#confirmBox").hide();
+			showMessage("删除异常，请联系管理员！");
 		}
 	});
 }

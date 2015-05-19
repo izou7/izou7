@@ -46,7 +46,8 @@
 					<a href="/entrepreneur/index">我是创业社区</a>
 					<a href="/community/index">我是创业者</a>
 				</span>                                                            
-				<span class="fr s3" style="margin-left:55%;float:none;">
+				
+				<span class="fr s2" style="margin-right:7.2%;">
 					<a href="/service">付费服务</a>
 				</span>
 			</div>
@@ -78,6 +79,9 @@
 							<input type='submit' value="">
 						</div>
 					</form>
+				</div>
+				<div class="forget_box">
+					<a href="/regist">免费注册</a>
 				</div>
 				<!--  
 				<div class="ft clearfix">
