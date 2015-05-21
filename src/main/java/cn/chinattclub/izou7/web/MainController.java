@@ -49,7 +49,6 @@ import cn.chinattclub.izou7.service.CustomerService;
 import cn.chinattclub.izou7.service.ProvinceService;
 import cn.chinattclub.izou7.service.UserService;
 import cn.chinattclub.izou7.util.CommonUtil;
-import cn.chinattclub.izou7.util.PinyinUtil;
 import cn.zy.commons.webdev.constant.ResponseStatusCode;
 import cn.zy.commons.webdev.http.RestResponse;
 import cn.zy.commons.webdev.vo.Page;
@@ -307,33 +306,33 @@ public class MainController {
 		return response;
 	}
 	
-	@RequestMapping(value = "test", method = RequestMethod.GET)
-	@ResponseBody
-	public RestResponse test(){
-		RestResponse response = new RestResponse();
-		List<City> citys = cityServiceImpl.list();
-		String[] cityNames = new String[citys.size()];
-		for(int i=0;i<citys.size();i++){
-			cityNames[i] = citys.get(i).getCity();
-		}
-		Collator cmp = Collator.getInstance(java.util.Locale.CHINA);
-		Arrays.sort(cityNames, cmp); 
-		String html = "<dl class=\"layout city-list\"><dt>A</dt>";
-		String last = "";
-		for (int j=0;j<cityNames.length;j++) {
-			if(last==""){
-				last = PinyinUtil.converterToFirstSpell(cityNames[j].substring(0,1).trim());
-			}
-			String current = PinyinUtil.converterToFirstSpell(cityNames[j].substring(0,1).trim());
-			if(!current.equals(last)){
-				last = current;
-				html += "</dl>\n<dl class=\"layout city-list\">\n<dt>"+current.toUpperCase()+"</dt>\n";
-			}
-			html+= "<dd id='"+cityServiceImpl.findCityByName(cityNames[j]).getId()+"'>"+cityNames[j]+"</dd>\n";
-		} 
-		System.out.println(html);
-		return response;
-	}
+//	@RequestMapping(value = "test", method = RequestMethod.GET)
+//	@ResponseBody
+//	public RestResponse test(){
+//		RestResponse response = new RestResponse();
+//		List<City> citys = cityServiceImpl.list();
+//		String[] cityNames = new String[citys.size()];
+//		for(int i=0;i<citys.size();i++){
+//			cityNames[i] = citys.get(i).getCity();
+//		}
+//		Collator cmp = Collator.getInstance(java.util.Locale.CHINA);
+//		Arrays.sort(cityNames, cmp); 
+//		String html = "<dl class=\"layout city-list\"><dt>A</dt>";
+//		String last = "";
+//		for (int j=0;j<cityNames.length;j++) {
+//			if(last==""){
+//				last = PinyinUtil.converterToFirstSpell(cityNames[j].substring(0,1).trim());
+//			}
+//			String current = PinyinUtil.converterToFirstSpell(cityNames[j].substring(0,1).trim());
+//			if(!current.equals(last)){
+//				last = current;
+//				html += "</dl>\n<dl class=\"layout city-list\">\n<dt>"+current.toUpperCase()+"</dt>\n";
+//			}
+//			html+= "<dd id='"+cityServiceImpl.findCityByName(cityNames[j]).getId()+"'>"+cityNames[j]+"</dd>\n";
+//		} 
+//		System.out.println(html);
+//		return response;
+//	}
 	
 	
 	

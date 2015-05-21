@@ -31,15 +31,17 @@ function ajaxFileUpload() {
 	    dataType: 'json', //返回值类型 一般设置为json
 	    success: function (data, status)  //服务器成功响应处理函数
 	    {
-	       $("#posterUrl").attr("src","http://www.xinhuanet.com/photo/static/arr_left.cur");
-           $("#posterUrl").css("display","block");
+	    	if(data.statusCode==200){
+	    		$("#posterUrl").attr("src",data.body.urls[0]);
+	    		$("#posterUrl").css("display","block");
+	    	}else{
+	    		showMessage(data.message);
+	    	}
 	    },
 	    error: function (data, status, e)//服务器响应失败处理函数
         {
         	showMessage("上传失败！");
         	showMessage(data.responseBody.message);
-        	
-            
         }
 	    }
 	    )
@@ -62,7 +64,7 @@ function initTags(tags){
 
 function addCommunity(){
 	var action = "/community/add";
-	var poster = $("#posterUrl").attr("scr");
+	var poster = $("#posterUrl").attr("src");
 	var price = $.trim($("#price").val().replace("元 人/月","").replace("元","").replace("人","").replace("月","").replace("/",""));
 	try{ 
 		price = parseInt(price);
