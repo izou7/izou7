@@ -1,3 +1,33 @@
+<style>
+textarea{
+	padding:8px 5px;
+}
+.btn_box2{
+ 	text-align:center;
+ }
+.btn_box2 input{
+	width: 253px;
+    height: 42px;
+    color: #fff;
+    border: 0 none;
+    margin: 0 auto;
+    font-family: "微软雅黑";
+    background-color:#e62f17;
+    -moz-border-radius: 3px;      /* Gecko browsers */
+    -webkit-border-radius: 3px;   /* Webkit browsers */
+    border-radius:3px;            /* W3C syntax */
+    cursor:pointer;
+}
+.addManager{
+	float:right;
+}
+.longInput{
+	width:715px!important;
+}
+dt{
+	font-weight: bold;
+}
+</style>
 <body>
 <div class="jr_w">
 		<div class="banner"></div>
@@ -6,96 +36,96 @@
 				<dl>
 					<dt>公司信息<span></span></dt>
 					<dd class="clearfix">
-						<div class="fl l">
-							<label class="fl label_1">公司名称</label>
-							<input type="text" class="fl">
-						</div>
-						<div class="fr r">
-							<label class="fl label_1">公司官网</label>
-							<input type="text" class="fl">
-						</div>
+							<label class="fl label_1">名称</label>
+							<div class="textarea">
+								<input type="text" id="companyName" class="fl longInput" >
+							</div>
 					</dd>
 					<dd class="clearfix">
-						<div class="fl l">
+							<label class="fl label_1">网址</label>
+							<div class="textarea">
+								<input type="text" id="webSite" class="fl longInput" >
+							</div>
+					</dd>
+					<dd class="clearfix">
 							<label class="fl label_1">公众号</label>
-							<input type="text" class="fl">
-						</div>
+							<div class="textarea">
+								<input type="text" id="publicNum" class="fl longInput" >
+							</div>
 					</dd>
 				</dl>
-				<dl>
+				<dl >
 					<dt>核心管理层</dt>
-					<dd class="clearfix">
-						<div class="fl">
-							<label class="fl label_1">姓名</label>
-							<input type="text" class="fl">
-						</div>
-						<div class="fr">
-							<label class="fl label_1">职务</label>
-							<input type="text" class="fl">
-						</div>
-					</dd>
-					<dd class="clearfix">
-						<div class="clearfix jybj_box">
-							<div class="fl">
-								<label class="fl label_1">教育背景</label>
-								<div class="fl">
-								<input type="text" class="fl s_input">
-								<label class="fl">年</label>
-								<input type="text" class="fl s_input">
-								<label class="fl">月至</label>
-								<input type="text" class="fl s_input">
-								<label class="fl">年</label>
-								<input type="text" class="fl s_input">
-								<label class="fl">月</label>
+					<div >
+						<dd class="clearfix">
+								<p class="addManager"><a id="addMag" href="javascript:void(0);" class="add_gzjl">删除</a></p>
+								
+						</dd>
+						<dd class="clearfix">
+								<label class="fl label_1">姓名</label>
+								<div class="textarea">
+									<input type="text"  class="fl longInput" >
+								</div>
+						</dd>
+						<dd class="clearfix">
+								<label class="fl label_1">职务</label>
+								<div class="textarea">
+									<input type="text"  class="fl longInput" >
+								</div>
+						</dd>
+						
+						<dd class="clearfix">
+							<label class="fl label_1">教育背景</label>
+							<div class="textarea">
+								<textarea ></textarea>
 							</div>
-							<div class="fr">
-								<label class="fl label_1">学历</label>
-								<select  class="fl">
-									<option>请选择</option>
-								</select>
-							</div>
-						</div>
-					</dd>
-					<dd class="clearfix">
-						<div class="textarea">
-							<textarea></textarea>
-						</div>
-					</dd>
-					<dd class="clearfix">
-						<p><a href="javascript:;" class="add_jybj">添加教育背景</a></p>
-					</dd>
-					<dd class="clearfix">
-						<div class="fl">
+						</dd>
+						<dd class="clearfix">
 							<label class="fl label_1">工作经历</label>
-							<input type="text" class="fl s_input">
-							<label class="fl">年</label>
-							<input type="text" class="fl s_input">
-							<label class="fl">月至</label>
-							<input type="text" class="fl s_input">
-							<label class="fl">年</label>
-							<input type="text" class="fl s_input">
-							<label class="fl">月</label>
-						</div>
-					</dd>
+							<div class="textarea">
+								<textarea ></textarea>
+							</div>
+						</dd>
+					</div>
+				</dl>
+				<dl>
 					<dd class="clearfix">
-						<div class="textarea">
-							<textarea></textarea>
-						</div>
-					</dd>
-					<dd class="clearfix">
-						<p><a href="javascript:;" class="add_gzjl">添加工作经历</a></p>
+						<p class="addManager"><a id="addMag" href="javascript:void(0);" class="add_gzjl">添加核心管理层</a></p>
 					</dd>
 				</dl>
 				<dl>
-					<dt>公司产品或拟申报项目简介<span>（产品应用范围，技术创新点 ，项目进展，发展规划）   </span><p>一个商用的地址是注册公司的必备条件</p></dt>
+					<dt>公司产品或拟申报项目简介<span>（产品应用范围，技术创新点 ，项目进展，发展规划）   </span></dt>
 					<dd class="clearfix">
+						<label class="fl label_1">项目简介</label>
 						<div class="textarea">
-							<textarea></textarea>
+							<textarea id="description"></textarea>
 						</div>
 					</dd>
 				</dl>
-				<div class="btn_box">
-					<input type="submit" value="">
+				<dl>
+					<dt>个人信息<span></span></dt>
+					<dd class="clearfix">
+							<label class="fl label_1">姓名</label>
+							<div class="textarea">
+								<input type="text" id="name" class="fl longInput" >
+							</div>
+					</dd>
+					<dd class="clearfix">
+							<label class="fl label_1">邮箱</label>
+							<div class="textarea">
+								<input type="text" id="email" class="fl longInput" >
+							</div>
+					</dd>
+					<dd class="clearfix">
+							<label class="fl label_1">手机</label>
+							<div class="textarea">
+								<input type="text" id="phone" class="fl longInput" >
+							</div>
+					</dd>
+					
+				</dl>
+				<div class="btn_box2" >
+						<input id="saveBtn" type="button" value="下一步">
 				</div>
 			</form>
 		</div>

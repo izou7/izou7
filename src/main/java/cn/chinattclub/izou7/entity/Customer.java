@@ -30,25 +30,41 @@ public class Customer {
 	@Length(max=50,message="公众号名称不能超过50个字符长度")
 	private String publicNum;
 	
-	@NotBlank(message="姓名不能为空！")
-	@Length(max=50,message="姓名不能超过50个字符长度")
-	private String name;
+//	@NotBlank(message="姓名不能为空！")
+//	@Length(max=50,message="姓名不能超过50个字符长度")
+//	private String name;
+//	
+//	@NotBlank(message="职务不能为空！")
+//	@Length(max=50,message="职务不能超过50个字符长度")
+//	private String position;
+//	
+//	@Length(max=1000,message="教育背景不能超过1000个字符长度")
+//	@Column(name = "education_info")
+//	private String educationInfo;
+//	
+//	@Length(max=1000,message="工作经历不能超过1000个字符长度")
+//	@Column(name = "career_info")
+//	private String careerInfo;
 	
-	@NotBlank(message="职务不能为空！")
-	@Length(max=50,message="职务不能超过50个字符长度")
-	private String position;
-	
-	@Length(max=1000,message="教育背景不能超过1000个字符长度")
-	@Column(name = "education_info")
-	private String educationInfo;
-	
-	@Length(max=1000,message="工作经历不能超过1000个字符长度")
-	@Column(name = "career_info")
-	private String careerInfo;
+	/**
+	 * 管理层信息
+	 */
+	private String managementInfo;
 	
 	
 	@Length(max=10000,message="公司产品或拟申报项目简介不能超过10000个字符长度")
 	private String description;
+	
+	@NotBlank(message="姓名不能为空！")
+	@Length(max=50,message="姓名不能超过50个字符长度")
+	private String name;
+	
+	@Length(max=50,message="邮箱格式有误")
+	private String email;
+	
+	@NotBlank(message="手机不能为空！")
+	@Length(max=11,message="手机格式有误")
+	private String phone;
 
 
 	public int getId() {
@@ -101,36 +117,6 @@ public class Customer {
 	}
 
 
-	public String getPosition() {
-		return position;
-	}
-
-
-	public void setPosition(String position) {
-		this.position = position;
-	}
-
-
-	public String getEducationInfo() {
-		return educationInfo;
-	}
-
-
-	public void setEducationInfo(String educationInfo) {
-		this.educationInfo = educationInfo;
-	}
-
-
-	public String getCareerInfo() {
-		return careerInfo;
-	}
-
-
-	public void setCareerInfo(String careerInfo) {
-		this.careerInfo = careerInfo;
-	}
-
-
 	public String getDescription() {
 		return description;
 	}
@@ -140,5 +126,58 @@ public class Customer {
 		this.description = description;
 	}
 
-	
+
+	/**
+	 * Returns the value of the field called 'managementInfo'.
+	 * @return Returns the managementInfo.
+	 */
+	public String getManagementInfo() {
+		return this.managementInfo;
+	}
+
+
+	/**
+	 * Sets the field called 'managementInfo' to the given value.
+	 * @param managementInfo The managementInfo to set.
+	 */
+	public void setManagementInfo(String managementInfo) {
+		this.managementInfo = managementInfo;
+	}
+
+
+	/**
+	 * Returns the value of the field called 'email'.
+	 * @return Returns the email.
+	 */
+	public String getEmail() {
+		return this.email;
+	}
+
+
+	/**
+	 * Sets the field called 'email' to the given value.
+	 * @param email The email to set.
+	 */
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+
+	/**
+	 * Returns the value of the field called 'phone'.
+	 * @return Returns the phone.
+	 */
+	public String getPhone() {
+		return this.phone;
+	}
+
+
+	/**
+	 * Sets the field called 'phone' to the given value.
+	 * @param phone The phone to set.
+	 */
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
 }

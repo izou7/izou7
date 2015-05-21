@@ -1,6 +1,10 @@
 $(function () {
 	$("#submitBtn").click(submitBtnClicked);
+	$("#addMag").click(addMagClicked);
 });
+function addMagClicked(){
+	
+}
 function submitBtnClicked(){
 	console.info($('form').serializeObject());
 	$.ajax({

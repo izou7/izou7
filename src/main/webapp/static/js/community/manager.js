@@ -1,5 +1,5 @@
-$(function () {
 	$("#pager").paginate({
+		$(function () {
 			count 		: parseInt(count),
 			start 		: parseInt(start)+1,
 			display     : 10,

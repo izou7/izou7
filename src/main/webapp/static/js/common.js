@@ -174,31 +174,6 @@ $(function(){
 		$(this).parents("dd").before(htm);
 	})
 
-	$(".add_gzjl").click(function(){
-		var htm = ''
-		 htm+=	'<dd class="clearfix">'
-		htm+=		'<div class="clearfix jybj_box">'
-		htm+=			'<div class="fl">'
-		htm+=				'<label class="fl label_1">工作经历</label>'
-		htm+=				'<div class="fl">'
-		htm+=				'<input type="text" class="fl s_input">'
-		htm+=				'<label class="fl">年</label>'
-		htm+=				'<input type="text" class="fl s_input">'
-		htm+=				'<label class="fl">月至</label>'
-		htm+=				'<input type="text" class="fl s_input">'
-		htm+=				'<label class="fl">年</label>'
-		htm+=				'<input type="text" class="fl s_input">'
-		htm+=				'<label class="fl">月</label>'
-		htm+=			'</div>'
-		htm+=		'</div>'
-		htm+=	'</dd>'
-		htm+=	'<dd class="clearfix">'
-		htm+=		'<div class="textarea">'
-		htm+=			'<textarea></textarea>'
-		htm+=		'</div>'
-		htm+=	'</dd>'
-		$(this).parents("dd").before(htm);
-	})
 
 //$(".cjsq_w .btn_box input").click(function(){
 //	$(".pop_tip").show();
