@@ -67,6 +67,7 @@ public class Community {
 	 */
 	@ManyToOne
 	@JoinColumn(name="city")
+	@NotFound
 	private City city;
 	
 	@Transient

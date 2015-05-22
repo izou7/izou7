@@ -54,36 +54,35 @@ dt{
 							</div>
 					</dd>
 				</dl>
-				<dl >
+				<dl id="managerArea">
 					<dt>核心管理层</dt>
-					<div >
+					<div name="manager">
 						<dd class="clearfix">
-								<p class="addManager"><a id="addMag" href="javascript:void(0);" class="add_gzjl">删除</a></p>
-								
+							<p class="addManager"><a name="delBtn" href="javascript:void(0);" class="add_gzjl">删除</a></p>
 						</dd>
 						<dd class="clearfix">
 								<label class="fl label_1">姓名</label>
 								<div class="textarea">
-									<input type="text"  class="fl longInput" >
+									<input type="text"  name="name" class="fl longInput" >
 								</div>
 						</dd>
 						<dd class="clearfix">
 								<label class="fl label_1">职务</label>
 								<div class="textarea">
-									<input type="text"  class="fl longInput" >
+									<input type="text" name="position" class="fl longInput" >
 								</div>
 						</dd>
 						
 						<dd class="clearfix">
 							<label class="fl label_1">教育背景</label>
 							<div class="textarea">
-								<textarea ></textarea>
+								<textarea name="education"></textarea>
 							</div>
 						</dd>
 						<dd class="clearfix">
 							<label class="fl label_1">工作经历</label>
 							<div class="textarea">
-								<textarea ></textarea>
+								<textarea name="career"></textarea>
 							</div>
 						</dd>
 					</div>

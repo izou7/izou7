@@ -18,7 +18,6 @@ public class Customer {
 	@GeneratedValue
 	private int id;
 	
-	@NotBlank(message="公司名称不能为空！")
 	@Length(max=50,message="公司名称不能超过50个字符长度")
 	@Column(name = "company_name")
 	private String companyName;
@@ -49,6 +48,8 @@ public class Customer {
 	/**
 	 * 管理层信息
 	 */
+	@Length(max=10000,message="管理层信息不合法")
+	@Column(name="management_info")
 	private String managementInfo;
 	
 	
@@ -60,10 +61,11 @@ public class Customer {
 	private String name;
 	
 	@Length(max=50,message="邮箱格式有误")
+	@Email(message="邮件地址无效！")  
 	private String email;
 	
 	@NotBlank(message="手机不能为空！")
-	@Length(max=11,message="手机格式有误")
+	@Pattern(regexp = "^1[3-8]{1}\\d{9}$", message = "手机格式不正确")
 	private String phone;
 
 

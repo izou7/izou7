@@ -79,6 +79,7 @@ select{
 						</dd>
 						<dd>
 						<select id="province" name="province" >
+						<option>所有</option>
 						  <#list provinces! as province>
 						  		<#if (com.city.province.name)! == province.name >
 						  			<option value="${(province.id)!}" selected>${(province.name)!}</option>
@@ -90,6 +91,7 @@ select{
 						</dd>
 						<dd>
 						<select id="city" name="city"  >
+						<option>所有</option>
 						  <#if (com.city.province.citys)??>
 							<#list (com.city.province.citys) as city>
 								<#if (com.city.city)! == city.city >

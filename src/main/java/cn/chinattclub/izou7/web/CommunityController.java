@@ -229,7 +229,9 @@ public class CommunityController {
 			if(StringUtils.isBlank(community.getPoster())){
 				community.setPoster(appConfig.get("defaultCommunityImgPath").toString());
 			}
-			community.setCity(cityServiceImpl.getCity(community.getCityId()));
+			if(community.getCityId()!=0){
+				community.setCity(cityServiceImpl.getCity(community.getCityId()));
+			}
 			community.setAdmin(CommonUtil.getCurrentUser());
 			community.setCreateTime(new Date());
 			communityServiceImpl.add(community);

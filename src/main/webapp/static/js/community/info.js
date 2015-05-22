@@ -97,7 +97,8 @@ function addCommunity(){
 		contentType:'application/json;charset=UTF-8', 
 		success: function(json) {
 			if (json.statusCode == 200) {
-					showMessage("操作成功");
+					//showMessage("操作成功");
+				location.href = "/community/manager";
 			}else {
 				showMessage(json.message);
 			}

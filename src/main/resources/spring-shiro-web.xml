@@ -106,6 +106,7 @@
                 /error = anon
                 /index = anon
                 /regist = anon
+                /customer/** = anon
                 /registSecond = anon
                 /contact = anon
                 /agency = anon
