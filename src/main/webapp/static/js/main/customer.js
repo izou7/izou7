@@ -44,7 +44,8 @@ function saveBtnClicked(){
 		contentType:'application/json;charset=UTF-8',
         success:function(json){
         	if (json.statusCode == 200) {
-				showMessage("提交成功！");
+				//showMessage("提交成功！");
+				location.href = "/customer/finish";
 			}else {
 				showMessage(json.message);
 			}
