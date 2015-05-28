@@ -107,6 +107,7 @@
                 /index = anon
                 /regist = anon
                 /customer/** = anon
+                /share/** = anon
                 /registSecond = anon
                 /contact = anon
                 /agency = anon

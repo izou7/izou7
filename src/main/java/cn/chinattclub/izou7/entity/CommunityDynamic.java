@@ -47,6 +47,27 @@ public class CommunityDynamic {
 	
 	private String content;
 	
+	@Column(name = "images_url")
+	private String imagesUrl;
+	
+	private String images;
+	
+	/**
+	 * Returns the value of the field called 'imagesUrl'.
+	 * @return Returns the imagesUrl.
+	 */
+	public String getImagesUrl() {
+		return this.imagesUrl;
+	}
+
+	/**
+	 * Sets the field called 'imagesUrl' to the given value.
+	 * @param imagesUrl The imagesUrl to set.
+	 */
+	public void setImagesUrl(String imagesUrl) {
+		this.imagesUrl = imagesUrl;
+	}
+
 	/** 
 	 *  创建时间
 	 */
@@ -159,6 +180,22 @@ public class CommunityDynamic {
 	public void setCommunityDynamicMessages(
 			List<CommunityDynamicMessage> communityDynamicMessages) {
 		this.communityDynamicMessages = communityDynamicMessages;
+	}
+
+	/**
+	 * Returns the value of the field called 'images'.
+	 * @return Returns the images.
+	 */
+	public String getImages() {
+		return this.images;
+	}
+
+	/**
+	 * Sets the field called 'images' to the given value.
+	 * @param images The images to set.
+	 */
+	public void setImages(String images) {
+		this.images = images;
 	}
 
 }
