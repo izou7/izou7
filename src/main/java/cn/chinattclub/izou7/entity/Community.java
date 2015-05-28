@@ -113,7 +113,7 @@ public class Community {
 	 * 活动介绍
 	 */
 	@NotBlank(message="介绍不能为空")
-	@Length(max=500,message="介绍长度小于500个字符之间")
+	@Length(max=2000,message="介绍长度小于2000个字符之间")
 	private String description;
 	
 	private String reserve;

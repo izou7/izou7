@@ -102,7 +102,7 @@ dt{
 					</dd>
 				</dl>
 				<dl>
-					<dt>个人信息<span></span></dt>
+					<dt>联系人信息<span></span></dt>
 					<dd class="clearfix">
 							<label class="fl label_1">姓名</label>
 							<div class="textarea">
@@ -124,7 +124,7 @@ dt{
 					
 				</dl>
 				<div class="btn_box2" >
-						<input id="saveBtn" type="button" value="下一步">
+						<input id="saveBtn" type="button" value="提交">
 				</div>
 			</form>
 		</div>

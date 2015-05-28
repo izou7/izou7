@@ -1,6 +1,6 @@
 <style>
 .bspan{
- font-weight:bold;
+ font-size:15px;
 }
 .ltd{
 float:left;
@@ -20,8 +20,6 @@ float:left;
 								移动官网解决方案
 							</p>
 							<p class="l2">
-								创业空间移动主页<br/>
-								创业者线上交流平台<br/>
 								<span class="bspan">APP、微信多端适配</span> 
 							</p>
 						</li>
@@ -30,19 +28,15 @@ float:left;
 								互联网时代的招商方案 
 							</p>
 							<p class="l2">
-								多渠道：微信、微博社交化传播<br/>
-								多形式：文案、微信H5、微电影<br/>
-								<span class="bspan">精准覆盖数百万创业者</span>
+								<span class="bspan">线上全渠道推广</span>
 							</p>
 						</li>
 						<li class="li_3">
 							<p class="l1">
-								企业信息数据库
+								企业实时信息数据库
 							</p>
 							<p class="l2">
-								目标客户精准定位<br/>
-								客户信息查询、跟踪企业<br/>
-								<span class="bspan">全网广告精准投放</span>
+								<span class="bspan">客户信息查询、跟踪</span>
 							</p>
 						</li>
 						<li class="li_4">
@@ -50,9 +44,7 @@ float:left;
 								线下推广方案 
 							</p>
 							<p class="l2">
-								海量线下活动资源<br/>
-								现场宣传、联合主办<br/>
-								<span class="bspan">覆盖数万目标客户</span>
+								<span class="bspan">海量线下活动</span>
 							</p>
 						</li>
 					</ul>
@@ -142,12 +134,12 @@ float:left;
 						<tr>
 							<td rowspan="2">创业服务支持</td>
 							<td class="h"><strong>投融资对接</strong></td>
-							<td class="h"><img src="${ (project.staticDomain)! }/images/gou.png"></td>
+							<td class="h"><span class="c">×</span></td>
 							<td class="h"><img src="${ (project.staticDomain)! }/images/gou.png"></td>
 						</tr>
 						<tr>
 							<td><strong>优质活动合作</strong></td>
-							<td><img src="${ (project.staticDomain)! }/images/gou.png"></td>
+							<td><span class="c">×</span></td>
 							<td ><img src="${ (project.staticDomain)! }/images/gou.png"></td>
 						</tr>
 					</table>

@@ -12,7 +12,7 @@ font-size:15px;
 			|
 			<a href="/agency" class="on">代理政策</a>
 		</div>
-		<div class="intro_box dl_box" style="padding:0px;">
+		<div class="intro_box dl_box" style="padding:30px;">
 			<div class="t_box">
 				<ul class="clearfix">
 					<li>
@@ -32,12 +32,10 @@ font-size:15px;
 				</ul>
 			</div>
 			<div class="b_box">
-				<div class="d1">代理商资质要求</div>
-				<div class="d2"> 欢迎有实力的机构/个人成为区域代理，我们将与您深度合作，共创未来。 </div>
-				</br>
+				<div class="d1">申请成为代理商</div>
+				<div class="d2"> 欢迎有实力的机构/个人成为区域代理，	与我们共创未来！ </div>
 				</br>
 
-				<div class="d1">申请成为代理商</div>
 			</div>
 		</div>
 		<div class="con_box con_form_box contact_box">

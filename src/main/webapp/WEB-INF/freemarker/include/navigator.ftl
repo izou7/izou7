@@ -24,10 +24,11 @@
 					<a href="/user/logout">退出</a>
 				</span>
 				<span class="fr s2" style="">
-					<a href="/service">付费服务</a>
+					
+					<a href="/community/manager">管理中心</a>
 				</span>
 				<span class="fr s2">
-					<a href="/community/manager">管理中心</a>
+					<a href="/service">付费服务</a>
 				</span>
 				<#else>  
 				
