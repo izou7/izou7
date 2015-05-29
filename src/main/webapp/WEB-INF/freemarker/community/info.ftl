@@ -109,7 +109,35 @@ select{
 						<input name="address"  id="address" type="text" class="text" placeholder="详细地址" value="${(com.address)!}">
 						</dd>
 						<dd>
-						<input name="price"  id="price" type="text" class="text" placeholder="价格" value="${(com.price)!0}元 人/月">
+						
+							<select id="free" >
+							<#if (com.id)??>
+								<#if (com.price)?? && com.price==0>
+									<option selected>免费</option>
+									<option>收费</option>
+								<#else>
+									<option >免费</option>
+									<option selected>收费</option>
+								</#if>
+							<#else>
+								<option selected>免费</option>
+								<option>收费</option>
+							</#if>
+							
+							
+							
+							</select>
+						</dd>
+						<dd>
+						<#if (com.id)??>
+						<#if (com.price)?? && com.price==0>
+								<input name="price"  id="price" type="text" class="text" style="display:none;" placeholder="价格(元)" value="${(com.price)!0}元">
+							<#else>
+								<input name="price"  id="price" type="text" class="text" placeholder="价格(元)" value="${(com.price)!0}元">
+							</#if>
+						<#else>
+							<input name="price"  id="price" type="text" class="text" style="display:none;" placeholder="价格(元)" value="${(com.price)!0}元">
+						</#if>
 						</dd>
 						<!--
 						<dd>
@@ -137,6 +165,9 @@ select{
 						-->
 						<dd>
 							<textarea id="description" placeholder="介绍" >${(com.description)!}</textarea>
+						</dd>
+						<dd>
+							<textarea id="benefits" placeholder="福利" >${(com.benefits)!}</textarea>
 						</dd>
 					</dl>
 					

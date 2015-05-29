@@ -1,6 +1,42 @@
 $(function () {
 	$("#province").change(function(){provinceChange(this)});
+	$("#saveBtn").click(saveBtnClicked);
 });
+
+function saveBtnClicked(){
+	var realName = $("#realName").val();
+	var city = $("#city option:selected").val();
+	var company = $("#company").val();
+	var position = $("#position").val();
+	var sex = $("input[name='sex']:checked").val();
+	var paramObj = {
+			"realName":realName,
+			"city":parseInt(city),
+			"company":company,
+			"position":position,
+			"sex":parseInt(sex)==0?false:true,
+			"id":parseInt($("#id").val())
+	}
+	console.info(JSON.stringify(paramObj));
+	$.ajax({
+		type:"POST",
+        url:"/registSecond",
+        data:JSON.stringify(paramObj),
+		dataType : "json",
+		contentType:'application/json;charset=UTF-8',
+        success:function(json){
+        	if (json.statusCode == 200) {
+        		location.href="/login.jsp";
+			}else {
+				showMessage(json.message);
+			}
+        },
+		error:function(json){
+			console.info(json);
+	    	showMessage("操作异常！");
+	    }
+    });
+}
 function provinceChange(obj){
 	if($(obj).val()!=0){
 		var url = "/city/"+$(obj).val();

@@ -1,12 +1,23 @@
 package cn.chinattclub.izou7.web;
 
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 import javax.annotation.Resource;
+import javax.imageio.ImageIO;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.apache.commons.lang3.StringUtils;
@@ -24,6 +35,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -32,6 +44,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import cn.chinattclub.izou7.dto.ActivityListDto;
 import cn.chinattclub.izou7.dto.ActivityQueryDto;
 import cn.chinattclub.izou7.dto.RegistDto;
+import cn.chinattclub.izou7.dto.RegistSecondDto;
 import cn.chinattclub.izou7.dto.RegistUserDto;
 import cn.chinattclub.izou7.entity.Activity;
 import cn.chinattclub.izou7.entity.Agency;
@@ -47,6 +60,7 @@ import cn.chinattclub.izou7.service.CityService;
 import cn.chinattclub.izou7.service.ContactService;
 import cn.chinattclub.izou7.service.CustomerService;
 import cn.chinattclub.izou7.service.ProvinceService;
+import cn.chinattclub.izou7.service.UserInfoService;
 import cn.chinattclub.izou7.service.UserService;
 import cn.chinattclub.izou7.util.CommonUtil;
 import cn.zy.commons.webdev.constant.ResponseStatusCode;
@@ -88,6 +102,25 @@ public class MainController {
 	@Resource
 	private ProvinceService provinceServiceImpl;
 	
+	@Resource
+	private UserInfoService userInfoServiceImpl;
+	
+	@Resource
+	private HttpServletRequest request;
+	
+	/**
+	 * 生成验证码
+	 */
+	private int width = 152;// 定义图片的width
+	private int height = 39;// 定义图片的height
+	private int codeCount = 4;// 定义图片上显示验证码的个数
+	private int xx = 25;
+	private int fontHeight = 22;
+	private int codeY = 20;
+	char[] codeSequence = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',
+			'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W',
+			'X', 'Y', 'Z', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+	
 	@RequestMapping(value = {"/index","/"}, method = RequestMethod.GET)
 	public String indexPage(Model model,Page page,ActivityQueryDto query) {
 		return "site.community.index";
@@ -112,30 +145,76 @@ public class MainController {
 	}
 	
 	
-	@RequestMapping(value = "registSecond", method = RequestMethod.GET)
-	public String registSecondPage(Model model,RegistDto user) {
+	@RequestMapping(value = "registSecondPage", method = RequestMethod.POST)
+	public String registSecondPage(Model model,Integer id) {
 		List<Province> provinces = provinceServiceImpl.findAll();
 		model.addAttribute("provinces",provinces);
-		model.addAttribute("user", user);
+		model.addAttribute("id",id);
 		return "site.main.registSecond";
 	}
 	
-//	@RequestMapping(value = "regist", method = RequestMethod.POST)
-//	@ResponseBody
-//	public RestResponse regist(@RequestBody @Valid RegistDto user) {
-//		RestResponse response = new RestResponse();
-//		int statusCode = ResponseStatusCode.OK;
-//		String message = "新增社区成功！";
-//		if(!CommonUtil.validateDto(response,br,user.getClass().getName().toString())){
-//			statusCode = ResponseStatusCode.INTERNAL_SERVER_ERROR;
-//		}else{
-//			User user = New User();
-//			user.set
-//			response.setMessage(message);
-//		}
-//		response.setStatusCode(statusCode);
-//		return response;
-//	}
+	@RequestMapping(value = "registSecond", method = RequestMethod.POST)
+	@ResponseBody
+	public RestResponse registSecond(@RequestBody @Valid RegistSecondDto dto,BindingResult br) throws SecurityException, ClassNotFoundException {
+		RestResponse response = new RestResponse();
+		int statusCode = ResponseStatusCode.OK;
+		String message = "添加用户信息成功！";
+		if(!CommonUtil.validateDto(response,br,dto.getClass().getName().toString())){
+			statusCode = ResponseStatusCode.INTERNAL_SERVER_ERROR;
+		}else{
+			List<Province> provinces = provinceServiceImpl.findAll();
+			User user = userServiceImpl.get(dto.getId());
+			UserInfo userInfo = user.getUserInfo();
+			userInfo.setCompany(dto.getCompany());
+			userInfo.setPosition(dto.getPosition());
+			City city = cityServiceImpl.getCity(dto.getCity());
+			userInfo.setCity(city);
+			userInfo.setRealName(dto.getRealName());
+			userInfo.setSex(dto.getSex());
+			userInfoServiceImpl.update(userInfo);
+			response.setStatusCode(statusCode);
+		}
+		return response;
+	}
+	
+	@RequestMapping(value = "regist", method = RequestMethod.POST)
+	@ResponseBody
+	public RestResponse regist(@RequestBody @Valid RegistDto user,BindingResult br) throws SecurityException, ClassNotFoundException {
+		RestResponse response = new RestResponse();
+		int statusCode = ResponseStatusCode.OK;
+		String message = "注册成功！";
+		if(!CommonUtil.validateDto(response,br,user.getClass().getName().toString())){
+			statusCode = ResponseStatusCode.INTERNAL_SERVER_ERROR;
+		}else{
+			String code = (String) request.getSession().getAttribute("code");   
+			if(!user.getPassword().equals(user.getcPassword())){
+				response.setStatusCode(ResponseStatusCode.FORBIDDEN);
+				response.setMessage("密码和确认密码输入不一致，请重新输入！");
+				return response;
+			}else if(userServiceImpl.exists(user.getPhone())){
+				response.setStatusCode(ResponseStatusCode.FORBIDDEN);
+				response.setMessage("该手机号已被注册，请重新输入！");
+				return response;
+			}else if(!code.equalsIgnoreCase(user.getCaptcha())){
+				response.setStatusCode(ResponseStatusCode.FORBIDDEN);
+				response.setMessage("验证码输入错误，请重新输入！");
+				return response;
+			}else{
+				UserInfo userInfo = new UserInfo();
+				userInfo.setPhone(user.getPhone());
+				userInfo.setCreateTime(new Date());
+				userInfoServiceImpl.add(userInfo);
+				User newUser = new User();
+				newUser.setUsername(user.getPhone());
+				newUser.setPassword(user.getPassword());
+				newUser.setUserInfo(userInfo);
+				userServiceImpl.createUser(newUser);
+				response.getBody().put("id",newUser.getId());
+			}
+		}
+		response.setStatusCode(statusCode);
+		return response;
+	}
 
 	/**
 	 * 
@@ -333,6 +412,78 @@ public class MainController {
 //		System.out.println(html);
 //		return response;
 //	}
+	
+	@RequestMapping("/code")
+	public void getCode(HttpServletRequest req, HttpServletResponse resp)
+			throws IOException {
+
+		// 定义图像buffer
+		BufferedImage buffImg = new BufferedImage(width, height,
+				BufferedImage.TYPE_INT_RGB);
+		// Graphics2D gd = buffImg.createGraphics();
+		// Graphics2D gd = (Graphics2D) buffImg.getGraphics();
+		Graphics gd = buffImg.getGraphics();
+		// 创建一个随机数生成器类
+		Random random = new Random();
+		// 将图像填充为白色
+		gd.setColor(Color.WHITE);
+		gd.fillRect(0, 0, width, height);
+
+		// 创建字体，字体的大小应该根据图片的高度来定。
+		Font font = new Font("Fixedsys", Font.BOLD, fontHeight);
+		// 设置字体。
+		gd.setFont(font);
+
+		// 画边框。
+		//gd.setColor(Color.BLACK);
+		gd.drawRect(0, 0, width - 1, height - 1);
+
+		// 随机产生40条干扰线，使图象中的认证码不易被其它程序探测到。
+		gd.setColor(Color.BLACK);
+		for (int i = 0; i < 40; i++) {
+			int x = random.nextInt(width);
+			int y = random.nextInt(height);
+			int xl = random.nextInt(12);
+			int yl = random.nextInt(12);
+			gd.drawLine(x, y, x + xl, y + yl);
+		}
+
+		// randomCode用于保存随机产生的验证码，以便用户登录后进行验证。
+		StringBuffer randomCode = new StringBuffer();
+		int red = 0, green = 0, blue = 0;
+
+		// 随机产生codeCount数字的验证码。
+		for (int i = 0; i < codeCount; i++) {
+			// 得到随机产生的验证码数字。
+			String code = String.valueOf(codeSequence[random.nextInt(36)]);
+			// 产生随机的颜色分量来构造颜色值，这样输出的每位数字的颜色值都将不同。
+			red = random.nextInt(255);
+			green = random.nextInt(255);
+			blue = random.nextInt(255);
+
+			// 用随机产生的颜色将验证码绘制到图像中。
+			gd.setColor(new Color(red, green, blue));
+			gd.drawString(code, (i + 1) * xx, codeY);
+
+			// 将产生的四个随机数组合在一起。
+			randomCode.append(code);
+		}
+		// 将四位数字的验证码保存到Session中。
+		HttpSession session = req.getSession();
+		session.setAttribute("code", randomCode.toString());
+
+		// 禁止图像缓存。
+		resp.setHeader("Pragma", "no-cache");
+		resp.setHeader("Cache-Control", "no-cache");
+		resp.setDateHeader("Expires", 0);
+
+		resp.setContentType("image/jpeg");
+
+		// 将图像输出到Servlet输出流中。
+		ServletOutputStream sos = resp.getOutputStream();
+		ImageIO.write(buffImg, "jpeg", sos);
+		sos.close();
+	}
 	
 	
 	

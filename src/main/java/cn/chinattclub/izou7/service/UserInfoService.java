@@ -27,5 +27,7 @@ public interface UserInfoService {
 	public UserInfo findById(int id);
 	
 	public void update(UserInfo userInfo);
+	
+	public void add(UserInfo userInfo);
 
 }

@@ -99,7 +99,10 @@ public class CommunityController {
 				}
 			}
 		}
-		List<CommunityDynamic> dys = communityDynamicServiceImpl.findDynamics(page,id,null);
+		List<CommunityDynamic> dys = new ArrayList<>();
+		if(id!=null){
+			dys = communityDynamicServiceImpl.findDynamics(page,id,null);
+		}
 		model.addAttribute("dys",dys);
 		model.addAttribute("page",page);
 		model.addAttribute("communities",communities);
@@ -191,6 +194,7 @@ public class CommunityController {
 			oldCommunity.setDescription(com.getDescription());
 			oldCommunity.setName(com.getName());
 			oldCommunity.setTags(com.getTags());
+			oldCommunity.setBenefits(com.getBenefits());
 //			oldCommunity.setPublicNumber(com.getPublicNumber());
 			if(StringUtils.isNotBlank(com.getPoster())){
 				oldCommunity.setPoster(com.getPoster());

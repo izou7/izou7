@@ -116,6 +116,11 @@ public class Community {
 	@Length(max=2000,message="介绍长度小于2000个字符之间")
 	private String description;
 	
+	@Length(max=2000,message="福利长度小于2000个字符之间")
+	private String benefits;
+	
+	
+	
 	private String reserve;
 
 	/**
@@ -378,7 +383,21 @@ public class Community {
 	public void setPrice(Integer price) {
 		this.price = price;
 	}
-	
-	
+
+	/**
+	 * Returns the value of the field called 'benefits'.
+	 * @return Returns the benefits.
+	 */
+	public String getBenefits() {
+		return this.benefits;
+	}
+
+	/**
+	 * Sets the field called 'benefits' to the given value.
+	 * @param benefits The benefits to set.
+	 */
+	public void setBenefits(String benefits) {
+		this.benefits = benefits;
+	}
 	
 }

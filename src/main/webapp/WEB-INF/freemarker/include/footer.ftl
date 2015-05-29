@@ -28,7 +28,9 @@
 				<a href="" class="a3">微博登录</a>
 			</p>
 			<p class="p3">               
-				QQ群：107317233    公司地址：中关村发展大厦
+				
+				QQ群：107317233 &nbsp; &nbsp; &nbsp;公司地址：中关村发展大厦 &nbsp; &nbsp; &nbsp;备案号：京ICP备15015762号-1
+				
 			</p>
 		</div>
 	</div>

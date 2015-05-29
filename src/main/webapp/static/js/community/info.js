@@ -7,7 +7,21 @@ $(function () {
 	//animHandler([217,122,382,284]);
 	//$("#uploadBtn").click(uploadBtnClick);
 	$("#fileInput").change(fileInputChanged);
+	
+	$("#free").change(freeChanged);
 });
+function freeChanged(){
+	var text = $("#free option:selected").text();
+	if(text=="免费"){
+		$("#price").hide();
+		$("#price").val("0");
+	}else{
+		$("#price").show();
+		$("#price").val("");
+		$("#price").attr("placeholder","价格（元）");
+		
+	}
+}
 function fileInputChanged(){
 	
 	var file = $("#fileInput").val();
@@ -72,6 +86,7 @@ function addCommunity(){
 		showMessage("价格格式错误，请填入正整数的价格！");
 		return;
 	}
+	var benefits = $("#benefits").val();
 	var community = {
 			"id":parseInt($("#id").val()),
 			"tags":$("#tags").val(),
@@ -83,7 +98,8 @@ function addCommunity(){
 			"phone":$("#phone").val(),
 			"publicNumber":$("#publicNumber").val(),
 			"poster":poster,
-			"price":price
+			"price":price,
+			"benefits":benefits
 	};
 	if($.trim($("#id").val())!=""){
 		action = "/community/update";

@@ -1,5 +1,25 @@
 <style>
-
+.text2{
+ 	width: 140px;
+    height: 37px;
+    border: 1px solid #dcdcdc;
+    border-radius: 5px;
+    margin-bottom: 8px;
+    background: url(../images/user_icon.png) no-repeat 10px center;
+    position: relative;
+    box-shadow: inset 0 0 9px #ddd;
+    }
+.shortInput{
+    margin: 6px 0 0 33px;
+    height: 20px;
+    line-height: 20px;
+    padding: 3px;
+    width: 100px;
+    border: 0 none;
+} 
+.footer{
+height:340px;
+}   
 </style>
 
 <!--
@@ -43,28 +63,31 @@
 				<a href="login.html" class="fr">我已有账户</a>
 			</div>
 			<div class="bd">
+				<form id="registSecondForm" action="registSecondPage" method="POST">
+				<input type="hidden" name="id" id="id" value="">
+				</form>
 				<form action="registSecond" method="GET">
 					<div class="text ">
-						<input type="text" >
+						<input type="text" id="phone" >
 						<label>手机号</label>
 					</div>
-					<div class="text" style="width:150px">
-						<input type="text" style="width:130px">
+					<div  >
+						<img id="imgObj" alt="点击重新获取" src="code" style="cursor:pointer;padding-bottom:10px;" />
+					</div>
+					<div class="text" >
+						<input type="text"  id="captcha">
 						<label>验证码</label>
 					</div>
-					<div >
-					<button type="button" name="">获取验证码</button>
-					</div>
 					<div class="text ">
-						<input type="text" >
+						<input type="password" id="password" >
 						<label>密码</label>
 					</div>
 					<div class="text ">
-						<input type="text" >
+						<input type="password" id="cPassword">
 						<label>确认密码</label>
 					</div>
 					<div class="login_btn">
-						<input type='submit' value="">
+						<input id="loginBtn" type='button' value="">
 					</div>
 				</form>
 			</div>

@@ -106,4 +106,10 @@ public class UserInfoServiceImpl implements UserInfoService {
 		userInfoDao.update(userInfo);
 	}
 
+	@Override
+	public void add(UserInfo userInfo) {
+		// TODO Auto-generated method stub.
+		userInfoDao.save(userInfo);
+	}
+
 }

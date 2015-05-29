@@ -103,12 +103,15 @@
                 /static/** = anon
                 /login.jsp = authc
                 /user/logout = logout
+                /code = anon
+                /city/** = anon
                 /error = anon
                 /index = anon
                 /regist = anon
                 /customer/** = anon
                 /share/** = anon
-                /registSecond = anon
+                /registSecond/** = anon
+                /registSecondPage/** = anon
                 /contact = anon
                 /agency = anon
                 /join = anon

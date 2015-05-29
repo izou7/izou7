@@ -87,28 +87,128 @@
         </div>
         <div class="bd">
           <p class="txt-b">${(dn.content)!}</p>
-          <div class="pic-d pic2">
-            <div class="bo">
+          
             <#if dn.images??>
-	            <#list dn.images?split("&&") as img>
-	            	<#if img_index<3>
-	            	<div class="flex center"><a href="#" style="background-image:url(${img})"></a></div>
+	            <#assign list=dn.images?split("&&")>
+	            	<#if list?size==1>
+	            	<div class="pic-d"><p style="background-image:url(${list[0]})" name="picture"></p></div>
+	            	<#elseif list?size==2>
+	            		<div class="pic-d pic2"><div class="bo"><div class="flex center"><a href="#" style="background-image:url(${list[0]})" name="picture"></a></div>
+									<div class="flex center"><a href="#" style="background-image:url(${list[1]})" name="picture"></a></div>
+									<div class="flex center"></div>
+								</div>
+							</div>
+	            	<#elseif list?size==3>
+	            		<div class="pic-d pic2">
+								<div class="bo">
+								<div class="flex center"><a href="#" style="background-image:url(${list[0]})" name="picture"></a></div>
+									<div class="flex center"><a href="#" style="background-image:url(${list[1]})" name="picture"></a></div>
+									<div class="flex center"><a href="#" style="background-image:url(${list[2]})" name="picture"></a></div>
+								</div>
+							</div>
+	            	<#elseif list?size==4>
+	            		<div class="pic-d pic4">
+								<div class="bo">
+								<div class="flex center"><a href="#" style="background-image:url(${list[0]})" name="picture"></a></div>
+									<div class="flex center"><a href="#" style="background-image:url(${list[1]})" name="picture"></a></div>
+									<div class="flex center"><a href="#" style="background-image:url(${list[2]})" name="picture"></a></div>
+								</div>
+								<div class="bo">
+								<div class="flex center"><a href="#" style="background-image:url(${list[3]})" name="picture"></a></div>
+									<div class="flex center"></div>
+									<div class="flex center"></div>
+								</div>
+							</div>
+	            	<#elseif list?size==5>
+	            		<div class="pic-d pic4">
+								<div class="bo">
+								<div class="flex center"><a href="#" style="background-image:url(${list[0]})" name="picture"></a></div>
+									<div class="flex center"><a href="#" style="background-image:url(${list[1]})" name="picture"></a></div>
+									<div class="flex center"><a href="#" style="background-image:url(${list[2]})" name="picture"></a></div>
+								</div>
+								<div class="bo">
+								<div class="flex center"><a href="#" style="background-image:url(${list[3]})" name="picture"></a></div>
+									<div class="flex center"><a href="#" style="background-image:url(${list[4]})" name="picture"></a></div>
+									<div class="flex center"></div>
+								</div>
+							</div>
+	            	<#elseif list?size==6>
+	            		<div class="pic-d pic4">
+								<div class="bo">
+								<div class="flex center"><a href="#" style="background-image:url(${list[0]})" name="picture"></a></div>
+									<div class="flex center"><a href="#" style="background-image:url(${list[1]})" name="picture"></a></div>
+									<div class="flex center"><a href="#" style="background-image:url(${list[2]})" name="picture"></a></div>
+								</div>
+								<div class="bo">
+								<div class="flex center"><a href="#" style="background-image:url(${list[3]})" name="picture"></a></div>
+									<div class="flex center"><a href="#" style="background-image:url(${list[4]})" name="picture"></a></div>
+									<div class="flex center"><a href="#" style="background-image:url(${list[5	]})" name="picture"></a></div>
+								</div>
+							</div>
 	            	</#if>
-				</#list>
-            </#if>
-            </div>
-          </div>
-          <div class="pic-d pic2">
-            <div class="bo">
-            <#if dn.images??>
-				<#list dn.images?split("&&") as img>
-	            	<#if img_index gt 2>
-	            	<div class="flex center"><a href="#" style="background-image:url(${img})"></a></div>
+	            	<!--  
+	            	<#if list?size==2>
+	            		<div class="pic-d pic2"><div class="bo"><div class="flex center"><a href="#" style="background-image:url('+items[i].imagesUrl[0]+')" name="picture"></a></div>
+									<div class="flex center"><a href="#" style="background-image:url('+items[i].imagesUrl[1]+')" name="picture"></a></div>
+									<div class="flex center"></div>
+								</div>
+							</div>
 	            	</#if>
-				</#list>
+	            	<#if list?size==3>
+	            		<div class="pic-d pic2">
+								<div class="bo">
+								<div class="flex center"><a href="#" style="background-image:url('+items[i].imagesUrl[0]+')" name="picture"></a></div>
+									<div class="flex center"><a href="#" style="background-image:url('+items[i].imagesUrl[1]+')" name="picture"></a></div>
+									<div class="flex center"><a href="#" style="background-image:url('+items[i].imagesUrl[2]+')" name="picture"></a></div>
+								</div>
+							</div>;
+	            	</#if>
+	            	<#if list?size==4>
+	            	<div class="pic-d pic4">
+								<div class="bo">
+								<div class="flex center"><a href="#" style="background-image:url('+items[i].imagesUrl[0]+')" name="picture"></a></div>
+									<div class="flex center"><a href="#" style="background-image:url('+items[i].imagesUrl[1]+')" name="picture"></a></div>
+									<div class="flex center"><a href="#" style="background-image:url('+items[i].imagesUrl[2]+')" name="picture"></a></div>
+								</div>
+								<div class="bo">
+								<div class="flex center"><a href="#" style="background-image:url('+items[i].imagesUrl[3]+')" name="picture"></a></div>
+									<div class="flex center"></div>
+									<div class="flex center"></div>
+								</div>
+							</div>
+	            	</#if>
+	            	<#if list?size==5>
+	            	<div class="pic-d pic4">
+								<div class="bo">
+								<div class="flex center"><a href="#" style="background-image:url('+items[i].imagesUrl[0]+')" name="picture"></a></div>
+									<div class="flex center"><a href="#" style="background-image:url('+items[i].imagesUrl[1]+')" name="picture"></a></div>
+									<div class="flex center"><a href="#" style="background-image:url('+items[i].imagesUrl[2]+')" name="picture"></a></div>
+								</div>
+								<div class="bo">
+								<div class="flex center"><a href="#" style="background-image:url('+items[i].imagesUrl[3]+')" name="picture"></a></div>
+									<div class="flex center"><a href="#" style="background-image:url('+items[i].imagesUrl[4]+')" name="picture"></a></div>
+									<div class="flex center"></div>
+								</div>
+							</div>
+	            	</#if>
+	            	<#if list?size==6>
+	            	<div class="pic-d pic4">
+								<div class="bo">
+								<div class="flex center"><a href="#" style="background-image:url('+items[i].imagesUrl[0]+')" name="picture"></a></div>
+									<div class="flex center"><a href="#" style="background-image:url('+items[i].imagesUrl[1]+')" name="picture"></a></div>
+									<div class="flex center"><a href="#" style="background-image:url('+items[i].imagesUrl[2]+')" name="picture"></a></div>
+								</div>
+								<div class="bo">
+								<div class="flex center"><a href="#" style="background-image:url('+items[i].imagesUrl[3]+')" name="picture"></a></div>
+									<div class="flex center"><a href="#" style="background-image:url('+items[i].imagesUrl[4]+')" name="picture"></a></div>
+									<div class="flex center"><a href="#" style="background-image:url('+items[i].imagesUrl[5]+')" name="picture"></a></div>
+								</div>
+							</div>
+	            	</#if>
+	            	-->
+	            	
             </#if>
-            </div>
-          </div>
+            
         </div>
         <div class="rev-list">
         <#list dn.communityDynamicMessages as ms>

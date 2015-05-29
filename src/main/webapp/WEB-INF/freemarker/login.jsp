@@ -80,9 +80,11 @@
 						</div>
 					</form>
 				</div>
+				<!--  
 				<div class="forget_box">
 					<a href="/regist">免费注册</a>
 				</div>
+				-->
 				<!--  
 				<div class="ft clearfix">
 					<span>其他登录方式</span>

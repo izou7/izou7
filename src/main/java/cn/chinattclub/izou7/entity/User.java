@@ -71,7 +71,7 @@ public class User {
 	/**
 	 * 关联用户信息
 	 */
-	@OneToOne( fetch = FetchType.LAZY)
+	@OneToOne( cascade={CascadeType.MERGE}, fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_info_id")
 	private UserInfo userInfo;
 	

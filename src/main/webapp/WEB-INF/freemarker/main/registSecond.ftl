@@ -27,6 +27,9 @@
 	border: 1px solid #dcdcdc;
 	margin-bottom:10px
 }
+.footer{
+height:380px;
+}
 	</style>
 	<div class="cjsq_w">
 		<div class="inner">
@@ -36,7 +39,7 @@
 			<div class="bd">
 					<dl>
 						<dd>
-							<input name="name"  id="name" type="text" class="text" placeholder="真实姓名" value="">
+							<input name="realName"  id="realName" type="text" class="text" placeholder="真实姓名" value="">
 						</dd>
 						<select id="province" name="province" style="">
 						  <#list provinces! as province>
@@ -74,7 +77,8 @@
 					</dl>
 					
 					<div class="btn_box2" >
-						<input id="saveBtn" type="button" value="进入TT家族">
+						<input id="saveBtn" type="button" value="完成">
+						<input id="id" type="hidden" value="${id!}">
 					</div>
 			</div>
 		</div>

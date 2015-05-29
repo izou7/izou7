@@ -2,6 +2,7 @@ package cn.chinattclub.izou7.entity;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -27,7 +28,7 @@ public class UserInfo {
 	/**
 	 * 关联用户
 	 */
-	@OneToOne( mappedBy="userInfo",fetch = FetchType.LAZY)
+	@OneToOne( cascade={CascadeType.MERGE},mappedBy="userInfo",fetch = FetchType.LAZY)
 	private User user;
 	
 	@Column(name = "real_name")

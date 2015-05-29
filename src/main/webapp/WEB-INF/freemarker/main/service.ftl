@@ -80,7 +80,7 @@ float:left;
 						</tr>
 						<tr>
 							<td class="h"><strong>APP、微信多端适配</strong></td>
-							<td class="h"><img src="${ (project.staticDomain)! }/images/gou.png"></td>
+							<td class="h"><span class="c">×</span></td>
 							<td class="h"><img src="${ (project.staticDomain)! }/images/gou.png"></td>
 						</tr>
 						<tr>
