@@ -17,9 +17,9 @@
     width: 100px;
     border: 0 none;
 } 
-.footer{
-height:340px;
-}   
+.login_w{
+min-height:635px;
+}
 </style>
 
 <!--
@@ -60,7 +60,7 @@ height:340px;
 		<div class="inner">
 			<div class="hd clearfix">
 				<span class="fl">用户注册</span>
-				<a href="login.html" class="fr">我已有账户</a>
+				<a href="login.html" class="fr">登陆</a>
 			</div>
 			<div class="bd">
 				<form id="registSecondForm" action="registSecondPage" method="POST">
@@ -71,7 +71,7 @@ height:340px;
 						<input type="text" id="phone" >
 						<label>手机号</label>
 					</div>
-					<div  >
+					<div class="code-pic" >
 						<img id="imgObj" alt="点击重新获取" src="code" style="cursor:pointer;padding-bottom:10px;" />
 					</div>
 					<div class="text" >

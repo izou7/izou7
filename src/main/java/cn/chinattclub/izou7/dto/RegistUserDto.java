@@ -28,7 +28,7 @@ public class RegistUserDto {
 	@Email(message="邮箱格式不正确")
 	private String email;
 	
-	@Pattern(regexp="^[a-zA-Z]\\w{5,17}$",message="密码必须以字母开头，长度在6~18之间，只能包含字符、数字和下划线")
+	@Pattern(regexp = "^[A-Za-z]\\w{5,11}$", message = "密码格式不正确，请输入6到12位数字、字母组合并以字母开头")
 	private String password;
 	
 	private String password2;

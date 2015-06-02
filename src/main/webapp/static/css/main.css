@@ -1594,11 +1594,16 @@ font-size: 14px;
     display: none;
 }
 
-
-
-
-
-
+/*yu 2015年6月1日*/
+.form .btn-a,.form .btn-b{color: #fff;line-height: 46px;height:46px;width:200px;font-size: 18px;font-family: 'Microsoft YaHei';border-radius: 5px;  letter-spacing:3px;text-align: center;}
+.form .btn-a{background-color: #e72f17;}
+.form .btn-b{border:2px solid #ad2e1b;height: 42px;line-height: 42px;  background-color: rgba(0, 0, 0, 0.5);}
+.banner{position: relative;}
+.banner .btn-a,.banner .btn-b{position: absolute;bottom: 177px;left: 0;right: 0;margin: auto;}
+.banner .btn-a{  left: 50%;  margin-left: 10px;}
+.banner .btn-b{left: 50%;margin-left: 260px;}
+.code-pic{position: absolute;z-index: 1;margin-left:182px;  margin-top: 3px;}
+.code-pic img{width: 125px;}
 
 
 

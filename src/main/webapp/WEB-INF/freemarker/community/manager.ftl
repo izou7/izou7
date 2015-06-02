@@ -16,6 +16,9 @@
 .spanTime{
 	color:#3b3b3b;
 }
+.pl_w{
+min-height:575px;
+}
 </style>
 <link rel="stylesheet" type="text/css" href="${ (project.staticDomain)! }/libs/jPaginate/css/style.css" media="screen"/>
 <body >
@@ -63,13 +66,14 @@
 			<div class="tab_content" style="display:block">
 				<div class="cygl">
 					
-					<#if (com.communityMembers)?size == 0>
+					<#if (com.communityMembers)??>
 					<div class="hd">成员管理(暂无成员)</div>
 					<#else>
 					<div class="hd">成员管理</div>							
 					</#if>
 					<div class="bd">
 						<ul class="clearfix">
+							<#if (com.communityMembers)??>
 							<#list com.communityMembers as mem>
 							<#if mem.status == 0>
 								<li id="mem${(mem.id)!}">
@@ -152,6 +156,7 @@
 							</li>
 							</#if>
 							</#list>
+							</#if>
 							<!--  
 							<li class="more_li">
 								<a href="javascript:;">more</a>

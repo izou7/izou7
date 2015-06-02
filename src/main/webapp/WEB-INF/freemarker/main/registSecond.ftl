@@ -27,8 +27,8 @@
 	border: 1px solid #dcdcdc;
 	margin-bottom:10px
 }
-.footer{
-height:380px;
+.cjsq_w{
+min-height:595px;
 }
 	</style>
 	<div class="cjsq_w">
